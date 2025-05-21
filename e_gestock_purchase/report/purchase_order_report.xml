@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Hérite du rapport de bon de commande standard -->
+    <template id="report_purchaseorder_document_e_gestock" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <div t-if="o.cotation_id" class="mt-4 mb-4">
+                <div class="alert alert-info">
+                    <strong>Bon de commande issu du processus E-GESTOCK</strong>
+                </div>
+                
+                <div class="row">
+                    <div class="col-6">
+                        <strong>Demande d'origine:</strong> <span t-field="o.demande_cotation_id.reference"/>
+                        <br/>
+                        <strong>Cotation sélectionnée:</strong> <span t-field="o.cotation_id.reference"/>
+                        <br/>
+                        <strong>État d'approbation:</strong> <span t-field="o.state_approbation"/>
+                    </div>
+                    <div class="col-6">
+                        <strong>Date de retrait prévue:</strong> <span t-field="o.date_retrait"/>
+                        <br/>
+                        <strong>Date de livraison prévue:</strong> <span t-field="o.date_livraison_prevue"/>
+                        <br/>
+                        <t t-if="o.date_livraison_reelle">
+                            <strong>Date de livraison réelle:</strong> <span t-field="o.date_livraison_reelle"/>
+                        </t>
+                    </div>
+                </div>
+                
+                <div class="row mt-4" t-if="o.comite_reception_id">
+                    <div class="col-12">
+                        <strong>Comité de réception:</strong> <span t-field="o.comite_reception_id"/>
+                    </div>
+                </div>
+                
+                <div class="row mt-4" t-if="o.signataire_ids">
+                    <div class="col-12">
+                        <strong>Signataires:</strong>
+                        <ul>
+                            <t t-foreach="o.signataire_ids" t-as="signataire">
+                                <li><span t-field="signataire.name"/> (<span t-field="signataire.function"/>)</li>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        
+        <!-- Ajout des signatures au bas du document -->
+        <xpath expr="//p[@t-field='o.notes']" position="after">
+            <div t-if="o.cotation_id and o.signataire_ids" class="row mt-5">
+                <div class="col-12">
+                    <h5>Signatures:</h5>
+                </div>
+                <t t-set="nb_signataires" t-value="len(o.signataire_ids)"/>
+                <t t-set="col_width" t-value="12 // nb_signataires if nb_signataires > 0 else 12"/>
+                <t t-foreach="o.signataire_ids" t-as="signataire">
+                    <div t-attf-class="col-{{col_width}} text-center">
+                        <p t-field="signataire.function"/>
+                        <br/>
+                        <br/>
+                        <p t-field="signataire.name"/>
+                    </div>
+                </t>
+            </div>
+        </xpath>
+    </template>
+    
+    <!-- Rapport personnalisé pour les bons de commande E-GESTOCK -->
+    <record id="report_e_gestock_purchase_order" model="ir.actions.report">
+        <field name="name">Bon de commande E-GESTOCK</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_purchase.report_purchaseorder_e_gestock</field>
+        <field name="report_file">e_gestock_purchase.report_purchaseorder_e_gestock</field>
+        <field name="binding_model_id" ref="model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <!-- Template qui utilise l'extension et surcharge -->
+    <template id="report_purchaseorder_e_gestock">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="purchase.report_purchaseorder_document" t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo> 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Mise à jour de la vue formulaire du dépôt pour inclure les informations d'inventaire -->
+    <record id="view_e_gestock_depot_form_inventory" model="ir.ui.view">
+        <field name="name">e_gestock.depot.form.inventory</field>
+        <field name="model">e_gestock.depot</field>
+        <field name="inherit_id" ref="e_gestock_base.view_e_gestock_depot_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Stock et Inventaire" name="stock_inventory">
+                    <group>
+                        <group string="Entrepôt Odoo">
+                            <field name="warehouse_id" readonly="1"/>
+                            <field name="location_id" readonly="1"/>
+                            <field name="input_location_id" readonly="1"/>
+                            <field name="output_location_id" readonly="1"/>
+                            <field name="quality_location_id" readonly="1"/>
+                        </group>
+                        <group string="Statistiques">
+                            <field name="total_stock_value" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="stock_movement_count"/>
+                            <field name="inventory_count"/>
+                        </group>
+                    </group>
+                    <div class="oe_button_box">
+                        <button name="action_view_warehouse" 
+                                type="object" 
+                                string="Voir l'entrepôt Odoo" 
+                                class="oe_link" 
+                                invisible="not warehouse_id"/>
+                    </div>
+                    <notebook>
+                        <page string="Articles en stock" name="stock_items">
+                            <field name="stock_item_ids" readonly="1">
+                                <list decoration-danger="quantite_disponible &lt;= 0" decoration-warning="quantite_disponible &lt; min_quantity">
+                                    <field name="article_id"/>
+                                    <field name="quantite_disponible"/>
+                                    <field name="quantite_reservee"/>
+                                    <field name="quantite_virtuelle"/>
+                                    <field name="uom_id"/>
+                                    <field name="min_quantity"/>
+                                    <field name="max_quantity"/>
+                                    <field name="value" sum="Total"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="last_inventory_date"/>
+                                    <button name="action_view_movements" type="object" string="Mouvements" icon="fa-exchange"/>
+                                </list>
+                            </field>
+                            <div class="oe_button_box">
+                                <button name="action_view_stock_items" 
+                                        type="object" 
+                                        string="Gérer les articles en stock" 
+                                        class="oe_link"/>
+                            </div>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+            <div name="button_box" position="inside">
+                <button name="action_view_movements" type="object" class="oe_stat_button" icon="fa-exchange">
+                    <field name="stock_movement_count" widget="statinfo" string="Mouvements"/>
+                </button>
+                <button name="action_view_inventories" type="object" class="oe_stat_button" icon="fa-list-alt">
+                    <field name="inventory_count" widget="statinfo" string="Inventaires"/>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo> 

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les demandes de perdiem -->
+    <record id="view_e_gestock_perdiem_form" model="ir.ui.view">
+        <field name="name">e_gestock.perdiem.form</field>
+        <field name="model">e_gestock.perdiem</field>
+        <field name="arch" type="xml">
+            <form string="Demande de Perdiem">
+                <header>
+                    <button name="action_submit" string="Soumettre" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_validate_section" string="Valider (Section)" type="object"
+                            class="oe_highlight"
+                            groups="e_gestock_base.group_e_gestock_budget_manager,e_gestock_base.group_e_gestock_admin"
+                            invisible="state != 'submitted'"/>
+                    <button name="action_validate_direction" string="Valider (Direction)" type="object"
+                            class="oe_highlight"
+                            groups="e_gestock_base.group_e_gestock_budget_manager,e_gestock_base.group_e_gestock_admin"
+                            invisible="state != 'validated_section'"/>
+                    <button name="action_approve" string="Approuver" type="object"
+                            class="oe_highlight"
+                            groups="e_gestock_base.group_e_gestock_budget_manager,e_gestock_base.group_e_gestock_admin"
+                            invisible="state != 'validated_direction'"/>
+                    <button name="action_reject" string="Rejeter" type="object"
+                            groups="e_gestock_base.group_e_gestock_budget_manager,e_gestock_base.group_e_gestock_admin"
+                            invisible="state in ('draft', 'approved', 'rejected')"/>
+                    <button name="action_reset_to_draft" string="Remettre en brouillon" type="object"
+                            groups="e_gestock_base.group_e_gestock_budget_manager,e_gestock_base.group_e_gestock_admin"
+                            invisible="state in ('draft')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submitted,validated_section,validated_direction,approved"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="requester_id" readonly="state != 'draft'"/>
+                            <field name="structure_id" readonly="state != 'draft'"/>
+                            <field name="motive" readonly="state != 'draft'"/>
+                        </group>
+                        <group>
+                            <field name="exercice_id" readonly="state != 'draft'"/>
+                            <field name="credit_budget_id" readonly="state != 'draft'"/>
+                            <field name="budget_available" readonly="1"/>
+                            <field name="total_amount" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Bénéficiaires" name="beneficiaries">
+                            <field name="beneficiary_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="montant"/>
+                                    <field name="piece" filename="piece_name"/>
+                                    <field name="piece_name" invisible="1"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Historique des statuts" name="status_history">
+                            <field name="status_ids" readonly="1">
+                                <list>
+                                    <field name="status_type_id"/>
+                                    <field name="user_id"/>
+                                    <field name="date_debut"/>
+                                    <field name="date_fin"/>
+                                    <field name="commentaire"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les demandes de perdiem -->
+    <record id="view_e_gestock_perdiem_list" model="ir.ui.view">
+        <field name="name">e_gestock.perdiem.list</field>
+        <field name="model">e_gestock.perdiem</field>
+        <field name="arch" type="xml">
+            <list string="Demandes de Perdiem" decoration-info="state == 'draft'"
+                  decoration-danger="state == 'rejected'"
+                  decoration-success="state == 'approved'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="requester_id"/>
+                <field name="structure_id"/>
+                <field name="exercice_id"/>
+                <field name="total_amount" sum="Total"/>
+                <field name="state"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les demandes de perdiem -->
+    <record id="view_e_gestock_perdiem_search" model="ir.ui.view">
+        <field name="name">e_gestock.perdiem.search</field>
+        <field name="model">e_gestock.perdiem</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des demandes de perdiem">
+                <field name="name"/>
+                <field name="requester_id"/>
+                <field name="structure_id"/>
+                <field name="exercice_id"/>
+                <filter string="Mes demandes" name="my_perdiems" domain="[('requester_id', '=', uid)]"/>
+                <filter string="Brouillons" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Soumises" name="submitted" domain="[('state', '=', 'submitted')]"/>
+                <filter string="Validées (section)" name="validated_section" domain="[('state', '=', 'validated_section')]"/>
+                <filter string="Validées (direction)" name="validated_direction" domain="[('state', '=', 'validated_direction')]"/>
+                <filter string="Approuvées" name="approved" domain="[('state', '=', 'approved')]"/>
+                <filter string="Rejetées" name="rejected" domain="[('state', '=', 'rejected')]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Structure" name="structure" context="{'group_by': 'structure_id'}"/>
+                    <filter string="Exercice" name="exercice" context="{'group_by': 'exercice_id'}"/>
+                    <filter string="Statut" name="state" context="{'group_by': 'state'}"/>
+                    <filter string="Mois" name="month" context="{'group_by': 'create_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue pivot pour les demandes de perdiem -->
+    <record id="view_e_gestock_perdiem_pivot" model="ir.ui.view">
+        <field name="name">e_gestock.perdiem.pivot</field>
+        <field name="model">e_gestock.perdiem</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des perdiems">
+                <field name="structure_id" type="row"/>
+                <field name="exercice_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="total_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Vue graphique pour les demandes de perdiem -->
+    <record id="view_e_gestock_perdiem_graph" model="ir.ui.view">
+        <field name="name">e_gestock.perdiem.graph</field>
+        <field name="model">e_gestock.perdiem</field>
+        <field name="arch" type="xml">
+            <graph string="Analyse des perdiems" type="bar">
+                <field name="structure_id"/>
+                <field name="total_amount" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action pour les demandes de perdiem -->
+    <record id="action_e_gestock_perdiem" model="ir.actions.act_window">
+        <field name="name">Demandes de Perdiem</field>
+        <field name="res_model">e_gestock.perdiem</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="search_view_id" ref="view_e_gestock_perdiem_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer votre première demande de perdiem
+            </p>
+            <p>
+                Les demandes de perdiem vous permettent de gérer les indemnités journalières.
+            </p>
+        </field>
+    </record>
+</odoo>

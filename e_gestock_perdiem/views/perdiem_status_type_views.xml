@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue liste pour les types de statut -->
+    <record id="view_e_gestock_perdiem_status_type_list" model="ir.ui.view">
+        <field name="name">e_gestock.perdiem.status.type.list</field>
+        <field name="model">e_gestock.perdiem.status.type</field>
+        <field name="arch" type="xml">
+            <list string="Types de statut">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour les types de statut -->
+    <record id="view_e_gestock_perdiem_status_type_form" model="ir.ui.view">
+        <field name="name">e_gestock.perdiem.status.type.form</field>
+        <field name="model">e_gestock.perdiem.status.type</field>
+        <field name="arch" type="xml">
+            <form string="Type de statut">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="sequence"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour les types de statut -->
+    <record id="action_e_gestock_perdiem_status_type" model="ir.actions.act_window">
+        <field name="name">Types de statut</field>
+        <field name="res_model">e_gestock.perdiem.status.type</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau type de statut
+            </p>
+        </field>
+    </record>
+</odoo> 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu pour les sections -->
+    <menuitem id="menu_action_e_gestock_section"
+              name="Sections"
+              parent="menu_e_gestock_section_config"
+              action="action_e_gestock_section"
+              sequence="10"/>
+</odoo>

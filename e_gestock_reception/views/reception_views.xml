@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les réceptions -->
+    <record id="view_reception_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.form</field>
+        <field name="model">e_gestock.reception</field>
+        <field name="arch" type="xml">
+            <form string="Réception">
+                <header>
+                    <button name="action_confirm" string="Confirmer" type="object" class="oe_highlight" invisible="state != 'draft'" groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_submit_comite" string="Soumettre au comité" type="object" class="oe_highlight" invisible="state != 'confirmed'" groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_done" string="Terminer" type="object" class="oe_highlight" invisible="state != 'comite_validation' or pv_validation == False" groups="stock.group_stock_manager"/>
+                    <button name="action_cancel" string="Annuler" type="object" invisible="state not in ('draft', 'confirmed', 'comite_validation')" groups="stock.group_stock_manager"/>
+                    <button name="action_create_pv" string="Créer PV" type="object" class="btn-primary" invisible="state != 'comite_validation' or pv_count > 0" groups="purchase.group_purchase_manager"/>
+                    <button name="action_view_pv" string="Voir PV" type="object" class="btn-info" invisible="pv_count == 0"/>
+
+                    <!-- Boutons pour les actions liées à la qualité -->
+                    <button name="action_create_inspection" string="Créer inspection" type="object" invisible="state not in ['confirmed', 'comite_validation']" groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_create_return" string="Créer retour" type="object" invisible="state not in ['confirmed', 'comite_validation', 'done']" groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_create_quarantine" string="Mise en quarantaine" type="object" invisible="state not in ['confirmed', 'comite_validation', 'done']" groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,comite_validation,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_stock_picking" type="object" class="oe_stat_button" icon="fa-truck" invisible="stock_picking_id == False">
+                            <span>Opération stock</span>
+                        </button>
+                        <button name="action_view_notices" type="object" class="oe_stat_button" icon="fa-calendar" invisible="notice_count == 0">
+                            <field name="notice_count" string="Avis préalables" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_inspections" type="object" class="oe_stat_button" icon="fa-search" invisible="inspection_count == 0">
+                            <field name="inspection_count" string="Inspections" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_nonconformities" type="object" class="oe_stat_button" icon="fa-exclamation-triangle" invisible="nonconformity_count == 0">
+                            <field name="nonconformity_count" string="Non-conformités" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_quarantines" type="object" class="oe_stat_button" icon="fa-exclamation-circle" invisible="quarantine_count == 0">
+                            <field name="quarantine_count" string="Quarantaines" widget="statinfo"/>
+                        </button>
+                        <button name="action_view_returns" type="object" class="oe_stat_button" icon="fa-reply" invisible="return_count == 0">
+                            <field name="return_count" string="Retours" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="purchase_order_id" options="{'no_create': True, 'no_open': True}" readonly="state != 'draft'"/>
+                            <field name="demande_id" readonly="1"/>
+                            <field name="depot_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="committee_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="comite_reception_id" options="{'no_create': True}" readonly="state != 'draft'" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="fournisseur_id" readonly="1"/>
+                            <field name="responsable_id"/>
+                            <field name="bl_number" readonly="state != 'draft'"/>
+                            <field name="bl_date" readonly="state != 'draft'"/>
+                            <field name="pv_validation" invisible="1"/>
+                            <field name="pv_count" invisible="1"/>
+                            <field name="stock_picking_id" invisible="1"/>
+                            <field name="is_partial" readonly="1"/>
+                            <field name="notice_count" invisible="1"/>
+                            <field name="inspection_count" invisible="1"/>
+                            <field name="nonconformity_count" invisible="1"/>
+                            <field name="quarantine_count" invisible="1"/>
+                            <field name="return_count" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lignes de réception">
+                            <field name="line_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="article_id" options="{'no_create': True}"/>
+                                    <field name="designation"/>
+                                    <field name="quantite_commandee" readonly="1"/>
+                                    <field name="quantite_deja_recue" readonly="1"/>
+                                    <field name="quantite_recue"/>
+                                    <field name="quantite_restante" readonly="1"/>
+                                    <field name="uom_id" readonly="1"/>
+                                    <field name="est_conforme" readonly="parent.state != 'confirmed'"/>
+                                    <field name="notes"/>
+                                    <field name="purchase_line_id" invisible="1"/>
+                                    <field name="stock_move_id" invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Notes internes sur la réception..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les réceptions -->
+    <record id="view_reception_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.list</field>
+        <field name="model">e_gestock.reception</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'" decoration-warning="state == 'confirmed'" decoration-primary="state == 'comite_validation'" decoration-success="state == 'done'" decoration-danger="state == 'cancel'">
+                <field name="reference"/>
+                <field name="date"/>
+                <field name="purchase_order_id"/>
+                <field name="fournisseur_id"/>
+                <field name="depot_id"/>
+                <field name="responsable_id"/>
+                <field name="committee_id"/>
+                <field name="comite_reception_id" invisible="1"/>
+                <field name="state"/>
+                <field name="pv_validation" widget="boolean_toggle"/>
+                <field name="is_partial" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les réceptions -->
+    <record id="view_reception_search" model="ir.ui.view">
+        <field name="name">e_gestock.reception.search</field>
+        <field name="model">e_gestock.reception</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="fournisseur_id"/>
+                <field name="purchase_order_id"/>
+                <field name="depot_id"/>
+                <field name="responsable_id"/>
+                <filter string="Brouillons" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmées" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="En validation" name="comite_validation" domain="[('state', '=', 'comite_validation')]"/>
+                <filter string="Terminées" name="done" domain="[('state', '=', 'done')]"/>
+                <filter string="Annulées" name="cancel" domain="[('state', '=', 'cancel')]"/>
+                <filter string="Mes réceptions" name="my_receptions" domain="[('responsable_id', '=', uid)]"/>
+                <filter string="Avec PV" name="with_pv" domain="[('pv_validation', '=', True)]"/>
+                <filter string="Sans PV" name="without_pv" domain="[('pv_validation', '=', False)]"/>
+                <filter string="Livraisons partielles" name="partial" domain="[('is_partial', '=', True)]"/>
+                <separator/>
+                <filter string="Date de réception" name="groupby_date" context="{'group_by': 'date'}"/>
+                <filter string="Fournisseur" name="groupby_fournisseur" context="{'group_by': 'fournisseur_id'}"/>
+                <filter string="Commande" name="groupby_po" context="{'group_by': 'purchase_order_id'}"/>
+                <filter string="Dépôt" name="groupby_depot" context="{'group_by': 'depot_id'}"/>
+                <filter string="Responsable" name="groupby_resp" context="{'group_by': 'responsable_id'}"/>
+                <filter string="État" name="groupby_state" context="{'group_by': 'state'}"/>
+                <filter string="Comité" name="groupby_committee" context="{'group_by': 'committee_id'}"/>
+                <filter string="Ancien Comité" name="groupby_comite" context="{'group_by': 'comite_reception_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les réceptions -->
+    <record id="action_reception" model="ir.actions.act_window">
+        <field name="name">Réceptions</field>
+        <field name="res_model">e_gestock.reception</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_draft': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle réception
+            </p>
+            <p>
+                Les réceptions permettent d'enregistrer les livraisons des fournisseurs
+                et de contrôler la conformité des articles reçus.
+            </p>
+        </field>
+    </record>
+</odoo>

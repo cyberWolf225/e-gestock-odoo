@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Modèle de rapport pour les maintenances -->
+    <record id="report_e_gestock_asset_maintenance" model="ir.actions.report">
+        <field name="name">Fiche de maintenance</field>
+        <field name="model">e_gestock.asset_maintenance</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_asset.report_maintenance_template</field>
+        <field name="report_file">e_gestock_asset.report_maintenance_template</field>
+        <field name="binding_model_id" ref="model_e_gestock_asset_maintenance"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <!-- Template QWeb pour le rapport de maintenance -->
+    <template id="report_maintenance_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Fiche de maintenance</h2>
+                        
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Référence:</strong> <span t-field="o.reference"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>État:</strong> <span t-field="o.state"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Immobilisation:</strong> <span t-field="o.asset_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Type:</strong> <span t-field="o.type"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Date de début:</strong> <span t-field="o.date_debut"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Date de fin:</strong> <span t-field="o.date_fin"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Responsable:</strong> <span t-field="o.responsable_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Prestataire:</strong> <span t-field="o.prestataire_id"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Coût:</strong> <span t-field="o.cout"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Durée d'intervention:</strong> <span t-field="o.duree_intervention"/> heures
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt32">Description des travaux</h4>
+                        <div class="row">
+                            <div class="col-12">
+                                <span t-field="o.description"/>
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt32">Pièces détachées utilisées</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Référence</th>
+                                    <th>Désignation</th>
+                                    <th>Unité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.piece_ids" t-as="p">
+                                    <td><span t-field="p.ref_article"/></td>
+                                    <td><span t-field="p.design_article"/></td>
+                                    <td><span t-field="p.code_unite"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="row mt32">
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <p>Signature du responsable</p>
+                                    <br/>
+                                    <br/>
+                                    <p>_________________________</p>
+                                    <p><span t-field="o.responsable_id"/></p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <p>Signature du prestataire</p>
+                                    <br/>
+                                    <br/>
+                                    <p>_________________________</p>
+                                    <p><span t-field="o.prestataire_id"/></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    
+    <!-- Rapport de planning des maintenances -->
+    <record id="report_e_gestock_asset_maintenance_planning" model="ir.actions.report">
+        <field name="name">Planning des maintenances</field>
+        <field name="model">e_gestock.asset_maintenance</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_asset.report_maintenance_planning_template</field>
+        <field name="report_file">e_gestock_asset.report_maintenance_planning_template</field>
+        <field name="binding_model_id" ref="model_e_gestock_asset_maintenance"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <!-- Template QWeb pour le rapport de planning des maintenances -->
+    <template id="report_maintenance_planning_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">Planning des maintenances</h2>
+                    
+                    <div class="row mt32 mb32">
+                        <div class="col-12">
+                            <p>Date d'impression: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/></p>
+                        </div>
+                    </div>
+                    
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Immobilisation</th>
+                                <th>Type</th>
+                                <th>Date début</th>
+                                <th>Date fin</th>
+                                <th>Responsable</th>
+                                <th>Prestataire</th>
+                                <th>État</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="o">
+                                <td><span t-field="o.reference"/></td>
+                                <td><span t-field="o.asset_id"/></td>
+                                <td><span t-field="o.type"/></td>
+                                <td><span t-field="o.date_debut"/></td>
+                                <td><span t-field="o.date_fin"/></td>
+                                <td><span t-field="o.responsable_id"/></td>
+                                <td><span t-field="o.prestataire_id"/></td>
+                                <td><span t-field="o.state"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

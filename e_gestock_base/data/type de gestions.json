@@ -1,0 +1,76 @@
+{
+	"query": "SELECT * FROM `egestock`.`gestions` LIMIT 1000",
+	"rows":
+	[
+		{
+			"id": 1,
+			"code_gestion": "A",
+			"libelle_gestion": "Risques professionnels",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 2,
+			"code_gestion": "E",
+			"libelle_gestion": "Etablissements et oeuvres",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 3,
+			"code_gestion": "F",
+			"libelle_gestion": "Prestations familiales",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 4,
+			"code_gestion": "M",
+			"libelle_gestion": "Assurances maladies",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 5,
+			"code_gestion": "S",
+			"libelle_gestion": "Actions sanitaires et sociales",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 6,
+			"code_gestion": "V",
+			"libelle_gestion": "Assurances vieillesses",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 7,
+			"code_gestion": "G",
+			"libelle_gestion": "Administration",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 8,
+			"code_gestion": "I",
+			"libelle_gestion": "Immeubles de rapports",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 9,
+			"code_gestion": "T.",
+			"libelle_gestion": "Placements financiers",
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 10,
+			"code_gestion": "K",
+			"libelle_gestion": "Mep compta analytique",
+			"created_at": null,
+			"updated_at": null
+		}
+	]
+}

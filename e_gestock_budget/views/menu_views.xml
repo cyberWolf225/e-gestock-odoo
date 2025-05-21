@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu principal Budget -->
+    <menuitem id="menu_e_gestock_budget_root"
+              name="Budget"
+              parent="e_gestock_base.menu_e_gestock_root"
+              sequence="30"/>
+
+    <!-- Gestion des crédits budgétaires -->
+    <menuitem id="menu_e_gestock_budget_credits"
+              name="Crédits budgétaires"
+              parent="menu_e_gestock_budget_root"
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_credit_budget"
+              name="Crédits budgétaires"
+              parent="menu_e_gestock_budget_credits"
+              action="action_e_gestock_credit_budget"
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_dotation_budget"
+              name="Dotations budgétaires"
+              parent="menu_e_gestock_budget_credits"
+              action="action_e_gestock_dotation_budget"
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_operation_budget"
+              name="Opérations budgétaires"
+              parent="menu_e_gestock_budget_credits"
+              action="action_e_gestock_operation_budget"
+              sequence="30"/>
+
+    <!-- Contrôle budgétaire -->
+    <menuitem id="menu_e_gestock_budget_control_root"
+              name="Contrôle budgétaire"
+              parent="menu_e_gestock_budget_root"
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_budget_control"
+              name="Contrôles budgétaires"
+              parent="menu_e_gestock_budget_control_root"
+              action="action_e_gestock_budget_control"
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_exercise"
+              name="Exercices budgétaires"
+              parent="menu_e_gestock_budget_control_root"
+              action="action_e_gestock_exercise"
+              sequence="20"/>
+
+    <!-- Configuration budgétaire intégré au menu Configuration existant -->
+    <menuitem id="menu_e_gestock_budget_config"
+              name="Budget"
+              parent="e_gestock_base.menu_e_gestock_configuration"
+              sequence="40"/>
+</odoo> 

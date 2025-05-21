@@ -1,0 +1,1484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sections importées du fichier JSON -->
+        <record id="section_921901" model="e_gestock.section">
+            <field name="code_section">921901</field>
+            <field name="nom_section">SECTION COMMUNE APS D'ABENGOUROU</field>
+            <field name="code_structure" ref="structure_9219"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920501" model="e_gestock.section">
+            <field name="code_section">920501</field>
+            <field name="nom_section">SECTION COMMUNE APS D'ABOBO</field>
+            <field name="code_structure" ref="structure_9205"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920301" model="e_gestock.section">
+            <field name="code_section">920301</field>
+            <field name="nom_section">SECTION COMMUNE APS D'ADJAME</field>
+            <field name="code_structure" ref="structure_9203"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922001" model="e_gestock.section">
+            <field name="code_section">922001</field>
+            <field name="nom_section">SECTION COMMUNE APS D'AGBOVILLE</field>
+            <field name="code_structure" ref="structure_9220"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920701" model="e_gestock.section">
+            <field name="code_section">920701</field>
+            <field name="nom_section">SECTION COMMUNE APS DE BONOUA</field>
+            <field name="code_structure" ref="structure_9207"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921001" model="e_gestock.section">
+            <field name="code_section">921001</field>
+            <field name="nom_section">SECTION COMMUNE APS DE BOUAKE</field>
+            <field name="code_structure" ref="structure_9210"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920801" model="e_gestock.section">
+            <field name="code_section">920801</field>
+            <field name="nom_section">SECTION COMMUNE APS DE COCODY</field>
+            <field name="code_structure" ref="structure_9208"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921301" model="e_gestock.section">
+            <field name="code_section">921301</field>
+            <field name="nom_section">SECTION COMMUNE APS DE DALOA</field>
+            <field name="code_structure" ref="structure_9213"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920901" model="e_gestock.section">
+            <field name="code_section">920901</field>
+            <field name="nom_section">SECTION COMMUNE APS DE DIVO</field>
+            <field name="code_structure" ref="structure_9209"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921401" model="e_gestock.section">
+            <field name="code_section">921401</field>
+            <field name="nom_section">SECTION COMMUNE APS DE GAGNOA</field>
+            <field name="code_structure" ref="structure_9214"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921101" model="e_gestock.section">
+            <field name="code_section">921101</field>
+            <field name="nom_section">SECTION COMMUNE APS DE KORHOGO</field>
+            <field name="code_structure" ref="structure_9211"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920601" model="e_gestock.section">
+            <field name="code_section">920601</field>
+            <field name="nom_section">SECTION COMMUNE APS DE KOUMASSI</field>
+            <field name="code_structure" ref="structure_9206"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921801" model="e_gestock.section">
+            <field name="code_section">921801</field>
+            <field name="nom_section">SECTION COMMUNE APS DE SAN PEDRO</field>
+            <field name="code_structure" ref="structure_9218"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920201" model="e_gestock.section">
+            <field name="code_section">920201</field>
+            <field name="nom_section">SECTION COMMUNE APS DE TREICHVILLE</field>
+            <field name="code_structure" ref="structure_9202"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921201" model="e_gestock.section">
+            <field name="code_section">921201</field>
+            <field name="nom_section">SECTION COMMUNE APS DE YAMOUSSOUKRO</field>
+            <field name="code_structure" ref="structure_9212"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920401" model="e_gestock.section">
+            <field name="code_section">920401</field>
+            <field name="nom_section">SECTION COMMUNE APS DE YOPOUGON</field>
+            <field name="code_structure" ref="structure_9204"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922201" model="e_gestock.section">
+            <field name="code_section">922201</field>
+            <field name="nom_section">SECTION COMMUNE APS DES PRESTATIONS EXTERIEURES</field>
+            <field name="code_structure" ref="structure_9222"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920101" model="e_gestock.section">
+            <field name="code_section">920101</field>
+            <field name="nom_section">SECTION COMMUNE APS DU PLATEAU</field>
+            <field name="code_structure" ref="structure_9201"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910301" model="e_gestock.section">
+            <field name="code_section">910301</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION COMMUNICATION MARKETING ET RELATION CLIENTS</field>
+            <field name="code_structure" ref="structure_9103"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910801" model="e_gestock.section">
+            <field name="code_section">910801</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DU PATRIMOINE ET DES MOYENS GENERAUX</field>
+            <field name="code_structure" ref="structure_9108"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910701" model="e_gestock.section">
+            <field name="code_section">910701</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION REGLEMENTATION JURIDIQUE ET CONTENTIEUX</field>
+            <field name="code_structure" ref="structure_9107"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_923301" model="e_gestock.section">
+            <field name="code_section">923301</field>
+            <field name="nom_section">SECTION COMMUNE CENTRE D'APPAREILLAGE</field>
+            <field name="code_structure" ref="structure_9233"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910101" model="e_gestock.section">
+            <field name="code_section">910101</field>
+            <field name="nom_section">SECTION COMMUNE CONSEIL D'ADMINISTRATION</field>
+            <field name="code_structure" ref="structure_9101"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911401" model="e_gestock.section">
+            <field name="code_section">911401</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DU CONTROLE MEDICAL</field>
+            <field name="code_structure" ref="structure_9114"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911001" model="e_gestock.section">
+            <field name="code_section">911001</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION AUDIT ET INSPECTION</field>
+            <field name="code_structure" ref="structure_9110"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910401" model="e_gestock.section">
+            <field name="code_section">910401</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DE LA DPPSST</field>
+            <field name="code_structure" ref="structure_9104"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_913501" model="e_gestock.section">
+            <field name="code_section">913501</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DE LA GOUVERNANCE DES DONNEES</field>
+            <field name="code_structure" ref="structure_9135"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911701" model="e_gestock.section">
+            <field name="code_section">911701</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DES PRESTATIONS</field>
+            <field name="code_structure" ref="structure_9117"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910601" model="e_gestock.section">
+            <field name="code_section">910601</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DES RESSOURCES HUMAINES</field>
+            <field name="code_structure" ref="structure_9106"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_913401" model="e_gestock.section">
+            <field name="code_section">913401</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DU BUDGET ET DU CONTROLE DE GESTION</field>
+            <field name="code_structure" ref="structure_9134"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911501" model="e_gestock.section">
+            <field name="code_section">911501</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DU RECOUVREMENT</field>
+            <field name="code_structure" ref="structure_9115"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910901" model="e_gestock.section">
+            <field name="code_section">910901</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DU SYSTEME D'INFORMATION</field>
+            <field name="code_structure" ref="structure_9109"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910501" model="e_gestock.section">
+            <field name="code_section">910501</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION COMPTABILITE ET FISCALITE</field>
+            <field name="code_structure" ref="structure_9105"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910201" model="e_gestock.section">
+            <field name="code_section">910201</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION GENERALE</field>
+            <field name="code_structure" ref="structure_9102"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_913301" model="e_gestock.section">
+            <field name="code_section">913301</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION PROJETS</field>
+            <field name="code_structure" ref="structure_9133"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911301" model="e_gestock.section">
+            <field name="code_section">911301</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION QUALITE ET ETUDES</field>
+            <field name="code_structure" ref="structure_9113"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_923201" model="e_gestock.section">
+            <field name="code_section">923201</field>
+            <field name="nom_section">SECTION COMMUNE ETABLISSEMENT MEDICAL DE DIVO</field>
+            <field name="code_structure" ref="structure_9232"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911801" model="e_gestock.section">
+            <field name="code_section">911801</field>
+            <field name="nom_section">SECTION COMMUNE IM2S</field>
+            <field name="code_structure" ref="structure_9118"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911101" model="e_gestock.section">
+            <field name="code_section">911101</field>
+            <field name="nom_section">SECTION COMMUNE INSPECTION GENERALE</field>
+            <field name="code_structure" ref="structure_9111"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910213" model="e_gestock.section">
+            <field name="code_section">910213</field>
+            <field name="nom_section">DIRECTION DE LA GOUVERNANCE DES DONNÃ‰ES</field>
+            <field name="code_structure" ref="structure_9102"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910607" model="e_gestock.section">
+            <field name="code_section">910607</field>
+            <field name="nom_section">MA-CNPS</field>
+            <field name="code_structure" ref="structure_9106"/>
+        </record>
+        
+        <record id="section_921809" model="e_gestock.section">
+            <field name="code_section">921809</field>
+            <field name="nom_section">SECTION ACCUEIL ET GED (SAN PÃ‰DRO)</field>
+            <field name="code_structure" ref="structure_9218"/>
+        </record>
+        
+        <record id="section_911804" model="e_gestock.section">
+            <field name="code_section">911804</field>
+            <field name="nom_section">SECTION ADMINISTRATION (IM2S)</field>
+            <field name="code_structure" ref="structure_9118"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921106" model="e_gestock.section">
+            <field name="code_section">921106</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET</field>
+            <field name="code_structure" ref="structure_9211"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922006" model="e_gestock.section">
+            <field name="code_section">922006</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE AGBOVILLE)</field>
+            <field name="code_structure" ref="structure_9220"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921006" model="e_gestock.section">
+            <field name="code_section">921006</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE BOUAKÃ‰)</field>
+            <field name="code_structure" ref="structure_9210"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921906" model="e_gestock.section">
+            <field name="code_section">921906</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE Dâ€™ABENGOUROU)</field>
+            <field name="code_structure" ref="structure_9219"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920506" model="e_gestock.section">
+            <field name="code_section">920506</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE D ABOBO)</field>
+            <field name="code_structure" ref="structure_9205"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920306" model="e_gestock.section">
+            <field name="code_section">920306</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE Dâ€™ADJAME)</field>
+            <field name="code_structure" ref="structure_9203"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921306" model="e_gestock.section">
+            <field name="code_section">921306</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE DALOA)</field>
+            <field name="code_structure" ref="structure_9213"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920706" model="e_gestock.section">
+            <field name="code_section">920706</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE DE BONOUA)</field>
+            <field name="code_structure" ref="structure_9207"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920806" model="e_gestock.section">
+            <field name="code_section">920806</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE DE COCODY)</field>
+            <field name="code_structure" ref="structure_9208"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920906" model="e_gestock.section">
+            <field name="code_section">920906</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE DE DIVO)</field>
+            <field name="code_structure" ref="structure_9209"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920606" model="e_gestock.section">
+            <field name="code_section">920606</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE DE KOUMASSI)</field>
+            <field name="code_structure" ref="structure_9206"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920406" model="e_gestock.section">
+            <field name="code_section">920406</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE DE YOPOUGON)</field>
+            <field name="code_structure" ref="structure_9204"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921406" model="e_gestock.section">
+            <field name="code_section">921406</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE GAGNOA)</field>
+            <field name="code_structure" ref="structure_9214"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920106" model="e_gestock.section">
+            <field name="code_section">920106</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE PLATEAU)</field>
+            <field name="code_structure" ref="structure_9201"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921806" model="e_gestock.section">
+            <field name="code_section">921806</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE SAN PEDRO)</field>
+            <field name="code_structure" ref="structure_9218"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920206" model="e_gestock.section">
+            <field name="code_section">920206</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE TREICHVILLE)</field>
+            <field name="code_structure" ref="structure_9202"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921206" model="e_gestock.section">
+            <field name="code_section">921206</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET (AGENCE YAMOUSSOUKRO)</field>
+            <field name="code_structure" ref="structure_9212"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922203" model="e_gestock.section">
+            <field name="code_section">922203</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET DE L APEXT</field>
+            <field name="code_structure" ref="structure_9222"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_923304" model="e_gestock.section">
+            <field name="code_section">923304</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET DU CARF</field>
+            <field name="code_structure" ref="structure_9233"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910405" model="e_gestock.section">
+            <field name="code_section">910405</field>
+            <field name="nom_section">SECTION ADMINISTRATION ET BUDGET DU CARF</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_913303" model="e_gestock.section">
+            <field name="code_section">913303</field>
+            <field name="nom_section">SECTION ANIMATION ET COORDINATION (DP)</field>
+            <field name="code_structure" ref="structure_9133"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910206" model="e_gestock.section">
+            <field name="code_section">910206</field>
+            <field name="nom_section">SECTION ARCHIVES (DG)</field>
+            <field name="code_structure" ref="structure_9102"/>
+        </record>
+        
+        <record id="section_910416" model="e_gestock.section">
+            <field name="code_section">910416</field>
+            <field name="nom_section">SECTION ARCHIVES DEX</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_921004" model="e_gestock.section">
+            <field name="code_section">921004</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE</field>
+            <field name="code_structure" ref="structure_9210"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921104" model="e_gestock.section">
+            <field name="code_section">921104</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE</field>
+            <field name="code_structure" ref="structure_9211"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922004" model="e_gestock.section">
+            <field name="code_section">922004</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE AGBOVILLE)</field>
+            <field name="code_structure" ref="structure_9220"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921904" model="e_gestock.section">
+            <field name="code_section">921904</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE Dâ€™ABENGOUROU)</field>
+            <field name="code_structure" ref="structure_9219"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920504" model="e_gestock.section">
+            <field name="code_section">920504</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE D ABOBO)</field>
+            <field name="code_structure" ref="structure_9205"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920304" model="e_gestock.section">
+            <field name="code_section">920304</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE Dâ€™ADJAME)</field>
+            <field name="code_structure" ref="structure_9203"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921304" model="e_gestock.section">
+            <field name="code_section">921304</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE DALOA)</field>
+            <field name="code_structure" ref="structure_9213"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920704" model="e_gestock.section">
+            <field name="code_section">920704</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE DE BONOUA)</field>
+            <field name="code_structure" ref="structure_9207"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920804" model="e_gestock.section">
+            <field name="code_section">920804</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE DE COCODY)</field>
+            <field name="code_structure" ref="structure_9208"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920904" model="e_gestock.section">
+            <field name="code_section">920904</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE DE DIVO)</field>
+            <field name="code_structure" ref="structure_9209"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920604" model="e_gestock.section">
+            <field name="code_section">920604</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE DE KOUMASSI)</field>
+            <field name="code_structure" ref="structure_9206"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920404" model="e_gestock.section">
+            <field name="code_section">920404</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE DE YOPOUGON)</field>
+            <field name="code_structure" ref="structure_9204"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921404" model="e_gestock.section">
+            <field name="code_section">921404</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE GAGNOA)</field>
+            <field name="code_structure" ref="structure_9214"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920104" model="e_gestock.section">
+            <field name="code_section">920104</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE PLATEAU)</field>
+            <field name="code_structure" ref="structure_9201"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921804" model="e_gestock.section">
+            <field name="code_section">921804</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE SAN PEDRO)</field>
+            <field name="code_structure" ref="structure_9218"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920204" model="e_gestock.section">
+            <field name="code_section">920204</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE TREICHVILLE)</field>
+            <field name="code_structure" ref="structure_9202"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921204" model="e_gestock.section">
+            <field name="code_section">921204</field>
+            <field name="nom_section">SECTION ASSURANCE VIEILLESSE (AGENCE YAMOUSSOUKRO)</field>
+            <field name="code_structure" ref="structure_9212"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910302" model="e_gestock.section">
+            <field name="code_section">910302</field>
+            <field name="nom_section">SECTION ASSURES (CCM)</field>
+            <field name="code_structure" ref="structure_9103"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921003" model="e_gestock.section">
+            <field name="code_section">921003</field>
+            <field name="nom_section">SECTION AT/MP</field>
+            <field name="code_structure" ref="structure_9210"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921103" model="e_gestock.section">
+            <field name="code_section">921103</field>
+            <field name="nom_section">SECTION AT/MP</field>
+            <field name="code_structure" ref="structure_9211"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922003" model="e_gestock.section">
+            <field name="code_section">922003</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE AGBOVILLE)</field>
+            <field name="code_structure" ref="structure_9220"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921903" model="e_gestock.section">
+            <field name="code_section">921903</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE Dâ€™ABENGOUROU)</field>
+            <field name="code_structure" ref="structure_9219"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920503" model="e_gestock.section">
+            <field name="code_section">920503</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE D ABOBO)</field>
+            <field name="code_structure" ref="structure_9205"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920303" model="e_gestock.section">
+            <field name="code_section">920303</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE Dâ€™ADJAME)</field>
+            <field name="code_structure" ref="structure_9203"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921303" model="e_gestock.section">
+            <field name="code_section">921303</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE DALOA)</field>
+            <field name="code_structure" ref="structure_9213"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920703" model="e_gestock.section">
+            <field name="code_section">920703</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE DE BONOUA)</field>
+            <field name="code_structure" ref="structure_9207"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920803" model="e_gestock.section">
+            <field name="code_section">920803</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE DE COCODY)</field>
+            <field name="code_structure" ref="structure_9208"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920903" model="e_gestock.section">
+            <field name="code_section">920903</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE DE DIVO)</field>
+            <field name="code_structure" ref="structure_9209"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920603" model="e_gestock.section">
+            <field name="code_section">920603</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE DE KOUMASSI)</field>
+            <field name="code_structure" ref="structure_9206"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920403" model="e_gestock.section">
+            <field name="code_section">920403</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE DE YOPOUGON)</field>
+            <field name="code_structure" ref="structure_9204"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921403" model="e_gestock.section">
+            <field name="code_section">921403</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE GAGNOA)</field>
+            <field name="code_structure" ref="structure_9214"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920103" model="e_gestock.section">
+            <field name="code_section">920103</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE PLATEAU)</field>
+            <field name="code_structure" ref="structure_9201"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921803" model="e_gestock.section">
+            <field name="code_section">921803</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE SAN PEDRO)</field>
+            <field name="code_structure" ref="structure_9218"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920203" model="e_gestock.section">
+            <field name="code_section">920203</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE TREICHVILLE)</field>
+            <field name="code_structure" ref="structure_9202"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921203" model="e_gestock.section">
+            <field name="code_section">921203</field>
+            <field name="nom_section">SECTION AT/MP (AGENCE YAMOUSSOUKRO)</field>
+            <field name="code_structure" ref="structure_9212"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911003" model="e_gestock.section">
+            <field name="code_section">911003</field>
+            <field name="nom_section">SECTION AUDIT ET CONTROLE INTERNE (DCAI)</field>
+            <field name="code_structure" ref="structure_9110"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910305" model="e_gestock.section">
+            <field name="code_section">910305</field>
+            <field name="nom_section">SECTION COMMUNICATION (CCM)</field>
+            <field name="code_structure" ref="structure_9103"/>
+        </record>
+        
+        <record id="section_921108" model="e_gestock.section">
+            <field name="code_section">921108</field>
+            <field name="nom_section">SECTION CONTENTIEUX</field>
+            <field name="code_structure" ref="structure_9211"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922008" model="e_gestock.section">
+            <field name="code_section">922008</field>
+            <field name="nom_section">SECTION CONTENTIEUX (AGENCE AGBOVILLE)</field>
+            <field name="code_structure" ref="structure_9220"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921008" model="e_gestock.section">
+            <field name="code_section">921008</field>
+            <field name="nom_section">SECTION CONTENTIEUX (AGENCE BOUAKÃ‰)</field>
+            <field name="code_structure" ref="structure_9210"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921908" model="e_gestock.section">
+            <field name="code_section">921908</field>
+            <field name="nom_section">SECTION CONTENTIEUX (AGENCE Dâ€™ABENGOUROU)</field>
+            <field name="code_structure" ref="structure_9219"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921308" model="e_gestock.section">
+            <field name="code_section">921308</field>
+            <field name="nom_section">SECTION CONTENTIEUX (AGENCE DALOA)</field>
+            <field name="code_structure" ref="structure_9213"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920908" model="e_gestock.section">
+            <field name="code_section">920908</field>
+            <field name="nom_section">SECTION CONTENTIEUX (AGENCE DE DIVO)</field>
+            <field name="code_structure" ref="structure_9209"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921408" model="e_gestock.section">
+            <field name="code_section">921408</field>
+            <field name="nom_section">SECTION CONTENTIEUX (AGENCE GAGNOA)</field>
+            <field name="code_structure" ref="structure_9214"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921808" model="e_gestock.section">
+            <field name="code_section">921808</field>
+            <field name="nom_section">SECTION CONTENTIEUX (AGENCE SAN PEDRO)</field>
+            <field name="code_structure" ref="structure_9218"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921208" model="e_gestock.section">
+            <field name="code_section">921208</field>
+            <field name="nom_section">SECTION CONTENTIEUX (AGENCE YAMOUSSOUKRO)</field>
+            <field name="code_structure" ref="structure_9212"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910702" model="e_gestock.section">
+            <field name="code_section">910702</field>
+            <field name="nom_section">SECTION CONTENTIEUX GENERAL (CJC)</field>
+            <field name="code_structure" ref="structure_9107"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910703" model="e_gestock.section">
+            <field name="code_section">910703</field>
+            <field name="nom_section">SECTION CONTENTIEUX SPECIFIQUE (CJC)</field>
+            <field name="code_structure" ref="structure_9107"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911002" model="e_gestock.section">
+            <field name="code_section">911002</field>
+            <field name="nom_section">SECTION CONTROLE DE GESTION ET SYSTEME DE MESURE (DCAI)</field>
+            <field name="code_structure" ref="structure_9110"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910208" model="e_gestock.section">
+            <field name="code_section">910208</field>
+            <field name="nom_section">SECTION CONTROLE MEDICAL DE YOPOUGON</field>
+            <field name="code_structure" ref="structure_9102"/>
+        </record>
+        
+        <record id="section_910205" model="e_gestock.section">
+            <field name="code_section">910205</field>
+            <field name="nom_section">SECTION CONTROLE MEDICAL NATIONAL (DG)</field>
+            <field name="code_structure" ref="structure_9102"/>
+        </record>
+        
+        <record id="section_910209" model="e_gestock.section">
+            <field name="code_section">910209</field>
+            <field name="nom_section">SECTION CONTROLE MEDICAL TREICHVILLE</field>
+            <field name="code_structure" ref="structure_9102"/>
+        </record>
+        
+        <record id="section_910402" model="e_gestock.section">
+            <field name="code_section">910402</field>
+            <field name="nom_section">SECTION COORDINATION ET DU CONTROLE TECHNIQUE PRESTATIONS (DEX)</field>
+            <field name="code_structure" ref="structure_9104"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910303" model="e_gestock.section">
+            <field name="code_section">910303</field>
+            <field name="nom_section">SECTION COTISANS (CCM)</field>
+            <field name="code_structure" ref="structure_9103"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910210" model="e_gestock.section">
+            <field name="code_section">910210</field>
+            <field name="nom_section">SECTION COURRIER DU DEPARTEMENT GED</field>
+            <field name="code_structure" ref="structure_9102"/>
+        </record>
+        
+        <record id="section_911802" model="e_gestock.section">
+            <field name="code_section">911802</field>
+            <field name="nom_section">SECTION ETUDE ET STAGE (IM2S)</field>
+            <field name="code_structure" ref="structure_9118"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922204" model="e_gestock.section">
+            <field name="code_section">922204</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE</field>
+            <field name="code_structure" ref="structure_9222"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_923305" model="e_gestock.section">
+            <field name="code_section">923305</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE DU CARF</field>
+            <field name="code_structure" ref="structure_9233"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921107" model="e_gestock.section">
+            <field name="code_section">921107</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE</field>
+            <field name="code_structure" ref="structure_9211"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922007" model="e_gestock.section">
+            <field name="code_section">922007</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE AGBOVILLE)</field>
+            <field name="code_structure" ref="structure_9220"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921007" model="e_gestock.section">
+            <field name="code_section">921007</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE BOUAKÃ‰)</field>
+            <field name="code_structure" ref="structure_9210"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921907" model="e_gestock.section">
+            <field name="code_section">921907</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE Dâ€™ABENGOUROU)</field>
+            <field name="code_structure" ref="structure_9219"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920507" model="e_gestock.section">
+            <field name="code_section">920507</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE D ABOBO)</field>
+            <field name="code_structure" ref="structure_9205"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920307" model="e_gestock.section">
+            <field name="code_section">920307</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE Dâ€™ADJAME)</field>
+            <field name="code_structure" ref="structure_9203"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921307" model="e_gestock.section">
+            <field name="code_section">921307</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE DALOA)</field>
+            <field name="code_structure" ref="structure_9213"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920707" model="e_gestock.section">
+            <field name="code_section">920707</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE DE BONOUA)</field>
+            <field name="code_structure" ref="structure_9207"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920807" model="e_gestock.section">
+            <field name="code_section">920807</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITÃ‰ (AGENCE DE COCODY)</field>
+            <field name="code_structure" ref="structure_9208"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920907" model="e_gestock.section">
+            <field name="code_section">920907</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITÃ‰ (AGENCE DE DIVO)</field>
+            <field name="code_structure" ref="structure_9209"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920607" model="e_gestock.section">
+            <field name="code_section">920607</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE DE KOUMASSI)</field>
+            <field name="code_structure" ref="structure_9206"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920407" model="e_gestock.section">
+            <field name="code_section">920407</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE DE YOPOUGON)</field>
+            <field name="code_structure" ref="structure_9204"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921407" model="e_gestock.section">
+            <field name="code_section">921407</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE GAGNOA)</field>
+            <field name="code_structure" ref="structure_9214"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920107" model="e_gestock.section">
+            <field name="code_section">920107</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE PLATEAU)</field>
+            <field name="code_structure" ref="structure_9201"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921807" model="e_gestock.section">
+            <field name="code_section">921807</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE SAN PEDRO)</field>
+            <field name="code_structure" ref="structure_9218"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920207" model="e_gestock.section">
+            <field name="code_section">920207</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE TREICHVILLE)</field>
+            <field name="code_structure" ref="structure_9202"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921207" model="e_gestock.section">
+            <field name="code_section">921207</field>
+            <field name="nom_section">SECTION FINANCES ET COMPTABILITE (AGENCE YAMOUSSOUKRO)</field>
+            <field name="code_structure" ref="structure_9212"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910605" model="e_gestock.section">
+            <field name="code_section">910605</field>
+            <field name="nom_section">SECTION FORMATION PERFECTIONNEMENT ET PRÃ‰VISION (DRH)</field>
+            <field name="code_structure" ref="structure_9106"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910306" model="e_gestock.section">
+            <field name="code_section">910306</field>
+            <field name="nom_section">SECTION MARKETING (CCM)</field>
+            <field name="code_structure" ref="structure_9103"/>
+        </record>
+        
+        <record id="section_923206" model="e_gestock.section">
+            <field name="code_section">923206</field>
+            <field name="nom_section">SECTION OPHTALMOLOGIE (CMS DE DIVO)</field>
+            <field name="code_structure" ref="structure_9232"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_911803" model="e_gestock.section">
+            <field name="code_section">911803</field>
+            <field name="nom_section">SECTION PERFECTIONNEMENT ET RECYCLAGE (IM2S)</field>
+            <field name="code_structure" ref="structure_9118"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910304" model="e_gestock.section">
+            <field name="code_section">910304</field>
+            <field name="nom_section">SECTION PERSONNEL (CCM)</field>
+            <field name="code_structure" ref="structure_9103"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922202" model="e_gestock.section">
+            <field name="code_section">922202</field>
+            <field name="nom_section">SECTION PRESTATIONS EXPATRIES (APEXT)</field>
+            <field name="code_structure" ref="structure_9222"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921402" model="e_gestock.section">
+            <field name="code_section">921402</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES</field>
+            <field name="code_structure" ref="structure_9214"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921102" model="e_gestock.section">
+            <field name="code_section">921102</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES</field>
+            <field name="code_structure" ref="structure_9211"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922002" model="e_gestock.section">
+            <field name="code_section">922002</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE AGBOVILLE)</field>
+            <field name="code_structure" ref="structure_9220"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921002" model="e_gestock.section">
+            <field name="code_section">921002</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE BOUAKÃ‰)</field>
+            <field name="code_structure" ref="structure_9210"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921902" model="e_gestock.section">
+            <field name="code_section">921902</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE Dâ€™ABENGOUROU)</field>
+            <field name="code_structure" ref="structure_9219"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920502" model="e_gestock.section">
+            <field name="code_section">920502</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE D ABOBO)</field>
+            <field name="code_structure" ref="structure_9205"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920302" model="e_gestock.section">
+            <field name="code_section">920302</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE Dâ€™ADJAME)</field>
+            <field name="code_structure" ref="structure_9203"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921302" model="e_gestock.section">
+            <field name="code_section">921302</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE DALOA)</field>
+            <field name="code_structure" ref="structure_9213"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920702" model="e_gestock.section">
+            <field name="code_section">920702</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE DE BONOUA)</field>
+            <field name="code_structure" ref="structure_9207"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920802" model="e_gestock.section">
+            <field name="code_section">920802</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE DE COCODY)</field>
+            <field name="code_structure" ref="structure_9208"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920902" model="e_gestock.section">
+            <field name="code_section">920902</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE DE DIVO)</field>
+            <field name="code_structure" ref="structure_9209"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920602" model="e_gestock.section">
+            <field name="code_section">920602</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE DE KOUMASSI)</field>
+            <field name="code_structure" ref="structure_9206"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920402" model="e_gestock.section">
+            <field name="code_section">920402</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE DE YOPOUGON)</field>
+            <field name="code_structure" ref="structure_9204"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920102" model="e_gestock.section">
+            <field name="code_section">920102</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE PLATEAU)</field>
+            <field name="code_structure" ref="structure_9201"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921802" model="e_gestock.section">
+            <field name="code_section">921802</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE SAN PEDRO)</field>
+            <field name="code_structure" ref="structure_9218"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920202" model="e_gestock.section">
+            <field name="code_section">920202</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE TREICHVILLE)</field>
+            <field name="code_structure" ref="structure_9202"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921202" model="e_gestock.section">
+            <field name="code_section">921202</field>
+            <field name="nom_section">SECTION PRESTATIONS FAMILIALES (AGENCE YAMOUSSOUKRO)</field>
+            <field name="code_structure" ref="structure_9212"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910404" model="e_gestock.section">
+            <field name="code_section">910404</field>
+            <field name="nom_section">SECTION PREVENTION DES AT/MP (DEX)</field>
+            <field name="code_structure" ref="structure_9104"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920905" model="e_gestock.section">
+            <field name="code_section">920905</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE DE DIVO)</field>
+            <field name="code_structure" ref="structure_9209"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922005" model="e_gestock.section">
+            <field name="code_section">922005</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE AGBOVILLE)</field>
+            <field name="code_structure" ref="structure_9220"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921005" model="e_gestock.section">
+            <field name="code_section">921005</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE BOUAKÃ‰)</field>
+            <field name="code_structure" ref="structure_9210"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921105" model="e_gestock.section">
+            <field name="code_section">921105</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE BOUAKÃ‰)</field>
+            <field name="code_structure" ref="structure_9211"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921905" model="e_gestock.section">
+            <field name="code_section">921905</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE Dâ€™ABENGOUROU)</field>
+            <field name="code_structure" ref="structure_9219"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920505" model="e_gestock.section">
+            <field name="code_section">920505</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE D ABOBO)</field>
+            <field name="code_structure" ref="structure_9205"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920305" model="e_gestock.section">
+            <field name="code_section">920305</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE Dâ€™ADJAME)</field>
+            <field name="code_structure" ref="structure_9203"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921305" model="e_gestock.section">
+            <field name="code_section">921305</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE DALOA)</field>
+            <field name="code_structure" ref="structure_9213"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920705" model="e_gestock.section">
+            <field name="code_section">920705</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE DE BONOUA)</field>
+            <field name="code_structure" ref="structure_9207"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920805" model="e_gestock.section">
+            <field name="code_section">920805</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE DE COCODY)</field>
+            <field name="code_structure" ref="structure_9208"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920605" model="e_gestock.section">
+            <field name="code_section">920605</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE DE KOUMASSI)</field>
+            <field name="code_structure" ref="structure_9206"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920405" model="e_gestock.section">
+            <field name="code_section">920405</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE DE YOPOUGON)</field>
+            <field name="code_structure" ref="structure_9204"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921405" model="e_gestock.section">
+            <field name="code_section">921405</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE GAGNOA)</field>
+            <field name="code_structure" ref="structure_9214"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920105" model="e_gestock.section">
+            <field name="code_section">920105</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE PLATEAU)</field>
+            <field name="code_structure" ref="structure_9201"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921805" model="e_gestock.section">
+            <field name="code_section">921805</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE SAN PEDRO)</field>
+            <field name="code_structure" ref="structure_9218"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_920205" model="e_gestock.section">
+            <field name="code_section">920205</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE TREICHVILLE)</field>
+            <field name="code_structure" ref="structure_9202"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_921205" model="e_gestock.section">
+            <field name="code_section">921205</field>
+            <field name="nom_section">SECTION RECOUVREMENT (AGENCE YAMOUSSOUKRO)</field>
+            <field name="code_structure" ref="structure_9212"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_923302" model="e_gestock.section">
+            <field name="code_section">923302</field>
+            <field name="nom_section">SECTION REEDUCATION DU CARF</field>
+            <field name="code_structure" ref="structure_9233"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_923303" model="e_gestock.section">
+            <field name="code_section">923303</field>
+            <field name="nom_section">SECTION REPARATION ET FABRICATION PROTHESE DU CARF</field>
+            <field name="code_structure" ref="structure_9233"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_913302" model="e_gestock.section">
+            <field name="code_section">913302</field>
+            <field name="nom_section">SECTION SUIVI ET CONTROLE (DP)</field>
+            <field name="code_structure" ref="structure_9133"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910802" model="e_gestock.section">
+            <field name="code_section">910802</field>
+            <field name="nom_section">SERVICE ACHAT ET GESTION DES STOCKS (CMP)</field>
+            <field name="code_structure" ref="structure_9108"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910414" model="e_gestock.section">
+            <field name="code_section">910414</field>
+            <field name="nom_section">SERVICE ADMINISTRATION ET DU BUDGET Dâ€™ABENGOUROU</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_910415" model="e_gestock.section">
+            <field name="code_section">910415</field>
+            <field name="nom_section">SERVICE ADMINISTRATION ET DU BUDGET DE BONOUA</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_910411" model="e_gestock.section">
+            <field name="code_section">910411</field>
+            <field name="nom_section">SERVICE ADMINISTRATION ET DU BUDGET DE DALOA</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_910412" model="e_gestock.section">
+            <field name="code_section">910412</field>
+            <field name="nom_section">SERVICE ADMINISTRATION ET DU BUDGET DE DIVO</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_910408" model="e_gestock.section">
+            <field name="code_section">910408</field>
+            <field name="nom_section">SERVICE ADMINISTRATION ET DU BUDGET DE GAGNOA</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_910406" model="e_gestock.section">
+            <field name="code_section">910406</field>
+            <field name="nom_section">SERVICE ADMINISTRATION ET DU BUDGET DE Lâ€™EMY</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_910413" model="e_gestock.section">
+            <field name="code_section">910413</field>
+            <field name="nom_section">SERVICE ADMINISTRATION ET DU BUDGET DE SAN PÃ‰DRO</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_910410" model="e_gestock.section">
+            <field name="code_section">910410</field>
+            <field name="nom_section">SERVICE ADMINISTRATION ET DU BUDGET DE YAKRO</field>
+            <field name="code_structure" ref="structure_9104"/>
+        </record>
+        
+        <record id="section_910504" model="e_gestock.section">
+            <field name="code_section">910504</field>
+            <field name="nom_section">SERVICE COMPTABILITE DU SIEGE (DFC)</field>
+            <field name="code_structure" ref="structure_9105"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910505" model="e_gestock.section">
+            <field name="code_section">910505</field>
+            <field name="nom_section">SERVICE COORDINATION DE LA COMPTABILITE DES STRUCTURES (DFC)</field>
+            <field name="code_structure" ref="structure_9105"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910405" model="e_gestock.section">
+            <field name="code_section">910405</field>
+            <field name="nom_section">SERVICE DE Lâ€™ACTION SANITAIRE ET SOCIALE</field>
+            <field name="code_structure" ref="structure_9104"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910403" model="e_gestock.section">
+            <field name="code_section">910403</field>
+            <field name="nom_section">SERVICE DE LA COORDINATION ET DU CONTROLE TECHNIQUE DU RECOUVREMENT (DEX)</field>
+            <field name="code_structure" ref="structure_9104"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910602" model="e_gestock.section">
+            <field name="code_section">910602</field>
+            <field name="nom_section">SERVICE GESTION ADMINISTRATIVE DU PERSONNEL (DRH)</field>
+            <field name="code_structure" ref="structure_9106"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910503" model="e_gestock.section">
+            <field name="code_section">910503</field>
+            <field name="nom_section">SERVICE GESTION DU PORTEFEUILLE (DFC)</field>
+            <field name="code_structure" ref="structure_9105"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910803" model="e_gestock.section">
+            <field name="code_section">910803</field>
+            <field name="nom_section">SERVICE LOGISTIQUE (CMP)</field>
+            <field name="code_structure" ref="structure_9108"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910903" model="e_gestock.section">
+            <field name="code_section">910903</field>
+            <field name="nom_section">SERVICE MAINTENANCE ET ASSISTANCE (CEI)</field>
+            <field name="code_structure" ref="structure_9109"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910606" model="e_gestock.section">
+            <field name="code_section">910606</field>
+            <field name="nom_section">SERVICE MEDICAL DU PERSONNEL (DRH)</field>
+            <field name="code_structure" ref="structure_9106"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910804" model="e_gestock.section">
+            <field name="code_section">910804</field>
+            <field name="nom_section">SERVICE PATRIMOINE (CMP)</field>
+            <field name="code_structure" ref="structure_9108"/>
+        </record>
+        
+        <record id="section_910603" model="e_gestock.section">
+            <field name="code_section">910603</field>
+            <field name="nom_section">SERVICE REMUNERATION DU PERSONNEL (DRH)</field>
+            <field name="code_structure" ref="structure_9106"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910902" model="e_gestock.section">
+            <field name="code_section">910902</field>
+            <field name="nom_section">SERVICE RESEAU ET SECURITE (CEI)</field>
+            <field name="code_structure" ref="structure_9109"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910604" model="e_gestock.section">
+            <field name="code_section">910604</field>
+            <field name="nom_section">SERVICE SOCIAL CULTUREL ET ANIMATION DU PERSONNEL (DRH)</field>
+            <field name="code_structure" ref="structure_9106"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910502" model="e_gestock.section">
+            <field name="code_section">910502</field>
+            <field name="nom_section">SERVICE TRESORERIE (DFC)</field>
+            <field name="code_structure" ref="structure_9105"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910904" model="e_gestock.section">
+            <field name="code_section">910904</field>
+            <field name="nom_section">SECTION SOLUTIONS ET DEVELOPPEMENT</field>
+            <field name="code_structure" ref="structure_9109"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910905" model="e_gestock.section">
+            <field name="code_section">910905</field>
+            <field name="nom_section">SECTION SECURITE</field>
+            <field name="code_structure" ref="structure_9109"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_910906" model="e_gestock.section">
+            <field name="code_section">910906</field>
+            <field name="nom_section">SECTION INFRASTRUCTURE ET EXPLOITATION</field>
+            <field name="code_structure" ref="structure_9109"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922801" model="e_gestock.section">
+            <field name="code_section">922801</field>
+            <field name="nom_section">SECTION COMMUNE APS ADZOPE</field>
+            <field name="code_structure" ref="structure_9228"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_922601" model="e_gestock.section">
+            <field name="code_section">922601</field>
+            <field name="nom_section">SECTION COMMUNE APS DE BINGERVILLE</field>
+            <field name="code_structure" ref="structure_9226"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+        <record id="section_913601" model="e_gestock.section">
+            <field name="code_section">913601</field>
+            <field name="nom_section">SECTION COMMUNE DIRECTION DES INVESTISSEMENTS ET STRUCTURATION FINANCIERE</field>
+            <field name="code_structure" ref="structure_9136"/>
+            <field name="code_gestion" ref="type_gestion_g"/>
+        </record>
+        
+    </data>
+</odoo>

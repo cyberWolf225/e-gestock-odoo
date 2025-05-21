@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Liste des bons de commande -->
+    <template id="portal_my_purchase_orders" name="My Purchase Orders">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Bons de commande</t>
+            </t>
+            <t t-if="not purchase_orders">
+                <div class="alert alert-warning mt8" role="alert">
+                    Aucun bon de commande trouvé.
+                </div>
+            </t>
+            <t t-if="purchase_orders">
+                <table class="table table-striped table-hover o_portal_my_doc_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Référence</th>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>État</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="purchase_orders" t-as="order">
+                            <tr>
+                                <td>
+                                    <a t-attf-href="/my/purchase_order/#{order.id}">
+                                        <t t-esc="order.name"/>
+                                    </a>
+                                </td>
+                                <td><span t-field="order.date_order"/></td>
+                                <td><span t-field="order.amount_total" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/></td>
+                                <td>
+                                    <t t-if="order.state_approbation == 'approved'">
+                                        <span class="badge badge-pill badge-info">Approuvé</span>
+                                    </t>
+                                    <t t-if="order.state_approbation == 'withdrawn'">
+                                        <span class="badge badge-pill badge-warning">Retiré</span>
+                                    </t>
+                                    <t t-if="order.state_approbation == 'delivered'">
+                                        <span class="badge badge-pill badge-success">Livré</span>
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+        </t>
+    </template>
+
+    <!-- Détail d'un bon de commande -->
+    <template id="portal_my_purchase_order" name="My Purchase Order">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert" groups="e_gestock_base.group_e_gestock_purchase_manager">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url" t-value="'/web#model=e_gestock.purchase_order&amp;id=%s&amp;view_type=form' % (purchase_order.id)"/>
+                </t>
+            </t>
+
+            <div class="row mt16 o_portal_purchase_order">
+                <div class="col-12">
+                    <h1 t-field="purchase_order.name" class="d-flex flex-nowrap justify-content-between"/>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>Informations générales</h5>
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>Date:</strong> <span t-field="purchase_order.date_order"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>État:</strong>
+                                    <t t-if="purchase_order.state_approbation == 'approved'">
+                                        <span class="badge badge-pill badge-info">Approuvé</span>
+                                    </t>
+                                    <t t-if="purchase_order.state_approbation == 'withdrawn'">
+                                        <span class="badge badge-pill badge-warning">Retiré</span>
+                                    </t>
+                                    <t t-if="purchase_order.state_approbation == 'delivered'">
+                                        <span class="badge badge-pill badge-success">Livré</span>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>Informations de livraison</h5>
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>Date de retrait:</strong> <span t-field="purchase_order.date_retrait"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Date de livraison prévue:</strong> <span t-field="purchase_order.date_livraison_prevue"/>
+                                </div>
+                                <div class="col-12">
+                                    <strong>Date de livraison réelle:</strong> <span t-field="purchase_order.date_livraison_reelle"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lignes de commande -->
+            <div class="mt32">
+                <h3>Articles commandés</h3>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Article</th>
+                            <th class="text-right">Quantité</th>
+                            <th class="text-right">Prix unitaire</th>
+                            <th class="text-right">Sous-total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="purchase_order.order_line" t-as="line">
+                            <tr>
+                                <td>
+                                    <span t-field="line.name"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.product_qty"/>
+                                    <span t-field="line.product_uom.name" groups="uom.group_uom"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": purchase_order.currency_id}'/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": purchase_order.currency_id}'/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Totaux -->
+            <div class="row justify-content-end">
+                <div class="col-md-4">
+                    <table class="table table-sm">
+                        <tr class="border-black">
+                            <td><strong>Sous-total</strong></td>
+                            <td class="text-right">
+                                <span t-field="purchase_order.amount_untaxed" t-options='{"widget": "monetary", "display_currency": purchase_order.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Taxes</td>
+                            <td class="text-right">
+                                <span t-field="purchase_order.amount_tax" t-options='{"widget": "monetary", "display_currency": purchase_order.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr class="border-black o_total">
+                            <td><strong>Total</strong></td>
+                            <td class="text-right">
+                                <span t-field="purchase_order.amount_total" t-options='{"widget": "monetary", "display_currency": purchase_order.currency_id}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="mt16 mb16">
+                <t t-if="purchase_order.state_approbation == 'approved'">
+                    <a t-attf-href="/my/purchase_order/#{purchase_order.id}/withdraw" class="btn btn-primary">
+                        Marquer comme retiré
+                    </a>
+                </t>
+                <t t-if="purchase_order.state_approbation == 'withdrawn'">
+                    <a t-attf-href="/my/purchase_order/#{purchase_order.id}/deliver" class="btn btn-primary">
+                        Marquer comme livré
+                    </a>
+                </t>
+            </div>
+
+            <!-- Formulaire de livraison -->
+            <t t-if="delivery_form">
+                <div class="mt32">
+                    <h3>Informations de livraison</h3>
+                    <form t-attf-action="/my/purchase_order/#{purchase_order.id}/deliver" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <div class="form-group">
+                            <label for="delivery_date">Date de livraison prévue</label>
+                            <input type="date" class="form-control" name="delivery_date" id="delivery_date" required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="delivery_note">Bon de livraison</label>
+                            <input type="file" class="form-control" name="delivery_note" id="delivery_note"/>
+                        </div>
+                        <button type="submit" name="confirm_delivery" value="1" class="btn btn-primary">Confirmer la livraison</button>
+                    </form>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- Ajout au menu du portail -->
+    <template id="portal_my_home_purchase_order" name="Portal My Home : purchase order entries" inherit_id="portal.portal_my_home" priority="30">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="purchase_order_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Bons de commande</t>
+                <t t-set="url" t-value="'/my/purchase_orders'"/>
+                <t t-set="count" t-value="purchase_order_count"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

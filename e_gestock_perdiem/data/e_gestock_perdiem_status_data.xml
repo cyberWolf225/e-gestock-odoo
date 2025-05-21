@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Types de statut pour les perdiems -->
+        <record id="perdiem_status_type_draft" model="e_gestock.perdiem.status.type">
+            <field name="name">Brouillon</field>
+            <field name="code">draft</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="perdiem_status_type_submitted" model="e_gestock.perdiem.status.type">
+            <field name="name">Soumis</field>
+            <field name="code">submitted</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="perdiem_status_type_section_validated" model="e_gestock.perdiem.status.type">
+            <field name="name">Validé par la section</field>
+            <field name="code">section_validated</field>
+            <field name="sequence">30</field>
+        </record>
+        
+        <record id="perdiem_status_type_structure_validated" model="e_gestock.perdiem.status.type">
+            <field name="name">Validé par la structure</field>
+            <field name="code">structure_validated</field>
+            <field name="sequence">40</field>
+        </record>
+        
+        <record id="perdiem_status_type_budget_validated" model="e_gestock.perdiem.status.type">
+            <field name="name">Validé par le budget</field>
+            <field name="code">budget_validated</field>
+            <field name="sequence">50</field>
+        </record>
+        
+        <record id="perdiem_status_type_finance_validated" model="e_gestock.perdiem.status.type">
+            <field name="name">Validé par les finances</field>
+            <field name="code">finance_validated</field>
+            <field name="sequence">60</field>
+        </record>
+        
+        <record id="perdiem_status_type_dg_validated" model="e_gestock.perdiem.status.type">
+            <field name="name">Validé par la DG</field>
+            <field name="code">dg_validated</field>
+            <field name="sequence">70</field>
+        </record>
+        
+        <record id="perdiem_status_type_approved" model="e_gestock.perdiem.status.type">
+            <field name="name">Approuvé</field>
+            <field name="code">approved</field>
+            <field name="sequence">80</field>
+        </record>
+        
+        <record id="perdiem_status_type_rejected" model="e_gestock.perdiem.status.type">
+            <field name="name">Rejeté</field>
+            <field name="code">rejected</field>
+            <field name="sequence">90</field>
+        </record>
+        
+        <record id="perdiem_status_type_cancelled" model="e_gestock.perdiem.status.type">
+            <field name="name">Annulé</field>
+            <field name="code">cancelled</field>
+            <field name="sequence">100</field>
+        </record>
+    </data>
+</odoo> 

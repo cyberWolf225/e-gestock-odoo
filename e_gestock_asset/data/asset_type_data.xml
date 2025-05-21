@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Types d'immobilisations -->
+        <record id="asset_type_materiel_informatique" model="e_gestock.asset_type">
+            <field name="code">INFO</field>
+            <field name="name">Matériel informatique</field>
+            <field name="duree_amortissement">3</field>
+            <field name="methode_amortissement">linear</field>
+            <field name="note">Ordinateurs, imprimantes, serveurs, etc.</field>
+        </record>
+        
+        <record id="asset_type_mobilier" model="e_gestock.asset_type">
+            <field name="code">MOB</field>
+            <field name="name">Mobilier</field>
+            <field name="duree_amortissement">10</field>
+            <field name="methode_amortissement">linear</field>
+            <field name="note">Bureaux, chaises, armoires, etc.</field>
+        </record>
+        
+        <record id="asset_type_vehicule" model="e_gestock.asset_type">
+            <field name="code">VEH</field>
+            <field name="name">Véhicules</field>
+            <field name="duree_amortissement">5</field>
+            <field name="methode_amortissement">linear</field>
+            <field name="note">Voitures, camions, motos, etc.</field>
+        </record>
+        
+        <record id="asset_type_materiel_bureau" model="e_gestock.asset_type">
+            <field name="code">BUR</field>
+            <field name="name">Matériel de bureau</field>
+            <field name="duree_amortissement">5</field>
+            <field name="methode_amortissement">linear</field>
+            <field name="note">Photocopieurs, téléphones, etc.</field>
+        </record>
+        
+        <record id="asset_type_batiment" model="e_gestock.asset_type">
+            <field name="code">BAT</field>
+            <field name="name">Bâtiments</field>
+            <field name="duree_amortissement">20</field>
+            <field name="methode_amortissement">linear</field>
+            <field name="note">Constructions, aménagements, etc.</field>
+        </record>
+        
+        <record id="asset_type_materiel_technique" model="e_gestock.asset_type">
+            <field name="code">TECH</field>
+            <field name="name">Matériel technique</field>
+            <field name="duree_amortissement">5</field>
+            <field name="methode_amortissement">linear</field>
+            <field name="note">Équipements techniques spécifiques</field>
+        </record>
+        
+        <record id="asset_type_logiciel" model="e_gestock.asset_type">
+            <field name="code">LOG</field>
+            <field name="name">Logiciels</field>
+            <field name="duree_amortissement">3</field>
+            <field name="methode_amortissement">linear</field>
+            <field name="note">Licences, développements spécifiques, etc.</field>
+        </record>
+    </data>
+</odoo>

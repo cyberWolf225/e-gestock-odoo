@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu principal pour le module perdiem -->
+    <menuitem id="menu_e_gestock_perdiem_root"
+              name="Perdiems"
+              parent="e_gestock_base.menu_e_gestock_root"
+              sequence="50"/>
+    
+    <!-- Sous-menu pour les demandes de perdiem -->
+    <menuitem id="menu_e_gestock_perdiem"
+              name="Demandes de Perdiem"
+              parent="menu_e_gestock_perdiem_root"
+              action="action_e_gestock_perdiem"
+              sequence="10"/>
+    
+    <!-- Sous-menu pour les bénéficiaires de perdiem -->
+    <menuitem id="menu_e_gestock_perdiem_beneficiary"
+              name="Bénéficiaires"
+              parent="menu_e_gestock_perdiem_root"
+              action="action_e_gestock_perdiem_beneficiary"
+              sequence="20"
+              groups="e_gestock_base.group_e_gestock_perdiem_manager"/>
+    
+    <!-- Sous-menu pour la configuration -->
+    <menuitem id="menu_e_gestock_perdiem_config"
+              name="Configuration"
+              parent="menu_e_gestock_perdiem_root"
+              sequence="100"
+              groups="e_gestock_base.group_e_gestock_perdiem_manager"/>
+    
+    <!-- Sous-menu pour les types de statut -->
+    <menuitem id="menu_e_gestock_perdiem_status_type"
+              name="Types de statut"
+              parent="menu_e_gestock_perdiem_config"
+              action="action_e_gestock_perdiem_status_type"
+              sequence="10"/>
+</odoo>

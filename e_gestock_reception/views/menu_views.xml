@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu principal pour le module de réception -->
+    <menuitem id="menu_reception_root" name="Réceptions" parent="e_gestock_base.menu_e_gestock_root" sequence="50"/>
+
+    <!-- Sous-menus pour la planification -->
+    <menuitem id="menu_reception_planning" name="Planification" parent="menu_reception_root" sequence="5"/>
+
+    <menuitem id="menu_reception_notice" name="Avis préalables" parent="menu_reception_planning" action="action_reception_notice" sequence="10"/>
+
+    <menuitem id="menu_reception_quai_planning" name="Planning des quais" parent="menu_reception_planning" action="action_reception_quai_planning" sequence="20"/>
+
+    <!-- Sous-menus pour les réceptions -->
+    <menuitem id="menu_reception" name="Réceptions" parent="menu_reception_root" action="action_reception" sequence="10"/>
+
+    <!-- Sous-menus pour les procès-verbaux -->
+    <menuitem id="menu_pv_reception" name="Procès-verbaux" parent="menu_reception_root" action="action_pv_reception" sequence="20"/>
+
+    <!-- Sous-menus pour les réserves -->
+    <menuitem id="menu_pv_reserve" name="Réserves" parent="menu_reception_root" action="action_pv_reserve" sequence="30"/>
+
+    <!-- Sous-menus pour le contrôle qualité -->
+    <menuitem id="menu_reception_quality" name="Contrôle qualité" parent="menu_reception_root" sequence="40"/>
+
+    <menuitem id="menu_reception_inspection" name="Inspections" parent="menu_reception_quality" action="action_reception_inspection" sequence="10"/>
+
+    <menuitem id="menu_reception_nonconformity" name="Non-conformités" parent="menu_reception_quality" action="action_reception_nonconformity" sequence="20"/>
+
+    <menuitem id="menu_reception_quarantine" name="Quarantaines" parent="menu_reception_quality" action="action_reception_quarantine" sequence="30"/>
+
+    <!-- Sous-menus pour les retours -->
+    <menuitem id="menu_reception_return" name="Retours fournisseurs" parent="menu_reception_root" action="action_reception_return" sequence="50"/>
+
+    <!-- Menu de configuration -->
+    <menuitem id="menu_reception_config" name="Configuration" parent="menu_reception_root" sequence="100"/>
+
+    <!-- Sous-menus de configuration -->
+    <menuitem id="menu_comite_reception" name="Comités de réception" parent="menu_reception_config" action="action_comite_reception" sequence="10"/>
+
+    <menuitem id="menu_reception_quai" name="Quais de réception" parent="menu_reception_config" action="action_reception_quai" sequence="20"/>
+
+    <menuitem id="menu_reception_equipement" name="Équipements de réception" parent="menu_reception_config" action="action_reception_equipement" sequence="30"/>
+
+    <menuitem id="menu_reception_quarantine_zone" name="Zones de quarantaine" parent="menu_reception_config" action="action_reception_quarantine_zone" sequence="40"/>
+
+    <menuitem id="menu_emplacement" name="Emplacements" parent="menu_reception_config" action="action_emplacement" sequence="50"/>
+
+    <menuitem id="menu_article_emplacement" name="Emplacements préférés" parent="menu_reception_config" action="action_article_emplacement" sequence="60"/>
+</odoo>

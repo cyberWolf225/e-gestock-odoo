@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Séquence pour les demandes de cotation -->
+        <record id="seq_e_gestock_demande_cotation" model="ir.sequence">
+            <field name="name">Demande de cotation</field>
+            <field name="code">e_gestock.demande_cotation</field>
+            <field name="prefix">%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Séquence pour les cotations -->
+        <record id="seq_e_gestock_cotation" model="ir.sequence">
+            <field name="name">Cotation fournisseur</field>
+            <field name="code">e_gestock.cotation</field>
+            <field name="prefix">COT/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo> 

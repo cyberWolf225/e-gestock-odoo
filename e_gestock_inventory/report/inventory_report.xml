@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_inventory_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Rapport d'inventaire</h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Référence:</strong> <span t-field="o.reference"/>
+                                <br/>
+                                <strong>Dépôt:</strong> <span t-field="o.depot_id"/>
+                                <br/>
+                                <strong>Date:</strong> <span t-field="o.date" t-options="{'widget': 'date'}"/>
+                                <br/>
+                                <strong>État:</strong> <span t-field="o.state"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Responsable:</strong> <span t-field="o.responsable_id"/>
+                                <br/>
+                                <t t-if="o.validateur_id">
+                                    <strong>Validateur:</strong> <span t-field="o.validateur_id"/>
+                                    <br/>
+                                </t>
+                                <strong>Total des lignes:</strong> <span t-field="o.total_lines"/>
+                                <br/>
+                                <strong>Lignes comptées:</strong> <span t-field="o.total_counted"/>
+                                <br/>
+                                <strong>Progression:</strong> <span t-field="o.count_progress"/> %
+                            </div>
+                        </div>
+                        
+                        <t t-if="o.notes">
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>Notes:</strong>
+                                    <p t-field="o.notes"/>
+                                </div>
+                            </div>
+                        </t>
+                        
+                        <div class="row mt32">
+                            <div class="col-12">
+                                <table class="table table-sm o_main_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Article</th>
+                                            <th class="text-right">Quantité théorique</th>
+                                            <th class="text-right">Quantité réelle</th>
+                                            <th class="text-right">Écart</th>
+                                            <th class="text-right">Écart %</th>
+                                            <th>Unité</th>
+                                            <th>Compté</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="o.line_ids" t-as="line" t-att-class="line.ecart &lt; 0 and 'text-danger' or (line.ecart &gt; 0 and 'text-success')">
+                                            <td><span t-field="line.article_id"/></td>
+                                            <td class="text-right"><span t-field="line.quantite_theorique"/></td>
+                                            <td class="text-right"><span t-field="line.quantite_reelle"/></td>
+                                            <td class="text-right"><span t-field="line.ecart"/></td>
+                                            <td class="text-right"><span t-field="line.ecart_ratio" t-options="{'widget': 'percentage'}"/></td>
+                                            <td><span t-field="line.uom_id"/></td>
+                                            <td><span t-if="line.is_counted" class="fa fa-check"/></td>
+                                            <td><span t-field="line.notes"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_inventory">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="e_gestock_inventory.report_inventory_document" t-lang="o.responsable_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_inventory" model="ir.actions.report">
+        <field name="name">Rapport d'inventaire</field>
+        <field name="model">e_gestock.inventory</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_inventory.report_inventory</field>
+        <field name="report_file">e_gestock_inventory.report_inventory</field>
+        <field name="binding_model_id" ref="model_e_gestock_inventory"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo> 

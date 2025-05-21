@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Format papier pour les rapports de PV -->
+    <record id="paperformat_pv" model="report.paperformat">
+        <field name="name">Format PV de Réception A4</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- Rapport de PV de réception -->
+    <record id="action_report_pv" model="ir.actions.report">
+        <field name="name">Procès-verbal de réception</field>
+        <field name="model">e_gestock.pv_reception</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_reception.report_pv_reception</field>
+        <field name="report_file">e_gestock_reception.report_pv_reception</field>
+        <field name="binding_model_id" ref="model_e_gestock_pv_reception"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_pv"/>
+    </record>
+
+    <!-- Template pour le rapport de PV de réception -->
+    <template id="report_pv_reception">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Procès-verbal de Réception</h2>
+                        <p class="text-center">
+                            <strong>Référence: </strong><span t-field="o.reference"/>
+                        </p>
+                        
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <p>
+                                    <strong>Réception: </strong><span t-field="o.reception_id.reference"/>
+                                </p>
+                                <p>
+                                    <strong>Bon de commande: </strong><span t-field="o.reception_id.purchase_order_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Fournisseur: </strong><span t-field="o.reception_id.fournisseur_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Date: </strong><span t-field="o.date"/>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <p>
+                                    <strong>Comité de réception: </strong><span t-field="o.comite_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Président: </strong><span t-field="o.comite_id.president_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Secrétaire: </strong><span t-field="o.comite_id.secretaire_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>État: </strong><span t-field="o.state"/>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h4>Décision du comité</h4>
+                        <div class="row">
+                            <div class="col-12">
+                                <p>
+                                    <strong>Décision: </strong>
+                                    <t t-if="o.decision == 'accepte'">
+                                        <span class="badge badge-success">Accepté</span>
+                                    </t>
+                                    <t t-elif="o.decision == 'accepte_reserve'">
+                                        <span class="badge badge-warning">Accepté avec réserves</span>
+                                    </t>
+                                    <t t-elif="o.decision == 'rejete'">
+                                        <span class="badge badge-danger">Rejeté</span>
+                                    </t>
+                                </p>
+                                <p>
+                                    <strong>Commentaire: </strong><span t-field="o.commentaire"/>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h4>Articles reçus</h4>
+                        <table class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th>Article</th>
+                                    <th>Désignation</th>
+                                    <th class="text-right">Quantité commandée</th>
+                                    <th class="text-right">Quantité reçue</th>
+                                    <th>Conformité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.reception_id.line_ids" t-as="line">
+                                    <td><span t-field="line.article_id.name"/></td>
+                                    <td><span t-field="line.designation"/></td>
+                                    <td class="text-right"><span t-field="line.quantite_commandee"/></td>
+                                    <td class="text-right"><span t-field="line.quantite_recue"/></td>
+                                    <td>
+                                        <t t-if="line.est_conforme == 'oui'">
+                                            <span class="badge badge-success">Conforme</span>
+                                        </t>
+                                        <t t-elif="line.est_conforme == 'non'">
+                                            <span class="badge badge-danger">Non conforme</span>
+                                            <p t-if="line.motif_non_conformite"><small t-field="line.motif_non_conformite"/></p>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge badge-secondary">Non vérifié</span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <t t-if="o.reserve_ids">
+                            <h4>Réserves émises</h4>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Type</th>
+                                        <th>Action corrective</th>
+                                        <th>Date limite</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.reserve_ids" t-as="reserve">
+                                        <td><span t-field="reserve.description"/></td>
+                                        <td><span t-field="reserve.type"/></td>
+                                        <td><span t-field="reserve.action_corrective"/></td>
+                                        <td><span t-field="reserve.date_limite"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+                        
+                        <h4>Signatures des membres du comité</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Membre</th>
+                                    <th>Fonction</th>
+                                    <th>Signature</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.signature_ids" t-as="signature">
+                                    <td><span t-field="signature.membre_id.name"/></td>
+                                    <td><span t-field="signature.fonction"/></td>
+                                    <td>
+                                        <t t-if="signature.signature">
+                                            <span class="badge badge-success">Signé</span>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge badge-warning">En attente</span>
+                                        </t>
+                                    </td>
+                                    <td><span t-field="signature.date_signature"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu racine E-GESTOCK -->
+    <menuitem id="menu_e_gestock_root"
+              name="E-GESTOCK"
+              web_icon="e_gestock_base,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- 1. Structures et organisation -->
+    <menuitem id="menu_structures_organisation"
+              name="Structures et organisation"
+              parent="menu_e_gestock_root"
+              sequence="10"/>
+              
+    <menuitem id="menu_structures"
+              name="Structures"
+              parent="menu_structures_organisation"
+              action="action_e_gestock_structure"
+              sequence="10"/>
+              
+    <menuitem id="menu_sections"
+              name="Sections"
+              parent="menu_structures_organisation"
+              action="action_e_gestock_section"
+              sequence="20"/>
+              
+    <menuitem id="menu_depots"
+              name="Dépôts"
+              parent="menu_structures_organisation"
+              action="action_e_gestock_depot"
+              sequence="30"/>
+
+    <!-- 2. Articles -->
+    <menuitem id="menu_articles_main"
+              name="Articles"
+              parent="menu_e_gestock_root"
+              sequence="20"/>
+              
+    <menuitem id="menu_categories"
+              name="Catégories"
+              parent="menu_articles_main"
+              action="action_e_gestock_category"
+              sequence="10"/>
+              
+    <menuitem id="menu_familles"
+              name="Familles d'articles"
+              parent="menu_articles_main"
+              action="action_e_gestock_famille"
+              sequence="20"/>
+              
+    <menuitem id="menu_articles"
+              name="Articles"
+              parent="menu_articles_main"
+              action="action_e_gestock_article"
+              sequence="30"/>
+
+    <!-- 3. Administration -->
+    <menuitem id="menu_administration"
+              name="Administration"
+              parent="menu_e_gestock_root"
+              sequence="30"/>
+              
+    <menuitem id="menu_types_gestion"
+              name="Types de gestion"
+              parent="menu_administration"
+              action="action_e_gestock_type_gestion"
+              sequence="10"/>
+</odoo> 

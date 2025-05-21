@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Les groupes sont maintenant définis dans le module de base e_gestock_base -->
+
+        <!-- Règles d'accès aux réceptions -->
+        <record id="reception_comp_rule" model="ir.rule">
+            <field name="name">Réception multi-société</field>
+            <field name="model_id" ref="model_e_gestock_reception"/>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="reception_user_rule" model="ir.rule">
+            <field name="name">Réceptions: utilisateurs peuvent voir leurs réceptions</field>
+            <field name="model_id" ref="model_e_gestock_reception"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="reception_reception_user_rule" model="ir.rule">
+            <field name="name">Réceptions: utilisateurs réception peuvent voir toutes les réceptions</field>
+            <field name="model_id" ref="model_e_gestock_reception"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_reception_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="reception_manager_rule" model="ir.rule">
+            <field name="name">Réceptions: gestionnaires réception peuvent gérer toutes les réceptions</field>
+            <field name="model_id" ref="model_e_gestock_reception"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_reception_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règles d'accès aux comités de réception -->
+        <record id="comite_reception_comp_rule" model="ir.rule">
+            <field name="name">Comité Réception multi-société</field>
+            <field name="model_id" ref="model_e_gestock_comite_reception"/>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="comite_reception_user_rule" model="ir.rule">
+            <field name="name">Comités de réception: utilisateurs peuvent voir tous les comités</field>
+            <field name="model_id" ref="model_e_gestock_comite_reception"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="comite_reception_manager_rule" model="ir.rule">
+            <field name="name">Comités de réception: gestionnaires réception peuvent gérer tous les comités</field>
+            <field name="model_id" ref="model_e_gestock_comite_reception"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_reception_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règles d'accès aux PV de réception -->
+        <record id="pv_reception_comp_rule" model="ir.rule">
+            <field name="name">PV Réception multi-société</field>
+            <field name="model_id" ref="model_e_gestock_pv_reception"/>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        </record>
+        
+        <!-- Règles restrictives pour les utilisateurs sans rôles E-GESTOCK -->
+        <record id="reception_no_access_rule" model="ir.rule">
+            <field name="name">Aucun accès aux réceptions pour les utilisateurs sans rôles E-GESTOCK</field>
+            <field name="model_id" ref="model_e_gestock_reception"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[(0,'=',1)]</field>
+        </record>
+        
+        <record id="comite_reception_no_access_rule" model="ir.rule">
+            <field name="name">Aucun accès aux comités de réception pour les utilisateurs sans rôles E-GESTOCK</field>
+            <field name="model_id" ref="model_e_gestock_comite_reception"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[(0,'=',1)]</field>
+        </record>
+        
+        <record id="pv_reception_no_access_rule" model="ir.rule">
+            <field name="name">Aucun accès aux PV de réception pour les utilisateurs sans rôles E-GESTOCK</field>
+            <field name="model_id" ref="model_e_gestock_pv_reception"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[(0,'=',1)]</field>
+        </record>
+    </data>
+</odoo>

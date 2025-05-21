@@ -1,0 +1,226 @@
+{
+	"query": "SELECT * FROM `egestock`.`depots` LIMIT 1000",
+	"rows":
+	[
+		{
+			"id": 1,
+			"ref_depot": 101,
+			"design_dep": "APS Bondoukou",
+			"tel_dep": "25154879",
+			"adr_dep": "BP 12 Bondoukou",
+			"principal": "0",
+			"code_ville": 19,
+			"created_at": null,
+			"updated_at": "2021-08-25 10:14:18"
+		},
+		{
+			"id": 2,
+			"ref_depot": 102,
+			"design_dep": "APS Bouake",
+			"tel_dep": null,
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 3,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 3,
+			"ref_depot": 103,
+			"design_dep": "Bouake 2",
+			"tel_dep": null,
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 3,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 4,
+			"ref_depot": 104,
+			"design_dep": "Cms Bouake",
+			"tel_dep": null,
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 3,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 5,
+			"ref_depot": 89,
+			"design_dep": "APS San pedro",
+			"tel_dep": null,
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 6,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 6,
+			"ref_depot": 91,
+			"design_dep": "APS Agboville",
+			"tel_dep": "23 54 75 99",
+			"adr_dep": "BP 567 AGBOVILLE",
+			"principal": "0",
+			"code_ville": 21,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 7,
+			"ref_depot": 93,
+			"design_dep": "APS Bonoua",
+			"tel_dep": null,
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 20,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 8,
+			"ref_depot": 94,
+			"design_dep": "Cms Divo",
+			"tel_dep": null,
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 13,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 9,
+			"ref_depot": 98,
+			"design_dep": "Centre medical du personnel (siege)",
+			"tel_dep": "20/25/21/39",
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 1,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 10,
+			"ref_depot": 88,
+			"design_dep": "APS Gagnoa",
+			"tel_dep": "+225 32 77 21 78",
+			"adr_dep": "BP 107 GAGNOA",
+			"principal": "0",
+			"code_ville": 4,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 11,
+			"ref_depot": 83,
+			"design_dep": "DÃepot principal du siege",
+			"tel_dep": "2250704592872",
+			"adr_dep": "BP 504 Abidjan 01",
+			"principal": "1",
+			"code_ville": 1,
+			"created_at": null,
+			"updated_at": "2023-02-11 07:48:07"
+		},
+		{
+			"id": 12,
+			"ref_depot": 85,
+			"design_dep": "Centre d Appareillage et de RÃ©Ã©ducation Fonctionnelle de Yopougon",
+			"tel_dep": "23454870",
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 1,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 13,
+			"ref_depot": 90,
+			"design_dep": "APS Abengourou",
+			"tel_dep": "35913613",
+			"adr_dep": "BP 144 Abengourou",
+			"principal": "0",
+			"code_ville": 12,
+			"created_at": null,
+			"updated_at": "2021-08-25 09:41:31"
+		},
+		{
+			"id": 14,
+			"ref_depot": 92,
+			"design_dep": "APS Divo",
+			"tel_dep": "32760267",
+			"adr_dep": "BP 219DiVO",
+			"principal": "0",
+			"code_ville": 13,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 15,
+			"ref_depot": 95,
+			"design_dep": "Cms Yopougon",
+			"tel_dep": null,
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 1,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 16,
+			"ref_depot": 100,
+			"design_dep": "APS Yamoussoukro",
+			"tel_dep": "30 64 01 40",
+			"adr_dep": "BP 159 Yamoussoukro",
+			"principal": "0",
+			"code_ville": 2,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 17,
+			"ref_depot": 86,
+			"design_dep": "Depot Pharmaceutique de l'Etablissement Medical de Yopougon",
+			"tel_dep": null,
+			"adr_dep": null,
+			"principal": "0",
+			"code_ville": 1,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 18,
+			"ref_depot": 87,
+			"design_dep": "APS Daloa",
+			"tel_dep": "32 78 36 04",
+			"adr_dep": "BP 280 daloa",
+			"principal": "0",
+			"code_ville": 5,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 19,
+			"ref_depot": 51,
+			"design_dep": "APS Bouake",
+			"tel_dep": "34/65/52/12",
+			"adr_dep": "bp 43 BkÃ© 01",
+			"principal": "0",
+			"code_ville": 3,
+			"created_at": null,
+			"updated_at": null
+		},
+		{
+			"id": 20,
+			"ref_depot": 2,
+			"design_dep": "Magasin principal de dabou",
+			"tel_dep": "07759400",
+			"adr_dep": "BP 1063 Dabou",
+			"principal": "1",
+			"code_ville": 8,
+			"created_at": null,
+			"updated_at": null
+		}
+	]
+}

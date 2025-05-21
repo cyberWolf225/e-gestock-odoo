@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les familles d'articles -->
+    <record id="view_e_gestock_famille_form" model="ir.ui.view">
+        <field name="name">e_gestock.famille.form</field>
+        <field name="model">e_gestock.famille</field>
+        <field name="arch" type="xml">
+            <form string="Famille d'articles">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                        <button name="action_view_articles" type="object" class="oe_stat_button" icon="fa-cubes">
+                            <field string="Articles" name="article_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="ref_fam" class="oe_edit_only"/>
+                        <h1><field name="ref_fam" placeholder="Référence (ex: 610225)"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="design_fam" placeholder="Désignation de la famille"/>
+                            <field name="date"/>
+                            <field name="budgetary_account"/>
+                        </group>
+                        <group>
+                            <field name="article_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Description détaillée..."/>
+                        </page>
+                        <page string="Articles">
+                            <field name="article_ids" readonly="0">
+                                <list>
+                                    <field name="ref_article"/>
+                                    <field name="design_article"/>
+                                    <field name="code_unite"/>
+                                    <field name="flag_actif"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les familles d'articles -->
+    <record id="view_e_gestock_famille_list" model="ir.ui.view">
+        <field name="name">e_gestock.famille.list</field>
+        <field name="model">e_gestock.famille</field>
+        <field name="arch" type="xml">
+            <list string="Familles d'articles">
+                <field name="ref_fam"/>
+                <field name="design_fam"/>
+                <field name="article_count"/>
+                <field name="budgetary_account"/>
+                <field name="date"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les familles d'articles -->
+    <record id="view_e_gestock_famille_search" model="ir.ui.view">
+        <field name="name">e_gestock.famille.search</field>
+        <field name="model">e_gestock.famille</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher une famille d'articles">
+                <field name="ref_fam"/>
+                <field name="design_fam"/>
+                <filter string="Compte budgétaire" name="budgetary_account" domain="[('budgetary_account', '=', True)]"/>
+                <filter string="Archivé" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Date de création" name="group_by_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les familles d'articles -->
+    <record id="action_e_gestock_famille" model="ir.actions.act_window">
+        <field name="name">Familles d'articles</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.famille</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_e_gestock_famille_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle famille d'articles
+            </p>
+            <p>
+                Les familles d'articles permettent de regrouper les articles et servent également de comptes budgétaires.
+            </p>
+        </field>
+    </record>
+</odoo>

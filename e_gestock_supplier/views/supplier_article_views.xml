@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue form pour les articles par fournisseur -->
+    <record id="e_gestock_supplier_article_form_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_article.form</field>
+        <field name="model">e_gestock.supplier_article</field>
+        <field name="arch" type="xml">
+            <form string="Article fournisseur">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Identification">
+                            <field name="supplier_id"
+                                   options="{'no_create': True, 'no_open': False}"
+                                   readonly="id"/>
+                            <field name="article_id"
+                                   options="{'no_create': True, 'no_open': False}"
+                                   readonly="id"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="is_preferred"/>
+                        </group>
+                        <group string="Prix et conditions">
+                            <field name="prix_unitaire"/>
+                            <field name="currency_id" options="{'no_create': True}"/>
+                            <field name="remise"/>
+                            <field name="remise_generale"/>
+                            <field name="tva"/>
+                            <field name="prix_ht"/>
+                            <field name="prix_ttc"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Conditions de livraison">
+                            <field name="date_debut"/>
+                            <field name="date_fin"/>
+                            <field name="delai_livraison"/>
+                            <field name="quantite_min"/>
+                        </group>
+                        <group string="Historique">
+                            <field name="last_purchase_date"/>
+                            <field name="last_purchase_price"/>
+                            <field name="purchase_count"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Informations supplémentaires sur cet article chez ce fournisseur..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les articles par fournisseur -->
+    <record id="e_gestock_supplier_article_list_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_article.list</field>
+        <field name="model">e_gestock.supplier_article</field>
+        <field name="arch" type="xml">
+            <list string="Articles fournisseur" decoration-success="is_preferred==True">
+                <field name="supplier_id"/>
+                <field name="article_id"/>
+                <field name="prix_unitaire"/>
+                <field name="remise"/>
+                <field name="prix_ht"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="delai_livraison"/>
+                <field name="quantite_min"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="is_preferred"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue search pour les articles par fournisseur -->
+    <record id="e_gestock_supplier_article_search_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_article.search</field>
+        <field name="model">e_gestock.supplier_article</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des articles fournisseur">
+                <field name="supplier_id"/>
+                <field name="article_id"/>
+                <field name="product_id"/>
+                <filter string="Fournisseurs préférés" name="preferred" domain="[('is_preferred', '=', True)]"/>
+                <filter string="Prix valides" name="valid_price" domain="['|', ('date_fin', '=', False), ('date_fin', '>=', context_today)]"/>
+                <filter string="Archivés" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Fournisseur" name="supplier" domain="[]" context="{'group_by':'supplier_id'}"/>
+                    <filter string="Article" name="article" domain="[]" context="{'group_by':'article_id'}"/>
+                    <filter string="Fournisseur préféré" name="by_preferred" domain="[]" context="{'group_by':'is_preferred'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_e_gestock_supplier_article" model="ir.actions.act_window">
+        <field name="name">Articles fournisseur</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.supplier_article</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="e_gestock_supplier_article_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle association article-fournisseur
+            </p>
+            <p>
+                Définissez les articles proposés par chaque fournisseur avec leurs conditions tarifaires.
+            </p>
+        </field>
+    </record>
+
+    <!-- Vue pivot -->
+    <record id="e_gestock_supplier_article_pivot_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_article.pivot</field>
+        <field name="model">e_gestock.supplier_article</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des prix fournisseurs">
+                <field name="supplier_id" type="row"/>
+                <field name="article_id" type="row"/>
+                <field name="prix_ht" type="measure"/>
+                <field name="delai_livraison" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Vue graph -->
+    <record id="e_gestock_supplier_article_graph_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_article.graph</field>
+        <field name="model">e_gestock.supplier_article</field>
+        <field name="arch" type="xml">
+            <graph string="Analyse des prix fournisseurs" type="bar">
+                <field name="supplier_id"/>
+                <field name="prix_ht" type="measure"/>
+            </graph>
+        </field>
+    </record>
+</odoo>

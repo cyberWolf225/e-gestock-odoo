@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les retours fournisseurs -->
+    <record id="view_reception_return_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.return.form</field>
+        <field name="model">e_gestock.reception.return</field>
+        <field name="arch" type="xml">
+            <form string="Retour fournisseur">
+                <header>
+                    <button name="action_confirm" string="Confirmer" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_ship" string="Expédier" type="object"
+                            class="oe_highlight" invisible="state != 'confirmed'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_received_by_supplier" string="Reçu par fournisseur" type="object"
+                            class="oe_highlight" invisible="state != 'shipped'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_register_credit_note" string="Enregistrer avoir" type="object"
+                            class="oe_highlight" invisible="state != 'received' or not avoir_attendu or avoir_recu"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_close" string="Clôturer" type="object"
+                            class="oe_highlight" invisible="state != 'received' or (avoir_attendu and not avoir_recu)"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_print_return_form" string="Imprimer bon de retour" type="object"
+                            invisible="state == 'draft'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,shipped,received,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="reception_id" options="{'no_create': True}"/>
+                            <field name="purchase_order_id" readonly="1"/>
+                            <field name="fournisseur_id" readonly="1"/>
+                            <field name="motif"/>
+                        </group>
+                        <group>
+                            <field name="responsable_id"/>
+                            <field name="transporteur_id" options="{'no_create': True}"/>
+                            <field name="date_expedition"/>
+                            <field name="numero_tracking"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="montant_total" widget="monetary"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Articles retournés">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="reception_line_id" domain="[('reception_id', '=', parent.reception_id)]" options="{'no_create': True}"/>
+                                    <field name="article_id" options="{'no_create': True}"/>
+                                    <field name="designation"/>
+                                    <field name="quantite"/>
+                                    <field name="prix_unitaire"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="montant" widget="monetary"/>
+                                    <field name="motif_detail"/>
+                                    <field name="photo" widget="image" class="oe_avatar" options="{'size': [90, 90]}"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Description">
+                            <field name="description" placeholder="Description détaillée du motif de retour..."/>
+                        </page>
+                        <page string="Documents">
+                            <group>
+                                <field name="bon_retour" filename="bon_retour_nom"/>
+                                <field name="bon_retour_nom" invisible="1"/>
+                            </group>
+                        </page>
+                        <page string="Avoir" invisible="state not in ['received', 'closed']">
+                            <group>
+                                <group>
+                                    <field name="avoir_attendu"/>
+                                    <field name="avoir_recu" readonly="1"/>
+                                    <field name="reference_avoir" readonly="1" invisible="not avoir_recu"/>
+                                    <field name="date_avoir" readonly="1" invisible="not avoir_recu"/>
+                                </group>
+                                <group>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="montant_avoir" widget="monetary" readonly="1" invisible="not avoir_recu"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les retours fournisseurs -->
+    <record id="view_reception_return_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.return.list</field>
+        <field name="model">e_gestock.reception.return</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'"
+                  decoration-warning="state == 'confirmed'"
+                  decoration-primary="state == 'shipped'"
+                  decoration-success="state == 'received'"
+                  decoration-muted="state == 'closed'">
+                <field name="reference"/>
+                <field name="date"/>
+                <field name="reception_id"/>
+                <field name="fournisseur_id"/>
+                <field name="motif"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="montant_total" widget="monetary"/>
+                <field name="date_expedition"/>
+                <field name="responsable_id"/>
+                <field name="state"/>
+                <field name="avoir_recu" invisible="state not in ['received', 'closed']"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les retours fournisseurs -->
+    <record id="view_reception_return_search" model="ir.ui.view">
+        <field name="name">e_gestock.reception.return.search</field>
+        <field name="model">e_gestock.reception.return</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="reception_id"/>
+                <field name="fournisseur_id"/>
+                <field name="responsable_id"/>
+                <separator/>
+                <filter string="Brouillons" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmés" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Expédiés" name="shipped" domain="[('state', '=', 'shipped')]"/>
+                <filter string="Reçus par fournisseur" name="received" domain="[('state', '=', 'received')]"/>
+                <filter string="Clôturés" name="closed" domain="[('state', '=', 'closed')]"/>
+                <separator/>
+                <filter string="Avoir attendu" name="credit_note_expected" domain="[('avoir_attendu', '=', True), ('avoir_recu', '=', False), ('state', '=', 'received')]"/>
+                <filter string="Avoir reçu" name="credit_note_received" domain="[('avoir_recu', '=', True)]"/>
+                <separator/>
+                <filter string="Mes retours" name="my_returns" domain="[('responsable_id', '=', uid)]"/>
+                <filter string="Aujourd'hui" name="today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Réception" name="group_by_reception" context="{'group_by': 'reception_id'}"/>
+                    <filter string="Fournisseur" name="group_by_fournisseur" context="{'group_by': 'fournisseur_id'}"/>
+                    <filter string="Motif" name="group_by_motif" context="{'group_by': 'motif'}"/>
+                    <filter string="Responsable" name="group_by_responsable" context="{'group_by': 'responsable_id'}"/>
+                    <filter string="État" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date'}"/>
+                    <filter string="Date d'expédition" name="group_by_date_expedition" context="{'group_by': 'date_expedition'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour l'assistant d'enregistrement d'avoir -->
+    <record id="view_reception_return_credit_note_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.return.credit.note.wizard.form</field>
+        <field name="model">e_gestock.reception.return.credit.note.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Enregistrer un avoir">
+                <group>
+                    <group>
+                        <field name="return_id" invisible="1"/>
+                        <field name="reference_avoir"/>
+                        <field name="date_avoir"/>
+                    </group>
+                    <group>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="montant_attendu" widget="monetary" readonly="1"/>
+                        <field name="montant_avoir" widget="monetary"/>
+                    </group>
+                </group>
+                <field name="commentaire" placeholder="Commentaire sur l'avoir..."/>
+                <footer>
+                    <button name="action_validate" string="Valider" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour les retours fournisseurs -->
+    <record id="action_reception_return" model="ir.actions.act_window">
+        <field name="name">Retours fournisseurs</field>
+        <field name="res_model">e_gestock.reception.return</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_draft': 1, 'search_default_confirmed': 1, 'search_default_shipped': 1, 'search_default_received': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau retour fournisseur
+            </p>
+            <p>
+                Les retours fournisseurs permettent de gérer les articles à retourner suite à une non-conformité.
+            </p>
+        </field>
+    </record>
+</odoo>

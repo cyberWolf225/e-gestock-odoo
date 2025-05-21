@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--
+        Ce fichier établit des liens d'héritage entre les groupes spécifiques E-GESTOCK.
+        Les références aux groupes du module purchase standard ont été supprimées.
+        -->
+
+        <!-- Assurez-vous que l'administrateur E-GESTOCK a tous les droits -->
+        <record id="e_gestock_base.group_e_gestock_admin" model="res.groups">
+            <field name="implied_ids" eval="[
+                (4, ref('e_gestock_base.group_e_gestock_purchase_manager')),
+                (4, ref('e_gestock_base.group_e_gestock_purchase_user')),
+                (4, ref('e_gestock_base.group_e_gestock_resp_dmp')),
+                (4, ref('e_gestock_base.group_e_gestock_budget_controller')),
+                (4, ref('e_gestock_base.group_e_gestock_resp_dfc')),
+                (4, ref('e_gestock_base.group_dfc_validator')),
+                (4, ref('e_gestock_base.group_e_gestock_direction')),
+                (4, ref('e_gestock_base.group_e_gestock_reception_manager')),
+                (4, ref('e_gestock_base.group_e_gestock_quotation_manager')),
+                (4, ref('e_gestock_base.group_section_manager')),
+                (4, ref('e_gestock_base.group_structure_manager')),
+                (4, ref('e_gestock_base.group_e_gestock_budget_engager'))
+            ]"/>
+        </record>
+
+        <!-- Assurez-vous que l'utilisateur admin est dans le groupe e_gestock_admin -->
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+        </record>
+    </data>
+</odoo>

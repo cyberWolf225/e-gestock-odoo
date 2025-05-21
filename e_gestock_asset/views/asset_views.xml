@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire des immobilisations -->
+    <record id="view_e_gestock_asset_form" model="ir.ui.view">
+        <field name="name">e_gestock.asset.form</field>
+        <field name="model">e_gestock.asset</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_mise_en_service" string="Mettre en service" type="object"
+                            class="oe_highlight" invisible="state != 'in_stock'"/>
+                    <button name="action_hors_service" string="Mettre hors service" type="object"
+                            invisible="state not in ('in_service', 'in_maintenance')"/>
+                    <button name="action_generate_amortization_lines" string="Générer amortissements" type="object"
+                            invisible="state in ('disposed', 'scrapped')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="in_stock,in_service,in_maintenance,out_of_service"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                        <button name="action_view_maintenances" type="object" class="oe_stat_button" icon="fa-wrench">
+                            <field name="maintenance_count" widget="statinfo" string="Maintenances"/>
+                        </button>
+                        <button name="action_view_assignments" type="object" class="oe_stat_button" icon="fa-user">
+                            <field name="assignment_count" widget="statinfo" string="Affectations"/>
+                        </button>
+                        <button name="action_view_transfers" type="object" class="oe_stat_button" icon="fa-exchange">
+                            <field name="transfer_count" widget="statinfo" string="Transferts"/>
+                        </button>
+                        <button name="action_view_documents" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="document_count" widget="statinfo" string="Documents"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                        <h2>
+                            <field name="name" placeholder="Nom de l'immobilisation"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="article_id"/>
+                            <field name="type_id"/>
+                            <field name="marque"/>
+                            <field name="modele"/>
+                            <field name="numero_serie"/>
+                            <field name="qr_code" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="date_acquisition"/>
+                            <field name="date_mise_service"/>
+                            <field name="date_debut_garantie"/>
+                            <field name="date_fin_garantie"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Informations financières" name="financial_info">
+                            <group>
+                                <group>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="valeur_acquisition" widget="monetary"/>
+                                    <field name="valeur_residuelle" widget="monetary"/>
+                                </group>
+                                <group>
+                                    <field name="duree_amortissement"/>
+                                    <field name="methode_amortissement"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Localisation et responsabilité" name="location">
+                            <group>
+                                <group>
+                                    <field name="structure_id"/>
+                                    <field name="section_id"/>
+                                    <field name="localisation"/>
+                                </group>
+                                <group>
+                                    <field name="responsable_id"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Description détaillée de l'immobilisation..."/>
+                        </page>
+                        <page string="Maintenances" name="maintenances">
+                            <field name="maintenance_ids" readonly="1">
+                                <list>
+                                    <field name="reference"/>
+                                    <field name="type"/>
+                                    <field name="date_debut"/>
+                                    <field name="date_fin"/>
+                                    <field name="responsable_id"/>
+                                    <field name="prestataire_id"/>
+                                    <field name="cout" sum="Total"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Affectations" name="assignments">
+                            <field name="assignment_ids" readonly="1">
+                                <list>
+                                    <field name="reference"/>
+                                    <field name="date_debut"/>
+                                    <field name="date_fin"/>
+                                    <field name="user_id"/>
+                                    <field name="structure_id"/>
+                                    <field name="section_id"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Transferts" name="transfers">
+                            <field name="transfer_ids" readonly="1">
+                                <list>
+                                    <field name="reference"/>
+                                    <field name="date"/>
+                                    <field name="structure_origine_id"/>
+                                    <field name="structure_destination_id"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Documents" name="documents">
+                            <field name="document_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="type"/>
+                                    <field name="date"/>
+                                    <field name="date_expiration"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des immobilisations -->
+    <record id="view_e_gestock_asset_list" model="ir.ui.view">
+        <field name="name">e_gestock.asset.list</field>
+        <field name="model">e_gestock.asset</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'in_stock'" decoration-success="state == 'in_service'"
+                  decoration-warning="state == 'in_maintenance'" decoration-danger="state == 'out_of_service'"
+                  decoration-muted="state in ('disposed', 'scrapped')">
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="structure_id"/>
+                <field name="date_acquisition"/>
+                <field name="date_mise_service"/>
+                <field name="valeur_acquisition" sum="Total"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue kanban des immobilisations -->
+    <record id="view_e_gestock_asset_kanban" model="ir.ui.view">
+        <field name="name">e_gestock.asset.kanban</field>
+        <field name="model">e_gestock.asset</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_small_column">
+                <field name="id"/>
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="structure_id"/>
+                <field name="state"/>
+                <field name="valeur_acquisition"/>
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong><field name="reference"/> - <field name="name"/></strong>
+                                <div>
+                                    <span class="text-muted">Type: </span><field name="type_id"/>
+                                </div>
+                                <div>
+                                    <span class="text-muted">Structure: </span><field name="structure_id"/>
+                                </div>
+                                <div>
+                                    <span class="text-muted">Valeur: </span>
+                                    <field name="valeur_acquisition" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vue recherche des immobilisations -->
+    <record id="view_e_gestock_asset_search" model="ir.ui.view">
+        <field name="name">e_gestock.asset.search</field>
+        <field name="model">e_gestock.asset</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="type_id"/>
+                <field name="structure_id"/>
+                <field name="section_id"/>
+                <field name="responsable_id"/>
+                <field name="numero_serie"/>
+                <field name="marque"/>
+                <field name="modele"/>
+                <separator/>
+                <filter string="En stock" name="state_in_stock" domain="[('state', '=', 'in_stock')]"/>
+                <filter string="En service" name="state_in_service" domain="[('state', '=', 'in_service')]"/>
+                <filter string="En maintenance" name="state_in_maintenance" domain="[('state', '=', 'in_maintenance')]"/>
+                <filter string="Hors service" name="state_out_of_service" domain="[('state', '=', 'out_of_service')]"/>
+                <filter string="Cédé" name="state_disposed" domain="[('state', '=', 'disposed')]"/>
+                <filter string="Mis au rebut" name="state_scrapped" domain="[('state', '=', 'scrapped')]"/>
+                <separator/>
+                <filter string="Archivé" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Type" name="groupby_type" context="{'group_by': 'type_id'}"/>
+                    <filter string="Structure" name="groupby_structure" context="{'group_by': 'structure_id'}"/>
+                    <filter string="Section" name="groupby_section" context="{'group_by': 'section_id'}"/>
+                    <filter string="État" name="groupby_state" context="{'group_by': 'state'}"/>
+                    <filter string="Responsable" name="groupby_responsable" context="{'group_by': 'responsable_id'}"/>
+                    <filter string="Date d'acquisition" name="groupby_date_acquisition" context="{'group_by': 'date_acquisition'}"/>
+                    <filter string="Date de mise en service" name="groupby_date_mise_service" context="{'group_by': 'date_mise_service'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les immobilisations -->
+    <record id="action_e_gestock_asset" model="ir.actions.act_window">
+        <field name="name">Immobilisations</field>
+        <field name="res_model">e_gestock.asset</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="context">{'search_default_state_in_service': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer votre première immobilisation
+            </p>
+            <p>
+                Gérez vos immobilisations pour suivre leurs acquisitions, amortissements et cessions.
+            </p>
+        </field>
+    </record>
+</odoo>

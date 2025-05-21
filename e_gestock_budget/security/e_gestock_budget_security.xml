@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Les groupes sont maintenant définis dans le module de base e_gestock_base -->
+
+    <!-- Règles d'accès par modèle -->
+    <record id="e_gestock_exercise_rule_admin" model="ir.rule">
+        <field name="name">Exercices: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_exercise"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_exercise_rule_user" model="ir.rule">
+        <field name="name">Exercices: lecture pour tous les utilisateurs</field>
+        <field name="model_id" ref="model_e_gestock_exercise"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_credit_budget_rule_admin" model="ir.rule">
+        <field name="name">Crédits budgétaires: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_credit_budget"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_credit_budget_rule_user" model="ir.rule">
+        <field name="name">Crédits budgétaires: accès en lecture</field>
+        <field name="model_id" ref="model_e_gestock_credit_budget"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_credit_budget_structure_rule" model="ir.rule">
+        <field name="name">Crédits budgétaires: responsable structure</field>
+        <field name="model_id" ref="model_e_gestock_credit_budget"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_structure_manager'))]"/>
+        <field name="domain_force">[('structure_id.id', 'in', user.structure_ids.ids)]</field>
+    </record>
+
+    <record id="e_gestock_dotation_budget_rule_admin" model="ir.rule">
+        <field name="name">Dotations budgétaires: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_dotation_budget"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_dotation_budget_rule_user" model="ir.rule">
+        <field name="name">Dotations budgétaires: accès en lecture</field>
+        <field name="model_id" ref="model_e_gestock_dotation_budget"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_dotation_budget_depot_rule" model="ir.rule">
+        <field name="name">Dotations budgétaires: responsable dépôt</field>
+        <field name="model_id" ref="model_e_gestock_dotation_budget"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_resp_depot'))]"/>
+        <field name="domain_force">[('depot_id.responsable_id', '=', user.id)]</field>
+    </record>
+
+    <record id="e_gestock_operation_budget_rule_admin" model="ir.rule">
+        <field name="name">Opérations budgétaires: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_operation_budget"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_operation_budget_rule_user" model="ir.rule">
+        <field name="name">Opérations budgétaires: lecture pour utilisateurs</field>
+        <field name="model_id" ref="model_e_gestock_operation_budget"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Types de gestion -->
+        <record id="type_gestion_a" model="e_gestock.type_gestion">
+            <field name="code_gestion">A</field>
+            <field name="libelle_gestion">Risques professionnels</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_e" model="e_gestock.type_gestion">
+            <field name="code_gestion">E</field>
+            <field name="libelle_gestion">Établissements et oeuvres</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_f" model="e_gestock.type_gestion">
+            <field name="code_gestion">F</field>
+            <field name="libelle_gestion">Prestations familiales</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_m" model="e_gestock.type_gestion">
+            <field name="code_gestion">M</field>
+            <field name="libelle_gestion">Assurances maladies</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_s" model="e_gestock.type_gestion">
+            <field name="code_gestion">S</field>
+            <field name="libelle_gestion">Actions sanitaires et sociales</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_v" model="e_gestock.type_gestion">
+            <field name="code_gestion">V</field>
+            <field name="libelle_gestion">Assurances vieillesses</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_g" model="e_gestock.type_gestion">
+            <field name="code_gestion">G</field>
+            <field name="libelle_gestion">Administration</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_i" model="e_gestock.type_gestion">
+            <field name="code_gestion">I</field>
+            <field name="libelle_gestion">Immeubles de rapports</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_t" model="e_gestock.type_gestion">
+            <field name="code_gestion">T.</field>
+            <field name="libelle_gestion">Placements financiers</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="type_gestion_k" model="e_gestock.type_gestion">
+            <field name="code_gestion">K</field>
+            <field name="libelle_gestion">Mep compta analytique</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo> 

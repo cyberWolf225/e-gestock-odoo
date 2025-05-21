@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ajout des champs dans la vue fournisseur existante -->
+    <record id="view_partner_form_supplier_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.supplier.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <!-- Ajouter un nouvel onglet pour les infos fournisseur E-GESTOCK -->
+            <notebook position="inside">
+                <page string="E-GESTOCK" name="e_gestock_supplier" invisible="supplier_rank == 0">
+                    <group>
+                        <group string="Catégorisation">
+                            <field name="e_gestock_supplier_category_id"/>
+                            <field name="e_gestock_is_approved"/>
+                            <field name="e_gestock_approval_date" invisible="e_gestock_is_approved == False"/>
+                            <field name="e_gestock_approval_user_id" invisible="e_gestock_is_approved == False"/>
+                        </group>
+                        <group string="Informations commerciales">
+                            <field name="e_gestock_remise_generale"/>
+                            <field name="e_gestock_condition_reglement"/>
+                            <field name="e_gestock_code_bancaire"/>
+                            <field name="e_gestock_ref_externe"/>
+                        </group>
+                    </group>
+
+                    <group string="Performance">
+                        <field name="e_gestock_note_globale" widget="progressbar"/>
+                        <field name="e_gestock_delai_moyen"/>
+                        <field name="e_gestock_taux_conformite" widget="progressbar"/>
+                        <field name="e_gestock_certifications"/>
+                    </group>
+
+                    <!-- Documents joints -->
+                    <separator string="Documents"/>
+                    <field name="e_gestock_attachment_ids" widget="many2many_binary"/>
+
+                    <!-- Boutons d'actions -->
+                    <div class="oe_button_box" name="e_gestock_button_box">
+                        <button name="action_approve_supplier" type="object" string="Approuver" class="oe_highlight" invisible="e_gestock_is_approved == True" groups="e_gestock_base.group_e_gestock_supplier_manager"/>
+                        <button name="action_disapprove_supplier" type="object" string="Désapprouver" class="oe_highlight" invisible="e_gestock_is_approved == False" groups="e_gestock_base.group_e_gestock_supplier_manager"/>
+                    </div>
+                </page>
+            </notebook>
+
+            <!-- Ajouter les smart buttons dans la section button_box -->
+            <div name="button_box" position="inside">
+                <button name="action_view_e_gestock_articles" type="object" class="oe_stat_button" icon="fa-cubes" invisible="supplier_rank == 0">
+                    <field name="e_gestock_article_count" widget="statinfo" string="Articles"/>
+                </button>
+                <button name="action_view_e_gestock_contracts" type="object" class="oe_stat_button" icon="fa-file-text" invisible="supplier_rank == 0">
+                    <field name="e_gestock_contract_count" widget="statinfo" string="Contrats"/>
+                </button>
+                <button name="action_view_e_gestock_evaluations" type="object" class="oe_stat_button" icon="fa-star" invisible="supplier_rank == 0">
+                    <field name="e_gestock_evaluation_count" widget="statinfo" string="Évaluations"/>
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <!-- Vue kanban pour les fournisseurs -->
+    <record id="e_gestock_supplier_kanban_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="e_gestock_supplier_category_id"/>
+                <field name="e_gestock_note_globale"/>
+                <field name="e_gestock_is_approved"/>
+                <field name="image_128"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url('/web/image/res.partner/#{record.id.raw_value}/image_128')" />
+                                <div class="o_kanban_image d-md-none" t-attf-style="background-image: url('/web/image/res.partner/#{record.id.raw_value}/image_128')" />
+                                <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                        <t t-if="record.e_gestock_is_approved.raw_value">
+                                            <span class="fa fa-check-circle text-success" title="Fournisseur approuvé"/>
+                                        </t>
+                                    </strong>
+                                    <div t-if="record.e_gestock_supplier_category_id.raw_value">
+                                        <span>
+                                            <field name="e_gestock_supplier_category_id"/>
+                                        </span>
+                                    </div>
+                                    <div t-if="record.phone.raw_value">
+                                        <span class="fa fa-phone" title="Téléphone"/>
+                                        <field name="phone"/>
+                                    </div>
+                                    <div t-if="record.email.raw_value">
+                                        <span class="fa fa-envelope" title="Email"/>
+                                        <field name="email"/>
+                                    </div>
+                                    <div t-if="record.e_gestock_note_globale.raw_value" class="mt8">
+                                        <span class="fa fa-star" title="Note"/>
+ Note: <field name="e_gestock_note_globale"/>
+ / 5
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les fournisseurs -->
+    <record id="e_gestock_supplier_list_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier.list</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Fournisseurs" decoration-success="e_gestock_is_approved==True" decoration-danger="e_gestock_is_approved==False">
+                <field name="name"/>
+                <field name="e_gestock_supplier_category_id"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="e_gestock_note_globale"/>
+                <field name="e_gestock_delai_moyen"/>
+                <field name="e_gestock_taux_conformite"/>
+                <field name="e_gestock_is_approved"/>
+                <field name="e_gestock_article_count" string="Articles"/>
+                <field name="e_gestock_contract_count" string="Contrats"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les fournisseurs -->
+    <record id="e_gestock_supplier_search_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier.search</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search string="Recherche fournisseurs">
+                <field name="name"/>
+                <field name="e_gestock_supplier_category_id"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="e_gestock_ref_externe"/>
+                <filter string="Approuvés" name="approved" domain="[('e_gestock_is_approved', '=', True)]"/>
+                <filter string="Non approuvés" name="not_approved" domain="[('e_gestock_is_approved', '=', False)]"/>
+                <filter string="Note > 4" name="high_rating" domain="[('e_gestock_note_globale', '>=', 4)]"/>
+                <filter string="Note &lt; 2" name="low_rating" domain="[('e_gestock_note_globale', '>', 0), ('e_gestock_note_globale', '&lt;', 2)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Catégorie" name="category" context="{'group_by': 'e_gestock_supplier_category_id'}"/>
+                    <filter string="Statut d'approbation" name="approval" context="{'group_by': 'e_gestock_is_approved'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour afficher les fournisseurs -->
+    <record id="action_e_gestock_supplier" model="ir.actions.act_window">
+        <field name="name">Fournisseurs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[('supplier_rank','>',0)]</field>
+        <field name="context">{'default_company_type': 'company', 'default_supplier_rank': 1}</field>
+        <field name="search_view_id" ref="e_gestock_supplier_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau fournisseur
+            </p>
+        </field>
+    </record>
+
+    <!-- Ajout de sélection de vues -->
+    <record id="action_e_gestock_supplier_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="e_gestock_supplier_kanban_view"/>
+        <field name="act_window_id" ref="action_e_gestock_supplier"/>
+    </record>
+
+    <record id="action_e_gestock_supplier_list" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="e_gestock_supplier_list_view"/>
+        <field name="act_window_id" ref="action_e_gestock_supplier"/>
+    </record>
+
+    <record id="action_e_gestock_supplier_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_partner_form_supplier_inherit"/>
+        <field name="act_window_id" ref="action_e_gestock_supplier"/>
+    </record>
+</odoo>

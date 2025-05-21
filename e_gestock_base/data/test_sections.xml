@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Sections de test -->
+        <record id="section_test_1" model="e_gestock.section">
+            <field name="code_section">910199</field>
+            <field name="nom_section">Section Test 1</field>
+            <field name="code_structure" ref="e_gestock_base.structure_9101"/>
+        </record>
+
+        <record id="section_test_2" model="e_gestock.section">
+            <field name="code_section">910198</field>
+            <field name="nom_section">Section Test 2</field>
+            <field name="code_structure" ref="e_gestock_base.structure_9101"/>
+        </record>
+
+        <record id="section_test_3" model="e_gestock.section">
+            <field name="code_section">920199</field>
+            <field name="nom_section">Section Test 3</field>
+            <field name="code_structure" ref="e_gestock_base.structure_9201"/>
+        </record>
+    </data>
+</odoo>

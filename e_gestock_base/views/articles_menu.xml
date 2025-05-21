@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sous-menus des articles -->
+    <menuitem id="menu_e_gestock_famille"
+              name="Familles d'articles"
+              parent="menu_e_gestock_articles"
+              action="action_e_gestock_famille"
+              sequence="20"/>
+              
+    <menuitem id="menu_e_gestock_article"
+              name="Articles"
+              parent="menu_e_gestock_articles"
+              action="action_e_gestock_article"
+              sequence="30"/>
+              
+    <menuitem id="menu_e_gestock_categorie"
+              name="Catégories"
+              parent="menu_e_gestock_articles"
+              action="action_e_gestock_categorie"
+              sequence="10"/>
+</odoo> 

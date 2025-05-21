@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Familles d'articles importées du fichier JSON -->
+        <record id="famille_632510" model="e_gestock.famille">
+            <field name="ref_fam">632510</field>
+            <field name="design_fam">Location de matériel de transport</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_601300" model="e_gestock.famille">
+            <field name="ref_fam">601300</field>
+            <field name="design_fam">Allocations familiales</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_601700" model="e_gestock.famille">
+            <field name="ref_fam">601700</field>
+            <field name="design_fam">Allocations au foyer du travailleur</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_601900" model="e_gestock.famille">
+            <field name="ref_fam">601900</field>
+            <field name="design_fam">Autres charges techniques</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602110" model="e_gestock.famille">
+            <field name="ref_fam">602110</field>
+            <field name="design_fam">I.J. d'incapacité</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602130" model="e_gestock.famille">
+            <field name="ref_fam">602130</field>
+            <field name="design_fam">Rentes aux assurés</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602140" model="e_gestock.famille">
+            <field name="ref_fam">602140</field>
+            <field name="design_fam">Rentes aux survivants</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602150" model="e_gestock.famille">
+            <field name="ref_fam">602150</field>
+            <field name="design_fam">Rachat de rentes</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602161" model="e_gestock.famille">
+            <field name="ref_fam">602161</field>
+            <field name="design_fam">Frais d'analyse et d'hospitalisation</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602162" model="e_gestock.famille">
+            <field name="ref_fam">602162</field>
+            <field name="design_fam">Produits pharmaceutiques</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602164" model="e_gestock.famille">
+            <field name="ref_fam">602164</field>
+            <field name="design_fam">Frais de rééducation</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602165" model="e_gestock.famille">
+            <field name="ref_fam">602165</field>
+            <field name="design_fam">Prothèses et fournitures de fabrication</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602170" model="e_gestock.famille">
+            <field name="ref_fam">602170</field>
+            <field name="design_fam">Frais de transport</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602180" model="e_gestock.famille">
+            <field name="ref_fam">602180</field>
+            <field name="design_fam">Frais funéraires</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602190" model="e_gestock.famille">
+            <field name="ref_fam">602190</field>
+            <field name="design_fam">Autres charges techniques</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602210" model="e_gestock.famille">
+            <field name="ref_fam">602210</field>
+            <field name="design_fam">Achat de fournitures de sécurité et de démonstration</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602220" model="e_gestock.famille">
+            <field name="ref_fam">602220</field>
+            <field name="design_fam">Frais d'administration et de propagande</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602230" model="e_gestock.famille">
+            <field name="ref_fam">602230</field>
+            <field name="design_fam">Exposition et frais d'organisation</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602240" model="e_gestock.famille">
+            <field name="ref_fam">602240</field>
+            <field name="design_fam">Cours, conférence et projection</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602250" model="e_gestock.famille">
+            <field name="ref_fam">602250</field>
+            <field name="design_fam">Recompenses des travailleurs</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602260" model="e_gestock.famille">
+            <field name="ref_fam">602260</field>
+            <field name="design_fam">Analyse et fournitures de laboratoire</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602270" model="e_gestock.famille">
+            <field name="ref_fam">602270</field>
+            <field name="design_fam">Publication technique à l'usage de tiers</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602280" model="e_gestock.famille">
+            <field name="ref_fam">602280</field>
+            <field name="design_fam">Dépenses de sécourisme</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_602290" model="e_gestock.famille">
+            <field name="ref_fam">602290</field>
+            <field name="design_fam">Autres charges techniques</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_610010" model="e_gestock.famille">
+            <field name="ref_fam">610010</field>
+            <field name="design_fam">Fournitures médicales</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_610020" model="e_gestock.famille">
+            <field name="ref_fam">610020</field>
+            <field name="design_fam">Produits pharmaceutiques</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_610223" model="e_gestock.famille">
+            <field name="ref_fam">610223</field>
+            <field name="design_fam">Fournitures d'atelier et de laboratoire</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_610225" model="e_gestock.famille">
+            <field name="ref_fam">610225</field>
+            <field name="design_fam">Fournitures de bureau</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_610226" model="e_gestock.famille">
+            <field name="ref_fam">610226</field>
+            <field name="design_fam">Fournitures pour ensemble electronique</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_612110" model="e_gestock.famille">
+            <field name="ref_fam">612110</field>
+            <field name="design_fam">Électricité</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_612120" model="e_gestock.famille">
+            <field name="ref_fam">612120</field>
+            <field name="design_fam">Gaz</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_612130" model="e_gestock.famille">
+            <field name="ref_fam">612130</field>
+            <field name="design_fam">Carburant et lubrifiant</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_612170" model="e_gestock.famille">
+            <field name="ref_fam">612170</field>
+            <field name="design_fam">Eau</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_612300" model="e_gestock.famille">
+            <field name="ref_fam">612300</field>
+            <field name="design_fam">Fournitures d'entretien et de petits équipements</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_612500" model="e_gestock.famille">
+            <field name="ref_fam">612500</field>
+            <field name="design_fam">Linge et vêtement de travail</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_612600" model="e_gestock.famille">
+            <field name="ref_fam">612600</field>
+            <field name="design_fam">Fourniture pour la sécurité des locaux</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_612800" model="e_gestock.famille">
+            <field name="ref_fam">612800</field>
+            <field name="design_fam">Autres fournitures non stockables</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_616100" model="e_gestock.famille">
+            <field name="ref_fam">616100</field>
+            <field name="design_fam">Achat pour réception</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_601100" model="e_gestock.famille">
+            <field name="ref_fam">601100</field>
+            <field name="design_fam">Allocations prénatales</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_601200" model="e_gestock.famille">
+            <field name="ref_fam">601200</field>
+            <field name="design_fam">Allocations de maternité</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_618210" model="e_gestock.famille">
+            <field name="ref_fam">618210</field>
+            <field name="design_fam">Transport</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_621100" model="e_gestock.famille">
+            <field name="ref_fam">621100</field>
+            <field name="design_fam">Frais de voyage et de déplacement Agents</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_621200" model="e_gestock.famille">
+            <field name="ref_fam">621200</field>
+            <field name="design_fam">Frais de voyage et de déplacement Administrat</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_621300" model="e_gestock.famille">
+            <field name="ref_fam">621300</field>
+            <field name="design_fam">Frais de voyage et de déplacement d'autres personnes</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_626100" model="e_gestock.famille">
+            <field name="ref_fam">626100</field>
+            <field name="design_fam">Frais de déménagement des Agents</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_630100" model="e_gestock.famille">
+            <field name="ref_fam">630100</field>
+            <field name="design_fam">Réception</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_630210" model="e_gestock.famille">
+            <field name="ref_fam">630210</field>
+            <field name="design_fam">Indemnité de mission et fr. séjour pers.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_630220" model="e_gestock.famille">
+            <field name="ref_fam">630220</field>
+            <field name="design_fam">Indemnité de mission et fr. séjour Admi</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_630280" model="e_gestock.famille">
+            <field name="ref_fam">630280</field>
+            <field name="design_fam">Indem de miss) et fr. séjour d'autres pers.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_632310" model="e_gestock.famille">
+            <field name="ref_fam">632310</field>
+            <field name="design_fam">Loyers</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_632500" model="e_gestock.famille">
+            <field name="ref_fam">632500</field>
+            <field name="design_fam">Location de matériel</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_633100" model="e_gestock.famille">
+            <field name="ref_fam">633100</field>
+            <field name="design_fam">Entretien Et réparation immeubles exploitation</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_633110" model="e_gestock.famille">
+            <field name="ref_fam">633110</field>
+            <field name="design_fam">Entretien Et réparation immeubles rapport</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_633140" model="e_gestock.famille">
+            <field name="ref_fam">633140</field>
+            <field name="design_fam">Entretien Et réparation logements sociaux</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_633210" model="e_gestock.famille">
+            <field name="ref_fam">633210</field>
+            <field name="design_fam">Entretien Et réparation matériel et mobilier bureau</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_633220" model="e_gestock.famille">
+            <field name="ref_fam">633220</field>
+            <field name="design_fam">Entretien Et reparation materiel informatique</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_633230" model="e_gestock.famille">
+            <field name="ref_fam">633230</field>
+            <field name="design_fam">Entretien Et réparation matériel transport</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_633240" model="e_gestock.famille">
+            <field name="ref_fam">633240</field>
+            <field name="design_fam">Entretien et réparation matériel techniq.oeuv sanitaire</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_633290" model="e_gestock.famille">
+            <field name="ref_fam">633290</field>
+            <field name="design_fam">Entretien Et réparation d'autres matériels et mobilier</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_634400" model="e_gestock.famille">
+            <field name="ref_fam">634400</field>
+            <field name="design_fam">Honoraires</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_634500" model="e_gestock.famille">
+            <field name="ref_fam">634500</field>
+            <field name="design_fam">Frais d'acte et de contentieux</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_634700" model="e_gestock.famille">
+            <field name="ref_fam">634700</field>
+            <field name="design_fam">Rémunération des stagiaires</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_634800" model="e_gestock.famille">
+            <field name="ref_fam">634800</field>
+            <field name="design_fam">Autres rémunérations</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_635100" model="e_gestock.famille">
+            <field name="ref_fam">635100</field>
+            <field name="design_fam">Annonces et insertions</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_635300" model="e_gestock.famille">
+            <field name="ref_fam">635300</field>
+            <field name="design_fam">Journaux, catalogues et autres doc.</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_635700" model="e_gestock.famille">
+            <field name="ref_fam">635700</field>
+            <field name="design_fam">Pourboirs et dons courants</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_635800" model="e_gestock.famille">
+            <field name="ref_fam">635800</field>
+            <field name="design_fam">AUTRES DEPENSES DE PUBLICITE, D'INFORMATION ET DE PUBLICATION</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_636100" model="e_gestock.famille">
+            <field name="ref_fam">636100</field>
+            <field name="design_fam">Affranchissement</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_636200" model="e_gestock.famille">
+            <field name="ref_fam">636200</field>
+            <field name="design_fam">Frais de mandatement</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_636300" model="e_gestock.famille">
+            <field name="ref_fam">636300</field>
+            <field name="design_fam">Téléphone, télégramme, télex et fax</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_636600" model="e_gestock.famille">
+            <field name="ref_fam">636600</field>
+            <field name="design_fam">Redevance pour boîte postale</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_636700" model="e_gestock.famille">
+            <field name="ref_fam">636700</field>
+            <field name="design_fam">Lignes spécialisées informatiques</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_636800" model="e_gestock.famille">
+            <field name="ref_fam">636800</field>
+            <field name="design_fam">Autres frais postaux</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_637100" model="e_gestock.famille">
+            <field name="ref_fam">637100</field>
+            <field name="design_fam">Frais sur titres</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_637800" model="e_gestock.famille">
+            <field name="ref_fam">637800</field>
+            <field name="design_fam">Autres frais et commissions bancaires</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_638110" model="e_gestock.famille">
+            <field name="ref_fam">638110</field>
+            <field name="design_fam">Cotisations à d'autres organismes</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_638220" model="e_gestock.famille">
+            <field name="ref_fam">638220</field>
+            <field name="design_fam">Frais de gardiennage</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_638230" model="e_gestock.famille">
+            <field name="ref_fam">638230</field>
+            <field name="design_fam">Autres services rendus par les tiers</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_638400" model="e_gestock.famille">
+            <field name="ref_fam">638400</field>
+            <field name="design_fam">Frais de recrutement du personnel</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_638600" model="e_gestock.famille">
+            <field name="ref_fam">638600</field>
+            <field name="design_fam">Frais de formation du personnel</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_638800" model="e_gestock.famille">
+            <field name="ref_fam">638800</field>
+            <field name="design_fam">Autres services extérieurs</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_205000" model="e_gestock.famille">
+            <field name="ref_fam">205000</field>
+            <field name="design_fam">Logiciel informatique</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_221000" model="e_gestock.famille">
+            <field name="ref_fam">221000</field>
+            <field name="design_fam">Matériel de bureau</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_221100" model="e_gestock.famille">
+            <field name="ref_fam">221100</field>
+            <field name="design_fam">Mobilier de bureau</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_222000" model="e_gestock.famille">
+            <field name="ref_fam">222000</field>
+            <field name="design_fam">Matériel informatique</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_223000" model="e_gestock.famille">
+            <field name="ref_fam">223000</field>
+            <field name="design_fam">Matériel de transport</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_224000" model="e_gestock.famille">
+            <field name="ref_fam">224000</field>
+            <field name="design_fam">Matériel et mobilier des Centres médicaux</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_665800" model="e_gestock.famille">
+            <field name="ref_fam">665800</field>
+            <field name="design_fam">Autres impôts</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_220600" model="e_gestock.famille">
+            <field name="ref_fam">220600</field>
+            <field name="design_fam">Aménagement des constructions</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_657300" model="e_gestock.famille">
+            <field name="ref_fam">657300</field>
+            <field name="design_fam">Frais médicaux du personnel</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_638120" model="e_gestock.famille">
+            <field name="ref_fam">638120</field>
+            <field name="design_fam">Frais de congrès, colloques, séminaires</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_641700" model="e_gestock.famille">
+            <field name="ref_fam">641700</field>
+            <field name="design_fam">Sinistres et évacuations sanitaires (Assurance maladie)</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_220700" model="e_gestock.famille">
+            <field name="ref_fam">220700</field>
+            <field name="design_fam">Installation générale, agencement et amenagement technique</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_220900" model="e_gestock.famille">
+            <field name="ref_fam">220900</field>
+            <field name="design_fam">Installation générale, agencement et amenagement pas proprétaire</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_657900" model="e_gestock.famille">
+            <field name="ref_fam">657900</field>
+            <field name="design_fam">Autres charges sociales</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_681800" model="e_gestock.famille">
+            <field name="ref_fam">681800</field>
+            <field name="design_fam">AUTRES CHARGES EXCEPTIONNELLES SUR OPERATION DE GESTION</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_229300" model="e_gestock.famille">
+            <field name="ref_fam">229300</field>
+            <field name="design_fam">Matériel et Mobilier de l'infirmerie du personnel</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_643101" model="e_gestock.famille">
+            <field name="ref_fam">643101</field>
+            <field name="design_fam">Subvention exceptionnelle</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_229100" model="e_gestock.famille">
+            <field name="ref_fam">229100</field>
+            <field name="design_fam">Matériel de Froid</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_229200" model="e_gestock.famille">
+            <field name="ref_fam">229200</field>
+            <field name="design_fam">Matériel de Protection</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_229400" model="e_gestock.famille">
+            <field name="ref_fam">229400</field>
+            <field name="design_fam">Autres matériel et mobilier</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_643100" model="e_gestock.famille">
+            <field name="ref_fam">643100</field>
+            <field name="design_fam">Appui au ministère de tutelle</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_605640" model="e_gestock.famille">
+            <field name="ref_fam">605640</field>
+            <field name="design_fam">autre subvention</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_632501" model="e_gestock.famille">
+            <field name="ref_fam">632501</field>
+            <field name="design_fam">Redevance-Brevet-Licence-Logiciel</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_220010" model="e_gestock.famille">
+            <field name="ref_fam">220010</field>
+            <field name="design_fam">Conctruction Immeubles Administratifs</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_220100" model="e_gestock.famille">
+            <field name="ref_fam">220100</field>
+            <field name="design_fam">Construction Immeubles de Rapport</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_657500" model="e_gestock.famille">
+            <field name="ref_fam">657500</field>
+            <field name="design_fam">VERSEMENT AU COMITE D'HYGIENE</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_632401" model="e_gestock.famille">
+            <field name="ref_fam">632401</field>
+            <field name="design_fam">LOYER ET CHARGES LOCATIVES DU MATERIEL INFO</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="famille_610228" model="e_gestock.famille">
+            <field name="ref_fam">610228</field>
+            <field name="design_fam">Autres fournitures consommables</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo> 

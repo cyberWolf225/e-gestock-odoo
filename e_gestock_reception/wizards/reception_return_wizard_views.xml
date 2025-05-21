@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour l'assistant de retour fournisseur -->
+    <record id="view_reception_return_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.return.wizard.form</field>
+        <field name="model">e_gestock.reception.return.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Créer un retour fournisseur">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reception_id" options="{'no_create': True}"/>
+                            <field name="inspection_id" domain="[('reception_id', '=', reception_id)]" options="{'no_create': True}"/>
+                            <field name="fournisseur_id" readonly="1"/>
+                            <field name="purchase_order_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="motif"/>
+                        </group>
+                    </group>
+                    <field name="commentaire" placeholder="Commentaire sur le motif du retour..."/>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="reception_line_id" invisible="1"/>
+                            <field name="article_id" readonly="1"/>
+                            <field name="designation" readonly="1"/>
+                            <field name="quantite_recue" readonly="1"/>
+                            <field name="quantite"/>
+                            <field name="prix_unitaire"/>
+                            <field name="montant"/>
+                            <field name="motif_detail"/>
+                        </list>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="action_create_return" string="Créer retour" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour l'assistant de retour fournisseur -->
+    <record id="action_reception_return_wizard" model="ir.actions.act_window">
+        <field name="name">Créer un retour fournisseur</field>
+        <field name="res_model">e_gestock.reception.return.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_reception_id': active_id}</field>
+        <field name="binding_model_id" ref="model_e_gestock_reception"/>
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>

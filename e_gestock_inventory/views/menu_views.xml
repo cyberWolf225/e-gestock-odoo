@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu principal Stock -->
+    <menuitem id="menu_e_gestock_stock_root"
+              name="Stock"
+              parent="e_gestock_base.menu_e_gestock_root"
+              sequence="20"/>
+
+    <!-- Sous-menu Stock -->
+    <menuitem id="menu_e_gestock_stock_items"
+              name="Articles en stock"
+              parent="menu_e_gestock_stock_root"
+              action="action_e_gestock_stock_item"
+              sequence="10"/>
+
+    <!-- Sous-menu Mouvements -->
+    <menuitem id="menu_e_gestock_stock_movement_root"
+              name="Mouvements"
+              parent="menu_e_gestock_stock_root"
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_stock_movement"
+              name="Tous les mouvements"
+              parent="menu_e_gestock_stock_movement_root"
+              action="action_e_gestock_stock_movement"
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_stock_movement_in"
+              name="Entrées"
+              parent="menu_e_gestock_stock_movement_root"
+              action="action_e_gestock_stock_movement_in"
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_stock_movement_out"
+              name="Sorties"
+              parent="menu_e_gestock_stock_movement_root"
+              action="action_e_gestock_stock_movement_out"
+              sequence="30"/>
+
+    <menuitem id="menu_e_gestock_stock_movement_transfer"
+              name="Transferts"
+              parent="menu_e_gestock_stock_movement_root"
+              action="action_e_gestock_stock_movement_transfer"
+              sequence="40"/>
+
+    <menuitem id="menu_e_gestock_stock_movement_operations"
+              name="Opérations"
+              parent="menu_e_gestock_stock_movement_root"
+              sequence="50"/>
+
+    <!-- Menu action pour l'assistant de transfert -->
+    <menuitem id="menu_e_gestock_stock_transfer_wizard"
+              name="Créer un transfert"
+              parent="menu_e_gestock_stock_movement_operations"
+              action="action_e_gestock_stock_transfer_wizard"
+              sequence="10"/>
+
+    <!-- Sous-menu Inventaires -->
+    <menuitem id="menu_e_gestock_inventory_root"
+              name="Inventaires"
+              parent="menu_e_gestock_stock_root"
+              sequence="30"/>
+
+    <menuitem id="menu_e_gestock_inventory"
+              name="Inventaires"
+              parent="menu_e_gestock_inventory_root"
+              action="action_e_gestock_inventory"
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_inventory_line"
+              name="Lignes d'inventaire"
+              parent="menu_e_gestock_inventory_root"
+              action="action_e_gestock_inventory_line"
+              sequence="20"/>
+
+    <!-- Sous-menu Rapports -->
+    <menuitem id="menu_e_gestock_stock_report_root"
+              name="Rapports"
+              parent="menu_e_gestock_stock_root"
+              sequence="40"/>
+
+    <menuitem id="menu_e_gestock_stock_movement_line"
+              name="Analyse des mouvements"
+              parent="menu_e_gestock_stock_report_root"
+              action="action_e_gestock_stock_movement_line"
+              sequence="10"/>
+</odoo> 

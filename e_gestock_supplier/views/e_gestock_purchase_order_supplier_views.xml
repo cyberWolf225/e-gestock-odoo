@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extension de la vue formulaire du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_form_supplier_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.form.supplier.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Ajouter un champ pour le contrat fournisseur -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="e_gestock_contract_id" domain="[('supplier_id', '=', partner_id), ('state', '=', 'active')]" options="{'no_create': True}" invisible_if="partner_id == False"/>
+            </xpath>
+
+            <!-- Ajouter un onglet pour les informations fournisseur -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Fournisseur" name="supplier" invisible_if="partner_id == False">
+                    <group>
+                        <field name="e_gestock_supplier_article_ids" invisible="1"/>
+                        <field name="has_preferred_supplier" widget="boolean_toggle"/>
+                    </group>
+                    <group string="Articles disponibles chez ce fournisseur" invisible_if="e_gestock_supplier_article_ids == []">
+                        <field name="e_gestock_supplier_article_ids" nolabel="1" readonly="1">
+                            <list>
+                                <field name="display_name"/>
+                                <field name="article_id"/>
+                                <field name="product_id"/>
+                                <field name="prix_unitaire"/>
+                                <field name="is_preferred"/>
+                                <field name="last_purchase_date"/>
+                            </list>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+
+            <!-- Ajouter le champ supplier_article_id dans les lignes de commande -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_id']" position="before">
+                <field name="supplier_article_id" domain="[('supplier_id', '=', parent.partner_id), ('active', '=', True)]" options="{'no_create': True}"/>
+                <field name="is_preferred_supplier" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extension de la vue liste du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_list_supplier_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.list.supplier.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="e_gestock_contract_id" optional="hide"/>
+                <field name="has_preferred_supplier" optional="hide"/>
+            </xpath>
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-info">has_preferred_supplier</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extension de la vue recherche du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_search_supplier_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.search.supplier.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='groupby_supplier']" position="after">
+                <filter string="Contrat fournisseur" name="contract_id" context="{'group_by': 'e_gestock_contract_id'}"/>
+                <separator/>
+                <filter string="Fournisseurs préférés" name="preferred_supplier" domain="[('has_preferred_supplier', '=', True)]"/>
+                <filter string="Avec contrat" name="with_contract" domain="[('e_gestock_contract_id', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

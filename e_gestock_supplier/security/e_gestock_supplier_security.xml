@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Les groupes sont maintenant définis dans le module de base e_gestock_base -->
+    </data>
+
+    <!-- Règles de sécurité pour les fournisseurs -->
+    <data noupdate="1">
+        <!-- Règle pour les utilisateurs (lecture seule) -->
+        <record id="rule_supplier_category_user" model="ir.rule">
+            <field name="name">Catégories de fournisseurs pour les utilisateurs</field>
+            <field name="model_id" ref="model_e_gestock_supplier_category"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Règle pour les utilisateurs achats -->
+        <record id="rule_supplier_category_purchase_user" model="ir.rule">
+            <field name="name">Catégories de fournisseurs pour les utilisateurs achats</field>
+            <field name="model_id" ref="model_e_gestock_supplier_category"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Règle pour les responsables achats -->
+        <record id="rule_supplier_category_purchase_manager" model="ir.rule">
+            <field name="name">Catégories de fournisseurs pour les responsables achats</field>
+            <field name="model_id" ref="model_e_gestock_supplier_category"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règles similaires pour les autres modèles -->
+        <!-- Supplier Article -->
+        <record id="rule_supplier_article_user" model="ir.rule">
+            <field name="name">Articles fournisseurs pour les utilisateurs</field>
+            <field name="model_id" ref="model_e_gestock_supplier_article"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Supplier Contract -->
+        <record id="rule_supplier_contract_user" model="ir.rule">
+            <field name="name">Contrats fournisseurs pour les utilisateurs</field>
+            <field name="model_id" ref="model_e_gestock_supplier_contract"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Supplier Evaluation -->
+        <record id="rule_supplier_evaluation_user" model="ir.rule">
+            <field name="name">Évaluations fournisseurs pour les utilisateurs</field>
+            <field name="model_id" ref="model_e_gestock_supplier_evaluation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+    </data>
+</odoo>

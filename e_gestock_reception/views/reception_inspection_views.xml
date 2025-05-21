@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les inspections de réception -->
+    <record id="view_reception_inspection_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.inspection.form</field>
+        <field name="model">e_gestock.reception.inspection</field>
+        <field name="arch" type="xml">
+            <form string="Inspection de réception">
+                <header>
+                    <button name="action_confirm" string="Confirmer" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_done" string="Terminer" type="object"
+                            class="oe_highlight" invisible="state != 'confirmed' or not decision"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_cancel" string="Annuler" type="object"
+                            invisible="state in ['done', 'cancelled']"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_nonconformities" type="object" class="oe_stat_button" icon="fa-exclamation-triangle"
+                                invisible="nonconformity_count == 0">
+                            <field name="nonconformity_count" string="Non-conformités" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="reception_id" options="{'no_create': True}"/>
+                            <field name="purchase_order_id" readonly="1"/>
+                            <field name="fournisseur_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="inspecteur_id"/>
+                            <field name="methode_echantillonnage"/>
+                            <field name="taux_echantillonnage" invisible="methode_echantillonnage == 'complet'"/>
+                            <field name="taux_conformite" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Résultats d'inspection">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="reception_line_id" domain="[('reception_id', '=', parent.reception_id)]" options="{'no_create': True}"/>
+                                    <field name="article_id" readonly="1"/>
+                                    <field name="designation"/>
+                                    <field name="quantite_recue" readonly="1"/>
+                                    <field name="quantite_inspectee"/>
+                                    <field name="resultat"/>
+                                    <field name="quantite_conforme" invisible="resultat == 'conforme'"/>
+                                    <field name="quantite_non_conforme" invisible="resultat == 'conforme'"/>
+                                    <field name="type_non_conformite" invisible="resultat == 'conforme'"/>
+                                    <field name="gravite" invisible="resultat == 'conforme'"/>
+                                    <field name="action_corrective" invisible="resultat == 'conforme'"/>
+                                    <field name="commentaire"/>
+                                    <field name="photo" widget="image" class="oe_avatar" options="{'size': [90, 90]}" invisible="resultat == 'conforme'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Décision" invisible="state == 'draft'">
+                            <group>
+                                <group>
+                                    <field name="decision" required="state == 'confirmed'"/>
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+                            <field name="commentaire" placeholder="Commentaire sur la décision..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les inspections de réception -->
+    <record id="view_reception_inspection_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.inspection.list</field>
+        <field name="model">e_gestock.reception.inspection</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'"
+                  decoration-warning="state == 'confirmed'"
+                  decoration-success="state == 'done' and decision in ('accepte', 'accepte_reserve')"
+                  decoration-danger="state == 'done' and decision in ('quarantaine', 'rejete')"
+                  decoration-muted="state == 'cancelled'">
+                <field name="reference"/>
+                <field name="date"/>
+                <field name="reception_id"/>
+                <field name="fournisseur_id"/>
+                <field name="inspecteur_id"/>
+                <field name="taux_conformite" widget="progressbar"/>
+                <field name="decision"/>
+                <field name="state"/>
+                <field name="nonconformity_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les inspections de réception -->
+    <record id="view_reception_inspection_search" model="ir.ui.view">
+        <field name="name">e_gestock.reception.inspection.search</field>
+        <field name="model">e_gestock.reception.inspection</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="reception_id"/>
+                <field name="fournisseur_id"/>
+                <field name="inspecteur_id"/>
+                <separator/>
+                <filter string="Brouillons" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmées" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Terminées" name="done" domain="[('state', '=', 'done')]"/>
+                <filter string="Annulées" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="Acceptées" name="accepted" domain="[('decision', 'in', ['accepte', 'accepte_reserve'])]"/>
+                <filter string="Rejetées" name="rejected" domain="[('decision', '=', 'rejete')]"/>
+                <filter string="En quarantaine" name="quarantine" domain="[('decision', '=', 'quarantaine')]"/>
+                <separator/>
+                <filter string="Aujourd'hui" name="today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Cette semaine" name="this_week" domain="[('date', '&gt;=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Réception" name="group_by_reception" context="{'group_by': 'reception_id'}"/>
+                    <filter string="Fournisseur" name="group_by_fournisseur" context="{'group_by': 'fournisseur_id'}"/>
+                    <filter string="Inspecteur" name="group_by_inspecteur" context="{'group_by': 'inspecteur_id'}"/>
+                    <filter string="État" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Décision" name="group_by_decision" context="{'group_by': 'decision'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les inspections de réception -->
+    <record id="action_reception_inspection" model="ir.actions.act_window">
+        <field name="name">Inspections</field>
+        <field name="res_model">e_gestock.reception.inspection</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_draft': 1, 'search_default_confirmed': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle inspection de réception
+            </p>
+            <p>
+                Les inspections permettent de contrôler la qualité des articles reçus.
+            </p>
+        </field>
+    </record>
+</odoo>

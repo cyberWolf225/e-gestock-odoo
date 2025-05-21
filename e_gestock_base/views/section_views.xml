@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les sections -->
+    <record id="view_e_gestock_section_form" model="ir.ui.view">
+        <field name="name">e_gestock.section.form</field>
+        <field name="model">e_gestock.section</field>
+        <field name="arch" type="xml">
+            <form string="Section">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="code_section" class="oe_edit_only"/>
+                        <h1><field name="code_section" placeholder="Code (ex: 910101)"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="nom_section" placeholder="Nom de la section"/>
+                            <field name="num_section"/>
+                        </group>
+                        <group>
+                            <field name="code_structure" options="{'no_create': True}"/>
+                            <field name="code_gestion" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les sections -->
+    <record id="view_e_gestock_section_list" model="ir.ui.view">
+        <field name="name">e_gestock.section.list</field>
+        <field name="model">e_gestock.section</field>
+        <field name="arch" type="xml">
+            <list string="Sections">
+                <field name="code_section"/>
+                <field name="nom_section"/>
+                <field name="code_structure"/>
+                <field name="code_gestion"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les sections -->
+    <record id="view_e_gestock_section_search" model="ir.ui.view">
+        <field name="name">e_gestock.section.search</field>
+        <field name="model">e_gestock.section</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher une section">
+                <field name="code_section"/>
+                <field name="nom_section"/>
+                <field name="code_structure"/>
+                <field name="code_gestion"/>
+                <filter string="Archivé" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Structure" name="group_by_structure" context="{'group_by': 'code_structure'}"/>
+                    <filter string="Type de gestion" name="group_by_gestion" context="{'group_by': 'code_gestion'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les sections -->
+    <record id="action_e_gestock_section" model="ir.actions.act_window">
+        <field name="name">Sections</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.section</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_e_gestock_section_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle section
+            </p>
+            <p>
+                Les sections sont des subdivisions des structures.
+            </p>
+        </field>
+    </record>
+</odoo>

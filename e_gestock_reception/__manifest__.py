@@ -1,0 +1,57 @@
+{
+    'name': 'E-GESTOCK Reception',
+    'version': '1.0',
+    'category': 'Inventory/Reception',
+    'sequence': 21,
+    'summary': 'Gestion des réceptions pour E-GESTOCK',
+    'description': """
+Module de gestion des réceptions
+================================
+Ce module permet de gérer tout le processus de réception dans la solution E-GESTOCK,
+depuis la réception des livraisons jusqu'à la validation par le comité de réception,
+en passant par le contrôle qualité et la mise à jour des stocks.
+    """,
+    'author': 'E-GESTOCK Team',
+    'website': 'https://www.e-gestock.com',
+    'depends': [
+        'base',
+        'mail',
+        'product',
+        'stock',
+        'e_gestock_base',
+        'e_gestock_budget',
+        'e_gestock_inventory',
+        'e_gestock_purchase',
+    ],
+    'data': [
+        'security/e_gestock_reception_security.xml',
+        'security/ir.model.access.csv',
+        'data/sequence_data.xml',
+        'data/mail_templates.xml',
+        'views/reception_views.xml',
+        'views/comite_reception_views.xml',  # Vues pour les comités de réception
+        'views/comite_reception_views_disabled.xml',  # Désactivation des vues de l'ancien modèle
+        'views/pv_reception_views.xml',
+        'views/reception_notice_views.xml',
+        'views/reception_inspection_views.xml',
+        'views/reception_nonconformity_views.xml',
+        'views/reception_quarantine_views.xml',
+        'views/reception_return_views.xml',
+        'views/reception_quai_views.xml',
+        'views/emplacement_views.xml',
+        'views/e_gestock_purchase_order_reception_views.xml',
+        'views/menu_views.xml',
+        'wizards/create_pv_wizard_views.xml',
+        'wizards/reception_return_wizard_views.xml',
+        'wizards/reception_quarantine_wizard_views.xml',
+        'wizards/validate_reception_wizard_views.xml',
+        'report/reception_report.xml',
+        'report/pv_report.xml',
+        'report/reception_return_report.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+}

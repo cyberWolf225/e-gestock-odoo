@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour l'assistant de sélection des fournisseurs -->
+    <record id="view_e_gestock_select_suppliers_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.select_suppliers_wizard.form</field>
+        <field name="model">e_gestock.select_suppliers_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sélection des fournisseurs">
+                <sheet>
+                    <group>
+                        <field name="demande_id" options="{'no_create': True}"/>
+                    </group>
+                    <group>
+                        <group string="Configuration de la demande">
+                            <field name="type_achat"/>
+                            <field name="code_echeance"/>
+                            <field name="taux_acompte"/>
+                            <field name="date_envoi"/>
+                        </group>
+                    </group>
+                    <separator string="Fournisseurs à consulter"/>
+                    <p class="text-muted">
+                        Sélectionnez les fournisseurs à qui envoyer les demandes de cotation.
+                    </p>
+                    <field name="supplier_ids" mode="kanban" options="{'no_create': True}">
+                        <kanban>
+                            <field name="id"/>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="image_128"/>
+                            <templates>
+                                <t t-name="card">
+                                    <div t-attf-class="oe_kanban_global_click">
+                                        <div class="o_kanban_image">
+                                            <img t-att-src="record.image_128.value ? 'data:image/png;base64,' + record.image_128.value : '/web/static/img/placeholder.png'" alt="Supplier Image"/>
+                                        </div>
+                                        <div class="oe_kanban_details">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name"/>
+                                            </strong>
+                                            <div t-if="record.email.raw_value">
+                                                <i class="fa fa-envelope" role="img" aria-label="Email" title="Email"/>
+                                                <field name="email"/>
+                                            </div>
+                                            <div t-if="record.phone.raw_value">
+                                                <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>
+                                                <field name="phone"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field>
+                </sheet>
+                <footer>
+                    <button string="Créer les demandes" name="action_create_supplier_quotations" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour l'assistant de sélection des fournisseurs -->
+    <record id="action_e_gestock_select_suppliers_wizard" model="ir.actions.act_window">
+        <field name="name">Sélection des fournisseurs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.select_suppliers_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_e_gestock_select_suppliers_wizard_form"/>
+    </record>
+</odoo>

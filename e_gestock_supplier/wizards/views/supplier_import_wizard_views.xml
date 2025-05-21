@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_supplier_import_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_import_wizard.form</field>
+        <field name="model">e_gestock.supplier_import_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Importer des fournisseurs">
+                <sheet>
+                    <group states="{'invisible': [('imported', '=', True)]}">
+                        <group string="Fichier à importer">
+                            <field name="file" widget="binary" filename="file_name"/>
+                            <field name="file_name" invisible="1"/>
+                            <field name="delimiter"/>
+                            <field name="encoding"/>
+                            <field name="skip_header"/>
+                        </group>
+                        <group string="Catégorisation">
+                            <field name="category_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group states="{'invisible': [('imported', '=', True)]}">
+                        <group string="Correspondance des colonnes">
+                            <field name="name_col"/>
+                            <field name="email_col"/>
+                            <field name="phone_col"/>
+                            <field name="street_col"/>
+                            <field name="city_col"/>
+                            <field name="zip_col"/>
+                            <field name="country_col"/>
+                            <field name="vat_col"/>
+                            <field name="website_col"/>
+                        </group>
+                    </group>
+                    <group states="{'invisible': [('imported', '=', False)]}">
+                        <group string="Résultat de l'importation">
+                            <field name="imported" invisible="1"/>
+                            <field name="total_count"/>
+                            <field name="success_count"/>
+                            <field name="error_count"/>
+                        </group>
+                    </group>
+                    <field name="result_log" attrs="{'invisible': [('imported', '=', False)]}" readonly="1" nolabel="1"/>
+                    <notebook attrs="{'invisible': [('imported', '=', False)]}">
+                        <page string="Fournisseurs importés">
+                            <field name="partner_ids" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                    <field name="e_gestock_supplier_category_id"/>
+                                    <field name="country_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_import" string="Importer" type="object"
+                            class="btn-primary" attrs="{'invisible': [('imported', '=', True)]}"/>
+                    <button special="cancel" string="Fermer" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_supplier_import_wizard" model="ir.actions.act_window">
+        <field name="name">Importer des fournisseurs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.supplier_import_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem id="menu_supplier_import"
+              name="Importer des fournisseurs"
+              parent="menu_e_gestock_supplier_config"
+              action="action_supplier_import_wizard"
+              sequence="10"
+              groups="e_gestock_supplier.group_supplier_manager"/>
+</odoo> 

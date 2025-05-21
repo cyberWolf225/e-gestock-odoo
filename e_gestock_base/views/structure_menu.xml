@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu pour les structures -->
+    <!-- Ce menu est commenté car il dépend d'un menu qui a été commenté dans menu.xml
+    <menuitem id="menu_action_e_gestock_structure"
+              name="Structures"
+              parent="menu_e_gestock_structure_config"
+              action="action_e_gestock_structure"
+              sequence="10"/>
+    -->
+</odoo>

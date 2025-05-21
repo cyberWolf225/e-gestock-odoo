@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue form pour l'évaluation des fournisseurs -->
+    <record id="e_gestock_supplier_evaluation_form_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_evaluation.form</field>
+        <field name="model">e_gestock.supplier_evaluation</field>
+        <field name="arch" type="xml">
+            <form string="Évaluation fournisseur">
+                <header>
+                    <button name="action_submit" string="Soumettre" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_validate" string="Valider" type="object" class="oe_highlight" invisible="state != 'submitted'" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+                    <button name="action_cancel" string="Annuler" type="object" invisible="state not in ('draft', 'submitted')" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+                    <button name="action_reset_to_draft" string="Remettre en brouillon" type="object" invisible="state not in ('cancelled', 'submitted')" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                        <button name="action_view_purchases" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+                            <field name="purchase_count" string="Commandes" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Informations générales">
+                            <field name="supplier_id" options="{'no_create': True}" readonly="state != 'draft'"/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="evaluator_id" readonly="state != 'draft'"/>
+                            <field name="validator_id" readonly="1" invisible="validator_id == False"/>
+                            <field name="validation_date" readonly="1" invisible="validation_date == False"/>
+                        </group>
+                        <group string="Période évaluée">
+                            <field name="period_start" readonly="state != 'draft'"/>
+                            <field name="period_end" readonly="state != 'draft'"/>
+                            <field name="note_globale" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Notes par critère">
+                            <field name="note_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="criteria_id" options="{'no_create': True}"/>
+                                    <field name="category"/>
+                                    <field name="note"/>
+                                    <field name="weight"/>
+                                    <field name="comments"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="evaluation_total">
+                                <field name="note_globale" widget="statinfo" string="Note globale"/>
+                            </group>
+                        </page>
+                        <page string="Commandes évaluées">
+                            <field name="purchase_ids" readonly="state != 'draft'">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="date_order"/>
+                                    <field name="date_planned"/>
+                                    <field name="amount_total"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Remarques générales">
+                            <field name="remarks" placeholder="Observations générales sur ce fournisseur..." readonly="state == 'validated'"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour l'évaluation des fournisseurs -->
+    <record id="e_gestock_supplier_evaluation_list_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_evaluation.list</field>
+        <field name="model">e_gestock.supplier_evaluation</field>
+        <field name="arch" type="xml">
+            <list string="Évaluations fournisseur" decoration-muted="state=='cancelled'" decoration-info="state=='draft'" decoration-warning="state=='submitted'" decoration-success="state=='validated'">
+                <field name="name"/>
+                <field name="supplier_id"/>
+                <field name="date"/>
+                <field name="period_start"/>
+                <field name="period_end"/>
+                <field name="note_globale"/>
+                <field name="evaluator_id"/>
+                <field name="state"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue kanban pour l'évaluation des fournisseurs -->
+    <record id="e_gestock_supplier_evaluation_kanban_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_evaluation.kanban</field>
+        <field name="model">e_gestock.supplier_evaluation</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="supplier_id"/>
+                <field name="date"/>
+                <field name="note_globale"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div>
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div>
+                                    <span>
+                                        <field name="supplier_id"/>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Date: <field name="date"/>
+                                    </span>
+                                </div>
+                                <div class="mt8">
+                                    <span class="fa fa-star" title="Note"/>
+ Note: <field name="note_globale"/>
+                                </div>
+                                <div class="mt8 text-right">
+                                    <span class="badge badge-pill" t-att-class="
+                                        state == 'draft' ? 'badge-info' :
+                                        state == 'submitted' ? 'badge-warning' :
+                                        state == 'validated' ? 'badge-success' :
+                                        'badge-danger'">
+                                        <field name="state"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vue search pour l'évaluation des fournisseurs -->
+    <record id="e_gestock_supplier_evaluation_search_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_evaluation.search</field>
+        <field name="model">e_gestock.supplier_evaluation</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des évaluations">
+                <field name="name"/>
+                <field name="supplier_id"/>
+                <field name="evaluator_id"/>
+                <filter string="Mes évaluations" name="my_evaluations" domain="[('evaluator_id', '=', uid)]"/>
+                <filter string="Brouillons" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="À valider" name="to_validate" domain="[('state', '=', 'submitted')]"/>
+                <filter string="Validées" name="validated" domain="[('state', '=', 'validated')]"/>
+                <filter string="Excellente note (>4)" name="excellent" domain="[('note_globale', '>=', 4)]"/>
+                <filter string="Mauvaise note (&lt;2)" name="poor" domain="[('note_globale', '&lt;', 2), ('note_globale', '&gt;', 0)]"/>
+                <filter string="Archivées" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Fournisseur" name="supplier" domain="[]" context="{'group_by':'supplier_id'}"/>
+                    <filter string="Évaluateur" name="evaluator" domain="[]" context="{'group_by':'evaluator_id'}"/>
+                    <filter string="État" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Mois d'évaluation" name="date_month" domain="[]" context="{'group_by':'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue graph pour l'évaluation des fournisseurs -->
+    <record id="e_gestock_supplier_evaluation_graph_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_evaluation.graph</field>
+        <field name="model">e_gestock.supplier_evaluation</field>
+        <field name="arch" type="xml">
+            <graph string="Analyse des évaluations" type="bar">
+                <field name="supplier_id"/>
+                <field name="note_globale" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Vue pivot pour l'évaluation des fournisseurs -->
+    <record id="e_gestock_supplier_evaluation_pivot_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_evaluation.pivot</field>
+        <field name="model">e_gestock.supplier_evaluation</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des évaluations">
+                <field name="supplier_id" type="row"/>
+                <field name="date" type="col" interval="month"/>
+                <field name="note_globale" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action pour les évaluations de fournisseurs -->
+    <record id="action_e_gestock_supplier_evaluation" model="ir.actions.act_window">
+        <field name="name">Évaluations fournisseur</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.supplier_evaluation</field>
+        <field name="view_mode">list,kanban,form,graph,pivot</field>
+        <field name="search_view_id" ref="e_gestock_supplier_evaluation_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle évaluation fournisseur
+            </p>
+            <p>
+                Évaluez régulièrement vos fournisseurs pour suivre leur performance.
+            </p>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les critères d'évaluation -->
+    <record id="e_gestock_evaluation_criteria_list_view" model="ir.ui.view">
+        <field name="name">e_gestock.evaluation_criteria.list</field>
+        <field name="model">e_gestock.evaluation_criteria</field>
+        <field name="arch" type="xml">
+            <list string="Critères d'évaluation" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="category"/>
+                <field name="weight"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue form pour les critères d'évaluation -->
+    <record id="e_gestock_evaluation_criteria_form_view" model="ir.ui.view">
+        <field name="name">e_gestock.evaluation_criteria.form</field>
+        <field name="model">e_gestock.evaluation_criteria</field>
+        <field name="arch" type="xml">
+            <form string="Critère d'évaluation">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="category"/>
+                            <field name="sequence"/>
+                            <field name="weight"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Description détaillée du critère..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour les critères d'évaluation -->
+    <record id="action_e_gestock_evaluation_criteria" model="ir.actions.act_window">
+        <field name="name">Critères d'évaluation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.evaluation_criteria</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau critère d'évaluation
+            </p>
+            <p>
+                Définissez les critères utilisés pour évaluer vos fournisseurs.
+            </p>
+        </field>
+    </record>
+</odoo>

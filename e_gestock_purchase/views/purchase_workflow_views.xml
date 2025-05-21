@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour le workflow d'achat -->
+    <record id="view_purchase_workflow_form" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_workflow.form</field>
+        <field name="model">e_gestock.purchase_workflow</field>
+        <field name="arch" type="xml">
+            <form string="Processus d'achat">
+                <header>
+                    <!-- Boutons d'actions selon les étapes -->
+                    <button name="action_submit" type="object" string="Soumettre" class="oe_highlight" invisible="state != 'draft'"/>
+
+                    <button name="action_validate" type="object" string="Valider" class="oe_highlight" groups="e_gestock_base.group_e_gestock_purchase_manager" invisible="state != 'submitted'"/>
+
+                    <button name="action_create_quotation_request" type="object" string="Créer demande de cotation" class="oe_highlight" groups="e_gestock_base.group_e_gestock_purchase_manager" invisible="state != 'validated'"/>
+
+                    <button name="action_validate_cmp_request" type="object" string="Valider (CMP)" class="oe_highlight" groups="e_gestock_base.group_e_gestock_cmp_manager" invisible="state != 'quotation_request'"/>
+
+                    <button name="action_send_quotation" type="object" string="Envoyer aux fournisseurs" class="oe_highlight" groups="e_gestock_base.group_e_gestock_purchase_manager" invisible="state != 'cmp_validated_request'"/>
+
+                    <button name="action_select_supplier" type="object" string="Sélectionner fournisseur" class="oe_highlight" groups="e_gestock_base.group_e_gestock_purchase_manager" invisible="state != 'quotation_received'"/>
+
+                    <button name="action_validate_cmp_choice" type="object" string="Valider choix (CMP)" class="oe_highlight" groups="e_gestock_base.group_e_gestock_cmp_manager" invisible="state != 'supplier_selected'"/>
+
+                    <button name="action_budget_control" type="object" string="Contrôle budgétaire" class="oe_highlight" groups="e_gestock_base.group_e_gestock_budget_controller" invisible="state != 'cmp_validated_choice'"/>
+
+                    <button name="action_validate_dcg_dept" type="object" string="Valider (Chef Dép. DCG)" class="oe_highlight" groups="e_gestock_base.group_e_gestock_dcg_dept_manager" invisible="state != 'budget_controlled'"/>
+
+                    <button name="action_validate_dcg" type="object" string="Valider (Resp. DCG)" class="oe_highlight" groups="e_gestock_base.group_e_gestock_dcg_manager" invisible="state != 'dcg_dept_validated'"/>
+
+                    <button name="action_validate_dgaaf" type="object" string="Valider (DGAAF)" class="oe_highlight" groups="e_gestock_base.group_e_gestock_dgaaf" invisible="state != 'dcg_validated' or needs_dg_validation"/>
+
+                    <button name="action_validate_dg" type="object" string="Valider (DG)" class="oe_highlight" groups="e_gestock_base.group_e_gestock_dg" invisible="state != 'dcg_validated' or not needs_dg_validation"/>
+
+                    <button name="action_edit_po" type="object" string="Éditer BC" class="oe_highlight" groups="e_gestock_base.group_e_gestock_purchase_manager" invisible="state not in ['dgaaf_validated', 'dg_validated']"/>
+
+                    <button name="action_withdraw_po" type="object" string="Retirer BC" class="oe_highlight" groups="e_gestock_base.group_e_gestock_supplier" invisible="state != 'po_edited'"/>
+
+                    <button name="action_deliver" type="object" string="Livrer" class="oe_highlight" groups="e_gestock_base.group_e_gestock_supplier" invisible="state != 'po_withdrawn'"/>
+
+                    <button name="action_receive" type="object" string="Réceptionner" class="oe_highlight" groups="e_gestock_base.group_e_gestock_reception_manager" invisible="state != 'delivered'"/>
+
+                    <button name="action_cancel" type="object" string="Annuler" invisible="state in ['cancelled', 'received']"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,quotation_request,cmp_validated_request,quotation_sent,quotation_received,supplier_selected,cmp_validated_choice,budget_controlled,dcg_dept_validated,dcg_validated,dgaaf_validated,dg_validated,po_edited,po_withdrawn,delivered,received"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date_creation"/>
+                            <field name="demandeur_id"/>
+                            <field name="structure_id" readonly="state != 'draft'"/>
+                            <field name="compte_budgetaire_id" readonly="state != 'draft'"/>
+                            <field name="gestion_id" readonly="state != 'draft'"/>
+                            <field name="intitule" readonly="state != 'draft'"/>
+                            <field name="needs_dg_validation" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="amount_total" widget="monetary"/>
+                            <field name="demande_cotation_id" invisible="not demande_cotation_id"/>
+                            <field name="cotation_id" invisible="not cotation_id"/>
+                            <field name="purchase_order_id" invisible="not purchase_order_id"/>
+                            <field name="committee_id" invisible="not committee_id"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Articles">
+                            <field name="line_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="article_id"/>
+                                    <field name="reference"/>
+                                    <field name="description"/>
+                                    <field name="quantite"/>
+                                    <field name="quantite_accordee" readonly="parent.state == 'draft'"/>
+                                    <field name="prix_unitaire"/>
+                                    <field name="prix_total" sum="Total"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" readonly="state != 'draft'"/>
+                            <field name="memo_motivation" filename="memo_filename" readonly="state != 'draft'"/>
+                            <field name="memo_filename" invisible="1"/>
+                        </page>
+                        <page string="Validations" invisible="state == 'draft'">
+                            <group>
+                                <group string="Responsable achats" invisible="not resp_achat_id">
+                                    <field name="resp_achat_id" readonly="1"/>
+                                    <field name="resp_achat_date" readonly="1"/>
+                                    <field name="resp_achat_comment" readonly="1"/>
+                                </group>
+                                <group string="CMP (Demande)" invisible="not cmp_request_validator_id">
+                                    <field name="cmp_request_validator_id" readonly="1"/>
+                                    <field name="cmp_request_date" readonly="1"/>
+                                    <field name="cmp_request_comment" readonly="1"/>
+                                </group>
+                                <group string="CMP (Choix)" invisible="not cmp_choice_validator_id">
+                                    <field name="cmp_choice_validator_id" readonly="1"/>
+                                    <field name="cmp_choice_date" readonly="1"/>
+                                    <field name="cmp_choice_comment" readonly="1"/>
+                                </group>
+                                <group string="Contrôle budgétaire" invisible="not budget_validator_id">
+                                    <field name="budget_validator_id" readonly="1"/>
+                                    <field name="budget_date" readonly="1"/>
+                                    <field name="budget_comment" readonly="1"/>
+                                </group>
+                                <group string="Chef Département DCG" invisible="not dcg_dept_validator_id">
+                                    <field name="dcg_dept_validator_id" readonly="1"/>
+                                    <field name="dcg_dept_date" readonly="1"/>
+                                    <field name="dcg_dept_comment" readonly="1"/>
+                                </group>
+                                <group string="Responsable DCG" invisible="not dcg_validator_id">
+                                    <field name="dcg_validator_id" readonly="1"/>
+                                    <field name="dcg_date" readonly="1"/>
+                                    <field name="dcg_comment" readonly="1"/>
+                                </group>
+                                <group string="DGAAF" invisible="not dgaaf_validator_id">
+                                    <field name="dgaaf_validator_id" readonly="1"/>
+                                    <field name="dgaaf_date" readonly="1"/>
+                                    <field name="dgaaf_comment" readonly="1"/>
+                                </group>
+                                <group string="DG" invisible="not dg_validator_id">
+                                    <field name="dg_validator_id" readonly="1"/>
+                                    <field name="dg_date" readonly="1"/>
+                                    <field name="dg_comment" readonly="1"/>
+                                </group>
+                                <group string="Réception" invisible="not committee_id">
+                                    <field name="committee_id" readonly="1"/>
+                                    <field name="reception_date" readonly="1"/>
+                                    <field name="reception_comment" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour le workflow d'achat -->
+    <record id="view_purchase_workflow_tree" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_workflow.tree</field>
+        <field name="model">e_gestock.purchase_workflow</field>
+        <field name="arch" type="xml">
+            <list string="Processus d'achat" decoration-info="state in ('draft','submitted')" decoration-warning="state in ('quotation_request','cmp_validated_request','quotation_sent','quotation_received','supplier_selected')" decoration-success="state in ('received')">
+                <field name="name"/>
+                <field name="date_creation"/>
+                <field name="demandeur_id"/>
+                <field name="structure_id"/>
+                <field name="intitule"/>
+                <field name="amount_total" sum="Total"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour le workflow d'achat -->
+    <record id="view_purchase_workflow_search" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_workflow.search</field>
+        <field name="model">e_gestock.purchase_workflow</field>
+        <field name="arch" type="xml">
+            <search string="Recherche processus d'achat">
+                <field name="name"/>
+                <field name="demandeur_id"/>
+                <field name="structure_id"/>
+                <field name="intitule"/>
+                <separator/>
+                <filter name="draft" string="Brouillon" domain="[('state', '=', 'draft')]"/>
+                <filter name="submitted" string="Soumis" domain="[('state', '=', 'submitted')]"/>
+                <filter name="validated" string="Validé" domain="[('state', '=', 'validated')]"/>
+                <filter name="quotation" string="En cotation" domain="[('state', 'in', ('quotation_request', 'cmp_validated_request', 'quotation_sent', 'quotation_received'))]"/>
+                <filter name="approving" string="En validation" domain="[('state', 'in', ('supplier_selected', 'cmp_validated_choice', 'budget_controlled', 'dcg_dept_validated', 'dcg_validated', 'dgaaf_validated', 'dg_validated'))]"/>
+                <filter name="in_progress" string="En cours" domain="[('state', 'in', ('po_edited', 'po_withdrawn', 'delivered'))]"/>
+                <filter name="received" string="Réceptionné" domain="[('state', '=', 'received')]"/>
+                <filter name="cancelled" string="Annulé" domain="[('state', '=', 'cancelled')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_state" string="État" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_demandeur" string="Demandeur" context="{'group_by': 'demandeur_id'}"/>
+                    <filter name="group_by_structure" string="Structure" context="{'group_by': 'structure_id'}"/>
+                    <filter name="group_by_date" string="Date" context="{'group_by': 'date_creation:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour le workflow d'achat -->
+    <record id="action_purchase_workflow" model="ir.actions.act_window">
+        <field name="name">Processus d'achat</field>
+        <field name="res_model">e_gestock.purchase_workflow</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_draft': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Créer un nouveau processus d'achat</p>
+            <p>Créez, suivez et validez vos processus d'achat de manière linéaire.</p>
+        </field>
+    </record>
+
+    <!-- Séquence pour le workflow d'achat -->
+    <record id="seq_e_gestock_purchase_workflow" model="ir.sequence">
+        <field name="name">Séquence processus d'achat</field>
+        <field name="code">e_gestock.purchase_workflow</field>
+        <field name="prefix">PURCH/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_purchase_workflow" name="Processus d'achat" action="action_purchase_workflow" parent="e_gestock_base.menu_purchase_main" sequence="10"/>
+</odoo> 

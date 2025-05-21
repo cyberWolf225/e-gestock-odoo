@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Structures importées du fichier JSON -->
+        <record id="structure_9101" model="e_gestock.structure">
+            <field name="code_structure">9101</field>
+            <field name="nom_structure">CONSEIL D'ADMINISTRATION</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9102" model="e_gestock.structure">
+            <field name="code_structure">9102</field>
+            <field name="nom_structure">DIRECTION GENERALE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9103" model="e_gestock.structure">
+            <field name="code_structure">9103</field>
+            <field name="nom_structure">DIRECTION COMMUNICATION MARKETING ET RELATION CLIENTS</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9104" model="e_gestock.structure">
+            <field name="code_structure">9104</field>
+            <field name="nom_structure">DIRECTION DE LA DPPSST</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9105" model="e_gestock.structure">
+            <field name="code_structure">9105</field>
+            <field name="nom_structure">DIRECTION COMPTABILITE ET FISCALITE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9106" model="e_gestock.structure">
+            <field name="code_structure">9106</field>
+            <field name="nom_structure">DIRECTION DES RESSOURCES HUMAINES</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9107" model="e_gestock.structure">
+            <field name="code_structure">9107</field>
+            <field name="nom_structure">DIRECTION REGLEMENTATION JURIDIQUE ET CONTENTIEUX</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9108" model="e_gestock.structure">
+            <field name="code_structure">9108</field>
+            <field name="nom_structure">DIRECTION DU PATRIMOINE ET DES MOYENS GENERAUX</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9109" model="e_gestock.structure">
+            <field name="code_structure">9109</field>
+            <field name="nom_structure">DIRECTION DU SYSTEME D'INFORMATION</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9110" model="e_gestock.structure">
+            <field name="code_structure">9110</field>
+            <field name="nom_structure">DIRECTION AUDIT ET INSPECTION</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9111" model="e_gestock.structure">
+            <field name="code_structure">9111</field>
+            <field name="nom_structure">INSPECTION GENERALE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9113" model="e_gestock.structure">
+            <field name="code_structure">9113</field>
+            <field name="nom_structure">DIRECTION QUALITE ET ETUDES</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9114" model="e_gestock.structure">
+            <field name="code_structure">9114</field>
+            <field name="nom_structure">DIRECTION DU CONTROLE MEDICAL</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9115" model="e_gestock.structure">
+            <field name="code_structure">9115</field>
+            <field name="nom_structure">DIRECTION DU RECOUVREMENT</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9117" model="e_gestock.structure">
+            <field name="code_structure">9117</field>
+            <field name="nom_structure">DIRECTION DES PRESTATIONS</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9118" model="e_gestock.structure">
+            <field name="code_structure">9118</field>
+            <field name="nom_structure">IM2S</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9133" model="e_gestock.structure">
+            <field name="code_structure">9133</field>
+            <field name="nom_structure">DIRECTION PROJETS</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9134" model="e_gestock.structure">
+            <field name="code_structure">9134</field>
+            <field name="nom_structure">DIRECTION DU BUDGET ET DU CONTROLE DE GESTION</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9135" model="e_gestock.structure">
+            <field name="code_structure">9135</field>
+            <field name="nom_structure">DIRECTION DE LA GOUVERNANCE DES DONNEES</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9201" model="e_gestock.structure">
+            <field name="code_structure">9201</field>
+            <field name="nom_structure">APS DU PLATEAU</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9202" model="e_gestock.structure">
+            <field name="code_structure">9202</field>
+            <field name="nom_structure">APS DE TREICHVILLE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9203" model="e_gestock.structure">
+            <field name="code_structure">9203</field>
+            <field name="nom_structure">APS D'ADJAME</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9204" model="e_gestock.structure">
+            <field name="code_structure">9204</field>
+            <field name="nom_structure">APS DE YOPOUGON</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9205" model="e_gestock.structure">
+            <field name="code_structure">9205</field>
+            <field name="nom_structure">APS D'ABOBO</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9206" model="e_gestock.structure">
+            <field name="code_structure">9206</field>
+            <field name="nom_structure">APS DE KOUMASSI</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9207" model="e_gestock.structure">
+            <field name="code_structure">9207</field>
+            <field name="nom_structure">APS DE BONOUA</field>
+            <field name="ref_depot" ref="depot_93"/>
+        </record>
+        
+        <record id="structure_9208" model="e_gestock.structure">
+            <field name="code_structure">9208</field>
+            <field name="nom_structure">APS DE COCODY</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9209" model="e_gestock.structure">
+            <field name="code_structure">9209</field>
+            <field name="nom_structure">APS DE DIVO</field>
+            <field name="ref_depot" ref="depot_92"/>
+        </record>
+        
+        <record id="structure_9210" model="e_gestock.structure">
+            <field name="code_structure">9210</field>
+            <field name="nom_structure">APS DE BOUAKE</field>
+            <field name="ref_depot" ref="depot_51"/>
+        </record>
+        
+        <record id="structure_9211" model="e_gestock.structure">
+            <field name="code_structure">9211</field>
+            <field name="nom_structure">APS DE KORHOGO</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9212" model="e_gestock.structure">
+            <field name="code_structure">9212</field>
+            <field name="nom_structure">APS DE YAMOUSSOUKRO</field>
+            <field name="ref_depot" ref="depot_100"/>
+        </record>
+        
+        <record id="structure_9213" model="e_gestock.structure">
+            <field name="code_structure">9213</field>
+            <field name="nom_structure">APS DE DALOA</field>
+            <field name="ref_depot" ref="depot_87"/>
+        </record>
+        
+        <record id="structure_9214" model="e_gestock.structure">
+            <field name="code_structure">9214</field>
+            <field name="nom_structure">APS DE GAGNOA</field>
+            <field name="ref_depot" ref="depot_88"/>
+        </record>
+        
+        <record id="structure_9218" model="e_gestock.structure">
+            <field name="code_structure">9218</field>
+            <field name="nom_structure">APS DE SAN PEDRO</field>
+            <field name="ref_depot" ref="depot_89"/>
+        </record>
+        
+        <record id="structure_9219" model="e_gestock.structure">
+            <field name="code_structure">9219</field>
+            <field name="nom_structure">APS D'ABENGOUROU</field>
+            <field name="ref_depot" ref="depot_90"/>
+        </record>
+        
+        <record id="structure_9220" model="e_gestock.structure">
+            <field name="code_structure">9220</field>
+            <field name="nom_structure">APS D'AGBOVILLE</field>
+            <field name="ref_depot" ref="depot_91"/>
+        </record>
+        
+        <record id="structure_9222" model="e_gestock.structure">
+            <field name="code_structure">9222</field>
+            <field name="nom_structure">APS DES PRESTATIONS EXTERIEURES</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9232" model="e_gestock.structure">
+            <field name="code_structure">9232</field>
+            <field name="nom_structure">ETABLISSEMENT MEDICAL DE DIVO</field>
+            <field name="ref_depot" ref="depot_94"/>
+        </record>
+        
+        <record id="structure_9233" model="e_gestock.structure">
+            <field name="code_structure">9233</field>
+            <field name="nom_structure">CENTRE D'APPAREILLAGE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9228" model="e_gestock.structure">
+            <field name="code_structure">9228</field>
+            <field name="nom_structure">APS ADZOPE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9226" model="e_gestock.structure">
+            <field name="code_structure">9226</field>
+            <field name="nom_structure">APS DE BINGERVILLE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9217" model="e_gestock.structure">
+            <field name="code_structure">9217</field>
+            <field name="nom_structure">APS D'ODIENNE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9221" model="e_gestock.structure">
+            <field name="code_structure">9221</field>
+            <field name="nom_structure">APS DE BONDOUKOU</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9227" model="e_gestock.structure">
+            <field name="code_structure">9227</field>
+            <field name="nom_structure">APS DE DAOUKRO</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9136" model="e_gestock.structure">
+            <field name="code_structure">9136</field>
+            <field name="nom_structure">DIRECTION DES INVESTISSEMENTS ET STRUCTURATION FINANCIERE</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+        
+        <record id="structure_9234" model="e_gestock.structure">
+            <field name="code_structure">9234</field>
+            <field name="nom_structure">CONTROLE MEDICAL</field>
+            <field name="ref_depot" ref="depot_83"/>
+        </record>
+    </data>
+</odoo> 

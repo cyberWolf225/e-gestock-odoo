@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire de l'assistant de cession d'immobilisation -->
+    <record id="view_e_gestock_asset_disposal_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.asset.disposal.wizard.form</field>
+        <field name="model">e_gestock.asset.disposal.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Céder l'immobilisation">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id" readonly="1"/>
+                            <field name="date"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="valeur_comptable" widget="monetary" readonly="1"/>
+                            <field name="prix_cession" widget="monetary" invisible="type in ['scrapping', 'theft']"/>
+                        </group>
+                    </group>
+                    <group string="Motif">
+                        <field name="motif" placeholder="Motif de la cession..."/>
+                    </group>
+                    <group string="Destinataire" invisible="type in ['scrapping', 'theft']">
+                        <field name="partner_id"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_dispose" string="Céder" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour l'assistant de cession d'immobilisation -->
+    <record id="action_e_gestock_asset_disposal_wizard" model="ir.actions.act_window">
+        <field name="name">Céder l'immobilisation</field>
+        <field name="res_model">e_gestock.asset.disposal.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

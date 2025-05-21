@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Séquences -->
+    <record id="sequence_supplier_contract" model="ir.sequence">
+        <field name="name">Contrat fournisseur</field>
+        <field name="code">e_gestock.supplier_contract</field>
+        <field name="prefix">CF/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    
+    <record id="sequence_supplier_evaluation" model="ir.sequence">
+        <field name="name">Évaluation fournisseur</field>
+        <field name="code">e_gestock.supplier_evaluation</field>
+        <field name="prefix">EV/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    
+    <!-- Catégories fournisseur par défaut -->
+    <record id="supplier_category_1" model="e_gestock.supplier_category">
+        <field name="name">Fournisseur de matériel</field>
+        <field name="code">FMAT</field>
+    </record>
+    
+    <record id="supplier_category_2" model="e_gestock.supplier_category">
+        <field name="name">Fournisseur de services</field>
+        <field name="code">FSER</field>
+    </record>
+    
+    <record id="supplier_category_3" model="e_gestock.supplier_category">
+        <field name="name">Fournisseur de consommables</field>
+        <field name="code">FCON</field>
+    </record>
+    
+    <!-- Sous-catégories -->
+    <record id="supplier_category_1_1" model="e_gestock.supplier_category">
+        <field name="name">Matériel informatique</field>
+        <field name="code">FINF</field>
+        <field name="parent_id" ref="supplier_category_1"/>
+    </record>
+    
+    <record id="supplier_category_1_2" model="e_gestock.supplier_category">
+        <field name="name">Matériel médical</field>
+        <field name="code">FMED</field>
+        <field name="parent_id" ref="supplier_category_1"/>
+    </record>
+    
+    <record id="supplier_category_2_1" model="e_gestock.supplier_category">
+        <field name="name">Maintenance</field>
+        <field name="code">FMTN</field>
+        <field name="parent_id" ref="supplier_category_2"/>
+    </record>
+    
+    <record id="supplier_category_2_2" model="e_gestock.supplier_category">
+        <field name="name">Prestataires IT</field>
+        <field name="code">FPIT</field>
+        <field name="parent_id" ref="supplier_category_2"/>
+    </record>
+    
+    <!-- Critères d'évaluation par défaut -->
+    <function model="e_gestock.evaluation_criteria" name="_get_default_criteria"/>
+    
+    <!-- Modèles de clauses de contrat -->
+    <record id="contract_clause_template_1" model="e_gestock.contract_clause_template">
+        <field name="name">Clause de confidentialité</field>
+        <field name="type">confidentiality</field>
+        <field name="contract_type">all</field>
+        <field name="content">Les parties s'engagent à ne pas divulguer à des tiers les informations confidentielles obtenues dans le cadre de ce contrat, sauf accord écrit préalable de l'autre partie.</field>
+        <field name="is_mandatory">True</field>
+    </record>
+    
+    <record id="contract_clause_template_2" model="e_gestock.contract_clause_template">
+        <field name="name">Clause de résiliation</field>
+        <field name="type">termination</field>
+        <field name="contract_type">all</field>
+        <field name="content">Le présent contrat peut être résilié par l'une des parties en cas de manquement grave de l'autre partie à ses obligations, moyennant un préavis de 30 jours notifié par lettre recommandée avec accusé de réception.</field>
+        <field name="is_mandatory">True</field>
+    </record>
+    
+    <record id="contract_clause_template_3" model="e_gestock.contract_clause_template">
+        <field name="name">Clause de garantie</field>
+        <field name="type">warranty</field>
+        <field name="contract_type">all</field>
+        <field name="content">Le fournisseur garantit que les produits livrés sont conformes aux spécifications et exempts de défauts pendant une période de 12 mois à compter de la livraison.</field>
+        <field name="is_mandatory">True</field>
+    </record>
+    
+    <record id="contract_clause_template_4" model="e_gestock.contract_clause_template">
+        <field name="name">Clause de livraison</field>
+        <field name="type">delivery</field>
+        <field name="contract_type">all</field>
+        <field name="content">Les produits seront livrés à l'adresse spécifiée par le client dans le délai convenu. Tout retard de livraison de plus de 15 jours donnera lieu à des pénalités de retard de 1% du montant total par semaine de retard, dans la limite de 10%.</field>
+        <field name="is_mandatory">False</field>
+    </record>
+    
+    <record id="contract_clause_template_5" model="e_gestock.contract_clause_template">
+        <field name="name">Clause de paiement</field>
+        <field name="type">financial</field>
+        <field name="contract_type">all</field>
+        <field name="content">Le paiement sera effectué dans un délai de 30 jours à compter de la date de réception de la facture.</field>
+        <field name="is_mandatory">True</field>
+    </record>
+</odoo> 

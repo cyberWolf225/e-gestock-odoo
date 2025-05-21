@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire des transferts d'immobilisations -->
+    <record id="view_e_gestock_asset_transfer_form" model="ir.ui.view">
+        <field name="name">e_gestock.asset_transfer.form</field>
+        <field name="model">e_gestock.asset_transfer</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirmer" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_cancel" string="Annuler" type="object"
+                            invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,cancelled"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Origine" name="origine">
+                            <group>
+                                <group>
+                                    <field name="structure_origine_id"/>
+                                    <field name="section_origine_id"/>
+                                    <field name="localisation_origine"/>
+                                </group>
+                                <group>
+                                    <field name="responsable_origine_id"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Destination" name="destination">
+                            <group>
+                                <group>
+                                    <field name="structure_destination_id"/>
+                                    <field name="section_destination_id"/>
+                                    <field name="localisation_destination"/>
+                                </group>
+                                <group>
+                                    <field name="responsable_destination_id"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Informations complémentaires" name="infos">
+                            <group>
+                                <field name="motif" placeholder="Motif du transfert..."/>
+                                <field name="note" placeholder="Notes complémentaires..."/>
+                            </group>
+                        </page>
+                        <page string="Document" name="document">
+                            <group>
+                                <field name="document" filename="document_filename"/>
+                                <field name="document_filename" invisible="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des transferts d'immobilisations -->
+    <record id="view_e_gestock_asset_transfer_list" model="ir.ui.view">
+        <field name="name">e_gestock.asset_transfer.list</field>
+        <field name="model">e_gestock.asset_transfer</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'" decoration-success="state == 'confirmed'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="reference"/>
+                <field name="asset_id"/>
+                <field name="date"/>
+                <field name="structure_origine_id"/>
+                <field name="structure_destination_id"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche des transferts d'immobilisations -->
+    <record id="view_e_gestock_asset_transfer_search" model="ir.ui.view">
+        <field name="name">e_gestock.asset_transfer.search</field>
+        <field name="model">e_gestock.asset_transfer</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="asset_id"/>
+                <field name="structure_origine_id"/>
+                <field name="structure_destination_id"/>
+                <separator/>
+                <filter string="Brouillon" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmé" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Annulé" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Immobilisation" name="group_by_asset" context="{'group_by': 'asset_id'}"/>
+                    <filter string="Structure d'origine" name="group_by_structure_origine" context="{'group_by': 'structure_origine_id'}"/>
+                    <filter string="Structure de destination" name="group_by_structure_destination" context="{'group_by': 'structure_destination_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date'}"/>
+                    <filter string="État" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les transferts d'immobilisations -->
+    <record id="action_e_gestock_asset_transfer" model="ir.actions.act_window">
+        <field name="name">Transferts</field>
+        <field name="res_model">e_gestock.asset_transfer</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau transfert
+            </p>
+            <p>
+                Gérez les transferts de vos immobilisations entre structures.
+            </p>
+        </field>
+    </record>
+</odoo>

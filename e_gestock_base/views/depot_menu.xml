@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu pour les dépôts -->
+    <menuitem id="menu_action_e_gestock_depot"
+              name="Dépôts"
+              parent="menu_e_gestock_depot_config"
+              action="action_e_gestock_depot"
+              sequence="10"/>
+</odoo>

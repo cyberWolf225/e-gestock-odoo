@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue pour l'assistant de validation -->
+    <record id="view_validation_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.validation_wizard.form</field>
+        <field name="model">e_gestock.validation_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Validation">
+                <field name="workflow_id" invisible="1"/>
+                <field name="validation_type" invisible="1"/>
+                <field name="next_state" invisible="1"/>
+
+                <!-- Lignes pour la validation par le responsable des achats -->
+                <field name="line_ids" invisible="validation_type != 'resp_achat'">
+                    <list editable="bottom">
+                        <field name="article_id"/>
+                        <field name="reference"/>
+                        <field name="description"/>
+                        <field name="quantite"/>
+                        <field name="quantite_accordee"/>
+                        <field name="to_validate"/>
+                    </list>
+                </field>
+
+                <field name="validate_all" invisible="validation_type != 'resp_achat'"/>
+
+                <field name="comment" placeholder="Commentaire..."/>
+
+                <footer>
+                    <button name="action_validate" type="object" string="Valider" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" string="Annuler" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo> 

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire des articles en stock -->
+    <record id="view_e_gestock_stock_item_form" model="ir.ui.view">
+        <field name="name">e_gestock.stock_item.form</field>
+        <field name="model">e_gestock.stock_item</field>
+        <field name="arch" type="xml">
+            <form string="Article en stock">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_movements" type="object" class="oe_stat_button" icon="fa-exchange">
+                            <span>Mouvements</span>
+                        </button>
+                        <button name="action_update_from_odoo" type="object" class="oe_stat_button" icon="fa-refresh">
+                            <span>Synchroniser</span>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="article_id" options="{'no_create': True}"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="depot_id" options="{'no_create': True}"/>
+                            <field name="emplacement_id" readonly="1"/>
+                            <field name="product_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="quantite_disponible"/>
+                            <field name="quantite_reservee"/>
+                            <field name="quantite_virtuelle"/>
+                            <field name="uom_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="min_quantity"/>
+                            <field name="max_quantity"/>
+                        </group>
+                        <group>
+                            <field name="prix_unitaire"/>
+                            <field name="value" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="last_inventory_date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des articles en stock -->
+    <record id="view_e_gestock_stock_item_list" model="ir.ui.view">
+        <field name="name">e_gestock.stock_item.list</field>
+        <field name="model">e_gestock.stock_item</field>
+        <field name="arch" type="xml">
+            <list string="Articles en stock" decoration-danger="quantite_disponible &lt;= 0" decoration-warning="quantite_disponible &lt; min_quantity">
+                <field name="depot_id"/>
+                <field name="article_id"/>
+                <field name="quantite_disponible"/>
+                <field name="quantite_reservee"/>
+                <field name="quantite_virtuelle"/>
+                <field name="uom_id"/>
+                <field name="min_quantity"/>
+                <field name="max_quantity"/>
+                <field name="prix_unitaire"/>
+                <field name="value" sum="Total"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="last_inventory_date"/>
+                <button name="action_view_movements" type="object" string="Mouvements" icon="fa-exchange"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche des articles en stock -->
+    <record id="view_e_gestock_stock_item_search" model="ir.ui.view">
+        <field name="name">e_gestock.stock_item.search</field>
+        <field name="model">e_gestock.stock_item</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des articles en stock">
+                <field name="article_id"/>
+                <field name="depot_id"/>
+                <field name="product_id"/>
+                <separator/>
+                <filter name="low_stock" string="Stock bas" domain="[('quantite_disponible', '&lt;', 'min_quantity')]"/>
+                <filter name="out_of_stock" string="Rupture de stock" domain="[('quantite_disponible', '&lt;=', 0)]"/>
+                <filter name="reserved" string="Avec réservation" domain="[('quantite_reservee', '>', 0)]"/>
+                <separator/>
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_by_depot" string="Dépôt" context="{'group_by': 'depot_id'}"/>
+                    <filter name="group_by_article" string="Article" context="{'group_by': 'article_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue graphique des articles en stock -->
+    <record id="view_e_gestock_stock_item_graph" model="ir.ui.view">
+        <field name="name">e_gestock.stock_item.graph</field>
+        <field name="model">e_gestock.stock_item</field>
+        <field name="arch" type="xml">
+            <graph string="Analyse de stock" type="bar">
+                <field name="depot_id"/>
+                <field name="article_id"/>
+                <field name="quantite_disponible" type="measure"/>
+                <field name="value" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Vue pivot des articles en stock -->
+    <record id="view_e_gestock_stock_item_pivot" model="ir.ui.view">
+        <field name="name">e_gestock.stock_item.pivot</field>
+        <field name="model">e_gestock.stock_item</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse de stock">
+                <field name="depot_id" type="row"/>
+                <field name="article_id" type="row"/>
+                <field name="quantite_disponible" type="measure"/>
+                <field name="value" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action pour les articles en stock -->
+    <record id="action_e_gestock_stock_item" model="ir.actions.act_window">
+        <field name="name">Articles en stock</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.stock_item</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="search_view_id" ref="view_e_gestock_stock_item_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun article en stock trouvé
+            </p>
+            <p>
+                Les articles en stock sont automatiquement créés lorsque des mouvements de stock sont enregistrés.
+            </p>
+        </field>
+    </record>
+</odoo>

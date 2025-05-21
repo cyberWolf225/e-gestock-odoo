@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Format papier pour les rapports de réception -->
+    <record id="paperformat_reception" model="report.paperformat">
+        <field name="name">Format Réception A4</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- Rapport de réception -->
+    <record id="action_report_reception" model="ir.actions.report">
+        <field name="name">Fiche de réception</field>
+        <field name="model">e_gestock.reception</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_reception.report_reception</field>
+        <field name="report_file">e_gestock_reception.report_reception</field>
+        <field name="binding_model_id" ref="model_e_gestock_reception"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_reception"/>
+    </record>
+
+    <!-- Template pour le rapport de réception -->
+    <template id="report_reception">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Fiche de Réception</h2>
+                        <p class="text-center">
+                            <strong>Référence: </strong><span t-field="o.reference"/>
+                        </p>
+                        
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <p>
+                                    <strong>Bon de commande: </strong><span t-field="o.purchase_order_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Fournisseur: </strong><span t-field="o.fournisseur_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Date: </strong><span t-field="o.date"/>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <p>
+                                    <strong>Dépôt: </strong><span t-field="o.depot_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Responsable: </strong><span t-field="o.responsable_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>État: </strong><span t-field="o.state"/>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h4>Articles reçus</h4>
+                        <table class="table table-sm o_main_table">
+                            <thead>
+                                <tr>
+                                    <th>Article</th>
+                                    <th>Désignation</th>
+                                    <th class="text-right">Quantité commandée</th>
+                                    <th class="text-right">Quantité reçue</th>
+                                    <th class="text-right">Quantité restante</th>
+                                    <th>Conformité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.line_ids" t-as="line">
+                                    <td><span t-field="line.article_id.name"/></td>
+                                    <td><span t-field="line.designation"/></td>
+                                    <td class="text-right"><span t-field="line.quantite_commandee"/></td>
+                                    <td class="text-right"><span t-field="line.quantite_recue"/></td>
+                                    <td class="text-right"><span t-field="line.quantite_restante"/></td>
+                                    <td>
+                                        <t t-if="line.est_conforme == 'oui'">
+                                            <span class="badge badge-success">Conforme</span>
+                                        </t>
+                                        <t t-elif="line.est_conforme == 'non'">
+                                            <span class="badge badge-danger">Non conforme</span>
+                                            <p t-if="line.motif_non_conformite"><small t-field="line.motif_non_conformite"/></p>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge badge-secondary">Non vérifié</span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="row mt32">
+                            <div class="col-12">
+                                <h4>Observations</h4>
+                                <p t-field="o.notes"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt32">
+                            <div class="col-4">
+                                <p><strong>Signature du responsable:</strong></p>
+                                <div style="height: 70px; border-bottom: 1px solid black;"></div>
+                            </div>
+                            <div class="col-4">
+                                <p><strong>Signature du magasinier:</strong></p>
+                                <div style="height: 70px; border-bottom: 1px solid black;"></div>
+                            </div>
+                            <div class="col-4">
+                                <p><strong>Signature du fournisseur:</strong></p>
+                                <div style="height: 70px; border-bottom: 1px solid black;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

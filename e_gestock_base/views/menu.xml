@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu racine -->
+    <menuitem id="menu_e_gestock_root"
+              name="E-GESTOCK"
+              web_icon="e_gestock_base,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Sous-menus principaux -->
+    <menuitem id="menu_e_gestock_configuration"
+              name="Configuration"
+              parent="menu_e_gestock_root"
+              sequence="100"/>
+
+    <menuitem id="menu_e_gestock_articles"
+              name="Articles"
+              parent="menu_e_gestock_root"
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_structures"
+              name="Structures"
+              parent="menu_e_gestock_root"
+              sequence="30"/>
+
+    <!-- Sous-menus de configuration -->
+    <!-- Ce menu cause l'erreur car l'action est déjà référencée dans menu_views.xml
+    <menuitem id="menu_e_gestock_structure_config"
+              name="Structures"
+              parent="menu_e_gestock_configuration"
+              action="action_e_gestock_structure"
+              sequence="10"/>
+    -->
+
+    <menuitem id="menu_e_gestock_section_config"
+              name="Sections"
+              parent="menu_e_gestock_configuration"
+              action="action_e_gestock_section"
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_depot_config"
+              name="Dépôts"
+              parent="menu_e_gestock_configuration"
+              action="action_e_gestock_depot"
+              sequence="30"/>
+</odoo>

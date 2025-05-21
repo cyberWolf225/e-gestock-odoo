@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les opérations budgétaires -->
+    <record id="view_e_gestock_operation_budget_form" model="ir.ui.view">
+        <field name="name">e_gestock.operation_budget.form</field>
+        <field name="model">e_gestock.operation_budget</field>
+        <field name="arch" type="xml">
+            <form string="Opération budgétaire">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="credit_id" options="{'no_create': True}"/>
+                            <field name="date"/>
+                            <field name="type"/>
+                            <field name="origine"/>
+                            <field name="ref_origine" invisible="origine == 'init'"/>
+                        </group>
+                        <group>
+                            <field name="montant"/>
+                            <field name="user_id"/>
+                            <field name="validateur_id" invisible="validateur_id == False"/>
+                            <field name="etape_validation" invisible="etape_validation == False"/>
+                            <field name="currency_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes" placeholder="Notes..."/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="structure_id" readonly="1"/>
+                            <field name="famille_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="exercise_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les opérations budgétaires -->
+    <record id="view_e_gestock_operation_budget_list" model="ir.ui.view">
+        <field name="name">e_gestock.operation_budget.list</field>
+        <field name="model">e_gestock.operation_budget</field>
+        <field name="arch" type="xml">
+            <list string="Opérations budgétaires"
+                  decoration-info="type=='allocation'"
+                  decoration-warning="type=='engagement'"
+                  decoration-danger="type=='consommation'"
+                  decoration-muted="type=='ajustement'">
+                <field name="date"/>
+                <field name="credit_id"/>
+                <field name="type"/>
+                <field name="montant" sum="Total"/>
+                <field name="origine"/>
+                <field name="ref_origine"/>
+                <field name="user_id"/>
+                <field name="etape_validation"/>
+                <field name="validateur_id"/>
+                <field name="structure_id"/>
+                <field name="famille_id"/>
+                <field name="exercise_id"/>
+                <field name="currency_id" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les opérations budgétaires -->
+    <record id="view_e_gestock_operation_budget_search" model="ir.ui.view">
+        <field name="name">e_gestock.operation_budget.search</field>
+        <field name="model">e_gestock.operation_budget</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher une opération budgétaire">
+                <field name="credit_id"/>
+                <field name="ref_origine"/>
+                <field name="user_id"/>
+                <field name="validateur_id"/>
+                <field name="structure_id"/>
+                <field name="famille_id"/>
+                <field name="exercise_id"/>
+                <filter string="Allocations" name="type_allocation" domain="[('type', '=', 'allocation')]"/>
+                <filter string="Engagements" name="type_engagement" domain="[('type', '=', 'engagement')]"/>
+                <filter string="Consommations" name="type_consommation" domain="[('type', '=', 'consommation')]"/>
+                <filter string="Ajustements" name="type_ajustement" domain="[('type', '=', 'ajustement')]"/>
+                <filter string="Demande d'achat" name="origine_achat" domain="[('origine', '=', 'demande_achat')]"/>
+                <filter string="Bon de commande" name="origine_commande" domain="[('origine', '=', 'bon_commande')]"/>
+                <filter string="Manuel" name="origine_manuel" domain="[('origine', '=', 'manuel')]"/>
+                <filter string="Initialisation" name="origine_init" domain="[('origine', '=', 'init')]"/>
+                <filter string="Date du jour" name="date_today" domain="[('date', '>=', context_today().strftime('%Y-%m-%d 00:00:00')), ('date', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Crédit budgétaire" name="group_by_credit" context="{'group_by': 'credit_id'}"/>
+                    <filter string="Type d'opération" name="group_by_type" context="{'group_by': 'type'}"/>
+                    <filter string="Origine" name="group_by_origine" context="{'group_by': 'origine'}"/>
+                    <filter string="Utilisateur" name="group_by_user" context="{'group_by': 'user_id'}"/>
+                    <filter string="Structure" name="group_by_structure" context="{'group_by': 'structure_id'}"/>
+                    <filter string="Famille" name="group_by_famille" context="{'group_by': 'famille_id'}"/>
+                    <filter string="Exercice" name="group_by_exercise" context="{'group_by': 'exercise_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue pivot pour les opérations budgétaires -->
+    <record id="view_e_gestock_operation_budget_pivot" model="ir.ui.view">
+        <field name="name">e_gestock.operation_budget.pivot</field>
+        <field name="model">e_gestock.operation_budget</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des opérations budgétaires" display_quantity="true">
+                <field name="exercise_id" type="col"/>
+                <field name="type" type="row"/>
+                <field name="structure_id" type="row"/>
+                <field name="famille_id" type="row"/>
+                <field name="montant" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Vue graphique pour les opérations budgétaires -->
+    <record id="view_e_gestock_operation_budget_graph" model="ir.ui.view">
+        <field name="name">e_gestock.operation_budget.graph</field>
+        <field name="model">e_gestock.operation_budget</field>
+        <field name="arch" type="xml">
+            <graph string="Opérations budgétaires" type="bar">
+                <field name="type"/>
+                <field name="montant" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action pour les opérations budgétaires -->
+    <record id="action_e_gestock_operation_budget" model="ir.actions.act_window">
+        <field name="name">Opérations budgétaires</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.operation_budget</field>
+        <field name="view_mode">list,pivot,graph,form</field>
+        <field name="search_view_id" ref="view_e_gestock_operation_budget_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune opération budgétaire trouvée
+            </p>
+            <p>
+                Les opérations budgétaires sont créées automatiquement lors des allocations, engagements, consommations et ajustements de crédits.
+            </p>
+        </field>
+    </record>
+</odoo>

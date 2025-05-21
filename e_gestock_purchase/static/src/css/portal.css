@@ -1,0 +1,77 @@
+/* Styles pour le portail fournisseur E-GESTOCK */
+
+.e_gestock_supplier_portal .card {
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.e_gestock_supplier_portal .card-header {
+    font-weight: bold;
+}
+
+.e_gestock_supplier_portal .badge-info {
+    background-color: #17a2b8;
+}
+
+.e_gestock_supplier_portal .badge-success {
+    background-color: #28a745;
+}
+
+.e_gestock_supplier_portal .table-responsive {
+    overflow-x: auto;
+}
+
+/* Style pour les entrées de formulaire */
+.e_gestock_supplier_portal input.form-control,
+.e_gestock_supplier_portal textarea.form-control {
+    border: 1px solid #ced4da;
+}
+
+.e_gestock_supplier_portal input.form-control:focus,
+.e_gestock_supplier_portal textarea.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Style pour les boutons */
+.e_gestock_supplier_portal .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.e_gestock_supplier_portal .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.e_gestock_supplier_portal .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.e_gestock_supplier_portal .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Style pour le tableau des articles */
+.e_gestock_supplier_portal table.table-sm th {
+    background-color: #f8f9fa;
+}
+
+.e_gestock_supplier_portal table.table-sm tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* Styles pour les notifications */
+.e_gestock_supplier_portal .alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.e_gestock_supplier_portal .alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+} 

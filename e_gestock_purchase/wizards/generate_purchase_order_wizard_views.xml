@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour l'assistant de génération de bon de commande -->
+    <record id="view_e_gestock_generate_purchase_order_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.generate_purchase_order_wizard.form</field>
+        <field name="model">e_gestock.generate_purchase_order_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Générer un bon de commande">
+                <sheet>
+                    <group>
+                        <field name="cotation_id" options="{'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="date_order"/>
+                    </group>
+                    <separator string="Signataires"/>
+                    <p class="text-muted">
+                        Sélectionnez les signataires du bon de commande.
+                    </p>
+                    <field name="signataire_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    <separator string="Notes"/>
+                    <field name="note" placeholder="Notes à ajouter au bon de commande..."/>
+                </sheet>
+                <footer>
+                    <button string="Générer" name="action_generate_po" 
+                            type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour l'assistant de génération de bon de commande -->
+    <record id="action_e_gestock_generate_purchase_order_wizard" model="ir.actions.act_window">
+        <field name="name">Générer un bon de commande</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.generate_purchase_order_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_e_gestock_generate_purchase_order_wizard_form"/>
+    </record>
+</odoo> 

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template de base pour les bons de commande E-GESTOCK -->
+    <template id="report_purchaseorder_document_e_gestock">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+            <div class="page">
+                <div class="oe_structure"/>
+                
+                <h2>Bon de commande <span t-field="o.name"/></h2>
+                
+                <div class="row mt32 mb32">
+                    <div class="col-6">
+                        <strong>Fournisseur:</strong>
+                        <p>
+                            <span t-field="o.partner_id.name"/><br/>
+                            <span t-field="o.partner_id.street"/><br/>
+                            <span t-field="o.partner_id.city"/> <span t-field="o.partner_id.zip"/><br/>
+                            <span t-field="o.partner_id.country_id.name"/>
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <strong>Informations:</strong>
+                        <p>
+                            <strong>Date:</strong> <span t-field="o.date_order"/><br/>
+                            <strong>Référence:</strong> <span t-field="o.name"/><br/>
+                            <strong>Acheteur:</strong> <span t-field="o.user_id.name"/><br/>
+                            <strong>Origine:</strong> <span t-field="o.origin"/>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Informations E-GESTOCK -->
+                <div t-if="o.cotation_id" class="mt-4 mb-4">
+                    <div class="alert alert-info">
+                        <strong>Bon de commande issu du processus E-GESTOCK</strong>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-6">
+                            <strong>Demande d'origine:</strong> <span t-field="o.demande_cotation_id.reference"/><br/>
+                            <strong>Cotation sélectionnée:</strong> <span t-field="o.cotation_id.reference"/><br/>
+                            <strong>État d'approbation:</strong> <span t-field="o.state_approbation"/>
+                        </div>
+                        <div class="col-6">
+                            <strong>Date de retrait prévue:</strong> <span t-field="o.date_retrait"/><br/>
+                            <strong>Date de livraison prévue:</strong> <span t-field="o.date_livraison_prevue"/><br/>
+                            <t t-if="o.date_livraison_reelle">
+                                <strong>Date de livraison réelle:</strong> <span t-field="o.date_livraison_reelle"/>
+                            </t>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4" t-if="o.comite_reception_id">
+                        <div class="col-12">
+                            <strong>Comité de réception:</strong> <span t-field="o.comite_reception_id"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4" t-if="o.signataire_ids">
+                        <div class="col-12">
+                            <strong>Signataires:</strong>
+                            <ul>
+                                <t t-foreach="o.signataire_ids" t-as="signataire">
+                                    <li><span t-field="signataire.name"/> (<span t-field="signataire.function"/>)</li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lignes de commande -->
+                <table class="table table-sm o_main_table">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Description</th>
+                            <th class="text-right">Date prévue</th>
+                            <th class="text-right">Quantité</th>
+                            <th class="text-right">Unité</th>
+                            <th class="text-right">Prix unitaire</th>
+                            <th class="text-right">Taxes</th>
+                            <th class="text-right">Sous-total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.order_line" t-as="line">
+                            <tr>
+                                <td>
+                                    <span t-field="line.name"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.date_planned"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.product_qty"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.product_uom.name"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="', '.join(map(lambda x: x.name, line.taxes_id))"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="line.price_subtotal"
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                
+                <!-- Totaux -->
+                <div class="row justify-content-end">
+                    <div class="col-4">
+                        <table class="table table-sm">
+                            <tr class="border-black">
+                                <td><strong>Sous-total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_untaxed"
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Taxes</td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_tax"
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <tr class="border-black o_total">
+                                <td><strong>Total</strong></td>
+                                <td class="text-right">
+                                    <span t-field="o.amount_total"
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Notes -->
+                <p t-field="o.notes"/>
+                
+                <!-- Signatures -->
+                <div t-if="o.cotation_id and o.signataire_ids" class="row mt-5">
+                    <div class="col-12">
+                        <h5>Signatures:</h5>
+                    </div>
+                    <t t-set="nb_signataires" t-value="len(o.signataire_ids)"/>
+                    <t t-set="col_width" t-value="12 // nb_signataires if nb_signataires > 0 else 12"/>
+                    <t t-foreach="o.signataire_ids" t-as="signataire">
+                        <div t-attf-class="col-{{col_width}} text-center">
+                            <p t-field="signataire.function"/>
+                            <br/>
+                            <br/>
+                            <p t-field="signataire.name"/>
+                        </div>
+                    </t>
+                </div>
+                
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+    
+    <!-- Rapport personnalisé pour les bons de commande E-GESTOCK -->
+    <record id="report_e_gestock_purchase_order" model="ir.actions.report">
+        <field name="name">Bon de commande E-GESTOCK</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_purchase.report_purchaseorder_e_gestock</field>
+        <field name="report_file">e_gestock_purchase.report_purchaseorder_e_gestock</field>
+        <field name="binding_model_id" ref="model_e_gestock_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <!-- Template qui utilise le template de base -->
+    <template id="report_purchaseorder_e_gestock">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="e_gestock_purchase.report_purchaseorder_document_e_gestock" t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

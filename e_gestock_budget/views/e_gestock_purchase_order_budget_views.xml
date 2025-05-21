@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extension de la vue formulaire du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_form_budget_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.form.budget.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Ajouter un onglet pour les informations budgétaires -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Budget" name="budget" groups="e_gestock_base.group_e_gestock_budget_user,e_gestock_base.group_e_gestock_budget_controller,e_gestock_base.group_e_gestock_budget_manager">
+                    <group>
+                        <group>
+                            <field name="credit_id" readonly="1"/>
+                            <field name="montant_budget_disponible" widget="monetary"/>
+                            <field name="est_budget_suffisant" widget="boolean_toggle"/>
+                            <field name="budget_state" widget="badge" 
+                                decoration-success="budget_state in ('checked', 'derogation_approved')"
+                                decoration-warning="budget_state in ('not_checked', 'pending_derogation')"
+                                decoration-danger="budget_state == 'insufficient' or budget_state == 'rejected'"/>
+                        </group>
+                        <group>
+                            <field name="budget_control_id" readonly="1"/>
+                            <field name="budget_operation_id" readonly="1"/>
+                            <button name="action_check_budget" string="Vérifier le budget" type="object" 
+                                class="oe_highlight" 
+                                attrs="{'invisible': ['|', ('budget_state', 'not in', ['not_checked']), ('state', 'not in', ['draft', 'sent', 'to_approve'])]}"
+                                groups="e_gestock_base.group_e_gestock_budget_controller"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            
+            <!-- Ajouter un widget de statut pour le budget -->
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_check_budget" type="object" class="oe_stat_button" icon="fa-money"
+                        groups="e_gestock_base.group_e_gestock_budget_controller,e_gestock_base.group_e_gestock_budget_manager">
+                    <field name="budget_state" widget="statinfo" string="Budget"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Extension de la vue liste du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_list_budget_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.list.budget.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state_approbation']" position="after">
+                <field name="budget_state" optional="show" widget="badge" 
+                    decoration-success="budget_state in ('checked', 'derogation_approved')"
+                    decoration-warning="budget_state in ('not_checked', 'pending_derogation')"
+                    decoration-danger="budget_state == 'insufficient' or budget_state == 'rejected'"/>
+                <field name="credit_id" optional="hide"/>
+                <field name="montant_budget_disponible" optional="hide" widget="monetary"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Extension de la vue recherche du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_search_budget_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.search.budget.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='state_approbation']" position="after">
+                <filter string="Statut budget" name="budget_state" context="{'group_by': 'budget_state'}"/>
+                <filter string="Crédit budgétaire" name="credit_id" context="{'group_by': 'credit_id'}"/>
+                <separator/>
+                <filter string="Budget vérifié" name="budget_checked" domain="[('budget_state', 'in', ['checked', 'derogation_approved'])]"/>
+                <filter string="Budget non vérifié" name="budget_not_checked" domain="[('budget_state', '=', 'not_checked')]"/>
+                <filter string="Budget insuffisant" name="budget_insufficient" domain="[('budget_state', 'in', ['insufficient', 'rejected'])]"/>
+                <filter string="En attente de dérogation" name="budget_pending_derogation" domain="[('budget_state', '=', 'pending_derogation')]"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Extension de la vue du contrôle budgétaire pour ajouter le lien vers le bon de commande -->
+    <record id="view_e_gestock_budget_control_form_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.budget_control.form.inherit</field>
+        <field name="model">e_gestock_budget.budget_control</field>
+        <field name="inherit_id" ref="e_gestock_budget.view_e_gestock_budget_control_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='demande_id']" position="after">
+                <field name="purchase_order_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

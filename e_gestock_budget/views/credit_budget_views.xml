@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les crédits budgétaires -->
+    <record id="view_e_gestock_credit_budget_form" model="ir.ui.view">
+        <field name="name">e_gestock.credit_budget.form</field>
+        <field name="model">e_gestock.credit_budget</field>
+        <field name="arch" type="xml">
+            <form string="Crédit budgétaire">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="reference" class="oe_edit_only"/>
+                        <h1><field name="reference" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="structure_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="structure_display" invisible="1"/>
+                            <field name="section_id" options="{'no_create': True, 'no_open': True}"
+                                   domain="[('code_structure', '=', structure_id)]"/>
+                            <field name="section_display" invisible="1"/>
+                            <field name="famille_id" options="{'no_create': True, 'no_open': True}"
+                                  domain="[('budgetary_account', '=', True)]"/>
+                            <field name="famille_display" invisible="1"/>
+                            <field name="type_gestion_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="type_gestion_display" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="exercise_id" options="{'no_create': True, 'no_open': True}"
+                                  domain="[('state', '=', 'open')]"/>
+                            <field name="depot_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="date_creation"/>
+                            <field name="responsable_id" options="{'no_open': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="montant_alloue"/>
+                            <field name="montant_engage"/>
+                        </group>
+                        <group>
+                            <field name="montant_consomme"/>
+                            <field name="montant_disponible"/>
+                            <field name="currency_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="threshold_percentage"/>
+                        <field name="is_below_threshold" invisible="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Opérations">
+                            <field name="operation_ids" readonly="1">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="type"/>
+                                    <field name="montant"/>
+                                    <field name="origine"/>
+                                    <field name="ref_origine"/>
+                                    <field name="user_id"/>
+                                    <field name="etape_validation"/>
+                                    <field name="currency_id" invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les crédits budgétaires -->
+    <record id="view_e_gestock_credit_budget_list" model="ir.ui.view">
+        <field name="name">e_gestock.credit_budget.list</field>
+        <field name="model">e_gestock.credit_budget</field>
+        <field name="arch" type="xml">
+            <list string="Crédits budgétaires" decoration-danger="is_below_threshold==True">
+                <field name="reference"/>
+                <field name="structure_id" invisible="1"/>
+                <field name="structure_display"/>
+                <field name="famille_id" invisible="1"/>
+                <field name="famille_display"/>
+                <field name="exercise_id"/>
+                <field name="depot_id"/>
+                <field name="type_gestion_id" invisible="1"/>
+                <field name="type_gestion_display"/>
+                <field name="montant_alloue" sum="Total"/>
+                <field name="montant_engage" sum="Total"/>
+                <field name="montant_disponible" sum="Total"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="is_below_threshold" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les crédits budgétaires -->
+    <record id="view_e_gestock_credit_budget_search" model="ir.ui.view">
+        <field name="name">e_gestock.credit_budget.search</field>
+        <field name="model">e_gestock.credit_budget</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher un crédit budgétaire">
+                <field name="reference"/>
+                <field name="structure_id"/>
+                <field name="structure_display"/>
+                <field name="famille_id"/>
+                <field name="famille_display"/>
+                <field name="exercise_id"/>
+                <field name="depot_id"/>
+                <field name="type_gestion_id"/>
+                <field name="type_gestion_display"/>
+                <filter string="Sous seuil d'alerte" name="below_threshold" domain="[('is_below_threshold', '=', True)]"/>
+                <filter string="Archivé" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Structure" name="group_by_structure" context="{'group_by': 'structure_id'}"/>
+                    <filter string="Famille" name="group_by_famille" context="{'group_by': 'famille_id'}"/>
+                    <filter string="Exercice" name="group_by_exercise" context="{'group_by': 'exercise_id'}"/>
+                    <filter string="Dépôt" name="group_by_depot" context="{'group_by': 'depot_id'}"/>
+                    <filter string="Type de gestion" name="group_by_type_gestion" context="{'group_by': 'type_gestion_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue pivot pour les crédits budgétaires -->
+    <record id="view_e_gestock_credit_budget_pivot" model="ir.ui.view">
+        <field name="name">e_gestock.credit_budget.pivot</field>
+        <field name="model">e_gestock.credit_budget</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des crédits budgétaires" display_quantity="true">
+                <field name="structure_display" type="row"/>
+                <field name="famille_display" type="row"/>
+                <field name="exercise_id" type="col"/>
+                <field name="montant_alloue" type="measure"/>
+                <field name="montant_engage" type="measure"/>
+                <field name="montant_disponible" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action pour les crédits budgétaires -->
+    <record id="action_e_gestock_credit_budget" model="ir.actions.act_window">
+        <field name="name">Crédits budgétaires</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.credit_budget</field>
+        <field name="view_mode">list,pivot,form</field>
+        <field name="search_view_id" ref="view_e_gestock_credit_budget_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau crédit budgétaire
+            </p>
+            <p>
+                Les crédits budgétaires permettent d'allouer des budgets par structure, famille et exercice.
+            </p>
+        </field>
+    </record>
+</odoo>

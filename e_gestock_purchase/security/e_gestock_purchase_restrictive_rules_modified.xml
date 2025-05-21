@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Règle d'accès complet pour l'administrateur -->
+        <record id="admin_full_access_rule" model="ir.rule">
+            <field name="name">Accès complet pour l'administrateur</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règles pour les utilisateurs avec des rôles E-GESTOCK -->
+        <record id="demande_cotation_purchase_user_rule" model="ir.rule">
+            <field name="name">Demandes de cotation pour les utilisateurs des achats</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="demande_cotation_purchase_manager_rule" model="ir.rule">
+            <field name="name">Demandes de cotation pour les responsables des achats</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="demande_cotation_resp_dmp_rule" model="ir.rule">
+            <field name="name">Demandes de cotation pour les responsables DMP</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_resp_dmp'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="demande_cotation_budget_controller_rule" model="ir.rule">
+            <field name="name">Demandes de cotation pour les contrôleurs budget</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_budget_controller'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Règles pour les lignes de demande de cotation -->
+        <record id="demande_cotation_line_purchase_user_rule" model="ir.rule">
+            <field name="name">Lignes de demande de cotation pour les utilisateurs des achats</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation_line"/>
+            <field name="domain_force">[('demande_id.create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="demande_cotation_line_purchase_manager_rule" model="ir.rule">
+            <field name="name">Lignes de demande de cotation pour les responsables des achats</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règles pour les cotations -->
+        <record id="cotation_purchase_user_rule" model="ir.rule">
+            <field name="name">Cotations pour les utilisateurs des achats</field>
+            <field name="model_id" ref="model_e_gestock_cotation"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="cotation_purchase_manager_rule" model="ir.rule">
+            <field name="name">Cotations pour les responsables des achats</field>
+            <field name="model_id" ref="model_e_gestock_cotation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règles pour les lignes de cotation -->
+        <record id="cotation_line_purchase_user_rule" model="ir.rule">
+            <field name="name">Lignes de cotation pour les utilisateurs des achats</field>
+            <field name="model_id" ref="model_e_gestock_cotation_line"/>
+            <field name="domain_force">[('cotation_id.create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="cotation_line_purchase_manager_rule" model="ir.rule">
+            <field name="name">Lignes de cotation pour les responsables des achats</field>
+            <field name="model_id" ref="model_e_gestock_cotation_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+    </data>
+</odoo>

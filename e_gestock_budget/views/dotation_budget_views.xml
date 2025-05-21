@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les dotations budgétaires -->
+    <record id="view_e_gestock_dotation_budget_form" model="ir.ui.view">
+        <field name="name">e_gestock.dotation_budget.form</field>
+        <field name="model">e_gestock.dotation_budget</field>
+        <field name="arch" type="xml">
+            <form string="Dotation budgétaire">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="reference" class="oe_edit_only"/>
+                        <h1><field name="reference" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="depot_id" options="{'no_create': True}"/>
+                            <field name="famille_id" options="{'no_create': True}"/>
+                            <field name="exercise_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="responsable_id"/>
+                            <field name="date_creation"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="montant_dotation"/>
+                            <field name="montant_consomme"/>
+                        </group>
+                        <group>
+                            <field name="montant_disponible"/>
+                            <field name="currency_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les dotations budgétaires -->
+    <record id="view_e_gestock_dotation_budget_list" model="ir.ui.view">
+        <field name="name">e_gestock.dotation_budget.list</field>
+        <field name="model">e_gestock.dotation_budget</field>
+        <field name="arch" type="xml">
+            <list string="Dotations budgétaires" decoration-danger="montant_disponible &lt; 0.1 * montant_dotation">
+                <field name="reference"/>
+                <field name="depot_id"/>
+                <field name="famille_id"/>
+                <field name="exercise_id"/>
+                <field name="montant_dotation" sum="Total"/>
+                <field name="montant_consomme" sum="Total"/>
+                <field name="montant_disponible" sum="Total"/>
+                <field name="responsable_id"/>
+                <field name="currency_id" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les dotations budgétaires -->
+    <record id="view_e_gestock_dotation_budget_search" model="ir.ui.view">
+        <field name="name">e_gestock.dotation_budget.search</field>
+        <field name="model">e_gestock.dotation_budget</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher une dotation budgétaire">
+                <field name="reference"/>
+                <field name="depot_id"/>
+                <field name="famille_id"/>
+                <field name="exercise_id"/>
+                <field name="responsable_id"/>
+                <filter string="Épuisé (&lt;10%)" name="low_availability" domain="[('montant_disponible', '&lt;', 0.1 * montant_dotation)]"/>
+                <filter string="Archivé" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Dépôt" name="group_by_depot" context="{'group_by': 'depot_id'}"/>
+                    <filter string="Famille" name="group_by_famille" context="{'group_by': 'famille_id'}"/>
+                    <filter string="Exercice" name="group_by_exercise" context="{'group_by': 'exercise_id'}"/>
+                    <filter string="Responsable" name="group_by_responsible" context="{'group_by': 'responsable_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue pivot pour les dotations budgétaires -->
+    <record id="view_e_gestock_dotation_budget_pivot" model="ir.ui.view">
+        <field name="name">e_gestock.dotation_budget.pivot</field>
+        <field name="model">e_gestock.dotation_budget</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des dotations budgétaires" display_quantity="true">
+                <field name="depot_id" type="row"/>
+                <field name="famille_id" type="row"/>
+                <field name="exercise_id" type="col"/>
+                <field name="montant_dotation" type="measure"/>
+                <field name="montant_consomme" type="measure"/>
+                <field name="montant_disponible" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action pour les dotations budgétaires -->
+    <record id="action_e_gestock_dotation_budget" model="ir.actions.act_window">
+        <field name="name">Dotations budgétaires</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.dotation_budget</field>
+        <field name="view_mode">list,pivot,form</field>
+        <field name="search_view_id" ref="view_e_gestock_dotation_budget_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle dotation budgétaire
+            </p>
+            <p>
+                Les dotations budgétaires permettent d'allouer des budgets par dépôt et famille d'articles.
+            </p>
+        </field>
+    </record>
+</odoo>

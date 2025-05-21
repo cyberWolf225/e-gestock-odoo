@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extension de la vue formulaire du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_form_reception_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.form.reception.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Ajouter un bouton pour voir les réceptions -->
+            <xpath expr="//div[@class='oe_title']" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_view_receptions" type="object" class="oe_stat_button" icon="fa-truck" groups="e_gestock_base.group_e_gestock_reception_user,e_gestock_base.group_e_gestock_reception_manager">
+                        <field name="reception_count" widget="statinfo" string="Réceptions"/>
+                    </button>
+                </div>
+            </xpath>
+
+            <!-- Ajouter un champ pour le comité de réception -->
+            <xpath expr="//group[1]/group[2]" position="after">
+                <group string="Réception" name="reception_info" groups="e_gestock_base.group_e_gestock_reception_user,e_gestock_base.group_e_gestock_reception_manager">
+                    <field name="committee_id" options="{'no_create': True}"/>
+                    <field name="is_fully_received" widget="boolean_toggle"/>
+                </group>
+            </xpath>
+
+            <!-- Ajouter un bouton pour créer une réception -->
+            <xpath expr="//header" position="inside">
+                <button name="action_create_reception" string="Créer réception" type="object" class="btn-primary" invisible_if="state_approbation != 'delivered' or is_fully_received" groups="e_gestock_base.group_e_gestock_reception_user,e_gestock_base.group_e_gestock_reception_manager"/>
+                <button name="action_open_reception_wizard" string="Valider réception" type="object" class="btn-primary" invisible_if="state_approbation != 'delivered' or is_fully_received" groups="e_gestock_base.group_e_gestock_reception_manager"/>
+            </xpath>
+
+            <!-- Ajouter un onglet pour les réceptions -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Réceptions" name="receptions" invisible_if="reception_count == 0" groups="e_gestock_base.group_e_gestock_reception_user,e_gestock_base.group_e_gestock_reception_manager">
+                    <field name="reception_ids" readonly="1">
+                        <list>
+                            <field name="reference"/>
+                            <field name="date"/>
+                            <field name="depot_id"/>
+                            <field name="responsable_id"/>
+                            <field name="committee_id"/>
+                            <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state in ('confirmed', 'comite_validation')" decoration-success="state == 'done'" decoration-danger="state == 'cancel'"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+            <!-- Ajouter des champs pour les quantités reçues dans les lignes de commande -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_subtotal']" position="after">
+                <field name="qty_received"/>
+                <field name="qty_to_receive"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extension de la vue liste du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_list_reception_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.list.reception.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state_approbation']" position="after">
+                <field name="committee_id" optional="hide"/>
+                <field name="reception_count" optional="hide"/>
+                <field name="is_fully_received" optional="hide" widget="boolean_toggle"/>
+            </xpath>
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-success">is_fully_received</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extension de la vue recherche du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_search_reception_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.search.reception.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='groupby_state_approbation']" position="after">
+                <filter string="Comité de réception" name="committee_id" context="{'group_by': 'committee_id'}"/>
+                <separator/>
+                <filter string="Entièrement réceptionné" name="fully_received" domain="[('is_fully_received', '=', True)]"/>
+                <filter string="Partiellement réceptionné" name="partially_received" domain="[('reception_count', '>', 0), ('is_fully_received', '=', False)]"/>
+                <filter string="Non réceptionné" name="not_received" domain="[('reception_count', '=', 0)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Modèle d'email pour la notification de nouvelle demande de perdiem -->
+        <record id="email_template_perdiem_new" model="mail.template">
+            <field name="name">Perdiem: Nouvelle demande</field>
+            <field name="model_id" ref="model_e_gestock_perdiem"/>
+            <field name="subject">Nouvelle demande de perdiem: ${object.name}</field>
+            <field name="email_from">${object.create_uid.email_formatted | safe}</field>
+            <field name="partner_to">${object.create_uid.partner_id.id}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour,
+                        <br/><br/>
+                        Une nouvelle demande de perdiem <strong>${object.name}</strong> a été créée.
+                        <br/><br/>
+                        <strong>Libellé:</strong> ${object.libelle}<br/>
+                        <strong>Structure:</strong> ${object.structure_id.name}<br/>
+                        <strong>Famille:</strong> ${object.famille_id.name}<br/>
+                        <strong>Montant total:</strong> ${format_amount(object.montant_total, object.company_id.currency_id)}<br/>
+                        <br/>
+                        Vous pouvez consulter cette demande en cliquant sur le lien suivant:
+                        <a href="/web#id=${object.id}&amp;model=e_gestock.perdiem&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                            Voir la demande
+                        </a>
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.create_uid.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+        
+        <!-- Modèle d'email pour la notification de validation de demande de perdiem -->
+        <record id="email_template_perdiem_validated" model="mail.template">
+            <field name="name">Perdiem: Demande validée</field>
+            <field name="model_id" ref="model_e_gestock_perdiem"/>
+            <field name="subject">Demande de perdiem validée: ${object.name}</field>
+            <field name="email_from">${user.email_formatted | safe}</field>
+            <field name="partner_to">${object.create_uid.partner_id.id}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour,
+                        <br/><br/>
+                        La demande de perdiem <strong>${object.name}</strong> a été validée.
+                        <br/><br/>
+                        <strong>Libellé:</strong> ${object.libelle}<br/>
+                        <strong>Structure:</strong> ${object.structure_id.name}<br/>
+                        <strong>Famille:</strong> ${object.famille_id.name}<br/>
+                        <strong>Montant total:</strong> ${format_amount(object.montant_total, object.company_id.currency_id)}<br/>
+                        <br/>
+                        Vous pouvez consulter cette demande en cliquant sur le lien suivant:
+                        <a href="/web#id=${object.id}&amp;model=e_gestock.perdiem&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                            Voir la demande
+                        </a>
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.create_uid.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+        
+        <!-- Modèle d'email pour la notification de rejet de demande de perdiem -->
+        <record id="email_template_perdiem_rejected" model="mail.template">
+            <field name="name">Perdiem: Demande rejetée</field>
+            <field name="model_id" ref="model_e_gestock_perdiem"/>
+            <field name="subject">Demande de perdiem rejetée: ${object.name}</field>
+            <field name="email_from">${user.email_formatted | safe}</field>
+            <field name="partner_to">${object.create_uid.partner_id.id}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour,
+                        <br/><br/>
+                        La demande de perdiem <strong>${object.name}</strong> a été rejetée.
+                        <br/><br/>
+                        <strong>Libellé:</strong> ${object.libelle}<br/>
+                        <strong>Structure:</strong> ${object.structure_id.name}<br/>
+                        <strong>Famille:</strong> ${object.famille_id.name}<br/>
+                        <strong>Montant total:</strong> ${format_amount(object.montant_total, object.company_id.currency_id)}<br/>
+                        <br/>
+                        Vous pouvez consulter cette demande en cliquant sur le lien suivant:
+                        <a href="/web#id=${object.id}&amp;model=e_gestock.perdiem&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                            Voir la demande
+                        </a>
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.create_uid.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

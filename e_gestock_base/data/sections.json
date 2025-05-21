@@ -1,0 +1,1932 @@
+{
+	"query": "SELECT * FROM `egestock`.`sections` LIMIT 1000",
+	"rows":
+	[
+		{
+			"id": 1,
+			"code_section": 921901,
+			"code_structure": 9219,
+			"nom_section": "SECTION COMMUNE APS D'ABENGOUROU",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 2,
+			"code_section": 920501,
+			"code_structure": 9205,
+			"nom_section": "SECTION COMMUNE APS D'ABOBO",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 3,
+			"code_section": 920301,
+			"code_structure": 9203,
+			"nom_section": "SECTION COMMUNE APS D'ADJAME",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 4,
+			"code_section": 922001,
+			"code_structure": 9220,
+			"nom_section": "SECTION COMMUNE APS D'AGBOVILLE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 5,
+			"code_section": 920701,
+			"code_structure": 9207,
+			"nom_section": "SECTION COMMUNE APS DE BONOUA",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 6,
+			"code_section": 921001,
+			"code_structure": 9210,
+			"nom_section": "SECTION COMMUNE APS DE BOUAKE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 7,
+			"code_section": 920801,
+			"code_structure": 9208,
+			"nom_section": "SECTION COMMUNE APS DE COCODY",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 8,
+			"code_section": 921301,
+			"code_structure": 9213,
+			"nom_section": "SECTION COMMUNE APS DE DALOA",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 9,
+			"code_section": 920901,
+			"code_structure": 9209,
+			"nom_section": "SECTION COMMUNE APS DE DIVO",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 10,
+			"code_section": 921401,
+			"code_structure": 9214,
+			"nom_section": "SECTION COMMUNE APS DE GAGNOA",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 11,
+			"code_section": 921101,
+			"code_structure": 9211,
+			"nom_section": "SECTION COMMUNE APS DE KORHOGO",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 12,
+			"code_section": 920601,
+			"code_structure": 9206,
+			"nom_section": "SECTION COMMUNE APS DE KOUMASSI",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 13,
+			"code_section": 921801,
+			"code_structure": 9218,
+			"nom_section": "SECTION COMMUNE APS DE SAN PEDRO",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 14,
+			"code_section": 920201,
+			"code_structure": 9202,
+			"nom_section": "SECTION COMMUNE APS DE TREICHVILLE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 15,
+			"code_section": 921201,
+			"code_structure": 9212,
+			"nom_section": "SECTION COMMUNE APS DE YAMOUSSOUKRO",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 16,
+			"code_section": 920401,
+			"code_structure": 9204,
+			"nom_section": "SECTION COMMUNE APS DE YOPOUGON",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 17,
+			"code_section": 922201,
+			"code_structure": 9222,
+			"nom_section": "SECTION COMMUNE APS DES PRESTATIONS EXTERIEURES",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 18,
+			"code_section": 920101,
+			"code_structure": 9201,
+			"nom_section": "SECTION COMMUNE APS DU PLATEAU",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 19,
+			"code_section": 910301,
+			"code_structure": 9103,
+			"nom_section": "SECTION COMMUNE DIRECTION COMMUNICATION MARKETING ET RELATION CLIENTS",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 20,
+			"code_section": 910801,
+			"code_structure": 9108,
+			"nom_section": "SECTION COMMUNE DIRECTION DU PATRIMOINE ET DES MOYENS GENERAUX",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 21,
+			"code_section": 910701,
+			"code_structure": 9107,
+			"nom_section": "SECTION COMMUNE DIRECTION REGLEMENTATION JURIDIQUE ET CONTENTIEUX",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 22,
+			"code_section": 923301,
+			"code_structure": 9233,
+			"nom_section": "SECTION COMMUNE CENTRE D'APPAREILLAGE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 23,
+			"code_section": 910101,
+			"code_structure": 9101,
+			"nom_section": "SECTION COMMUNE CONSEIL D'ADMINISTRATION",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 24,
+			"code_section": 911401,
+			"code_structure": 9114,
+			"nom_section": "SECTION COMMUNE DIRECTION DU CONTROLE MEDICAL",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 25,
+			"code_section": 911001,
+			"code_structure": 9110,
+			"nom_section": "SECTION COMMUNE DIRECTION AUDIT ET INSPECTION",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 26,
+			"code_section": 910401,
+			"code_structure": 9104,
+			"nom_section": "SECTION COMMUNE DIRECTION DE LA DPPSST",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 27,
+			"code_section": 913501,
+			"code_structure": 9135,
+			"nom_section": "SECTION COMMUNE DIRECTION DE LA GOUVERNANCE DES DONNEES",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 28,
+			"code_section": 911701,
+			"code_structure": 9117,
+			"nom_section": "SECTION COMMUNE DIRECTION DES PRESTATIONS",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 29,
+			"code_section": 910601,
+			"code_structure": 9106,
+			"nom_section": "SECTION COMMUNE DIRECTION DES RESSOURCES HUMAINES",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 30,
+			"code_section": 913401,
+			"code_structure": 9134,
+			"nom_section": "SECTION COMMUNE DIRECTION DU BUDGET ET DU CONTROLE DE GESTION",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 31,
+			"code_section": 911501,
+			"code_structure": 9115,
+			"nom_section": "SECTION COMMUNE DIRECTION DU RECOUVREMENT",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 32,
+			"code_section": 910901,
+			"code_structure": 9109,
+			"nom_section": "SECTION COMMUNE DIRECTION DU SYSTEME D'INFORMATION",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 33,
+			"code_section": 910501,
+			"code_structure": 9105,
+			"nom_section": "SECTION COMMUNE DIRECTION COMPTABILITE ET FISCALITE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 34,
+			"code_section": 910201,
+			"code_structure": 9102,
+			"nom_section": "SECTION COMMUNE DIRECTION GENERALE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 35,
+			"code_section": 913301,
+			"code_structure": 9133,
+			"nom_section": "SECTION COMMUNE DIRECTION PROJETS",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 36,
+			"code_section": 911301,
+			"code_structure": 9113,
+			"nom_section": "SECTION COMMUNE DIRECTION QUALITE ET ETUDES",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 37,
+			"code_section": 923201,
+			"code_structure": 9232,
+			"nom_section": "SECTION COMMUNE ETABLISSEMENT MEDICAL DE DIVO",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 38,
+			"code_section": 911801,
+			"code_structure": 9118,
+			"nom_section": "SECTION COMMUNE IM2S",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 39,
+			"code_section": 911101,
+			"code_structure": 9111,
+			"nom_section": "SECTION COMMUNE INSPECTION GENERALE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 46,
+			"code_section": 910213,
+			"code_structure": 9102,
+			"nom_section": "DIRECTION DE LA GOUVERNANCE DES DONNÃ‰ES",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 47,
+			"code_section": 910607,
+			"code_structure": 9106,
+			"nom_section": "MA-CNPS",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 48,
+			"code_section": 921809,
+			"code_structure": 9218,
+			"nom_section": "SECTION ACCUEIL ET GED (SAN PÃ‰DRO)",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 49,
+			"code_section": 911804,
+			"code_structure": 9118,
+			"nom_section": "SECTION ADMINISTRATION (IM2S)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 50,
+			"code_section": 921106,
+			"code_structure": 9211,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 51,
+			"code_section": 922006,
+			"code_structure": 9220,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE AGBOVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 52,
+			"code_section": 921006,
+			"code_structure": 9210,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE BOUAKÃ‰)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 53,
+			"code_section": 921906,
+			"code_structure": 9219,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE Dâ€™ABENGOUROU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 54,
+			"code_section": 920506,
+			"code_structure": 9205,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE D ABOBO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 55,
+			"code_section": 920306,
+			"code_structure": 9203,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE Dâ€™ADJAME)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 56,
+			"code_section": 921306,
+			"code_structure": 9213,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE DALOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 57,
+			"code_section": 920706,
+			"code_structure": 9207,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE DE BONOUA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 58,
+			"code_section": 920806,
+			"code_structure": 9208,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE DE COCODY)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 59,
+			"code_section": 920906,
+			"code_structure": 9209,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE DE DIVO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 60,
+			"code_section": 920606,
+			"code_structure": 9206,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE DE KOUMASSI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 61,
+			"code_section": 920406,
+			"code_structure": 9204,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE DE YOPOUGON)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 62,
+			"code_section": 921406,
+			"code_structure": 9214,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE GAGNOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 63,
+			"code_section": 920106,
+			"code_structure": 9201,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE PLATEAU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 64,
+			"code_section": 921806,
+			"code_structure": 9218,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE SAN PEDRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 65,
+			"code_section": 920206,
+			"code_structure": 9202,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE TREICHVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 66,
+			"code_section": 921206,
+			"code_structure": 9212,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET (AGENCE YAMOUSSOUKRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 67,
+			"code_section": 922203,
+			"code_structure": 9222,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET DE L APEXT",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 68,
+			"code_section": 923304,
+			"code_structure": 9233,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET DU CARF",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 69,
+			"code_section": 91045,
+			"code_structure": 9104,
+			"nom_section": "SECTION ADMINISTRATION ET BUDGET DU CARF",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 70,
+			"code_section": 913303,
+			"code_structure": 9133,
+			"nom_section": "SECTION ANIMATION ET COORDINATION (DP)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 71,
+			"code_section": 910206,
+			"code_structure": 9102,
+			"nom_section": "SECTION ARCHIVES (DG)",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 72,
+			"code_section": 910416,
+			"code_structure": 9104,
+			"nom_section": "SECTION ARCHIVES DEX",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 73,
+			"code_section": 921004,
+			"code_structure": 9210,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 74,
+			"code_section": 921104,
+			"code_structure": 9211,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 75,
+			"code_section": 922004,
+			"code_structure": 9220,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE AGBOVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 76,
+			"code_section": 921904,
+			"code_structure": 9219,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE Dâ€™ABENGOUROU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 77,
+			"code_section": 920504,
+			"code_structure": 9205,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE D ABOBO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 78,
+			"code_section": 920304,
+			"code_structure": 9203,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE Dâ€™ADJAME)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 79,
+			"code_section": 921304,
+			"code_structure": 9213,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE DALOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 80,
+			"code_section": 920704,
+			"code_structure": 9207,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE DE BONOUA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 81,
+			"code_section": 920804,
+			"code_structure": 9208,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE DE COCODY)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 82,
+			"code_section": 920904,
+			"code_structure": 9209,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE DE DIVO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 83,
+			"code_section": 920604,
+			"code_structure": 9206,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE DE KOUMASSI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 84,
+			"code_section": 920404,
+			"code_structure": 9204,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE DE YOPOUGON)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 85,
+			"code_section": 921404,
+			"code_structure": 9214,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE GAGNOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 86,
+			"code_section": 920104,
+			"code_structure": 9201,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE PLATEAU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 87,
+			"code_section": 921804,
+			"code_structure": 9218,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE SAN PEDRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 88,
+			"code_section": 920204,
+			"code_structure": 9202,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE TREICHVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 89,
+			"code_section": 921204,
+			"code_structure": 9212,
+			"nom_section": "SECTION ASSURANCE VIEILLESSE (AGENCE YAMOUSSOUKRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 90,
+			"code_section": 910302,
+			"code_structure": 9103,
+			"nom_section": "SECTION ASSURES (CCM)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 91,
+			"code_section": 921003,
+			"code_structure": 9210,
+			"nom_section": "SECTION AT/MP",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 92,
+			"code_section": 921103,
+			"code_structure": 9211,
+			"nom_section": "SECTION AT/MP",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 93,
+			"code_section": 922003,
+			"code_structure": 9220,
+			"nom_section": "SECTION AT/MP (AGENCE AGBOVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 94,
+			"code_section": 921903,
+			"code_structure": 9219,
+			"nom_section": "SECTION AT/MP (AGENCE Dâ€™ABENGOUROU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 95,
+			"code_section": 920503,
+			"code_structure": 9205,
+			"nom_section": "SECTION AT/MP (AGENCE D ABOBO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 96,
+			"code_section": 920303,
+			"code_structure": 9203,
+			"nom_section": "SECTION AT/MP (AGENCE Dâ€™ADJAME)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 97,
+			"code_section": 921303,
+			"code_structure": 9213,
+			"nom_section": "SECTION AT/MP (AGENCE DALOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 98,
+			"code_section": 920703,
+			"code_structure": 9207,
+			"nom_section": "SECTION AT/MP (AGENCE DE BONOUA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 99,
+			"code_section": 920803,
+			"code_structure": 9208,
+			"nom_section": "SECTION AT/MP (AGENCE DE COCODY)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 100,
+			"code_section": 920903,
+			"code_structure": 9209,
+			"nom_section": "SECTION AT/MP (AGENCE DE DIVO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 101,
+			"code_section": 920603,
+			"code_structure": 9206,
+			"nom_section": "SECTION AT/MP (AGENCE DE KOUMASSI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 102,
+			"code_section": 920403,
+			"code_structure": 9204,
+			"nom_section": "SECTION AT/MP (AGENCE DE YOPOUGON)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 103,
+			"code_section": 921403,
+			"code_structure": 9214,
+			"nom_section": "SECTION AT/MP (AGENCE GAGNOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 104,
+			"code_section": 920103,
+			"code_structure": 9201,
+			"nom_section": "SECTION AT/MP (AGENCE PLATEAU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 105,
+			"code_section": 921803,
+			"code_structure": 9218,
+			"nom_section": "SECTION AT/MP (AGENCE SAN PEDRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 106,
+			"code_section": 920203,
+			"code_structure": 9202,
+			"nom_section": "SECTION AT/MP (AGENCE TREICHVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 107,
+			"code_section": 921203,
+			"code_structure": 9212,
+			"nom_section": "SECTION AT/MP (AGENCE YAMOUSSOUKRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 108,
+			"code_section": 911003,
+			"code_structure": 9110,
+			"nom_section": "SECTION AUDIT ET CONTROLE INTERNE (DCAI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 109,
+			"code_section": 910305,
+			"code_structure": 9103,
+			"nom_section": "SECTION COMMUNICATION (CCM)",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 110,
+			"code_section": 921108,
+			"code_structure": 9211,
+			"nom_section": "SECTION CONTENTIEUX",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 111,
+			"code_section": 922008,
+			"code_structure": 9220,
+			"nom_section": "SECTION CONTENTIEUX (AGENCE AGBOVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 112,
+			"code_section": 921008,
+			"code_structure": 9210,
+			"nom_section": "SECTION CONTENTIEUX (AGENCE BOUAKÃ‰)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 113,
+			"code_section": 921908,
+			"code_structure": 9219,
+			"nom_section": "SECTION CONTENTIEUX (AGENCE Dâ€™ABENGOUROU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 114,
+			"code_section": 921308,
+			"code_structure": 9213,
+			"nom_section": "SECTION CONTENTIEUX (AGENCE DALOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 115,
+			"code_section": 920908,
+			"code_structure": 9209,
+			"nom_section": "SECTION CONTENTIEUX (AGENCE DE DIVO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 116,
+			"code_section": 921408,
+			"code_structure": 9214,
+			"nom_section": "SECTION CONTENTIEUX (AGENCE GAGNOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 117,
+			"code_section": 921808,
+			"code_structure": 9218,
+			"nom_section": "SECTION CONTENTIEUX (AGENCE SAN PEDRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 118,
+			"code_section": 921208,
+			"code_structure": 9212,
+			"nom_section": "SECTION CONTENTIEUX (AGENCE YAMOUSSOUKRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 119,
+			"code_section": 910702,
+			"code_structure": 9107,
+			"nom_section": "SECTION CONTENTIEUX GENERAL (CJC)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 120,
+			"code_section": 910703,
+			"code_structure": 9107,
+			"nom_section": "SECTION CONTENTIEUX SPECIFIQUE (CJC)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 121,
+			"code_section": 911002,
+			"code_structure": 9110,
+			"nom_section": "SECTION CONTROLE DE GESTION ET SYSTEME DE MESURE (DCAI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 122,
+			"code_section": 910208,
+			"code_structure": 9102,
+			"nom_section": "SECTION CONTROLE MEDICAL DE YOPOUGON",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 123,
+			"code_section": 910205,
+			"code_structure": 9102,
+			"nom_section": "SECTION CONTROLE MEDICAL NATIONAL (DG)",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 124,
+			"code_section": 910209,
+			"code_structure": 9102,
+			"nom_section": "SECTION CONTROLE MEDICAL TREICHVILLE",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 125,
+			"code_section": 910402,
+			"code_structure": 9104,
+			"nom_section": "SECTION COORDINATION ET DU CONTROLE TECHNIQUE PRESTATIONS (DEX)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 126,
+			"code_section": 910303,
+			"code_structure": 9103,
+			"nom_section": "SECTION COTISANS (CCM)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 127,
+			"code_section": 910210,
+			"code_structure": 9102,
+			"nom_section": "SECTION COURRIER DU DEPARTEMENT GED",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 128,
+			"code_section": 911802,
+			"code_structure": 9118,
+			"nom_section": "SECTION ETUDE ET STAGE (IM2S)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 129,
+			"code_section": 922204,
+			"code_structure": 9222,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 130,
+			"code_section": 923305,
+			"code_structure": 9233,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE DU CARF",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 131,
+			"code_section": 921107,
+			"code_structure": 9211,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 132,
+			"code_section": 922007,
+			"code_structure": 9220,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE AGBOVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 133,
+			"code_section": 921007,
+			"code_structure": 9210,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE BOUAKÃ‰)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 134,
+			"code_section": 921907,
+			"code_structure": 9219,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE Dâ€™ABENGOUROU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 135,
+			"code_section": 920507,
+			"code_structure": 9205,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE D ABOBO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 136,
+			"code_section": 920307,
+			"code_structure": 9203,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE Dâ€™ADJAME)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 137,
+			"code_section": 921307,
+			"code_structure": 9213,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE DALOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 138,
+			"code_section": 920707,
+			"code_structure": 9207,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE DE BONOUA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 139,
+			"code_section": 920807,
+			"code_structure": 9208,
+			"nom_section": "SECTION FINANCES ET COMPTABILITÃ‰ (AGENCE DE COCODY)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 140,
+			"code_section": 920907,
+			"code_structure": 9209,
+			"nom_section": "SECTION FINANCES ET COMPTABILITÃ‰ (AGENCE DE DIVO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 141,
+			"code_section": 920607,
+			"code_structure": 9206,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE DE KOUMASSI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 142,
+			"code_section": 920407,
+			"code_structure": 9204,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE DE YOPOUGON)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 143,
+			"code_section": 921407,
+			"code_structure": 9214,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE GAGNOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 144,
+			"code_section": 920107,
+			"code_structure": 9201,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE PLATEAU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 145,
+			"code_section": 921807,
+			"code_structure": 9218,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE SAN PEDRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 146,
+			"code_section": 920207,
+			"code_structure": 9202,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE TREICHVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 147,
+			"code_section": 921207,
+			"code_structure": 9212,
+			"nom_section": "SECTION FINANCES ET COMPTABILITE (AGENCE YAMOUSSOUKRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 148,
+			"code_section": 910605,
+			"code_structure": 9106,
+			"nom_section": "SECTION FORMATION PERFECTIONNEMENT ET PRÃ‰VISION (DRH)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 149,
+			"code_section": 910306,
+			"code_structure": 9103,
+			"nom_section": "SECTION MARKETING (CCM)",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 150,
+			"code_section": 923206,
+			"code_structure": 9232,
+			"nom_section": "SECTION OPHTALMOLOGIE (CMS DE DIVO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 151,
+			"code_section": 911803,
+			"code_structure": 9118,
+			"nom_section": "SECTION PERFECTIONNEMENT ET RECYCLAGE (IM2S)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 152,
+			"code_section": 910304,
+			"code_structure": 9103,
+			"nom_section": "SECTION PERSONNEL (CCM)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 153,
+			"code_section": 922202,
+			"code_structure": 9222,
+			"nom_section": "SECTION PRESTATIONS EXPATRIES (APEXT)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 154,
+			"code_section": 921402,
+			"code_structure": 9214,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 155,
+			"code_section": 921102,
+			"code_structure": 9211,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 156,
+			"code_section": 922002,
+			"code_structure": 9220,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE AGBOVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 157,
+			"code_section": 921002,
+			"code_structure": 9210,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE BOUAKÃ‰)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 158,
+			"code_section": 921902,
+			"code_structure": 9219,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE Dâ€™ABENGOUROU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 159,
+			"code_section": 920502,
+			"code_structure": 9205,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE D ABOBO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 160,
+			"code_section": 920302,
+			"code_structure": 9203,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE Dâ€™ADJAME)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 161,
+			"code_section": 921302,
+			"code_structure": 9213,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE DALOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 162,
+			"code_section": 920702,
+			"code_structure": 9207,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE DE BONOUA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 163,
+			"code_section": 920802,
+			"code_structure": 9208,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE DE COCODY)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 164,
+			"code_section": 920902,
+			"code_structure": 9209,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE DE DIVO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 165,
+			"code_section": 920602,
+			"code_structure": 9206,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE DE KOUMASSI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 166,
+			"code_section": 920402,
+			"code_structure": 9204,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE DE YOPOUGON)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 167,
+			"code_section": 920102,
+			"code_structure": 9201,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE PLATEAU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 168,
+			"code_section": 921802,
+			"code_structure": 9218,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE SAN PEDRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 169,
+			"code_section": 920202,
+			"code_structure": 9202,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE TREICHVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 170,
+			"code_section": 921202,
+			"code_structure": 9212,
+			"nom_section": "SECTION PRESTATIONS FAMILIALES (AGENCE YAMOUSSOUKRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 171,
+			"code_section": 910404,
+			"code_structure": 9104,
+			"nom_section": "SECTION PREVENTION DES AT/MP (DEX)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 172,
+			"code_section": 920905,
+			"code_structure": 9209,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE DE DIVO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 173,
+			"code_section": 922005,
+			"code_structure": 9220,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE AGBOVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 174,
+			"code_section": 921005,
+			"code_structure": 9210,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE BOUAKÃ‰)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 175,
+			"code_section": 921105,
+			"code_structure": 9211,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE BOUAKÃ‰)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 176,
+			"code_section": 921905,
+			"code_structure": 9219,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE Dâ€™ABENGOUROU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 177,
+			"code_section": 920505,
+			"code_structure": 9205,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE D ABOBO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 178,
+			"code_section": 920305,
+			"code_structure": 9203,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE Dâ€™ADJAME)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 179,
+			"code_section": 921305,
+			"code_structure": 9213,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE DALOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 180,
+			"code_section": 920705,
+			"code_structure": 9207,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE DE BONOUA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 181,
+			"code_section": 920805,
+			"code_structure": 9208,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE DE COCODY)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 182,
+			"code_section": 920605,
+			"code_structure": 9206,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE DE KOUMASSI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 183,
+			"code_section": 920405,
+			"code_structure": 9204,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE DE YOPOUGON)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 184,
+			"code_section": 921405,
+			"code_structure": 9214,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE GAGNOA)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 185,
+			"code_section": 920105,
+			"code_structure": 9201,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE PLATEAU)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 186,
+			"code_section": 921805,
+			"code_structure": 9218,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE SAN PEDRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 187,
+			"code_section": 920205,
+			"code_structure": 9202,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE TREICHVILLE)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 188,
+			"code_section": 921205,
+			"code_structure": 9212,
+			"nom_section": "SECTION RECOUVREMENT (AGENCE YAMOUSSOUKRO)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 189,
+			"code_section": 923302,
+			"code_structure": 9233,
+			"nom_section": "SECTION REEDUCATION DU CARF",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 190,
+			"code_section": 923303,
+			"code_structure": 9233,
+			"nom_section": "SECTION REPARATION ET FABRICATION PROTHESE DU CARF",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 191,
+			"code_section": 913302,
+			"code_structure": 9133,
+			"nom_section": "SECTION SUIVI ET CONTROLE (DP)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 192,
+			"code_section": 910802,
+			"code_structure": 9108,
+			"nom_section": "SERVICE ACHAT ET GESTION DES STOCKS (CMP)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 193,
+			"code_section": 910414,
+			"code_structure": 9104,
+			"nom_section": "SERVICE ADMINISTRATION ET DU BUDGET Dâ€™ABENGOUROU",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 194,
+			"code_section": 910415,
+			"code_structure": 9104,
+			"nom_section": "SERVICE ADMINISTRATION ET DU BUDGET DE BONOUA",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 195,
+			"code_section": 910411,
+			"code_structure": 9104,
+			"nom_section": "SERVICE ADMINISTRATION ET DU BUDGET DE DALOA",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 196,
+			"code_section": 910412,
+			"code_structure": 9104,
+			"nom_section": "SERVICE ADMINISTRATION ET DU BUDGET DE DIVO",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 197,
+			"code_section": 910408,
+			"code_structure": 9104,
+			"nom_section": "SERVICE ADMINISTRATION ET DU BUDGET DE GAGNOA",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 198,
+			"code_section": 910406,
+			"code_structure": 9104,
+			"nom_section": "SERVICE ADMINISTRATION ET DU BUDGET DE Lâ€™EMY",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 199,
+			"code_section": 910413,
+			"code_structure": 9104,
+			"nom_section": "SERVICE ADMINISTRATION ET DU BUDGET DE SAN PÃ‰DRO",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 200,
+			"code_section": 910410,
+			"code_structure": 9104,
+			"nom_section": "SERVICE ADMINISTRATION ET DU BUDGET DE YAKRO",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 201,
+			"code_section": 910504,
+			"code_structure": 9105,
+			"nom_section": "SERVICE COMPTABILITE DU SIEGE (DFC)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 202,
+			"code_section": 910505,
+			"code_structure": 9105,
+			"nom_section": "SERVICE COORDINATION DE LA COMPTABILITE DES STRUCTURES (DFC)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 203,
+			"code_section": 910405,
+			"code_structure": 9104,
+			"nom_section": "SERVICE DE Lâ€™ACTION SANITAIRE ET SOCIALE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 204,
+			"code_section": 910403,
+			"code_structure": 9104,
+			"nom_section": "SERVICE DE LA COORDINATION ET DU CONTROLE TECHNIQUE DU RECOUVREMENT (DEX)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 205,
+			"code_section": 910602,
+			"code_structure": 9106,
+			"nom_section": "SERVICE GESTION ADMINISTRATIVE DU PERSONNEL (DRH)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 206,
+			"code_section": 910503,
+			"code_structure": 9105,
+			"nom_section": "SERVICE GESTION DU PORTEFEUILLE (DFC)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 207,
+			"code_section": 910803,
+			"code_structure": 9108,
+			"nom_section": "SERVICE LOGISTIQUE (CMP)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 208,
+			"code_section": 910903,
+			"code_structure": 9109,
+			"nom_section": "SERVICE MAINTENANCE ET ASSISTANCE (CEI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 209,
+			"code_section": 910606,
+			"code_structure": 9106,
+			"nom_section": "SERVICE MEDICAL DU PERSONNEL (DRH)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 210,
+			"code_section": 910804,
+			"code_structure": 9108,
+			"nom_section": "SERVICE PATRIMOINE (CMP)",
+			"code_gestion": null,
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 211,
+			"code_section": 910603,
+			"code_structure": 9106,
+			"nom_section": "SERVICE REMUNERATION DU PERSONNEL (DRH)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 212,
+			"code_section": 910902,
+			"code_structure": 9109,
+			"nom_section": "SERVICE RESEAU ET SECURITE (CEI)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 213,
+			"code_section": 910604,
+			"code_structure": 9106,
+			"nom_section": "SERVICE SOCIAL CULTUREL ET ANIMATION DU PERSONNEL (DRH)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 214,
+			"code_section": 910502,
+			"code_structure": 9105,
+			"nom_section": "SERVICE TRESORERIE (DFC)",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 215,
+			"code_section": 910904,
+			"code_structure": 9109,
+			"nom_section": "SECTION SOLUTIONS ET DEVELOPPEMENT",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 216,
+			"code_section": 910905,
+			"code_structure": 9109,
+			"nom_section": "SECTION SECURITE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 217,
+			"code_section": 910906,
+			"code_structure": 9109,
+			"nom_section": "SECTION INFRASTRUCTURE ET EXPLOITATION",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 218,
+			"code_section": 922801,
+			"code_structure": 9228,
+			"nom_section": "SECTION COMMUNE APS ADZOPE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 219,
+			"code_section": 922601,
+			"code_structure": 9226,
+			"nom_section": "SECTION COMMUNE APS DE BINGERVILLE",
+			"code_gestion": "G",
+			"created_at": "2023-05-23 07:38:54",
+			"updated_at": "2023-05-23 07:38:54"
+		},
+		{
+			"id": 220,
+			"code_section": 913601,
+			"code_structure": 9136,
+			"nom_section": "SECTION COMMUNE DIRECTION DES INVESTISSEMENTS ET STRUCTURATION FINANCIERE",
+			"code_gestion": "G",
+			"created_at": "2024-02-21 16:49:07",
+			"updated_at": "2024-02-21 16:49:07"
+		}
+	]
+}

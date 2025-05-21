@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les articles -->
+    <record id="view_e_gestock_article_form" model="ir.ui.view">
+        <field name="name">e_gestock.article.form</field>
+        <field name="model">e_gestock.article</field>
+        <field name="arch" type="xml">
+            <form string="Article">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="flag_actif" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                        <button name="action_view_product" type="object" class="oe_stat_button" icon="fa-cube"
+                                invisible="product_id == False">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Produit Odoo</span>
+                            </div>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar" options="{'preview_image': 'image'}"/>
+                    <div class="oe_title">
+                        <label for="ref_article" class="oe_edit_only"/>
+                        <h1>
+                            <field name="ref_article" readonly="1" placeholder="[Généré automatiquement après sélection de la famille]"/>
+                        </h1>
+                        <h2>
+                            <field name="design_article" placeholder="Désignation de l'article"/>
+                        </h2>
+                        <field name="qr_code" readonly="1" groups="base.group_no_one"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="famille_id" options="{'no_create': True}"/>
+                            <field name="ref_fam" invisible="1"/>
+                            <field name="categorie_id" options="{'no_create': True}"/>
+                            <field name="code_unite" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="type_articles_id"/>
+                            <field name="ref_taxe_name"/>
+                            <field name="prix_achat"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="created_at" readonly="1"/>
+                            <field name="updated_at" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Description détaillée..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les articles -->
+    <record id="view_e_gestock_article_list" model="ir.ui.view">
+        <field name="name">e_gestock.article.list</field>
+        <field name="model">e_gestock.article</field>
+        <field name="arch" type="xml">
+            <list string="Articles">
+                <field name="ref_article"/>
+                <field name="design_article"/>
+                <field name="famille_id"/>
+                <field name="categorie_id"/>
+                <field name="code_unite"/>
+                <field name="product_id"/>
+                <field name="flag_actif"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les articles -->
+    <record id="view_e_gestock_article_search" model="ir.ui.view">
+        <field name="name">e_gestock.article.search</field>
+        <field name="model">e_gestock.article</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher un article">
+                <field name="ref_article"/>
+                <field name="design_article"/>
+                <field name="famille_id"/>
+                <field name="categorie_id"/>
+                <field name="qr_code"/>
+                <filter name="filter_no_product" string="Sans produit Odoo" domain="[('product_id', '=', False)]"/>
+                <filter name="filter_inactive" string="Archivé" domain="[('flag_actif', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_by_famille" string="Famille" context="{'group_by': 'famille_id'}"/>
+                    <filter name="group_by_categorie" string="Catégorie" context="{'group_by': 'categorie_id'}"/>
+                    <filter name="group_by_unite" string="Unité de mesure" context="{'group_by': 'code_unite'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue kanban pour les articles -->
+    <record id="view_e_gestock_article_kanban" model="ir.ui.view">
+        <field name="name">e_gestock.article.kanban</field>
+        <field name="model">e_gestock.article</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="ref_article"/>
+                <field name="design_article"/>
+                <field name="famille_id"/>
+                <field name="categorie_id"/>
+                <field name="image"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('e_gestock.article', 'image', record.id.raw_value)})" />
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="ref_article"/> - <field name="design_article"/>
+                                </strong>
+                                <ul>
+                                    <li>Famille: <field name="famille_id"/></li>
+                                    <li t-if="record.categorie_id.raw_value">Catégorie: <field name="categorie_id"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action pour les articles -->
+    <record id="action_e_gestock_article" model="ir.actions.act_window">
+        <field name="name">Articles</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.article</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="search_view_id" ref="view_e_gestock_article_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouvel article
+            </p>
+            <p>
+                Les articles sont classés par famille et catégorie, et sont automatiquement associés à un produit Odoo.
+            </p>
+        </field>
+    </record>
+</odoo>

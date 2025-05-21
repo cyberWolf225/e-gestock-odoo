@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Les groupes sont maintenant définis dans le module de base e_gestock_base -->
+
+    <!-- Règles d'accès par modèle -->
+    <record id="e_gestock_stock_item_rule_admin" model="ir.rule">
+        <field name="name">Articles en stock: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_stock_item"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_stock_item_rule_user" model="ir.rule">
+        <field name="name">Articles en stock: accès en lecture</field>
+        <field name="model_id" ref="model_e_gestock_stock_item"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_stock_item_depot_rule" model="ir.rule">
+        <field name="name">Articles en stock: responsable dépôt</field>
+        <field name="model_id" ref="model_e_gestock_stock_item"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_resp_depot'))]"/>
+        <field name="domain_force">[('depot_id.responsable_id', '=', user.id)]</field>
+    </record>
+
+    <record id="e_gestock_stock_movement_rule_admin" model="ir.rule">
+        <field name="name">Mouvements de stock: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_stock_movement"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_stock_movement_rule_user" model="ir.rule">
+        <field name="name">Mouvements de stock: accès en lecture</field>
+        <field name="model_id" ref="model_e_gestock_stock_movement"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_stock_movement_depot_rule" model="ir.rule">
+        <field name="name">Mouvements de stock: responsable dépôt</field>
+        <field name="model_id" ref="model_e_gestock_stock_movement"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_resp_depot'))]"/>
+        <field name="domain_force">['|', ('depot_source_id.responsable_id', '=', user.id), ('depot_destination_id.responsable_id', '=', user.id)]</field>
+    </record>
+
+    <record id="e_gestock_inventory_rule_admin" model="ir.rule">
+        <field name="name">Inventaires: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_inventory"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_inventory_rule_user" model="ir.rule">
+        <field name="name">Inventaires: accès en lecture</field>
+        <field name="model_id" ref="model_e_gestock_inventory"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_inventory_depot_rule" model="ir.rule">
+        <field name="name">Inventaires: responsable dépôt</field>
+        <field name="model_id" ref="model_e_gestock_inventory"/>
+        <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_resp_depot'))]"/>
+        <field name="domain_force">[('depot_id.responsable_id', '=', user.id)]</field>
+    </record>
+</odoo>

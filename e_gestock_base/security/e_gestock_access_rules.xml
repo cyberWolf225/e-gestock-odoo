@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ============================================================
+         RÈGLES D'ACCÈS AUX DONNÉES E-GESTOCK
+         ============================================================ -->
+
+    <!-- ============ RÈGLES D'ACCÈS STRUCTURES ============ -->
+    <!-- Règles d'accès pour le modèle e_gestock_structure -->
+    <record id="e_gestock_structure_rule" model="ir.rule">
+        <field name="name">Structures: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_structure"/>
+        <field name="groups" eval="[(4, ref('group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="e_gestock_structure_user_rule" model="ir.rule">
+        <field name="name">Structures: lecture pour tous les utilisateurs</field>
+        <field name="model_id" ref="model_e_gestock_structure"/>
+        <field name="groups" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_structure_manager_rule" model="ir.rule">
+        <field name="name">Structures: accès limité pour responsables structure</field>
+        <field name="model_id" ref="model_e_gestock_structure"/>
+        <field name="groups" eval="[(4, ref('group_structure_manager'))]"/>
+        <field name="domain_force">[('id', '=', user.structure_id.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- ============ RÈGLES D'ACCÈS SECTIONS ============ -->
+    <!-- Règles d'accès pour le modèle e_gestock_section -->
+    <record id="e_gestock_section_rule" model="ir.rule">
+        <field name="name">Sections: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_section"/>
+        <field name="groups" eval="[(4, ref('group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="e_gestock_section_user_rule" model="ir.rule">
+        <field name="name">Sections: lecture pour tous les utilisateurs</field>
+        <field name="model_id" ref="model_e_gestock_section"/>
+        <field name="groups" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_section_manager_rule" model="ir.rule">
+        <field name="name">Sections: accès limité pour responsables section</field>
+        <field name="model_id" ref="model_e_gestock_section"/>
+        <field name="groups" eval="[(4, ref('group_section_manager'))]"/>
+        <field name="domain_force">[('id', '=', user.section_id.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_section_structure_manager_rule" model="ir.rule">
+        <field name="name">Sections: accès à toutes les sections de sa structure pour responsables structure</field>
+        <field name="model_id" ref="model_e_gestock_section"/>
+        <field name="groups" eval="[(4, ref('group_structure_manager'))]"/>
+        <field name="domain_force">[('code_structure', '=', user.structure_id.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Les règles d'accès pour les demandes d'achat seront définies dans le module e_gestock_purchase -->
+    <!-- Elles ont été supprimées ici pour éviter les erreurs de référence à des modèles qui n'existent pas encore -->
+</odoo>

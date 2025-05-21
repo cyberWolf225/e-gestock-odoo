@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extension du menu du portail -->
+    <template id="portal_my_home_menu_purchase" name="Portal my home : e-gestock purchase menu entries" inherit_id="portal.portal_breadcrumbs" priority="30">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'demande' or page_name == 'submit_cotation'" class="breadcrumb-item">
+                <a t-if="demande" t-attf-href="/my/demandes?{{ keep_query() }}">Demandes de cotation</a>
+                <t t-else="">Demandes de cotation</t>
+            </li>
+            <li t-if="page_name == 'demande' and demande" class="breadcrumb-item active">
+                <t t-out="demande.reference" />
+            </li>
+            <li t-if="page_name == 'submit_cotation'" class="breadcrumb-item">
+                <a t-attf-href="/my/demandes/{{demande.id}}?{{ keep_query() }}">
+                    <t t-out="demande.reference" />
+                </a>
+            </li>
+            <li t-if="page_name == 'submit_cotation'" class="breadcrumb-item active">
+                Soumettre une cotation
+            </li>
+        </xpath>
+    </template>
+
+    <!-- Ajouter une entrée dans le menu principale du portail -->
+    <template id="portal_my_home_demande" name="Portal My Home : E-GESTOCK Purchase" inherit_id="portal.portal_my_home" priority="30">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="demande_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Demandes de cotation</t>
+                <t t-set="url" t-value="'/my/demandes'"/>
+                <t t-set="count" t-value="demande_count"/>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Liste des demandes de cotation -->
+    <template id="portal_my_demandes" name="My Demandes de Cotation">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Demandes de cotation</t>
+            </t>
+            <t t-if="not demandes">
+                <div class="alert alert-info">
+                    <p>Aucune demande de cotation trouvée.</p>
+                </div>
+            </t>
+            <t t-if="demandes" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Référence</th>
+                        <th>Demande</th>
+                        <th>Date d'envoi</th>
+                        <th>Date d'échéance</th>
+                        <th class="text-right">État</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="demandes" t-as="demande">
+                        <tr>
+                            <td>
+                                <a t-attf-href="/my/demandes/#{demande.id}?#{keep_query()}">
+                                    <t t-esc="demande.reference"/>
+                                </a>
+                            </td>
+                            <td>
+                                <t t-esc="demande.demande_id.intitule"/>
+                            </td>
+                            <td><span t-field="demande.date_envoi"/></td>
+                            <td><span t-field="demande.date_echeance"/></td>
+                            <td class="text-right">
+                                <span t-if="demande.state == 'sent'" class="badge badge-pill badge-info">
+                                    <i class="fa fa-clock-o" /> En attente
+                                </span>
+                                <span t-if="demande.state == 'received'" class="badge badge-pill badge-success">
+                                    <i class="fa fa-check" /> Répondu
+                                </span>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <!-- Détail d'une demande de cotation -->
+    <template id="portal_my_demande_detail" name="My Demande Detail">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert" groups="portal.group_portal">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url" t-value="'/web#model=e_gestock.demande_cotation_fournisseur&amp;id=%s&amp;view_type=form' % (demande.id)"/>
+                </t>
+            </t>
+
+            <div class="row mt16 o_portal_sidebar">
+                <!-- Contenu principal -->
+                <div class="col-12 col-lg-9 o_portal_main">
+                    <div class="o_portal_page_header mb-3">
+                        <h2 class="mb-0">Demande de cotation <t t-esc="demande.reference"/></h2>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Informations générales</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Demande:</strong> <span t-field="demande.demande_id.reference"/>
+                                    <br/>
+                                    <strong>Intitulé:</strong> <span t-field="demande.demande_id.intitule"/>
+                                    <br/>
+                                    <strong>Date d'envoi:</strong> <span t-field="demande.date_envoi"/>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Échéance:</strong> <span t-field="demande.date_echeance"/>
+                                    <br/>
+                                    <strong>Code d'échéance:</strong> <span t-field="demande.code_echeance"/>
+                                    <br/>
+                                    <strong>Type d'achat:</strong> <span t-field="demande.type_achat"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Articles demandés</h5>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Référence</th>
+                                        <th>Désignation</th>
+                                        <th class="text-right">Quantité</th>
+                                        <th>Unité</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="demande.demande_id.line_ids" t-as="line">
+                                        <tr>
+                                            <td><span t-field="line.ref_article"/></td>
+                                            <td><span t-field="line.designation"/></td>
+                                            <td class="text-right"><span t-field="line.quantite"/></td>
+                                            <td><span t-field="line.unite_id"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Si une cotation a déjà été soumise -->
+                    <div t-if="cotation" class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Votre offre soumise</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Vous avez déjà soumis une offre pour cette demande de cotation.</p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Référence:</strong> <span t-field="cotation.reference"/>
+                                    <br/>
+                                    <strong>Date:</strong> <span t-field="cotation.date"/>
+                                    <br/>
+                                    <strong>Délai de livraison:</strong> <span t-field="cotation.delai_livraison"/> jours
+                                </div>
+                                <div class="col-6">
+                                    <strong>Conditions de paiement:</strong> <span t-field="cotation.conditions_paiement"/>
+                                    <br/>
+                                    <strong>Montant total:</strong> <span t-field="cotation.montant_total" t-options='{"widget": "monetary", "display_currency": cotation.currency_id}'/>
+                                    <br/>
+                                    <strong>État:</strong> <span t-field="cotation.state"/>
+                                </div>
+                            </div>
+                            
+                            <h6 class="mt-3">Détail des articles</h6>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Désignation</th>
+                                        <th class="text-right">Quantité</th>
+                                        <th class="text-right">Prix unitaire</th>
+                                        <th class="text-right">Montant</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="cotation.line_ids" t-as="line">
+                                        <tr>
+                                            <td><span t-field="line.designation"/></td>
+                                            <td class="text-right"><span t-field="line.quantite_a_servir"/></td>
+                                            <td class="text-right"><span t-field="line.prix_unitaire" t-options='{"widget": "monetary", "display_currency": cotation.currency_id}'/></td>
+                                            <td class="text-right"><span t-field="line.montant" t-options='{"widget": "monetary", "display_currency": cotation.currency_id}'/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Si aucune cotation n'a été soumise et que la demande est toujours en attente -->
+                    <div t-if="not cotation and demande.state == 'sent'" class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Soumettre une offre</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Vous n'avez pas encore soumis d'offre pour cette demande de cotation.</p>
+                            <a class="btn btn-primary" t-attf-href="/my/demandes/{{demande.id}}/submit">
+                                <i class="fa fa-pencil"/> Soumettre une cotation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-12 col-lg-3 o_portal_sidebar">
+                    <div class="card mb-4">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">État</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <strong>État actuel:</strong>
+                                <span t-if="demande.state == 'sent'" class="badge badge-pill badge-info">
+                                    <i class="fa fa-clock-o" /> En attente
+                                </span>
+                                <span t-if="demande.state == 'received'" class="badge badge-pill badge-success">
+                                    <i class="fa fa-check" /> Répondu
+                                </span>
+                            </div>
+                            <div t-if="demande.state == 'sent'" class="alert alert-warning">
+                                <i class="fa fa-exclamation-triangle"/> La date d'échéance est le <strong><t t-esc="demande.date_echeance"/></strong>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Formulaire de soumission de cotation -->
+    <template id="portal_submit_cotation" name="Submit Cotation">
+        <t t-call="portal.portal_layout">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Soumettre une offre pour la demande <t t-esc="demande.reference"/></h2>
+                        
+                        <form t-attf-action="/my/demandes/{{demande.id}}/submit/confirm" method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            
+                            <div class="card mb-4">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Informations générales</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="date">Date de cotation</label>
+                                        <div class="col-sm-9">
+                                            <input type="date" class="form-control" name="date" id="date" required="required" 
+                                                   t-att-value="datetime.date.today().strftime('%Y-%m-%d')"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="delai_livraison">Délai de livraison (jours)</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" class="form-control" name="delai_livraison" id="delai_livraison" 
+                                                   required="required" min="1" value="7"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label" for="conditions_paiement">Conditions de paiement</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="conditions_paiement" 
+                                                   id="conditions_paiement" placeholder="Ex: 30 jours fin de mois"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Articles</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Référence</th>
+                                                    <th>Désignation</th>
+                                                    <th class="text-right">Quantité demandée</th>
+                                                    <th class="text-right">Quantité proposée</th>
+                                                    <th class="text-right">Prix unitaire</th>
+                                                    <th class="text-right">Remise ligne (%)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="original_lines" t-as="line">
+                                                    <tr>
+                                                        <td><span t-field="line.ref_article"/></td>
+                                                        <td><span t-field="line.designation"/></td>
+                                                        <td class="text-right"><span t-field="line.quantite"/></td>
+                                                        <td>
+                                                            <input type="number" step="0.01" min="0" 
+                                                                   t-attf-name="qty_{{line.id}}" class="form-control" 
+                                                                   t-att-value="line.quantite" required="required"/>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" step="0.01" min="0" 
+                                                                   t-attf-name="price_{{line.id}}" class="form-control" 
+                                                                   required="required"/>
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" step="0.01" min="0" max="100" 
+                                                                   t-attf-name="remise_{{line.id}}" class="form-control" 
+                                                                   value="0"/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-header bg-light">
+                                    <h5 class="mb-0">Notes</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <textarea name="notes" rows="5" class="form-control" 
+                                                 placeholder="Ajoutez ici vos commentaires, précisions ou conditions particulières..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between mb-4">
+                                <a t-attf-href="/my/demandes/{{demande.id}}" class="btn btn-secondary">
+                                    <i class="fa fa-arrow-left"/> Retour
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-check"/> Soumettre l'offre
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo> 

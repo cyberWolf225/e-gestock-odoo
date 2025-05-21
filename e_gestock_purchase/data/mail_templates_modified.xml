@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Email pour notifier le fournisseur de la génération du bon de commande -->
+        <record id="email_template_purchase_order_created" model="mail.template">
+            <field name="name">Bon de commande - Notification au fournisseur</field>
+            <field name="model_id" ref="model_e_gestock_purchase_order"/>
+            <field name="subject">{{ object.company_id.name }}: Bon de commande {{ object.name }}</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="email_to">{{ object.partner_id.email }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <!-- Champs report_template et report_name non disponibles dans Odoo 18 -->
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 14px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 14px;">
+                        Bonjour {{ object.partner_id.name }},<br/>
+                    <br/>
+
+                        Veuillez trouver ci-joint le bon de commande <strong>{{ object.name }}</strong>.
+
+                    <br/>
+                    <br/>
+
+                    <strong>Référence:</strong> {{ object.name }}<br/>
+                <strong>Date:</strong> {{ format_date(object.date_order) }}<br/>
+            <strong>Montant total:</strong> {{ format_amount(object.amount_total, object.currency_id) }}<br/>
+        <strong>Date de livraison prévue:</strong> {{ format_date(object.date_livraison_prevue) if object.date_livraison_prevue else '' }}
+
+        <br/>
+        <br/>
+
+                        Vous pouvez confirmer cette commande en cliquant sur le lien ci-dessous:
+        <br/>
+        <div style="margin: 16px 0px 16px 0px; text-align: center;">
+            <a href="/web#id={{ object.id }}&amp;model=e_gestock.purchase_order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                                Confirmer la commande
+            </a>
+        </div>
+
+        <br/>
+
+                        N'hésitez pas à nous contacter pour tout complément d'information.
+
+        <br/>
+        <br/>
+
+                        Cordialement,
+        <br/>
+                        {{ object.company_id.name }}
+    </p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour notifier le comité de réception pour la livraison prévue -->
+<record id="email_template_delivery_notification" model="mail.template">
+<field name="name">Notification - Livraison prévue</field>
+<field name="model_id" ref="model_e_gestock_purchase_order"/>
+<field name="subject">{{ object.company_id.name }}: Livraison prévue pour la commande {{ object.name }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ object.comite_reception_id.member_ids.mapped('email')|join(', ') }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+    <p style="margin: 0px; padding: 0px; font-size: 14px;">
+                        Bonjour,<br/>
+    <br/>
+
+                        Nous vous informons qu'une livraison est prévue pour la commande suivante:
+
+    <br/>
+    <br/>
+
+    <strong>Référence:</strong> {{ object.name }}<br/>
+<strong>Fournisseur:</strong> {{ object.partner_id.name }}<br/>
+<strong>Date de livraison prévue:</strong> {{ format_date(object.date_livraison_prevue) }}<br/>
+<strong>Lieu de livraison:</strong> {{ object.company_id.name }}
+
+<br/>
+<br/>
+
+                        Veuillez vous préparer pour la réception de cette commande en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.purchase_order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                                Voir la commande
+</a>
+</div>
+
+<br/>
+
+                        Cordialement,
+<br/>
+                        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+<!-- Email pour notifier le demandeur que la commande a été réceptionnée -->
+<record id="email_template_reception_completed" model="mail.template">
+<field name="name">Notification - Commande réceptionnée</field>
+<field name="model_id" ref="model_e_gestock_purchase_order"/>
+<field name="subject">{{ object.company_id.name }}: Commande réceptionnée {{ object.name }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ object.demande_cotation_id.demandeur_id.email }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+                        Bonjour {{ object.demande_cotation_id.demandeur_id.name }},<br/>
+<br/>
+
+                        Nous vous informons que la commande <strong>{{ object.name }}</strong> a été réceptionnée.
+
+<br/>
+<br/>
+
+<strong>Référence demande:</strong> {{ object.demande_cotation_id.reference }}<br/>
+<strong>Fournisseur:</strong> {{ object.partner_id.name }}<br/>
+<strong>Date de réception:</strong> {{ format_date(object.date_livraison_reelle) }}<br/>
+
+<br/>
+<br/>
+
+                        Les articles sont maintenant disponibles. Vous pouvez consulter les détails en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.purchase_order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                                Voir la commande
+</a>
+</div>
+
+<br/>
+
+                        Cordialement,
+<br/>
+                        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour les étapes de validation du bon de commande -->
+<record id="email_template_purchase_validation_request" model="mail.template">
+<field name="name">Demande de validation - Bon de commande</field>
+<field name="model_id" ref="model_e_gestock_purchase_order"/>
+<field name="subject">{{ object.company_id.name }}: BC à valider {{ object.name }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ ctx.get('validator_email', '') }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+                        Bonjour,<br/>
+<br/>
+
+                        Un bon de commande nécessite votre validation.
+
+<br/>
+<br/>
+
+<strong>Référence:</strong> {{ object.name }}<br/>
+<strong>Fournisseur:</strong> {{ object.partner_id.name }}<br/>
+<strong>Montant:</strong> {{ format_amount(object.amount_total, object.currency_id) }}<br/>
+<strong>Demande d'origine:</strong> {{ object.demande_cotation_id.reference }}<br/>
+<strong>État actuel:</strong> {{ object.state_approbation }}
+
+<br/>
+<br/>
+
+                        Veuillez valider ce bon de commande en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.purchase_order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                                Valider
+</a>
+</div>
+
+<br/>
+
+                        Cordialement,
+<br/>
+                        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+</data>
+</odoo>

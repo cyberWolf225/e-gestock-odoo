@@ -1,0 +1,113 @@
+1. Accès au module Achat
+•	Cliquer sur le menu Exploitation puis sur le sous-menu Achat
+2. PROCESSUS D'ACHAT PAR PROFIL UTILISATEUR
+2.1 Gestionnaire des achats
+•	Créer une demande d’achat :
+o	Cliquer sur le bouton Ajouter
+o	Saisir le compte budgétaire, la gestion et la structure bénéficiaire
+o	Saisir l'intitulé, la référence de l'article, la description et la quantité
+o	Possibilité de joindre une photo et un mémo de motivation
+o	Pour ajouter des articles supplémentaires, cliquer sur le bouton (+)
+•	Consulter une demande d’achat : cliquer sur le bouton voir (🔍)
+•	Modifier une demande d’achat :
+o	Cliquer sur le bouton Modifier (✏️)
+o	Pour supprimer une ligne d'article, cliquer sur le bouton (X)
+•	Transférer une demande d'achat au Responsable des achats :
+o	Cliquer sur le bouton de transfert
+o	Possibilité de faire des modifications ou suppressions avant transfert
+2.2 Responsable des achats
+a Valider une demande d’achat :
+o	Cliquer sur le bouton Valider (✓)
+o	Saisir la quantité accordée (la ligne à valider doit être cochée)
+o	Valider avec un commentaire si nécessaire ou annuler (retourne au Gestionnaire des achats)
+b Modifier la validation d'une demande d’achat : cliquer sur le bouton Modifier (✏️)
+c Enregistrer une demande de cotation :
+o	Sélectionner le code et le délai de l'échéance
+o	Choisir le type d'achat et saisir le taux d'acompte
+o	Présélectionner les fournisseurs (Ajouter/Retirer)
+d Transférer une demande de cotation au Responsable CMP :
+o	Cliquer sur le bouton Transférer
+e Transférer une demande de cotation aux fournisseurs :
+o	Après validation par le Responsable CMP
+o	Cliquer sur le bouton Transférer
+f Sélectionner la cotation du fournisseur mieux disant :
+o	Consulter les cotations fournisseurs
+o	Voir les détails de chaque cotation
+o	Sélectionner la meilleure cotation
+g Transférer la cotation du mieux disant au Responsable CMP :
+o	Cliquer sur le bouton Transférer
+h Éditer le bon de commande :
+o	Après validation par la Direction Générale (DGAAF ou DG)
+o	Cliquer sur le bouton Éditer
+o	Sélectionner les signataires disponibles
+o	Finaliser le processus d'édition
+2.3 Fournisseur
+a Répondre à une demande de cotation :
+o	Cliquer sur le bouton orange
+o	Choisir la devise
+o	Saisir la quantité à servir, le prix unitaire, la remise
+o	Possibilité de joindre un échantillon
+o	Saisir la remise générale et la TVA
+o	Soumettre la cotation
+b Retirer un bon de commande :
+o	Cliquer sur le bouton orange pour marquer le retrait
+o	Visualiser le bon de commande
+o	Saisir la date de livraison
+c Livrer la commande :
+o	Cliquer sur le bouton orange
+o	Joindre le bon de livraison
+o	Statut passe à "livrer" après confirmation
+2.4 Responsable CMP
+•	Ce profil valide les demandes de cotation
+•	Valide les choix de fournisseurs mieux disant
+2.5 Responsable contrôle budgétaire
+a Faire le contrôle budgétaire : 
+o	Cliquer sur le bouton dédié pour accéder à l'écran de contrôle
+o	Viser avec un commentaire si nécessaire
+o	En cas d'annulation, la demande retourne au Responsable CMP
+o	Cliquer sur le bouton Viser pour finaliser
+2.6 Chef Département DCG
+a Viser le bon de commande : 
+o	Accéder à l'interface via le bouton dédié
+o	Viser avec un commentaire si nécessaire
+o	En cas d'annulation, la demande retourne au Responsable du contrôle budgétaire
+o	Cliquer sur le bouton Viser pour finaliser
+2.7 Responsable DCG
+a Viser le bon de commande : 
+o	Accéder à l'interface via le bouton dédié
+o	Viser avec un commentaire si nécessaire
+o	En cas d'annulation, la demande retourne au Chef de département DCG
+o	Cliquer sur le bouton Viser pour finaliser
+2.8 DGAAF
+a Valider le bon de commande : 
+o	Accéder à l'interface via le bouton dédié
+o	Valider avec un commentaire si nécessaire
+o	En cas d'annulation, la demande retourne au Responsable DCG
+o	Cliquer sur le bouton Viser pour finaliser
+2.9 DG si monatnt supperieur a 5 MILLIONS de fcfa
+a Valider le bon de commande : 
+o	Accéder à l'interface via le bouton dédié
+o	Valider avec un commentaire si nécessaire
+o	En cas d'annulation, la demande retourne au Responsable CMP
+o	Cliquer sur le bouton Viser pour finaliser
+2.10 Comité de réception
+a Valider la livraison d'une commande : 
+o	Accéder à l'interface via le bouton dédié
+o	Confirmer la livraison avec un commentaire si nécessaire
+o	Saisir les quantités réceptionnées
+o	Cliquer sur le bouton Confirmer pour finaliser
+2.11 Administrateur DFC
+a Enregistrer le responsable du comité de réception : 
+o	Cliquer sur l'onglet Exploitation puis sur le sous-onglet Comité de réception
+3. FLUX DE PROCESSUS D'ACHAT
+1.	Création d'une demande d'achat (Gestionnaire des achats)
+2.	Validation de la demande (Responsable des achats)
+3.	Demande de cotation aux fournisseurs (Responsable des achats → Responsable CMP → Fournisseurs)
+4.	Soumission des cotations (Fournisseurs)
+5.	Sélection du mieux disant (Responsable des achats → Responsable CMP)
+6.	Contrôle budgétaire (Responsable contrôle budgétaire)
+7.	Circuit de validation du bon de commande (Chef Département DCG → Responsable DCG → DGAAF/DG)
+8.	Édition du bon de commande (Responsable des achats)
+9.	Retrait du bon de commande (Fournisseur)
+10.	Livraison de la commande (Fournisseur)
+11.	Validation de la livraison (Comité de réception)

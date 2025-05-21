@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue pour les lignes de réserve -->
+    <record id="view_create_pv_wizard_reserve_list" model="ir.ui.view">
+        <field name="name">e_gestock.create_pv_wizard_reserve.list</field>
+        <field name="model">e_gestock.create_pv_wizard_reserve</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="wizard_id" invisible="1"/>
+                <field name="line_id" domain="[('reception_id', '=', context.get('default_reception_id', False))]"/>
+                <field name="description"/>
+                <field name="action_corrective"/>
+                <field name="date_echeance"/>
+                <field name="responsable_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour l'assistant de création de PV -->
+    <record id="view_create_pv_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.create_pv_wizard.form</field>
+        <field name="model">e_gestock.create_pv_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Créer un PV de réception">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reception_id" domain="[('state', '=', 'comite_validation'), ('pv_validation', '=', False)]"/>
+                            <field name="comite_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="decision"/>
+                        </group>
+                    </group>
+                    <group string="Observations">
+                        <field name="observation" nolabel="1" placeholder="Observations sur la réception..."/>
+                    </group>
+                    <group string="Réserves" invisible="decision != 'accepted_reserve'">
+                        <field name="reserve_ids" nolabel="1" required="decision == 'accepted_reserve'"
+                              context="{'default_wizard_id': id, 'default_reception_id': reception_id}"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Créer PV" name="action_create_pv" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_stock_state_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>État du stock</h2>
+                    <div class="row mt32 mb32">
+                        <div class="col-6">
+                            <p>
+                                <strong>Date d'impression:</strong> <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p>
+                                <t t-if="data.get('depot_id')">
+                                    <strong>Dépôt:</strong> <span t-esc="data['depot_id'][1]"/>
+                                </t>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th>Dépôt</th>
+                                <th>Article</th>
+                                <th class="text-right">Quantité disponible</th>
+                                <th class="text-right">Quantité réservée</th>
+                                <th class="text-right">Quantité virtuelle</th>
+                                <th>Unité</th>
+                                <th class="text-right">Prix unitaire</th>
+                                <th class="text-right">Valeur</th>
+                                <th>Dernier inventaire</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="lines" t-as="line" t-att-class="line['quantite_disponible'] &lt;= 0 and 'text-danger' or (line['quantite_disponible'] &lt; line['min_quantity'] and 'text-warning')">
+                                <td><span t-esc="line['depot_id'][1]"/></td>
+                                <td><span t-esc="line['article_id'][1]"/></td>
+                                <td class="text-right"><span t-esc="line['quantite_disponible']"/></td>
+                                <td class="text-right"><span t-esc="line['quantite_reservee']"/></td>
+                                <td class="text-right"><span t-esc="line['quantite_virtuelle']"/></td>
+                                <td><span t-esc="line['uom_id'][1]"/></td>
+                                <td class="text-right"><span t-esc="line['prix_unitaire']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></td>
+                                <td class="text-right"><span t-esc="line['value']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></td>
+                                <td><span t-esc="line['last_inventory_date'] and format_date(line['last_inventory_date']) or ''"/></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="7" class="text-right"><strong>Total</strong></td>
+                                <td class="text-right">
+                                    <strong><span t-esc="sum(line['value'] for line in lines)" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></strong>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_stock_state_report" model="ir.actions.report">
+        <field name="name">État du stock</field>
+        <field name="model">e_gestock.stock_item</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_inventory.report_stock_state</field>
+        <field name="report_file">e_gestock_inventory.report_stock_state</field>
+        <field name="binding_model_id" ref="model_e_gestock_stock_item"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_stock_state">
+        <t t-call="web.html_container">
+            <t t-call="e_gestock_inventory.report_stock_state_document"/>
+        </t>
+    </template>
+
+    <!-- Stock Movement Report -->
+    <template id="report_stock_movement_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Bon de mouvement</h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Référence:</strong> <span t-field="o.reference"/>
+                                <br/>
+                                <strong>Type:</strong> <span t-field="o.type"/>
+                                <br/>
+                                <strong>Date:</strong> <span t-field="o.date" t-options="{'widget': 'datetime'}"/>
+                                <br/>
+                                <strong>État:</strong> <span t-field="o.state"/>
+                            </div>
+                            <div class="col-6">
+                                <t t-if="o.depot_source_id">
+                                    <strong>Dépôt source:</strong> <span t-field="o.depot_source_id"/>
+                                    <br/>
+                                </t>
+                                <t t-if="o.depot_destination_id">
+                                    <strong>Dépôt destination:</strong> <span t-field="o.depot_destination_id"/>
+                                    <br/>
+                                </t>
+                                <strong>Responsable:</strong> <span t-field="o.responsable_id"/>
+                                <br/>
+                                <t t-if="o.validateur_id">
+                                    <strong>Validateur:</strong> <span t-field="o.validateur_id"/>
+                                    <br/>
+                                </t>
+                            </div>
+                        </div>
+                        
+                        <t t-if="o.notes">
+                            <div class="row">
+                                <div class="col-12">
+                                    <strong>Notes:</strong>
+                                    <p t-field="o.notes"/>
+                                </div>
+                            </div>
+                        </t>
+                        
+                        <div class="row mt32">
+                            <div class="col-12">
+                                <table class="table table-sm o_main_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Article</th>
+                                            <th class="text-right">Quantité</th>
+                                            <th>Unité</th>
+                                            <th class="text-right">Prix unitaire</th>
+                                            <th class="text-right">Montant total</th>
+                                            <t t-if="o.type in ('in', 'transfer')">
+                                                <th>Lot/Numéro de série</th>
+                                                <th>Date de péremption</th>
+                                            </t>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="o.line_ids" t-as="line">
+                                            <td><span t-field="line.article_id"/></td>
+                                            <td class="text-right"><span t-field="line.quantite"/></td>
+                                            <td><span t-field="line.uom_id"/></td>
+                                            <td class="text-right"><span t-field="line.prix_unitaire"/></td>
+                                            <td class="text-right"><span t-field="line.montant_total"/></td>
+                                            <t t-if="o.type in ('in', 'transfer')">
+                                                <td><span t-field="line.lot_id"/></td>
+                                                <td><span t-field="line.date_peremption"/></td>
+                                            </t>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4" class="text-right"><strong>Total</strong></td>
+                                            <td class="text-right">
+                                                <strong><span t-field="o.total_amount"/></strong>
+                                            </td>
+                                            <t t-if="o.type in ('in', 'transfer')">
+                                                <td colspan="2"/>
+                                            </t>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt64">
+                            <div class="col-6">
+                                <p>Signature responsable:</p>
+                                <div style="border-top: 1px solid black; width: 80%; height: 50px;"/>
+                            </div>
+                            <div class="col-6">
+                                <p>Signature validateur:</p>
+                                <div style="border-top: 1px solid black; width: 80%; height: 50px;"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_stock_movement">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="e_gestock_inventory.report_stock_movement_document" t-lang="o.responsable_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_stock_movement" model="ir.actions.report">
+        <field name="name">Bon de mouvement</field>
+        <field name="model">e_gestock.stock_movement</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_inventory.report_stock_movement</field>
+        <field name="report_file">e_gestock_inventory.report_stock_movement</field>
+        <field name="binding_model_id" ref="model_e_gestock_stock_movement"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo> 

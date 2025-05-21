@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Séquence pour les mouvements de stock (entrée) -->
+        <record id="sequence_stock_movement_in" model="ir.sequence">
+            <field name="name">Séquence Mouvement Entrée</field>
+            <field name="code">e_gestock.stock_movement.in</field>
+            <field name="prefix">ENT/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les mouvements de stock (sortie) -->
+        <record id="sequence_stock_movement_out" model="ir.sequence">
+            <field name="name">Séquence Mouvement Sortie</field>
+            <field name="code">e_gestock.stock_movement.out</field>
+            <field name="prefix">SOR/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les mouvements de stock (transfert) -->
+        <record id="sequence_stock_movement_transfer" model="ir.sequence">
+            <field name="name">Séquence Mouvement Transfert</field>
+            <field name="code">e_gestock.stock_movement.transfer</field>
+            <field name="prefix">TRA/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les mouvements de stock (ajustement) -->
+        <record id="sequence_stock_movement_adjustment" model="ir.sequence">
+            <field name="name">Séquence Mouvement Ajustement</field>
+            <field name="code">e_gestock.stock_movement.adjustment</field>
+            <field name="prefix">ADJ/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les inventaires -->
+        <record id="sequence_inventory" model="ir.sequence">
+            <field name="name">Séquence Inventaire</field>
+            <field name="code">e_gestock.inventory</field>
+            <field name="prefix">INV/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo> 

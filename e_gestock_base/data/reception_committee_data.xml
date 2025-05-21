@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Séquence pour les comités de réception -->
+        <record id="seq_e_gestock_reception_committee" model="ir.sequence">
+            <field name="name">Séquence comité de réception</field>
+            <field name="code">e_gestock.reception_committee</field>
+            <field name="prefix">COM/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

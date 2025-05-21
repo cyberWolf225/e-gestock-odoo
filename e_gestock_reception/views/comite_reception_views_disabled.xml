@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Commentaire: Ce fichier est désactivé car il fait référence à des vues et une action qui n'existent pas -->
+    <!-- Pour réactiver ce fichier, décommentez les lignes ci-dessous et spécifiez correctement les vues et l'action à désactiver -->
+    <!--
+    <record id="e_gestock_reception.view_comite_reception_form" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="e_gestock_reception.view_comite_reception_list" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="e_gestock_reception.view_comite_reception_search" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="e_gestock_reception.action_comite_reception" model="ir.actions.act_window">
+        <field name="active" eval="False"/>
+    </record>
+    -->
+</odoo>

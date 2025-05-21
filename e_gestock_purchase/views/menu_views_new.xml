@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu principal Achats -->
+    <menuitem id="menu_e_gestock_purchase_root" 
+              name="Achats" 
+              parent="e_gestock_base.menu_e_gestock_root" 
+              sequence="30"/>
+
+    <!-- Sous-menu Demandes de cotation -->
+    <menuitem id="menu_e_gestock_demande_cotation_root" 
+              name="Demandes de cotation" 
+              parent="menu_e_gestock_purchase_root" 
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_demande_cotation" 
+              name="Toutes les demandes" 
+              parent="menu_e_gestock_demande_cotation_root" 
+              action="action_e_gestock_demande_cotation" 
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_demande_cotation_gestionnaire" 
+              name="Mes demandes" 
+              parent="menu_e_gestock_demande_cotation_root" 
+              action="action_e_gestock_demande_cotation_gestionnaire" 
+              sequence="20" 
+              groups="e_gestock_base.group_e_gestock_purchase_user"/>
+
+    <menuitem id="menu_e_gestock_demande_cotation_responsable" 
+              name="Demandes à valider" 
+              parent="menu_e_gestock_demande_cotation_root" 
+              action="action_e_gestock_demande_cotation_responsable" 
+              sequence="30" 
+              groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+    <menuitem id="menu_e_gestock_demande_cotation_controler" 
+              name="Demandes à contrôler" 
+              parent="menu_e_gestock_demande_cotation_root" 
+              action="action_e_gestock_demande_cotation_controler" 
+              sequence="40" 
+              groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+    <menuitem id="menu_e_gestock_demande_cotation_cotation" 
+              name="Demandes pour cotation" 
+              parent="menu_e_gestock_demande_cotation_root" 
+              action="action_e_gestock_demande_cotation_cotation" 
+              sequence="50" 
+              groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+    <!-- Sous-menu Cotations -->
+    <menuitem id="menu_e_gestock_cotation_root" 
+              name="Cotations" 
+              parent="menu_e_gestock_purchase_root" 
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_cotation" 
+              name="Toutes les cotations" 
+              parent="menu_e_gestock_cotation_root" 
+              action="action_e_gestock_cotation" 
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_cotation_to_confirm" 
+              name="Cotations à confirmer" 
+              parent="menu_e_gestock_cotation_root" 
+              action="action_e_gestock_cotation_to_confirm" 
+              sequence="20" 
+              groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+    <menuitem id="menu_e_gestock_cotation_best_offers" 
+              name="Meilleures offres" 
+              parent="menu_e_gestock_cotation_root" 
+              action="action_e_gestock_cotation_best_offers" 
+              sequence="30" 
+              groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+    <menuitem id="menu_e_gestock_demande_cotation_fournisseur" 
+              name="Demandes aux fournisseurs" 
+              parent="menu_e_gestock_cotation_root" 
+              action="action_e_gestock_demande_cotation_fournisseur" 
+              sequence="40"/>
+
+    <!-- Sous-menu Bons de commande -->
+    <menuitem id="menu_e_gestock_purchase_order_root" 
+              name="Bons de commande" 
+              parent="menu_e_gestock_purchase_root" 
+              sequence="30"/>
+
+    <menuitem id="menu_e_gestock_purchase_order" 
+              name="Tous les bons de commande" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order" 
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_cmp" 
+              name="BC à valider (CMP)" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_cmp" 
+              sequence="20" 
+              groups="e_gestock_base.group_e_gestock_resp_dmp"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_budget" 
+              name="BC à valider (Budget)" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_budget" 
+              sequence="30" 
+              groups="e_gestock_base.group_e_gestock_budget_controller"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_dcg_dept" 
+              name="BC à valider (Chef Dép. DCG)" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_dcg_dept" 
+              sequence="40" 
+              groups="e_gestock_base.group_e_gestock_resp_dfc"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_dcg" 
+              name="BC à valider (Resp. DCG)" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_dcg" 
+              sequence="50" 
+              groups="e_gestock_base.group_dfc_validator"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_dgaaf" 
+              name="BC à valider (DGAAF)" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_dgaaf" 
+              sequence="60" 
+              groups="e_gestock_base.group_dgaa_validator"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_dg" 
+              name="BC à valider (DG)" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_dg" 
+              sequence="70" 
+              groups="e_gestock_base.group_dg_validator"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_approved" 
+              name="BC approuvés" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_approved" 
+              sequence="80"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_delivered" 
+              name="BC livrés" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_delivered" 
+              sequence="90"/>
+
+    <menuitem id="menu_e_gestock_purchase_order_received" 
+              name="BC réceptionnés" 
+              parent="menu_e_gestock_purchase_order_root" 
+              action="action_e_gestock_purchase_order_received" 
+              sequence="100" 
+              groups="e_gestock_base.group_e_gestock_reception_manager"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_e_gestock_purchase_config" 
+              name="Configuration" 
+              parent="menu_e_gestock_purchase_root" 
+              sequence="100" 
+              groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+</odoo>

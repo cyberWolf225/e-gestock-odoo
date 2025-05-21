@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_perdiem">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Demande de Perdiem</h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Référence:</strong>
+                                <span t-field="o.name"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Date:</strong>
+                                <span t-field="o.date"/>
+                            </div>
+                        </div>
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Demandeur:</strong>
+                                <span t-field="o.requester_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Structure:</strong>
+                                <span t-field="o.structure_id"/>
+                            </div>
+                        </div>
+                        <div class="row mt32 mb32">
+                            <div class="col-12">
+                                <strong>Motif:</strong>
+                                <p t-field="o.motif"/>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Bénéficiaire</th>
+                                    <th>Date début</th>
+                                    <th>Date fin</th>
+                                    <th>Nombre de jours</th>
+                                    <th>Montant journalier</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.beneficiary_ids" t-as="b">
+                                    <tr>
+                                        <td><span t-field="b.name"/></td>
+                                        <td><span t-field="b.date_debut"/></td>
+                                        <td><span t-field="b.date_fin"/></td>
+                                        <td><span t-field="b.nombre_jours"/></td>
+                                        <td><span t-field="b.montant_journalier"/></td>
+                                        <td><span t-field="b.montant_total"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="5" class="text-right"><strong>Total:</strong></td>
+                                    <td><span t-field="o.montant_total"/></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="row mt32 mb32">
+                            <div class="col-12">
+                                <strong>Statut:</strong>
+                                <span t-field="o.state"/>
+                            </div>
+                        </div>
+                        <div class="row mt32 mb32">
+                            <div class="col-12">
+                                <strong>Commentaires:</strong>
+                                <p t-field="o.commentaire"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo> 

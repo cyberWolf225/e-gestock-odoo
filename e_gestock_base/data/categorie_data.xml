@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Fournitures de bureau -->
+        <record id="categorie_fournitures_bureau" model="e_gestock.categorie">
+            <field name="code">FB001</field>
+            <field name="name">Fournitures de bureau</field>
+            <field name="description">Papeterie, stylos, classeurs et autres fournitures administratives</field>
+        </record>
+
+        <!-- Matériel informatique -->
+        <record id="categorie_informatique" model="e_gestock.categorie">
+            <field name="code">IT001</field>
+            <field name="name">Matériel informatique</field>
+            <field name="description">Ordinateurs, périphériques, serveurs et composants</field>
+        </record>
+
+        <!-- Logiciels et licences -->
+        <record id="categorie_logiciels" model="e_gestock.categorie">
+            <field name="code">LOG001</field>
+            <field name="name">Logiciels et licences</field>
+            <field name="description">Logiciels, licences et abonnements</field>
+        </record>
+
+        <!-- Mobilier de bureau -->
+        <record id="categorie_mobilier" model="e_gestock.categorie">
+            <field name="code">MOB001</field>
+            <field name="name">Mobilier de bureau</field>
+            <field name="description">Bureaux, chaises, armoires et mobilier d'entreprise</field>
+        </record>
+
+        <!-- Matériel de télécommunication -->
+        <record id="categorie_telecom" model="e_gestock.categorie">
+            <field name="code">TEL001</field>
+            <field name="name">Télécommunications</field>
+            <field name="description">Téléphones, équipements réseau et communication</field>
+        </record>
+
+        <!-- Équipements électriques -->
+        <record id="categorie_electrique" model="e_gestock.categorie">
+            <field name="code">ELE001</field>
+            <field name="name">Équipements électriques</field>
+            <field name="description">Matériel électrique, câbles, prises et éclairage</field>
+        </record>
+
+        <!-- Consommables -->
+        <record id="categorie_consommables" model="e_gestock.categorie">
+            <field name="code">CONS001</field>
+            <field name="name">Consommables</field>
+            <field name="description">Cartouches d'encre, toners, papier et autres consommables</field>
+        </record>
+
+        <!-- Maintenance et entretien -->
+        <record id="categorie_maintenance" model="e_gestock.categorie">
+            <field name="code">MAINT001</field>
+            <field name="name">Maintenance et entretien</field>
+            <field name="description">Pièces de rechange, outils et matériel d'entretien</field>
+        </record>
+
+        <!-- Hygiène et nettoyage -->
+        <record id="categorie_hygiene" model="e_gestock.categorie">
+            <field name="code">HYG001</field>
+            <field name="name">Hygiène et nettoyage</field>
+            <field name="description">Produits d'entretien, sanitaires et hygiène</field>
+        </record>
+
+        <!-- Matériel de sécurité -->
+        <record id="categorie_securite" model="e_gestock.categorie">
+            <field name="code">SEC001</field>
+            <field name="name">Sécurité</field>
+            <field name="description">Équipements de sécurité, alarmes, systèmes de surveillance</field>
+        </record>
+
+        <!-- Ressources humaines -->
+        <record id="categorie_rh" model="e_gestock.categorie">
+            <field name="code">RH001</field>
+            <field name="name">Ressources humaines</field>
+            <field name="description">Matériel de formation, documentation RH</field>
+        </record>
+
+        <!-- Marketing et communication -->
+        <record id="categorie_marketing" model="e_gestock.categorie">
+            <field name="code">MKT001</field>
+            <field name="name">Marketing et communication</field>
+            <field name="description">Supports marketing, PLV, documentation commerciale</field>
+        </record>
+
+        <!-- Véhicules et transport -->
+        <record id="categorie_vehicules" model="e_gestock.categorie">
+            <field name="code">VEH001</field>
+            <field name="name">Véhicules et transport</field>
+            <field name="description">Véhicules, pièces détachées et matériel de transport</field>
+        </record>
+
+        <!-- Restauration et cafétéria -->
+        <record id="categorie_restauration" model="e_gestock.categorie">
+            <field name="code">REST001</field>
+            <field name="name">Restauration et cafétéria</field>
+            <field name="description">Équipements de cuisine, distributeurs et fournitures alimentaires</field>
+        </record>
+
+        <!-- Divers -->
+        <record id="categorie_divers" model="e_gestock.categorie">
+            <field name="code">DIV001</field>
+            <field name="name">Divers</field>
+            <field name="description">Articles ne rentrant dans aucune autre catégorie</field>
+        </record>
+    </data>
+</odoo> 

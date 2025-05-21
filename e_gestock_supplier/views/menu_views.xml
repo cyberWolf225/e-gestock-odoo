@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu principal pour le module fournisseur -->
+    <menuitem id="menu_e_gestock_supplier_root" name="Fournisseurs" parent="e_gestock_base.menu_e_gestock_root" sequence="40"/>
+
+    <!-- Sous-menu pour les fournisseurs -->
+    <menuitem id="menu_e_gestock_supplier" name="Fournisseurs" parent="menu_e_gestock_supplier_root" action="action_e_gestock_supplier" sequence="10"/>
+
+    <!-- Sous-menu pour les catégories de fournisseurs -->
+    <menuitem id="menu_e_gestock_supplier_category" name="Catégories de fournisseur" parent="menu_e_gestock_supplier_root" action="action_e_gestock_supplier_category" sequence="20"/>
+
+    <!-- Sous-menu pour les articles fournisseur -->
+    <menuitem id="menu_e_gestock_supplier_article" name="Articles fournisseur" parent="menu_e_gestock_supplier_root" action="action_e_gestock_supplier_article" sequence="30"/>
+
+    <!-- Sous-menu Contrats -->
+    <menuitem id="menu_e_gestock_supplier_contract" name="Contrats" parent="menu_e_gestock_supplier_root" sequence="40"/>
+
+    <menuitem id="menu_e_gestock_supplier_contract_list" name="Contrats fournisseur" parent="menu_e_gestock_supplier_contract" action="action_e_gestock_supplier_contract" sequence="10"/>
+
+    <menuitem id="menu_e_gestock_contract_clause_template" name="Modèles de clauses" parent="menu_e_gestock_supplier_contract" action="action_e_gestock_contract_clause_template" sequence="20" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+    <!-- Sous-menu Évaluations -->
+    <menuitem id="menu_e_gestock_supplier_evaluation" name="Évaluations" parent="menu_e_gestock_supplier_root" sequence="50"/>
+
+    <menuitem id="menu_e_gestock_supplier_evaluation_list" name="Évaluations fournisseur" parent="menu_e_gestock_supplier_evaluation" action="action_e_gestock_supplier_evaluation" sequence="10"/>
+
+    <menuitem id="menu_e_gestock_evaluation_criteria" name="Critères d'évaluation" parent="menu_e_gestock_supplier_evaluation" action="action_e_gestock_evaluation_criteria" sequence="20" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+    <!-- Sous-menu Configuration -->
+    <menuitem id="menu_e_gestock_supplier_config" name="Configuration" parent="menu_e_gestock_supplier_root" sequence="100" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Les groupes sont maintenant définis dans le module de base e_gestock_base -->
+
+        <!-- Règles de sécurité -->
+
+        <!-- Règle: les utilisateurs ne peuvent voir que leurs propres demandes -->
+        <record id="rule_perdiem_user" model="ir.rule">
+            <field name="name">Perdiem: utilisateurs voient leurs demandes</field>
+            <field name="model_id" ref="model_e_gestock_perdiem"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_perdiem_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Règle: les demandeurs peuvent créer et modifier leurs propres demandes -->
+        <record id="rule_perdiem_requester" model="ir.rule">
+            <field name="name">Perdiem: demandeurs gèrent leurs demandes</field>
+            <field name="model_id" ref="model_e_gestock_perdiem"/>
+            <field name="domain_force">[('create_uid', '=', user.id), ('state', 'in', ['draft', 'rejected'])]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_perdiem_requester'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règle: les validateurs peuvent voir toutes les demandes de leur structure -->
+        <record id="rule_perdiem_validator" model="ir.rule">
+            <field name="name">Perdiem: validateurs voient les demandes de leur structure</field>
+            <field name="model_id" ref="model_e_gestock_perdiem"/>
+            <field name="domain_force">[('structure_id', 'in', user.structure_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_perdiem_validator'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Règle: les responsables peuvent voir et gérer toutes les demandes -->
+        <record id="rule_perdiem_manager" model="ir.rule">
+            <field name="name">Perdiem: responsables gèrent toutes les demandes</field>
+            <field name="model_id" ref="model_e_gestock_perdiem"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_perdiem_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les emplacements -->
+    <record id="view_emplacement_form" model="ir.ui.view">
+        <field name="name">e_gestock.emplacement.form</field>
+        <field name="model">e_gestock.emplacement</field>
+        <field name="arch" type="xml">
+            <form string="Emplacement">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom de l'emplacement..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="depot_id" options="{'no_create': True}"/>
+                            <field name="parent_id" domain="[('depot_id', '=', depot_id), ('id', '!=', id)]" options="{'no_create': True}"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="location_id" readonly="1"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Caractéristiques">
+                            <group>
+                                <group string="Dimensions">
+                                    <field name="hauteur"/>
+                                    <field name="largeur"/>
+                                    <field name="profondeur"/>
+                                    <field name="volume"/>
+                                    <field name="capacite"/>
+                                </group>
+                                <group string="Contraintes">
+                                    <field name="temperature_min"/>
+                                    <field name="temperature_max"/>
+                                    <field name="humidite_min"/>
+                                    <field name="humidite_max"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Emplacements enfants" invisible="not child_ids">
+                            <field name="child_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="type"/>
+                                    <field name="active" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Description">
+                            <field name="description" placeholder="Description de l'emplacement..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les emplacements -->
+    <record id="view_emplacement_list" model="ir.ui.view">
+        <field name="name">e_gestock.emplacement.list</field>
+        <field name="model">e_gestock.emplacement</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="depot_id"/>
+                <field name="parent_id"/>
+                <field name="type"/>
+                <field name="capacite"/>
+                <field name="volume"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les emplacements -->
+    <record id="view_emplacement_search" model="ir.ui.view">
+        <field name="name">e_gestock.emplacement.search</field>
+        <field name="model">e_gestock.emplacement</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="depot_id"/>
+                <field name="parent_id"/>
+                <separator/>
+                <filter string="Réception" name="reception" domain="[('type', '=', 'reception')]"/>
+                <filter string="Stockage" name="stockage" domain="[('type', '=', 'stockage')]"/>
+                <filter string="Préparation" name="preparation" domain="[('type', '=', 'preparation')]"/>
+                <filter string="Expédition" name="expedition" domain="[('type', '=', 'expedition')]"/>
+                <filter string="Quarantaine" name="quarantaine" domain="[('type', '=', 'quarantaine')]"/>
+                <filter string="Rebut" name="rebut" domain="[('type', '=', 'rebut')]"/>
+                <separator/>
+                <filter string="Emplacements racine" name="root" domain="[('parent_id', '=', False)]"/>
+                <filter string="Inactifs" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Dépôt" name="group_by_depot" context="{'group_by': 'depot_id'}"/>
+                    <filter string="Parent" name="group_by_parent" context="{'group_by': 'parent_id'}"/>
+                    <filter string="Type" name="group_by_type" context="{'group_by': 'type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour les emplacements préférés par article -->
+    <record id="view_article_emplacement_form" model="ir.ui.view">
+        <field name="name">e_gestock.article.emplacement.form</field>
+        <field name="model">e_gestock.article.emplacement</field>
+        <field name="arch" type="xml">
+            <form string="Emplacement préféré">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="article_id" options="{'no_create': True}"/>
+                            <field name="depot_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="emplacement_id" domain="[('depot_id', '=', depot_id), ('type', '=', 'stockage')]" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les emplacements préférés par article -->
+    <record id="view_article_emplacement_list" model="ir.ui.view">
+        <field name="name">e_gestock.article.emplacement.list</field>
+        <field name="model">e_gestock.article.emplacement</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="article_id"/>
+                <field name="depot_id"/>
+                <field name="emplacement_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les emplacements préférés par article -->
+    <record id="view_article_emplacement_search" model="ir.ui.view">
+        <field name="name">e_gestock.article.emplacement.search</field>
+        <field name="model">e_gestock.article.emplacement</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="article_id"/>
+                <field name="depot_id"/>
+                <field name="emplacement_id"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Article" name="group_by_article" context="{'group_by': 'article_id'}"/>
+                    <filter string="Dépôt" name="group_by_depot" context="{'group_by': 'depot_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les emplacements -->
+    <record id="action_emplacement" model="ir.actions.act_window">
+        <field name="name">Emplacements</field>
+        <field name="res_model">e_gestock.emplacement</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouvel emplacement
+            </p>
+            <p>
+                Les emplacements définissent les lieux de stockage des articles dans vos dépôts.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action pour les emplacements préférés par article -->
+    <record id="action_article_emplacement" model="ir.actions.act_window">
+        <field name="name">Emplacements préférés</field>
+        <field name="res_model">e_gestock.article.emplacement</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Définir un emplacement préféré pour un article
+            </p>
+            <p>
+                Les emplacements préférés permettent de suggérer automatiquement où ranger les articles lors de la réception.
+            </p>
+        </field>
+    </record>
+</odoo>

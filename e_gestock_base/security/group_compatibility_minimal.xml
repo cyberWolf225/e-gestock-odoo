@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--
+        Ce fichier établit des liens minimaux entre les groupes spécifiques E-GESTOCK et le système de groupes d'Odoo.
+        Il ne crée pas de dépendances avec les modules spécifiques d'Odoo, mais assure la compatibilité avec le système de base.
+        -->
+
+        <!-- Lien minimal pour assurer la compatibilité avec le système de groupes d'Odoo -->
+        <record id="link_base_user_groups" model="res.groups">
+            <field name="name">Utilisateur Base E-GESTOCK</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="e_gestock_base.module_category_e_gestock"/>
+        </record>
+        <function model="res.groups" name="write">
+            <value eval="[ref('e_gestock_base.group_e_gestock_user')]"/>
+            <value eval="{'implied_ids': [(4, ref('link_base_user_groups'))]}"/>
+        </function>
+
+        <!-- Lien pour les groupes de portail -->
+        <record id="link_portal_supplier_groups" model="res.groups">
+            <field name="name">Fournisseur Portail E-GESTOCK</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="category_id" ref="e_gestock_base.module_category_e_gestock"/>
+            <field name="comment">Groupe de compatibilité pour les fournisseurs portail</field>
+        </record>
+        <function model="res.groups" name="write">
+            <value eval="[ref('e_gestock_base.group_e_gestock_fournisseur')]"/>
+            <value eval="{'implied_ids': [(4, ref('link_portal_supplier_groups'))]}"/>
+        </function>
+    </data>
+</odoo>

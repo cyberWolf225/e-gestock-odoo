@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les quarantaines -->
+    <record id="view_reception_quarantine_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quarantine.form</field>
+        <field name="model">e_gestock.reception.quarantine</field>
+        <field name="arch" type="xml">
+            <form string="Quarantaine">
+                <header>
+                    <button name="action_confirm" string="Confirmer" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_start" string="Démarrer" type="object"
+                            class="oe_highlight" invisible="state != 'confirmed'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_inspection" string="En inspection" type="object"
+                            invisible="state != 'in_progress'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_request_decision" string="Demander décision" type="object"
+                            class="oe_highlight" invisible="state != 'inspection'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_accept" string="Accepter" type="object"
+                            class="oe_highlight" invisible="state != 'decision'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_reject" string="Rejeter" type="object"
+                            invisible="state != 'decision'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_close" string="Clôturer" type="object"
+                            invisible="state not in ['accepted', 'rejected']"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,in_progress,inspection,decision,accepted,rejected,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_inspections" type="object" class="oe_stat_button" icon="fa-search"
+                                invisible="inspection_count == 0">
+                            <field name="inspection_count" string="Inspections" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date_debut"/>
+                            <field name="date_echeance"/>
+                            <field name="date_fin" readonly="1" invisible="not date_fin"/>
+                            <field name="duree" readonly="1"/>
+                            <field name="reception_id" options="{'no_create': True}"/>
+                            <field name="fournisseur_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="article_id" options="{'no_create': True}"/>
+                            <field name="designation"/>
+                            <field name="quantite"/>
+                            <field name="zone_id" options="{'no_create': True}"/>
+                            <field name="emplacement"/>
+                            <field name="motif"/>
+                            <field name="responsable_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Description détaillée du motif de mise en quarantaine..."/>
+                        </page>
+                        <page string="Décision" invisible="state not in ['decision', 'accepted', 'rejected', 'closed']">
+                            <group>
+                                <group>
+                                    <field name="decision" readonly="state in ['accepted', 'rejected', 'closed']"/>
+                                    <field name="decision_date" readonly="1" invisible="not decision_date"/>
+                                    <field name="decision_user_id" readonly="1" invisible="not decision_user_id"/>
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+                            <field name="decision_commentaire" placeholder="Commentaire sur la décision..." readonly="state in ['accepted', 'rejected', 'closed']"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les quarantaines -->
+    <record id="view_reception_quarantine_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quarantine.list</field>
+        <field name="model">e_gestock.reception.quarantine</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'"
+                  decoration-warning="state in ['confirmed', 'in_progress']"
+                  decoration-primary="state == 'inspection'"
+                  decoration-danger="state == 'decision'"
+                  decoration-success="state == 'accepted'"
+                  decoration-muted="state in ['rejected', 'closed']">
+                <field name="reference"/>
+                <field name="date_debut"/>
+                <field name="date_echeance"/>
+                <field name="duree"/>
+                <field name="reception_id"/>
+                <field name="fournisseur_id"/>
+                <field name="article_id"/>
+                <field name="designation"/>
+                <field name="quantite"/>
+                <field name="zone_id"/>
+                <field name="motif"/>
+                <field name="responsable_id"/>
+                <field name="state"/>
+                <field name="decision" invisible="state not in ['decision', 'accepted', 'rejected', 'closed']"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les quarantaines -->
+    <record id="view_reception_quarantine_search" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quarantine.search</field>
+        <field name="model">e_gestock.reception.quarantine</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="reception_id"/>
+                <field name="fournisseur_id"/>
+                <field name="article_id"/>
+                <field name="designation"/>
+                <field name="zone_id"/>
+                <field name="responsable_id"/>
+                <separator/>
+                <filter string="Brouillons" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmées" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="En cours" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter string="En inspection" name="inspection" domain="[('state', '=', 'inspection')]"/>
+                <filter string="Décision requise" name="decision" domain="[('state', '=', 'decision')]"/>
+                <filter string="Acceptées" name="accepted" domain="[('state', '=', 'accepted')]"/>
+                <filter string="Rejetées" name="rejected" domain="[('state', '=', 'rejected')]"/>
+                <filter string="Clôturées" name="closed" domain="[('state', '=', 'closed')]"/>
+                <separator/>
+                <filter string="Mes quarantaines" name="my_quarantines" domain="[('responsable_id', '=', uid)]"/>
+                <filter string="Échéance dépassée" name="overdue" domain="[('date_echeance', '&lt;', context_today().strftime('%Y-%m-%d')), ('state', 'in', ['confirmed', 'in_progress', 'inspection'])]"/>
+                <filter string="Aujourd'hui" name="today" domain="[('date_debut', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Réception" name="group_by_reception" context="{'group_by': 'reception_id'}"/>
+                    <filter string="Fournisseur" name="group_by_fournisseur" context="{'group_by': 'fournisseur_id'}"/>
+                    <filter string="Article" name="group_by_article" context="{'group_by': 'article_id'}"/>
+                    <filter string="Zone" name="group_by_zone" context="{'group_by': 'zone_id'}"/>
+                    <filter string="Motif" name="group_by_motif" context="{'group_by': 'motif'}"/>
+                    <filter string="Responsable" name="group_by_responsable" context="{'group_by': 'responsable_id'}"/>
+                    <filter string="État" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Décision" name="group_by_decision" context="{'group_by': 'decision'}"/>
+                    <filter string="Date de début" name="group_by_date_debut" context="{'group_by': 'date_debut'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour les zones de quarantaine -->
+    <record id="view_reception_quarantine_zone_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quarantine.zone.form</field>
+        <field name="model">e_gestock.reception.quarantine.zone</field>
+        <field name="arch" type="xml">
+            <form string="Zone de quarantaine">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom de la zone..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="depot_id" options="{'no_create': True}"/>
+                            <field name="location_id" domain="[('usage', '=', 'inventory')]"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Description de la zone de quarantaine..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les zones de quarantaine -->
+    <record id="view_reception_quarantine_zone_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quarantine.zone.list</field>
+        <field name="model">e_gestock.reception.quarantine.zone</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="depot_id"/>
+                <field name="location_id"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour les inspections de quarantaine -->
+    <record id="view_reception_quarantine_inspection_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quarantine.inspection.form</field>
+        <field name="model">e_gestock.reception.quarantine.inspection</field>
+        <field name="arch" type="xml">
+            <form string="Inspection complémentaire">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="quarantine_id" options="{'no_create': True}"/>
+                            <field name="date"/>
+                            <field name="inspecteur_id"/>
+                        </group>
+                        <group>
+                            <field name="article_id" readonly="1"/>
+                            <field name="designation" readonly="1"/>
+                            <field name="quantite" readonly="1"/>
+                            <field name="type_inspection"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Inspection">
+                            <group>
+                                <field name="description" placeholder="Description de l'inspection réalisée..."/>
+                            </group>
+                        </page>
+                        <page string="Résultat">
+                            <group>
+                                <group>
+                                    <field name="resultat"/>
+                                    <field name="recommandation"/>
+                                </group>
+                                <group>
+                                    <field name="piece_jointe" filename="piece_jointe_nom"/>
+                                    <field name="piece_jointe_nom" invisible="1"/>
+                                </group>
+                            </group>
+                            <field name="commentaire" placeholder="Commentaire sur le résultat..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les inspections de quarantaine -->
+    <record id="view_reception_quarantine_inspection_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quarantine.inspection.list</field>
+        <field name="model">e_gestock.reception.quarantine.inspection</field>
+        <field name="arch" type="xml">
+            <list decoration-success="resultat == 'conforme'"
+                  decoration-danger="resultat == 'non_conforme'"
+                  decoration-warning="resultat == 'partiellement'">
+                <field name="quarantine_id"/>
+                <field name="date"/>
+                <field name="inspecteur_id"/>
+                <field name="type_inspection"/>
+                <field name="resultat"/>
+                <field name="recommandation"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action pour les quarantaines -->
+    <record id="action_reception_quarantine" model="ir.actions.act_window">
+        <field name="name">Quarantaines</field>
+        <field name="res_model">e_gestock.reception.quarantine</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_draft': 1, 'search_default_confirmed': 1, 'search_default_in_progress': 1, 'search_default_inspection': 1, 'search_default_decision': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle quarantaine
+            </p>
+            <p>
+                Les quarantaines permettent d'isoler les articles non conformes pour inspection complémentaire.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action pour les zones de quarantaine -->
+    <record id="action_reception_quarantine_zone" model="ir.actions.act_window">
+        <field name="name">Zones de quarantaine</field>
+        <field name="res_model">e_gestock.reception.quarantine.zone</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle zone de quarantaine
+            </p>
+            <p>
+                Les zones de quarantaine définissent les emplacements où sont stockés les articles en quarantaine.
+            </p>
+        </field>
+    </record>
+</odoo>

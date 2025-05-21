@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu pour les types de gestion -->
+    <menuitem id="menu_action_e_gestock_type_gestion"
+              name="Types de gestion"
+              parent="menu_e_gestock_type_gestion_config"
+              action="action_e_gestock_type_gestion"
+              sequence="10"/>
+</odoo>

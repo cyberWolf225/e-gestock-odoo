@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour la demande de cotation -->
+    <record id="view_e_gestock_demande_cotation_form" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation.form</field>
+        <field name="model">e_gestock.demande_cotation</field>
+        <field name="arch" type="xml">
+            <form string="Demande de cotation">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,quotation,quoted,selected,po_generated,delivered,received"/>
+
+                    <button name="action_submit" string="Transférer" type="object"
+                            class="oe_highlight" invisible="state != 'draft'" groups="purchase.group_purchase_user"/>
+
+                    <button name="action_validate" string="Valider" type="object"
+                            class="oe_highlight" invisible="state != 'submitted'" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_check_budget" string="Vérifier budget" type="object"
+                            class="oe_highlight" invisible="state != 'validated'" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_approve" string="Approuver" type="object"
+                            class="oe_highlight" invisible="state != 'budget_checked'" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_send_quotation" string="Demander cotations" type="object"
+                            class="oe_highlight" invisible="state != 'approved'" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_cancel" string="Annuler" type="object"
+                            invisible="state not in ('draft', 'submitted', 'validated', 'approved', 'quotation')"
+                            groups="purchase.group_purchase_manager"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_cotations" type="object" class="oe_stat_button" icon="fa-list-alt"
+                                invisible="cotation_count == 0">
+                            <field name="cotation_count" widget="statinfo" string="Cotations"/>
+                        </button>
+                        <button name="action_view_fournisseurs" type="object" class="oe_stat_button" icon="fa-users"
+                                invisible="fournisseur_count == 0">
+                            <field name="fournisseur_count" widget="statinfo" string="Demandes fournisseurs"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="exercice_id" readonly="state != 'draft'" options="{'no_create': True}"/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="demandeur_id" readonly="state != 'draft'"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="compte_budg_id" required="1" readonly="state != 'draft'" options="{'no_create': True}"/>
+                            <field name="designation_compte" readonly="1"/>
+                            <field name="structure_id" required="1" readonly="state != 'draft'" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="gestion_id" required="1" readonly="state != 'draft'" options="{'no_create': True}"/>
+                            <field name="designation_gestion" readonly="1"/>
+                            <field name="intitule" required="1" readonly="state != 'draft'"/>
+                            <field name="solde_disponible" readonly="1"/>
+                            <field name="montant_total" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="is_stockable" widget="boolean_toggle" readonly="state != 'draft'"/>
+                    </group>
+                    <notebook>
+                        <page string="Articles" name="lines">
+                            <field name="line_ids" widget="one2many_list" mode="list,kanban" readonly="state != 'draft'" context="{'default_is_stockable': is_stockable}">
+                                <list editable="bottom">
+                                    <field name="is_selected" widget="boolean_toggle" column_invisible="parent.state != 'submitted'" readonly="parent.state != 'submitted'"/>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="ref_article" readonly="1"/>
+                                    <field name="article_id" domain="[('famille_id', '=', parent.compte_budg_id)]" required="parent.is_stockable == True" readonly="parent.state != 'draft'"/>
+                                    <field name="designation" required="1" readonly="parent.state != 'draft'"/>
+                                    <field name="description" readonly="parent.state != 'draft'"/>
+                                    <field name="unite_id" readonly="parent.state != 'draft'"/>
+                                    <field name="quantite" required="1" readonly="parent.state != 'draft'"/>
+                                    <field name="prix_unitaire_estime" readonly="1"/>
+                                    <field name="prix_unitaire" readonly="parent.state != 'draft'"/>
+                                    <field name="montant_estime" sum="Total" readonly="1"/>
+                                    <field name="quantite_accordee" column_invisible="parent.state != 'submitted'" readonly="parent.state != 'submitted'"/>
+                                    <field name="echantillon" widget="binary" filename="echantillon_filename" readonly="parent.state != 'draft'"/>
+                                    <field name="echantillon_filename" invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Commentaires" name="commentaires">
+                            <group>
+                                <field name="urgence_signalee" readonly="state != 'draft'"/>
+                                <field name="note" placeholder="Ajouter ici vos commentaires..." readonly="state != 'draft'"/>
+                                <field name="memo_motivation" widget="binary" filename="memo_filename" readonly="state != 'draft'"/>
+                                <field name="memo_filename" invisible="1"/>
+                            </group>
+                        </page>
+                        <page string="Cotations" name="cotations" invisible="state not in ['quotation', 'quoted', 'selected', 'po_generated', 'delivered', 'received']">
+                            <field name="cotation_ids" readonly="1">
+                                <list>
+                                    <field name="reference"/>
+                                    <field name="supplier_id"/>
+                                    <field name="date"/>
+                                    <field name="montant_total"/>
+                                    <field name="delai_livraison"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="state"/>
+                                    <field name="is_best_offer"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Fournisseurs" name="suppliers" invisible="state not in ['approved', 'quotation']">
+                            <group>
+                                <field name="supplier_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                            </group>
+                        </page>
+                        <page string="Bon de commande" name="po" invisible="purchase_order_id == False">
+                            <group>
+                                <field name="purchase_order_id" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour la demande de cotation -->
+    <record id="view_e_gestock_demande_cotation_list" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation.list</field>
+        <field name="model">e_gestock.demande_cotation</field>
+        <field name="arch" type="xml">
+            <list string="Demandes de cotation" decoration-info="state=='draft'" decoration-warning="state=='submitted'" decoration-success="state in ('validated', 'approved', 'quotation', 'quoted', 'selected', 'po_generated', 'delivered', 'received')" decoration-muted="state=='cancelled'">
+                <field name="reference"/>
+                <field name="date"/>
+                <field name="exercice_id"/>
+                <field name="demandeur_id"/>
+                <field name="structure_id"/>
+                <field name="compte_budg_id"/>
+                <field name="intitule"/>
+                <field name="montant_total" sum="Total" widget="monetary"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour la demande de cotation -->
+    <record id="view_e_gestock_demande_cotation_search" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation.search</field>
+        <field name="model">e_gestock.demande_cotation</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des demandes de cotation">
+                <field name="reference"/>
+                <field name="demandeur_id"/>
+                <field name="intitule"/>
+                <field name="structure_id"/>
+                <field name="compte_budg_id"/>
+                <separator/>
+                <filter name="draft" string="Brouillon" domain="[('state', '=', 'draft')]"/>
+                <filter name="submitted" string="Soumise" domain="[('state', '=', 'submitted')]"/>
+                <filter name="validated" string="Validée" domain="[('state', '=', 'validated')]"/>
+                <filter name="budget_checked" string="Budget vérifié" domain="[('state', '=', 'budget_checked')]"/>
+                <filter name="approved" string="Approuvée" domain="[('state', '=', 'approved')]"/>
+                <filter name="quotation" string="En attente cotation" domain="[('state', '=', 'quotation')]"/>
+                <filter name="quoted" string="Cotations reçues" domain="[('state', '=', 'quoted')]"/>
+                <filter name="selected" string="Fournisseur sélectionné" domain="[('state', '=', 'selected')]"/>
+                <filter name="po_generated" string="BC généré" domain="[('state', '=', 'po_generated')]"/>
+                <filter name="delivered" string="Livrée" domain="[('state', '=', 'delivered')]"/>
+                <filter name="received" string="Réceptionnée" domain="[('state', '=', 'received')]"/>
+                <filter name="cancelled" string="Annulée" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter name="my_requests" string="Mes demandes" domain="[('demandeur_id', '=', uid)]"/>
+                <filter name="urgent" string="Urgence signalée" domain="[('urgence_signalee', '=', True)]"/>
+                <filter name="stockable" string="Commandes stockables" domain="[('is_stockable', '=', True)]"/>
+                <separator/>
+                <filter name="today" string="Aujourd'hui" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="week" string="Cette semaine" domain="[('date', '>=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today() + datetime.timedelta(days=6-context_today().weekday())).strftime('%Y-%m-%d'))]"/>
+                <filter name="month" string="Ce mois" domain="[('date', '>=', (context_today().replace(day=1)).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today().replace(day=calendar.monthrange(context_today().year, context_today().month)[1])).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_by_state" string="État" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_demandeur" string="Demandeur" context="{'group_by': 'demandeur_id'}"/>
+                    <filter name="group_by_exercice" string="Exercice" context="{'group_by': 'exercice_id'}"/>
+                    <filter name="group_by_structure" string="Structure" context="{'group_by': 'structure_id'}"/>
+                    <filter name="group_by_compte" string="Compte budgétaire" context="{'group_by': 'compte_budg_id'}"/>
+                    <filter name="group_by_date" string="Date" context="{'group_by': 'date:day'}"/>
+                    <filter name="group_by_month" string="Mois" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue calendrier des demandes de cotation -->
+    <record id="view_e_gestock_demande_cotation_calendar" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation.calendar</field>
+        <field name="model">e_gestock.demande_cotation</field>
+        <field name="arch" type="xml">
+            <calendar string="Demandes de cotation" date_start="date" color="state" mode="month">
+                <field name="reference"/>
+                <field name="intitule"/>
+                <field name="demandeur_id"/>
+                <field name="montant_total"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Vue pivot des demandes de cotation -->
+    <record id="view_e_gestock_demande_cotation_pivot" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation.pivot</field>
+        <field name="model">e_gestock.demande_cotation</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des demandes">
+                <field name="exercice_id" type="row"/>
+                <field name="structure_id" type="row"/>
+                <field name="compte_budg_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="montant_total" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Vue graphique des demandes de cotation -->
+    <record id="view_e_gestock_demande_cotation_graph" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation.graph</field>
+        <field name="model">e_gestock.demande_cotation</field>
+        <field name="arch" type="xml">
+            <graph string="Analyse des demandes" type="bar">
+                <field name="structure_id"/>
+                <field name="date" interval="month"/>
+                <field name="state" type="row"/>
+                <field name="montant_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Actions pour les demandes de cotation -->
+    <record id="action_e_gestock_demande_cotation" model="ir.actions.act_window">
+        <field name="name">Demandes de cotation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.demande_cotation</field>
+        <field name="view_mode">list,form,calendar,pivot,graph</field>
+        <field name="search_view_id" ref="view_e_gestock_demande_cotation_search"/>
+        <field name="context">{'search_default_draft': 1, 'search_default_submitted': 1, 'search_default_validated': 1, 'search_default_budget_checked': 1, 'search_default_approved': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune demande de cotation trouvée
+            </p>
+            <p>
+                Créez votre première demande de cotation pour initier le processus d'achat.
+            </p>
+        </field>
+    </record>
+
+    <!-- Actions spécifiques par profil -->
+    <record id="action_e_gestock_demande_cotation_gestionnaire" model="ir.actions.act_window">
+        <field name="name">Mes demandes de cotation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.demande_cotation</field>
+        <field name="view_mode">list,form,calendar</field>
+        <field name="domain">[('demandeur_id', '=', uid)]</field>
+        <field name="search_view_id" ref="view_e_gestock_demande_cotation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune demande de cotation trouvée
+            </p>
+            <p>
+                Créez votre première demande de cotation pour initier le processus d'achat.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_demande_cotation_responsable" model="ir.actions.act_window">
+        <field name="name">Demandes à valider</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.demande_cotation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'submitted')]</field>
+        <field name="search_view_id" ref="view_e_gestock_demande_cotation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune demande de cotation à valider
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_demande_cotation_controler" model="ir.actions.act_window">
+        <field name="name">Demandes à contrôler</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.demande_cotation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'validated')]</field>
+        <field name="search_view_id" ref="view_e_gestock_demande_cotation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune demande de cotation à contrôler
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_demande_cotation_cotation" model="ir.actions.act_window">
+        <field name="name">Demandes pour cotation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.demande_cotation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', 'in', ['approved', 'quotation', 'quoted'])]</field>
+        <field name="search_view_id" ref="view_e_gestock_demande_cotation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune demande prête pour cotation
+            </p>
+        </field>
+    </record>
+</odoo>

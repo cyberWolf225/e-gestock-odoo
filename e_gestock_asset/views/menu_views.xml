@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu principal pour le module immobilisations -->
+    <menuitem id="menu_e_gestock_asset_root"
+              name="Immobilisations"
+              parent="e_gestock_base.menu_e_gestock_root"
+              sequence="50"/>
+
+    <!-- Sous-menu pour les immobilisations -->
+    <menuitem id="menu_e_gestock_asset"
+              name="Immobilisations"
+              parent="menu_e_gestock_asset_root"
+              action="action_e_gestock_asset"
+              sequence="10"/>
+
+    <!-- Sous-menu pour les maintenances -->
+    <menuitem id="menu_e_gestock_asset_maintenance"
+              name="Maintenances"
+              parent="menu_e_gestock_asset_root"
+              action="action_e_gestock_asset_maintenance"
+              sequence="20"/>
+
+    <!-- Sous-menu pour les affectations -->
+    <menuitem id="menu_e_gestock_asset_assignment"
+              name="Affectations"
+              parent="menu_e_gestock_asset_root"
+              action="action_e_gestock_asset_assignment"
+              sequence="30"/>
+
+    <!-- Sous-menu pour les transferts -->
+    <menuitem id="menu_e_gestock_asset_transfer"
+              name="Transferts"
+              parent="menu_e_gestock_asset_root"
+              action="action_e_gestock_asset_transfer"
+              sequence="40"/>
+
+    <!-- Sous-menu pour les cessions -->
+    <menuitem id="menu_e_gestock_asset_disposal"
+              name="Cessions"
+              parent="menu_e_gestock_asset_root"
+              action="action_e_gestock_asset_disposal"
+              sequence="50"/>
+
+    <!-- Sous-menu pour les documents -->
+    <menuitem id="menu_e_gestock_asset_document"
+              name="Documents"
+              parent="menu_e_gestock_asset_root"
+              action="action_e_gestock_asset_document"
+              sequence="60"/>
+
+    <!-- Sous-menu pour la configuration -->
+    <menuitem id="menu_e_gestock_asset_config"
+              name="Configuration"
+              parent="menu_e_gestock_asset_root"
+              sequence="100"
+              groups="e_gestock_base.group_e_gestock_asset_manager"/>
+
+    <!-- Sous-menu pour les types d'immobilisations -->
+    <menuitem id="menu_e_gestock_asset_type"
+              name="Types d'immobilisations"
+              parent="menu_e_gestock_asset_config"
+              action="action_e_gestock_asset_type"
+              sequence="10"/>
+</odoo>

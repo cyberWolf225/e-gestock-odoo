@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les structures -->
+    <record id="view_e_gestock_structure_form" model="ir.ui.view">
+        <field name="name">e_gestock.structure.form</field>
+        <field name="model">e_gestock.structure</field>
+        <field name="arch" type="xml">
+            <form string="Structure">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="code_structure" class="oe_edit_only"/>
+                        <h1><field name="code_structure" placeholder="Code (ex: 9101)"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="nom_structure" placeholder="Nom de la structure"/>
+                            <field name="num_structure"/>
+                            <field name="ref_depot" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="organisation_id" options="{'no_create': True}"/>
+                            <field name="section_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sections">
+                            <field name="section_ids" readonly="0">
+                                <list>
+                                    <field name="code_section"/>
+                                    <field name="nom_section"/>
+                                    <field name="code_gestion"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Structures enfants" invisible="child_ids == []">
+                            <field name="child_ids" readonly="1">
+                                <list>
+                                    <field name="code_structure"/>
+                                    <field name="nom_structure"/>
+                                    <field name="section_count"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les structures -->
+    <record id="view_e_gestock_structure_list" model="ir.ui.view">
+        <field name="name">e_gestock.structure.list</field>
+        <field name="model">e_gestock.structure</field>
+        <field name="arch" type="xml">
+            <list string="Structures">
+                <field name="code_structure"/>
+                <field name="nom_structure"/>
+                <field name="ref_depot"/>
+                <field name="organisation_id"/>
+                <field name="section_count"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- La vue hiérarchique a été supprimée car non supportée dans Odoo 18 -->
+
+    <!-- Vue recherche pour les structures -->
+    <record id="view_e_gestock_structure_search" model="ir.ui.view">
+        <field name="name">e_gestock.structure.search</field>
+        <field name="model">e_gestock.structure</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher une structure">
+                <field name="code_structure"/>
+                <field name="nom_structure"/>
+                <field name="ref_depot"/>
+                <filter string="Archivé" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Dépôt" name="group_by_depot" context="{'group_by': 'ref_depot'}"/>
+                    <filter string="Organisation parente" name="group_by_organisation" context="{'group_by': 'organisation_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les structures -->
+    <record id="action_e_gestock_structure" model="ir.actions.act_window">
+        <field name="name">Structures</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.structure</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_e_gestock_structure_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle structure
+            </p>
+            <p>
+                Les structures sont les entités organisationnelles principales qui peuvent contenir des sections.
+            </p>
+        </field>
+    </record>
+</odoo>

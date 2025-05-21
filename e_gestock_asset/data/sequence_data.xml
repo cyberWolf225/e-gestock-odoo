@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Séquence pour les immobilisations -->
+        <record id="seq_e_gestock_asset" model="ir.sequence">
+            <field name="name">Immobilisation</field>
+            <field name="code">e_gestock.asset</field>
+            <field name="prefix">IMM/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Séquence pour les maintenances -->
+        <record id="seq_e_gestock_asset_maintenance" model="ir.sequence">
+            <field name="name">Maintenance d'immobilisation</field>
+            <field name="code">e_gestock.asset_maintenance</field>
+            <field name="prefix">MAINT/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Séquence pour les affectations -->
+        <record id="seq_e_gestock_asset_assignment" model="ir.sequence">
+            <field name="name">Affectation d'immobilisation</field>
+            <field name="code">e_gestock.asset_assignment</field>
+            <field name="prefix">AFF/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Séquence pour les transferts -->
+        <record id="seq_e_gestock_asset_transfer" model="ir.sequence">
+            <field name="name">Transfert d'immobilisation</field>
+            <field name="code">e_gestock.asset_transfer</field>
+            <field name="prefix">TRANS/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <!-- Séquence pour les cessions -->
+        <record id="seq_e_gestock_asset_disposal" model="ir.sequence">
+            <field name="name">Cession d'immobilisation</field>
+            <field name="code">e_gestock.asset_disposal</field>
+            <field name="prefix">CESS/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

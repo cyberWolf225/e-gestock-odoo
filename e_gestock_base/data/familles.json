@@ -1,0 +1,878 @@
+{
+	"query": "SELECT * FROM `egestock`.`familles` LIMIT 1000",
+	"rows":
+	[
+		{
+			"id": 1,
+			"ref_fam": 632510,
+			"design_fam": "Location de matÃ©riel de transport",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 2,
+			"ref_fam": 601300,
+			"design_fam": "Allocations familiales",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 3,
+			"ref_fam": 601700,
+			"design_fam": "Allocations au foyer du travailleur",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 4,
+			"ref_fam": 601900,
+			"design_fam": "Autres charges techniques",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 5,
+			"ref_fam": 602110,
+			"design_fam": "I.J. d'incapacitÃ©",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:46:55"
+		},
+		{
+			"id": 6,
+			"ref_fam": 602130,
+			"design_fam": "Rentes aux assurÃ©s",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 7,
+			"ref_fam": 602140,
+			"design_fam": "Rentes aux survivants",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 8,
+			"ref_fam": 602150,
+			"design_fam": "Rachat de rentes",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 9,
+			"ref_fam": 602161,
+			"design_fam": "Frais d'analyse et d'hospitalisation",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 10,
+			"ref_fam": 602162,
+			"design_fam": "Produits pharmaceutiques",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 11,
+			"ref_fam": 602164,
+			"design_fam": "Frais de rÃ©education",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 12,
+			"ref_fam": 602165,
+			"design_fam": "ProthÃ¨ses et fournitures de fabrication",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 13,
+			"ref_fam": 602170,
+			"design_fam": "Frais de transport",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 14,
+			"ref_fam": 602180,
+			"design_fam": "Frais funÃ©raires",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 15,
+			"ref_fam": 602190,
+			"design_fam": "Autres charges techniques",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 16,
+			"ref_fam": 602210,
+			"design_fam": "Achat de fournitures de sÃ©curitÃ© et de dÃ©monstration",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 17,
+			"ref_fam": 602220,
+			"design_fam": "Frais d'administration et de propagande",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 18,
+			"ref_fam": 602230,
+			"design_fam": "Exposition et frais d'organisation",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 19,
+			"ref_fam": 602240,
+			"design_fam": "Cours, confÃ©rence et projection",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 20,
+			"ref_fam": 602250,
+			"design_fam": "Recompenses des travailleurs",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 21,
+			"ref_fam": 602260,
+			"design_fam": "Analyse et fournitures de laboratoire",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 22,
+			"ref_fam": 602270,
+			"design_fam": "Publication technique Ã  l'usage de tiers",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 23,
+			"ref_fam": 602280,
+			"design_fam": "DÃ©penses de sÃ©courisme",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 24,
+			"ref_fam": 602290,
+			"design_fam": "Autres charges techniques",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 25,
+			"ref_fam": 610010,
+			"design_fam": "Fournitures mÃ©dicales",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 26,
+			"ref_fam": 610020,
+			"design_fam": "Produits pharmaceutiques",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 27,
+			"ref_fam": 610223,
+			"design_fam": "Fournitures d'atelier et de laboratoire",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 28,
+			"ref_fam": 610225,
+			"design_fam": "Fournitures de bureau",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 29,
+			"ref_fam": 610226,
+			"design_fam": "Fournitures pour ensemble electronique",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 30,
+			"ref_fam": 612110,
+			"design_fam": "ElectricitÃ©",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 31,
+			"ref_fam": 612120,
+			"design_fam": "Gaz",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 32,
+			"ref_fam": 612130,
+			"design_fam": "Carburant et lubrifiant",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 33,
+			"ref_fam": 612170,
+			"design_fam": "Eau",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 34,
+			"ref_fam": 612300,
+			"design_fam": "Fournitures d'entretien et de petits Ã©quipements",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 35,
+			"ref_fam": 612500,
+			"design_fam": "Linge et vÃªtement de travail",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2023-02-21 16:00:32"
+		},
+		{
+			"id": 36,
+			"ref_fam": 612600,
+			"design_fam": "Fourniture pour la sÃ©curitÃ© des locaux",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 37,
+			"ref_fam": 612800,
+			"design_fam": "Autres fournitures non stockables",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 38,
+			"ref_fam": 616100,
+			"design_fam": "Achat pour rÃ©ception",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 39,
+			"ref_fam": 601100,
+			"design_fam": "Allocations prÃ©natales",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 40,
+			"ref_fam": 601200,
+			"design_fam": "Allocations de maternitÃ©",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 41,
+			"ref_fam": 618210,
+			"design_fam": "Transport",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 42,
+			"ref_fam": 621100,
+			"design_fam": "Frais de voyage et de dÃ©placement Agents",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 43,
+			"ref_fam": 621200,
+			"design_fam": "Frais de voyage et de dÃ©placement Administrat",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 44,
+			"ref_fam": 621300,
+			"design_fam": "Frais de voyage et de dÃ©placement d'autres personnes",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 45,
+			"ref_fam": 626100,
+			"design_fam": "Frais de dÃ©mÃ©nagement des Agents",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 46,
+			"ref_fam": 630100,
+			"design_fam": "RÃ©ception",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 47,
+			"ref_fam": 630210,
+			"design_fam": "IndemnitÃ© de mission et fr. sÃ©jour pers.",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 48,
+			"ref_fam": 630220,
+			"design_fam": "IndemnitÃ© de mission et fr. sÃ©jour Admi",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 49,
+			"ref_fam": 630280,
+			"design_fam": "Indem de miss) et fr. sÃ©jour d'autres pers.",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 50,
+			"ref_fam": 632310,
+			"design_fam": "Loyers",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 51,
+			"ref_fam": 632500,
+			"design_fam": "Location de matÃ©riel ",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 52,
+			"ref_fam": 633100,
+			"design_fam": "Entretien Et rÃ©paration immeubles exploitation",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 53,
+			"ref_fam": 633110,
+			"design_fam": "Entretien Et rÃ©paration immeubles rapport",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 54,
+			"ref_fam": 633140,
+			"design_fam": "Entretien Et rÃ©paration logements sociaux",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 55,
+			"ref_fam": 633210,
+			"design_fam": "Entretien Et rÃ©paration matÃ©riel et mobilier bureau",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 56,
+			"ref_fam": 633220,
+			"design_fam": "Entretien Et reparation materiel informatique",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 57,
+			"ref_fam": 633230,
+			"design_fam": "Entretien Et rÃ©paration matÃ©riel transport",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 58,
+			"ref_fam": 633240,
+			"design_fam": "Entretien et rÃ©paration matÃ©riel techniq.oeuv sanitaire",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 59,
+			"ref_fam": 633290,
+			"design_fam": "Entretien Et rÃ©paration d'autres matÃ©riels et mobilier ",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 60,
+			"ref_fam": 634400,
+			"design_fam": "Honoraires",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 61,
+			"ref_fam": 634500,
+			"design_fam": "Frais d'acte et de contentieux",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 62,
+			"ref_fam": 634700,
+			"design_fam": "RÃ©munÃ©ration des stagiaires",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 63,
+			"ref_fam": 634800,
+			"design_fam": "Autres rÃ©munÃ©rations",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 64,
+			"ref_fam": 635100,
+			"design_fam": "Annonces et insertions",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 65,
+			"ref_fam": 635300,
+			"design_fam": "Journaux, catalogues et autres doc.",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 66,
+			"ref_fam": 635700,
+			"design_fam": "Pourboirs et dons courants",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 67,
+			"ref_fam": 635800,
+			"design_fam": "AUTRES DEPENSES DE PUBLICITE, D'INFORMATION ET DE PUBLICATION",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 68,
+			"ref_fam": 636100,
+			"design_fam": "Affranchissement",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 69,
+			"ref_fam": 636200,
+			"design_fam": "Frais de mandatement",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 70,
+			"ref_fam": 636300,
+			"design_fam": "TÃ©lÃ©phone, tÃ©lÃ©gramme, tÃ©lex et fax",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 71,
+			"ref_fam": 636600,
+			"design_fam": "Redevance pour boÃ®te postale",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 72,
+			"ref_fam": 636700,
+			"design_fam": "Lignes spÃ©cialisÃ©es informatiques",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 73,
+			"ref_fam": 636800,
+			"design_fam": "Autres frais postaux",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 74,
+			"ref_fam": 637100,
+			"design_fam": "Frais sur titres",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 75,
+			"ref_fam": 637800,
+			"design_fam": "Autres frais et commissions bancaires",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 76,
+			"ref_fam": 638110,
+			"design_fam": "Cotisations Ã  d'autres organismes",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 77,
+			"ref_fam": 638220,
+			"design_fam": "Frais de gardiennage",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 78,
+			"ref_fam": 638230,
+			"design_fam": "Autres services rendus par les tiers",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 79,
+			"ref_fam": 638400,
+			"design_fam": "Frais de recrutement du personnel",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 80,
+			"ref_fam": 638600,
+			"design_fam": "Frais de formation du personnel",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 81,
+			"ref_fam": 638800,
+			"design_fam": "Autres services extÃ©rieurs",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 82,
+			"ref_fam": 205000,
+			"design_fam": "Logiciel informatique",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 83,
+			"ref_fam": 221000,
+			"design_fam": "MatÃ©riel de bureau",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2023-04-13 11:01:56"
+		},
+		{
+			"id": 84,
+			"ref_fam": 221100,
+			"design_fam": "Mobilier de bureau",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 85,
+			"ref_fam": 222000,
+			"design_fam": "MatÃ©riel informatique",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 86,
+			"ref_fam": 223000,
+			"design_fam": "MatÃ©riel de transport",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 87,
+			"ref_fam": 224000,
+			"design_fam": "MatÃ©riel et mobilier des Centres mÃ©dicaux",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 89,
+			"ref_fam": 665800,
+			"design_fam": "Autres impÃ´ts",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 90,
+			"ref_fam": 220600,
+			"design_fam": "AmÃ©nagement des constructions",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 91,
+			"ref_fam": 657300,
+			"design_fam": "Frais mÃ©dicaux du personnel",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 92,
+			"ref_fam": 638120,
+			"design_fam": "Frais de congrÃ¨s, colloques, sÃ©minaires",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 93,
+			"ref_fam": 641700,
+			"design_fam": "Sinistres et Ã©vacuations sanitaires (Assurance maladie)",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 94,
+			"ref_fam": 220700,
+			"design_fam": "Installation gÃ©nÃ©rale, agencement et amenagement technique",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 95,
+			"ref_fam": 220900,
+			"design_fam": "Installation gÃ©nÃ©rale, agencement et amenagement pas proprÃ©taire",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 96,
+			"ref_fam": 657900,
+			"design_fam": "Autres charges sociales",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2025-04-04 13:49:29"
+		},
+		{
+			"id": 97,
+			"ref_fam": 681800,
+			"design_fam": "AUTRES CHARGES EXCEPTIONNELLES SUR OPERATION DE GESTION",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 98,
+			"ref_fam": 229300,
+			"design_fam": "MatÃ©riel et Mobilier de l'infirmerie du personnel",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 99,
+			"ref_fam": 643101,
+			"design_fam": "Subvention exceptionnelle",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 100,
+			"ref_fam": 229100,
+			"design_fam": "MatÃ©riel de Froid",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 101,
+			"ref_fam": 229200,
+			"design_fam": "MatÃ©riel de Protection",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 102,
+			"ref_fam": 229400,
+			"design_fam": "Autres matÃ©riel et mobilier",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 103,
+			"ref_fam": 643100,
+			"design_fam": "Appui au ministÃ¨re de tutelle",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 104,
+			"ref_fam": 605640,
+			"design_fam": "autre subvention",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 105,
+			"ref_fam": 632501,
+			"design_fam": "Redevance-Brevet-Licence-Logiciel",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 106,
+			"ref_fam": 220010,
+			"design_fam": "Conctruction Immeubles Administratifs",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 107,
+			"ref_fam": 220100,
+			"design_fam": "Construction Immeubles de Rapport",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 108,
+			"ref_fam": 657500,
+			"design_fam": "VERSEMENT AU COMITE D'HYGIENE",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 109,
+			"ref_fam": 632401,
+			"design_fam": "LOYER ET CHARGES LOCATIVES DU MATERIEL INFO",
+			"flag_actif": 1,
+			"created_at": "2021-08-27 09:18:55",
+			"updated_at": "2021-08-27 09:18:55"
+		},
+		{
+			"id": 110,
+			"ref_fam": 610228,
+			"design_fam": "Autres fournitures consommables",
+			"flag_actif": 1,
+			"created_at": "2023-04-04 11:10:31",
+			"updated_at": "2023-04-04 11:10:31"
+		}
+	]
+}

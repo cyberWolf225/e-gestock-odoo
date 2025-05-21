@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue form pour les contrats fournisseur -->
+    <record id="e_gestock_supplier_contract_form_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_contract.form</field>
+        <field name="model">e_gestock.supplier_contract</field>
+        <field name="arch" type="xml">
+            <form string="Contrat fournisseur">
+                <header>
+                    <button name="action_submit" string="Soumettre" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_validate" string="Valider" type="object" class="oe_highlight" invisible="state != 'draft'" groups="e_gestock_base.group_e_gestock_supplier_manager"/>
+                    <button name="action_activate" string="Réactiver" type="object" invisible="state != 'terminated'" groups="e_gestock_base.group_e_gestock_supplier_manager"/>
+                    <button name="action_terminate" string="Résilier" type="object" class="oe_highlight" invisible="state != 'active'" groups="e_gestock_base.group_e_gestock_supplier_manager"/>
+                    <button name="action_cancel" string="Annuler" type="object" invisible="state not in ('draft', 'submitted', 'validated')" groups="e_gestock_base.group_e_gestock_supplier_manager"/>
+                    <button name="action_renew" string="Renouveler" type="object" class="oe_highlight" invisible="state not in ('active', 'expired')" groups="e_gestock_base.group_e_gestock_supplier_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,validated,active"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                        <button name="action_view_purchases" type="object" class="oe_stat_button" icon="fa-shopping-cart">
+                            <field name="purchase_count" string="Commandes" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                        <h2>
+                            <field name="name" placeholder="Titre du contrat"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group string="Informations générales">
+                            <field name="supplier_id" options="{'no_create': True}"/>
+                            <field name="type"/>
+                            <field name="date_debut"/>
+                            <field name="date_fin"/>
+                            <field name="date_signature"/>
+                            <field name="is_exclusive"/>
+                        </group>
+                        <group string="Informations financières">
+                            <field name="montant"/>
+                            <field name="currency_id" options="{'no_create': True}"/>
+                            <field name="remise"/>
+                            <field name="conditions_paiement"/>
+                            <field name="total_purchase_amount"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Responsables">
+                            <field name="responsable_id"/>
+                            <field name="validateur_id" readonly="1"/>
+                            <field name="date_validation" readonly="1"/>
+                        </group>
+                        <group string="Renouvellement">
+                            <field name="renew_auto"/>
+                            <field name="renewal_reminder"/>
+                            <field name="renewal_date"/>
+                            <field name="renewal_count"/>
+                            <field name="parent_id" readonly="1" invisible="parent_id == False"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Clauses">
+                            <field name="clause_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="type"/>
+                                    <field name="is_mandatory"/>
+                                    <field name="is_standard"/>
+                                    <field name="content"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Familles d'articles">
+                            <field name="famille_ids" widget="many2many_tags"/>
+                            <div class="text-muted" invisible="is_exclusive == False">
+                                Ce fournisseur bénéficie de l'exclusivité pour ces familles d'articles.
+                            </div>
+                        </page>
+                        <page string="Notes">
+                            <field name="note" placeholder="Informations additionnelles sur ce contrat..."/>
+                        </page>
+                        <page string="Documents">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                        <page string="Renouvellements" invisible="renewal_ids == []">
+                            <field name="renewal_ids" readonly="1">
+                                <list>
+                                    <field name="reference"/>
+                                    <field name="name"/>
+                                    <field name="date_debut"/>
+                                    <field name="date_fin"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les contrats fournisseur -->
+    <record id="e_gestock_supplier_contract_list_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_contract.list</field>
+        <field name="model">e_gestock.supplier_contract</field>
+        <field name="arch" type="xml">
+            <list string="Contrats fournisseur" decoration-muted="state=='cancelled'" decoration-danger="state=='expired'" decoration-warning="renewal_date and renewal_date &lt;= current_date and state=='active'" decoration-success="state=='active'">
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="supplier_id"/>
+                <field name="type"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="montant"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="renewal_date" invisible="1"/>
+                <field name="state"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue search pour les contrats fournisseur -->
+    <record id="e_gestock_supplier_contract_search_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_contract.search</field>
+        <field name="model">e_gestock.supplier_contract</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des contrats">
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="supplier_id"/>
+                <filter string="Mes contrats" name="my_contracts" domain="[('responsable_id', '=', uid)]"/>
+                <filter string="Actifs" name="active_state" domain="[('state', '=', 'active')]"/>
+                <filter string="Validés" name="validated" domain="[('state', '=', 'validated')]"/>
+                <filter string="À renouveler" name="to_renew" domain="[('state', '=', 'active'), ('renewal_date', '&lt;=', context_today)]"/>
+                <filter string="Expirés" name="expired" domain="[('state', '=', 'expired')]"/>
+                <filter string="Archivés" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Fournisseur" name="supplier" domain="[]" context="{'group_by':'supplier_id'}"/>
+                    <filter string="Type" name="type" domain="[]" context="{'group_by':'type'}"/>
+                    <filter string="État" name="state" domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Mois de début" name="start_month" domain="[]" context="{'group_by':'date_debut:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue calendar pour les contrats fournisseur -->
+    <record id="e_gestock_supplier_contract_calendar_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_contract.calendar</field>
+        <field name="model">e_gestock.supplier_contract</field>
+        <field name="arch" type="xml">
+            <calendar string="Contrats" date_start="date_debut" date_stop="date_fin" color="supplier_id" mode="month">
+                <field name="reference"/>
+                <field name="supplier_id"/>
+                <field name="montant"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Vue kanban pour les contrats fournisseur -->
+    <record id="e_gestock_supplier_contract_kanban_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_contract.kanban</field>
+        <field name="model">e_gestock.supplier_contract</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="supplier_id"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="montant"/>
+                <field name="currency_id"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <div class="row mb4">
+                                    <div class="col-6">
+                                        <strong>
+                                            <field name="reference"/>
+                                        </strong>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <span class="badge badge-pill" t-att-class="
+                                            state == 'draft' ? 'badge-secondary' :
+                                            state == 'submitted' ? 'badge-info' :
+                                            state == 'validated' ? 'badge-primary' :
+                                            state == 'active' ? 'badge-success' :
+                                            state == 'expired' ? 'badge-danger' :
+                                            state == 'terminated' ? 'badge-dark' :
+                                            state == 'renewed' ? 'badge-warning' :
+                                            'badge-danger'">
+                                            <field name="state"/>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <b>
+                                        <field name="name"/>
+                                    </b>
+                                </div>
+                                <div>Fournisseur: <field name="supplier_id"/>
+                                </div>
+                                <div>
+                                    <span>Du <field name="date_debut"/>
+ au <field name="date_fin"/>
+                                </span>
+                            </div>
+                            <div>
+                                    Montant: <field name="montant" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+<!-- Action pour les contrats fournisseur -->
+<record id="action_e_gestock_supplier_contract" model="ir.actions.act_window">
+    <field name="name">Contrats fournisseur</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">e_gestock.supplier_contract</field>
+    <field name="view_mode">list,kanban,form,calendar</field>
+    <field name="search_view_id" ref="e_gestock_supplier_contract_search_view"/>
+    <field name="context">{'search_default_active_state': 1}</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau contrat fournisseur
+        </p>
+        <p>
+                Enregistrez tous vos contrats avec les fournisseurs pour suivre vos engagements et conditions commerciales.
+        </p>
+    </field>
+</record>
+
+<!-- Vue liste pour les templates de clauses -->
+<record id="e_gestock_contract_clause_template_list_view" model="ir.ui.view">
+    <field name="name">e_gestock.contract_clause_template.list</field>
+    <field name="model">e_gestock.contract_clause_template</field>
+    <field name="arch" type="xml">
+        <list string="Modèles de clauses" editable="bottom">
+            <field name="sequence" widget="handle"/>
+            <field name="name"/>
+            <field name="type"/>
+            <field name="contract_type"/>
+            <field name="is_mandatory"/>
+            <field name="active"/>
+        </list>
+    </field>
+</record>
+
+<!-- Vue form pour les templates de clauses -->
+<record id="e_gestock_contract_clause_template_form_view" model="ir.ui.view">
+    <field name="name">e_gestock.contract_clause_template.form</field>
+    <field name="model">e_gestock.contract_clause_template</field>
+    <field name="arch" type="xml">
+        <form string="Modèle de clause">
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="type"/>
+                        <field name="contract_type"/>
+                        <field name="is_mandatory"/>
+                        <field name="active"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Contenu">
+                        <field name="content" placeholder="Contenu de la clause..."/>
+                    </page>
+                    <page string="Notes">
+                        <field name="note" placeholder="Notes à propos de cette clause..."/>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Action pour les templates de clauses -->
+<record id="action_e_gestock_contract_clause_template" model="ir.actions.act_window">
+    <field name="name">Modèles de clauses</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">e_gestock.contract_clause_template</field>
+    <field name="view_mode">list,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau modèle de clause
+        </p>
+        <p>
+                Définissez des modèles de clauses qui pourront être utilisés dans vos contrats fournisseur.
+        </p>
+    </field>
+</record>
+</odoo>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les cotations fournisseurs -->
+    <record id="view_e_gestock_cotation_form" model="ir.ui.view">
+        <field name="name">e_gestock.cotation.form</field>
+        <field name="model">e_gestock.cotation</field>
+        <field name="arch" type="xml">
+            <form string="Cotation fournisseur">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,confirmed,selected,po_generated"/>
+
+                    <button name="action_submit" string="Soumettre" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+
+                    <button name="action_confirm" string="Confirmer" type="object" class="oe_highlight" invisible="state != 'submitted'" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_select" string="Sélectionner comme meilleure offre" type="object" class="oe_highlight" invisible="state != 'confirmed'" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_revert_selection" string="Annuler la sélection" type="object" invisible="state != 'selected'" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_generate_po" string="Générer bon de commande" type="object" class="oe_highlight" invisible="state != 'selected' or is_best_offer == False" groups="purchase.group_purchase_manager"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_purchase_order" type="object" class="oe_stat_button" icon="fa-file-text-o" invisible="purchase_order_id == False">
+                            <field name="purchase_order_id" string="Bon de commande" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <span class="o_form_label" invisible="is_best_offer == False" style="color: green; font-weight: bold;">(Meilleure offre)</span>
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="demande_id" options="{'no_create': True}" widget="selection" readonly="context.get('default_demande_id', False)"/>
+                            <field name="supplier_id" options="{'no_create': True}" readonly="context.get('default_supplier_id', False)"/>
+                            <field name="date"/>
+                            <field name="date_expiration"/>
+                            <field name="is_best_offer" invisible="1"/>
+                            <field name="demande_cotation_fournisseur_id" readonly="1" invisible="demande_cotation_fournisseur_id == False"/>
+                        </group>
+                        <group>
+                            <field name="delai_livraison"/>
+                            <field name="conditions_paiement"/>
+                            <field name="currency_id" options="{'no_create': True}"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lignes" name="lines">
+                            <field name="line_ids" widget="one2many_list">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="demande_line_id" domain="[('demande_id', '=', parent.demande_id)]" options="{'no_create': True}" required="1"/>
+                                    <field name="article_id" readonly="1"/>
+                                    <field name="ref_article" readonly="1"/>
+                                    <field name="designation" readonly="1"/>
+                                    <field name="quantite" readonly="1"/>
+                                    <field name="quantite_a_servir" required="1"/>
+                                    <field name="unite_id" readonly="1"/>
+                                    <field name="prix_unitaire" required="1"/>
+                                    <field name="remise_ligne"/>
+                                    <field name="montant" sum="Total"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="echantillon" widget="binary" filename="echantillon_filename"/>
+                                    <field name="echantillon_filename" invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Tarification" name="pricing">
+                            <group>
+                                <group string="Remise et TVA">
+                                    <field name="remise_generale"/>
+                                    <field name="tva"/>
+                                </group>
+                                <group string="Montants">
+                                    <field name="montant_ht" widget="monetary"/>
+                                    <field name="montant_tva" widget="monetary"/>
+                                    <field name="montant_total" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Livraison" name="delivery" invisible="state not in ['po_generated', 'delivered']">
+                            <group>
+                                <field name="date_livraison"/>
+                                <field name="bl_attachment" widget="binary" filename="bl_filename"/>
+                                <field name="bl_filename" invisible="1"/>
+                            </group>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Ajouter des notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les cotations fournisseurs -->
+    <record id="view_e_gestock_cotation_list" model="ir.ui.view">
+        <field name="name">e_gestock.cotation.list</field>
+        <field name="model">e_gestock.cotation</field>
+        <field name="arch" type="xml">
+            <list string="Cotations fournisseurs" decoration-info="state=='draft'" decoration-success="is_best_offer==True" decoration-bf="is_best_offer==True" decoration-muted="state=='rejected'">
+                <field name="reference"/>
+                <field name="demande_id"/>
+                <field name="supplier_id"/>
+                <field name="date"/>
+                <field name="delai_livraison"/>
+                <field name="montant_total" sum="Total" widget="monetary"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="is_best_offer" invisible="1"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les cotations fournisseurs -->
+    <record id="view_e_gestock_cotation_search" model="ir.ui.view">
+        <field name="name">e_gestock.cotation.search</field>
+        <field name="model">e_gestock.cotation</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des cotations">
+                <field name="reference"/>
+                <field name="demande_id"/>
+                <field name="supplier_id"/>
+                <separator/>
+                <filter name="draft" string="Brouillon" domain="[('state', '=', 'draft')]"/>
+                <filter name="submitted" string="Soumises" domain="[('state', '=', 'submitted')]"/>
+                <filter name="confirmed" string="Confirmées" domain="[('state', '=', 'confirmed')]"/>
+                <filter name="selected" string="Sélectionnées" domain="[('state', '=', 'selected')]"/>
+                <filter name="po_generated" string="BC généré" domain="[('state', '=', 'po_generated')]"/>
+                <filter name="best_offer" string="Meilleures offres" domain="[('is_best_offer', '=', True)]"/>
+                <separator/>
+                <filter name="today" string="Aujourd'hui" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="week" string="Cette semaine" domain="[('date', '>=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today() + datetime.timedelta(days=6-context_today().weekday())).strftime('%Y-%m-%d'))]"/>
+                <filter name="month" string="Ce mois" domain="[('date', '>=', (context_today().replace(day=1)).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today().replace(day=calendar.monthrange(context_today().year, context_today().month)[1])).strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_by_state" string="État" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_supplier" string="Fournisseur" context="{'group_by': 'supplier_id'}"/>
+                    <filter name="group_by_demande" string="Demande" context="{'group_by': 'demande_id'}"/>
+                    <filter name="group_by_date" string="Date" context="{'group_by': 'date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue pivot pour les cotations fournisseurs -->
+    <record id="view_e_gestock_cotation_pivot" model="ir.ui.view">
+        <field name="name">e_gestock.cotation.pivot</field>
+        <field name="model">e_gestock.cotation</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des cotations">
+                <field name="supplier_id" type="row"/>
+                <field name="demande_id" type="row"/>
+                <field name="date" interval="month" type="col"/>
+                <field name="montant_total" type="measure"/>
+                <field name="delai_livraison" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Vue graphique pour les cotations fournisseurs -->
+    <record id="view_e_gestock_cotation_graph" model="ir.ui.view">
+        <field name="name">e_gestock.cotation.graph</field>
+        <field name="model">e_gestock.cotation</field>
+        <field name="arch" type="xml">
+            <graph string="Analyse des cotations" type="bar">
+                <field name="supplier_id"/>
+                <field name="date" interval="month"/>
+                <field name="montant_total" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action pour les cotations fournisseurs -->
+    <record id="action_e_gestock_cotation" model="ir.actions.act_window">
+        <field name="name">Cotations fournisseurs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.cotation</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="search_view_id" ref="view_e_gestock_cotation_search"/>
+        <field name="context">{'search_default_submitted': 1, 'search_default_confirmed': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune cotation fournisseur trouvée
+            </p>
+            <p>
+                Les cotations sont générées à partir des demandes envoyées aux fournisseurs.
+            </p>
+        </field>
+    </record>
+
+    <!-- Actions spécifiques -->
+    <record id="action_e_gestock_cotation_to_confirm" model="ir.actions.act_window">
+        <field name="name">Cotations à confirmer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.cotation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state', '=', 'submitted')]</field>
+        <field name="search_view_id" ref="view_e_gestock_cotation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune cotation à confirmer
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_cotation_best_offers" model="ir.actions.act_window">
+        <field name="name">Meilleures offres</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.cotation</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_best_offer', '=', True)]</field>
+        <field name="search_view_id" ref="view_e_gestock_cotation_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune meilleure offre trouvée
+            </p>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour les demandes de cotation fournisseur -->
+    <record id="view_e_gestock_demande_cotation_fournisseur_form" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation_fournisseur.form</field>
+        <field name="model">e_gestock.demande_cotation_fournisseur</field>
+        <field name="arch" type="xml">
+            <form string="Demande de cotation fournisseur">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,received"/>
+
+                    <button name="action_send" string="Envoyer" type="object" class="oe_highlight" invisible="state != 'draft'" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_cancel" string="Annuler" type="object" invisible="state not in ('draft', 'sent')" groups="purchase.group_purchase_manager"/>
+
+                    <button name="action_reset_to_draft" string="Remettre en brouillon" type="object" invisible="state != 'cancelled'" groups="purchase.group_purchase_manager"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_e_gestock_cotation)d" type="action" class="oe_stat_button" icon="fa-file-text-o" invisible="cotation_id == False" context="{'default_demande_id': demande_id, 'default_supplier_id': supplier_id}">
+                            <field name="cotation_id" string="Cotation" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="demande_id" options="{'no_create': True}" widget="selection" readonly="context.get('default_demande_id', False)"/>
+                            <field name="supplier_id" options="{'no_create': True}" readonly="context.get('default_supplier_id', False)"/>
+                            <field name="date_envoi"/>
+                            <field name="access_token" invisible="1"/>
+                            <field name="access_url" widget="url" readonly="1" invisible="access_token == False"/>
+                        </group>
+                        <group>
+                            <field name="code_echeance"/>
+                            <field name="date_echeance"/>
+                            <field name="type_achat"/>
+                            <field name="taux_acompte"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les demandes de cotation fournisseur -->
+    <record id="view_e_gestock_demande_cotation_fournisseur_list" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation_fournisseur.list</field>
+        <field name="model">e_gestock.demande_cotation_fournisseur</field>
+        <field name="arch" type="xml">
+            <list string="Demandes de cotation fournisseurs" decoration-info="state=='draft'" decoration-success="state=='received'" decoration-muted="state=='cancelled'">
+                <field name="reference"/>
+                <field name="demande_id"/>
+                <field name="supplier_id"/>
+                <field name="date_envoi"/>
+                <field name="date_echeance"/>
+                <field name="code_echeance"/>
+                <field name="type_achat"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les demandes de cotation fournisseur -->
+    <record id="view_e_gestock_demande_cotation_fournisseur_search" model="ir.ui.view">
+        <field name="name">e_gestock.demande_cotation_fournisseur.search</field>
+        <field name="model">e_gestock.demande_cotation_fournisseur</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des demandes fournisseurs">
+                <field name="reference"/>
+                <field name="demande_id"/>
+                <field name="supplier_id"/>
+                <separator/>
+                <filter name="draft" string="Brouillon" domain="[('state', '=', 'draft')]"/>
+                <filter name="sent" string="Envoyées" domain="[('state', '=', 'sent')]"/>
+                <filter name="received" string="Reçues" domain="[('state', '=', 'received')]"/>
+                <filter name="cancelled" string="Annulées" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter name="type_direct" string="Achat direct" domain="[('type_achat', '=', 'direct')]"/>
+                <filter name="type_appel_offre" string="Appel d'offres" domain="[('type_achat', '=', 'appel_offre')]"/>
+                <filter name="type_consultation" string="Consultation restreinte" domain="[('type_achat', '=', 'consultation')]"/>
+                <separator/>
+                <filter name="today" string="Aujourd'hui" domain="[('date_envoi', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="due_today" string="Échéance aujourd'hui" domain="[('date_echeance', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="overdue" string="En retard" domain="[('date_echeance', '&lt;', context_today().strftime('%Y-%m-%d')), ('state', '=', 'sent')]"/>
+                <separator/>
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_by_state" string="État" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_supplier" string="Fournisseur" context="{'group_by': 'supplier_id'}"/>
+                    <filter name="group_by_demande" string="Demande" context="{'group_by': 'demande_id'}"/>
+                    <filter name="group_by_date_envoi" string="Date d'envoi" context="{'group_by': 'date_envoi:day'}"/>
+                    <filter name="group_by_date_echeance" string="Date d'échéance" context="{'group_by': 'date_echeance:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les demandes de cotation fournisseur -->
+    <record id="action_e_gestock_demande_cotation_fournisseur" model="ir.actions.act_window">
+        <field name="name">Demandes aux fournisseurs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.demande_cotation_fournisseur</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_e_gestock_demande_cotation_fournisseur_search"/>
+        <field name="context">{'search_default_draft': 1, 'search_default_sent': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune demande de cotation fournisseur trouvée
+            </p>
+            <p>
+                Créez des demandes de cotation fournisseur à partir d'une demande de cotation validée.
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extension de la vue formulaire du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_form_budget_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.form.budget.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <!-- On utilise un eval pour éviter l'erreur sur l'ID externe manquant -->
+        <field name="inherit_id" eval="False"/>
+        <field name="arch" type="xml">
+            <form>
+                <notebook position="inside">
+                    <page string="Budget" name="budget" groups="e_gestock_base.group_e_gestock_budget_user,e_gestock_base.group_e_gestock_budget_controller,e_gestock_base.group_e_gestock_budget_manager">
+                        <group>
+                            <group>
+                                <field name="credit_id"/>
+                                <field name="montant_budget_disponible" widget="monetary"/>
+                                <field name="est_budget_suffisant" widget="boolean_toggle"/>
+                            </group>
+                            <group>
+                                <field name="budget_control_id"/>
+                                <field name="budget_state" widget="badge" decoration-success="budget_state in ('checked', 'derogation_approved')" decoration-warning="budget_state in ('not_checked', 'pending_derogation')" decoration-danger="budget_state == 'insufficient' or budget_state == 'rejected'"/>
+                                <field name="budget_operation_id"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <!-- Désactiver les autres extensions de vues qui peuvent causer des problèmes -->
+    <!--
+    <record id="view_e_gestock_purchase_order_list_budget_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.list.budget.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state_approbation']" position="after">
+                <field name="budget_state" optional="show" widget="badge" decoration-success="budget_state in ('checked', 'derogation_approved')" decoration-warning="budget_state in ('not_checked', 'pending_derogation')" decoration-danger="budget_state == 'insufficient' or budget_state == 'rejected'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_e_gestock_purchase_order_search_budget_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.search.budget.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='groupby_state_approbation']" position="after">
+                <filter string="Statut budget" name="budget_state" context="{'group_by': 'budget_state'}"/>
+                <filter string="Crédit budgétaire" name="credit_id" context="{'group_by': 'credit_id'}"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+    -->
+
+    <!-- Extension de la vue du contrôle budgétaire pour ajouter le lien vers le bon de commande -->
+    <record id="view_e_gestock_budget_control_form_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.budget_control.form.inherit</field>
+        <field name="model">e_gestock.budget_control</field>
+        <field name="inherit_id" ref="e_gestock_budget.view_e_gestock_budget_control_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='demande_id']" position="after">
+                <field name="purchase_order_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

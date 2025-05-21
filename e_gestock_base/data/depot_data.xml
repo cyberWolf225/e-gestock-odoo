@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Dépôts importés du fichier JSON -->
+        <record id="depot_101" model="e_gestock.depot">
+            <field name="ref_depot">101</field>
+            <field name="design_dep">APS Bondoukou</field>
+            <field name="tel_dep">25154879</field>
+            <field name="adr_dep">BP 12 Bondoukou</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">19</field>
+        </record>
+        
+        <record id="depot_102" model="e_gestock.depot">
+            <field name="ref_depot">102</field>
+            <field name="design_dep">APS Bouake</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">3</field>
+        </record>
+        
+        <record id="depot_103" model="e_gestock.depot">
+            <field name="ref_depot">103</field>
+            <field name="design_dep">Bouake 2</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">3</field>
+        </record>
+        
+        <record id="depot_104" model="e_gestock.depot">
+            <field name="ref_depot">104</field>
+            <field name="design_dep">Cms Bouake</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">3</field>
+        </record>
+        
+        <record id="depot_89" model="e_gestock.depot">
+            <field name="ref_depot">89</field>
+            <field name="design_dep">APS San pedro</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">6</field>
+        </record>
+        
+        <record id="depot_91" model="e_gestock.depot">
+            <field name="ref_depot">91</field>
+            <field name="design_dep">APS Agboville</field>
+            <field name="tel_dep">23 54 75 99</field>
+            <field name="adr_dep">BP 567 AGBOVILLE</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">21</field>
+        </record>
+        
+        <record id="depot_93" model="e_gestock.depot">
+            <field name="ref_depot">93</field>
+            <field name="design_dep">APS Bonoua</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">20</field>
+        </record>
+        
+        <record id="depot_94" model="e_gestock.depot">
+            <field name="ref_depot">94</field>
+            <field name="design_dep">Cms Divo</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">13</field>
+        </record>
+        
+        <record id="depot_98" model="e_gestock.depot">
+            <field name="ref_depot">98</field>
+            <field name="design_dep">Centre medical du personnel (siege)</field>
+            <field name="tel_dep">20/25/21/39</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">1</field>
+        </record>
+        
+        <record id="depot_88" model="e_gestock.depot">
+            <field name="ref_depot">88</field>
+            <field name="design_dep">APS Gagnoa</field>
+            <field name="tel_dep">+225 32 77 21 78</field>
+            <field name="adr_dep">BP 107 GAGNOA</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">4</field>
+        </record>
+        
+        <record id="depot_83" model="e_gestock.depot">
+            <field name="ref_depot">83</field>
+            <field name="design_dep">Depot principal du siege</field>
+            <field name="tel_dep">2250704592872</field>
+            <field name="adr_dep">BP 504 Abidjan 01</field>
+            <field name="principal" eval="True"/>
+            <field name="code_ville">1</field>
+        </record>
+        
+        <record id="depot_85" model="e_gestock.depot">
+            <field name="ref_depot">85</field>
+            <field name="design_dep">Centre d'Appareillage et de Rééducation Fonctionnelle de Yopougon</field>
+            <field name="tel_dep">23454870</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">1</field>
+        </record>
+        
+        <record id="depot_90" model="e_gestock.depot">
+            <field name="ref_depot">90</field>
+            <field name="design_dep">APS Abengourou</field>
+            <field name="tel_dep">35913613</field>
+            <field name="adr_dep">BP 144 Abengourou</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">12</field>
+        </record>
+        
+        <record id="depot_92" model="e_gestock.depot">
+            <field name="ref_depot">92</field>
+            <field name="design_dep">APS Divo</field>
+            <field name="tel_dep">32760267</field>
+            <field name="adr_dep">BP 219DiVO</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">13</field>
+        </record>
+        
+        <record id="depot_95" model="e_gestock.depot">
+            <field name="ref_depot">95</field>
+            <field name="design_dep">Cms Yopougon</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">1</field>
+        </record>
+        
+        <record id="depot_100" model="e_gestock.depot">
+            <field name="ref_depot">100</field>
+            <field name="design_dep">APS Yamoussoukro</field>
+            <field name="tel_dep">30 64 01 40</field>
+            <field name="adr_dep">BP 159 Yamoussoukro</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">2</field>
+        </record>
+        
+        <record id="depot_86" model="e_gestock.depot">
+            <field name="ref_depot">86</field>
+            <field name="design_dep">Depot Pharmaceutique de l'Etablissement Medical de Yopougon</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">1</field>
+        </record>
+        
+        <record id="depot_87" model="e_gestock.depot">
+            <field name="ref_depot">87</field>
+            <field name="design_dep">APS Daloa</field>
+            <field name="tel_dep">32 78 36 04</field>
+            <field name="adr_dep">BP 280 daloa</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">5</field>
+        </record>
+        
+        <record id="depot_51" model="e_gestock.depot">
+            <field name="ref_depot">51</field>
+            <field name="design_dep">APS Bouake</field>
+            <field name="tel_dep">34/65/52/12</field>
+            <field name="adr_dep">bp 43 BkÃ© 01</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">3</field>
+        </record>
+        
+        <record id="depot_2" model="e_gestock.depot">
+            <field name="ref_depot">2</field>
+            <field name="design_dep">Magasin principal de dabou</field>
+            <field name="tel_dep">07759400</field>
+            <field name="adr_dep">BP 1063 Dabou</field>
+            <field name="principal" eval="False"/>
+            <field name="code_ville">8</field>
+        </record>
+    </data>
+</odoo> 

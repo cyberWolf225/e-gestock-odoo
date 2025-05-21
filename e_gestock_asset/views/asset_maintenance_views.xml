@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire des maintenances d'immobilisations -->
+    <record id="view_e_gestock_asset_maintenance_form" model="ir.ui.view">
+        <field name="name">e_gestock.asset_maintenance.form</field>
+        <field name="model">e_gestock.asset_maintenance</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" string="Démarrer" type="object"
+                            class="oe_highlight" invisible="state != 'planned'"/>
+                    <button name="action_done" string="Terminer" type="object"
+                            class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Annuler" type="object"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="planned,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="type"/>
+                            <field name="date_debut"/>
+                            <field name="date_fin"/>
+                        </group>
+                        <group>
+                            <field name="responsable_id"/>
+                            <field name="prestataire_id"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="cout" widget="monetary"/>
+                            <field name="duree_intervention"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Description détaillée des travaux de maintenance..."/>
+                        </page>
+                        <page string="Pièces détachées" name="pieces">
+                            <field name="piece_ids">
+                                <list>
+                                    <field name="ref_article"/>
+                                    <field name="design_article"/>
+                                    <field name="code_unite"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Rapport" name="rapport">
+                            <group>
+                                <field name="rapport_intervention" filename="rapport_filename"/>
+                                <field name="rapport_filename" invisible="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des maintenances d'immobilisations -->
+    <record id="view_e_gestock_asset_maintenance_list" model="ir.ui.view">
+        <field name="name">e_gestock.asset_maintenance.list</field>
+        <field name="model">e_gestock.asset_maintenance</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'planned'" decoration-warning="state == 'in_progress'"
+                  decoration-success="state == 'done'" decoration-muted="state == 'cancelled'">
+                <field name="reference"/>
+                <field name="asset_id"/>
+                <field name="type"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="responsable_id"/>
+                <field name="prestataire_id"/>
+                <field name="cout" sum="Total"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue kanban des maintenances d'immobilisations -->
+    <record id="view_e_gestock_asset_maintenance_kanban" model="ir.ui.view">
+        <field name="name">e_gestock.asset_maintenance.kanban</field>
+        <field name="model">e_gestock.asset_maintenance</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="id"/>
+                <field name="reference"/>
+                <field name="asset_id"/>
+                <field name="type"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="responsable_id"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong><field name="reference"/> - <field name="asset_id"/></strong>
+                                <div>
+                                    <span class="text-muted">Type: </span><field name="type"/>
+                                </div>
+                                <div>
+                                    <span class="text-muted">Date début: </span><field name="date_debut"/>
+                                </div>
+                                <div>
+                                    <span class="text-muted">Responsable: </span><field name="responsable_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vue calendrier des maintenances d'immobilisations -->
+    <record id="view_e_gestock_asset_maintenance_calendar" model="ir.ui.view">
+        <field name="name">e_gestock.asset_maintenance.calendar</field>
+        <field name="model">e_gestock.asset_maintenance</field>
+        <field name="arch" type="xml">
+            <calendar string="Maintenances" date_start="date_debut" date_stop="date_fin" color="type" mode="month">
+                <field name="reference"/>
+                <field name="asset_id"/>
+                <field name="type"/>
+                <field name="responsable_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Vue recherche des maintenances d'immobilisations -->
+    <record id="view_e_gestock_asset_maintenance_search" model="ir.ui.view">
+        <field name="name">e_gestock.asset_maintenance.search</field>
+        <field name="model">e_gestock.asset_maintenance</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="asset_id"/>
+                <field name="responsable_id"/>
+                <field name="prestataire_id"/>
+                <separator/>
+                <filter string="Planifiée" name="planned" domain="[('state', '=', 'planned')]"/>
+                <filter string="En cours" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter string="Terminée" name="done" domain="[('state', '=', 'done')]"/>
+                <filter string="Annulée" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="Préventive" name="preventive" domain="[('type', '=', 'preventive')]"/>
+                <filter string="Corrective" name="corrective" domain="[('type', '=', 'corrective')]"/>
+                <filter string="Réglementaire" name="regulatory" domain="[('type', '=', 'regulatory')]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Immobilisation" name="group_by_asset" context="{'group_by': 'asset_id'}"/>
+                    <filter string="Type" name="group_by_type" context="{'group_by': 'type'}"/>
+                    <filter string="État" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Responsable" name="group_by_responsable" context="{'group_by': 'responsable_id'}"/>
+                    <filter string="Prestataire" name="group_by_prestataire" context="{'group_by': 'prestataire_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les maintenances d'immobilisations -->
+    <record id="action_e_gestock_asset_maintenance" model="ir.actions.act_window">
+        <field name="name">Maintenances</field>
+        <field name="res_model">e_gestock.asset_maintenance</field>
+        <field name="view_mode">kanban,list,form,calendar</field>
+        <field name="context">{'search_default_planned': 1, 'search_default_in_progress': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Planifier une nouvelle maintenance
+            </p>
+            <p>
+                Planifiez et suivez toutes les opérations de maintenance de vos immobilisations.
+            </p>
+        </field>
+    </record>
+</odoo>

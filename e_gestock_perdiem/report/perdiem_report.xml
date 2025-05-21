@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action de rapport pour les perdiems -->
+        <record id="action_report_perdiem" model="ir.actions.report">
+            <field name="name">Perdiem</field>
+            <field name="model">e_gestock.perdiem</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">e_gestock_perdiem.report_perdiem</field>
+            <field name="report_file">e_gestock_perdiem.report_perdiem</field>
+            <field name="print_report_name">'Perdiem - %s' % (object.name)</field>
+            <field name="attachment">(object.state == 'approved')</field>
+            <field name="attachment_use">True</field>
+            <field name="binding_model_id" ref="model_e_gestock_perdiem"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo> 

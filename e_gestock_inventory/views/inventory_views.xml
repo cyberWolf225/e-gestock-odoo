@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire des inventaires -->
+    <record id="view_e_gestock_inventory_form" model="ir.ui.view">
+        <field name="name">e_gestock.inventory.form</field>
+        <field name="model">e_gestock.inventory</field>
+        <field name="arch" type="xml">
+            <form string="Inventaire">
+                <header>
+                    <button name="action_start" string="Démarrer l'inventaire" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_validate" string="Valider" type="object"
+                            class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Annuler" type="object" invisible="state not in ('draft', 'in_progress')"/>
+                    <button name="action_add_article" string="Ajouter un article" type="object"
+                            class="btn-primary" invisible="state != 'in_progress'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,validated"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="depot_id" options="{'no_create': True}" readonly="depot_readonly"/>
+                            <field name="date"/>
+                            <field name="depot_readonly" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="responsable_id" readonly="responsable_readonly"/>
+                            <field name="validateur_id" readonly="1" invisible="validateur_id == False"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="responsable_readonly" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lignes d'inventaire" name="lines">
+                            <div class="oe_right oe_button_box">
+                                <button name="%(e_gestock_inventory.action_e_gestock_inventory_import_wizard)d"
+                                        type="action"
+                                        string="Importer des données"
+                                        class="btn-primary"
+                                        invisible="state != 'in_progress'"/>
+                            </div>
+                            <group class="oe_inline">
+                                <field name="total_lines" string="Total des lignes"/>
+                                <field name="total_counted" string="Lignes comptées"/>
+                                <field name="count_progress" string="Progression (%)" widget="progressbar"/>
+                            </group>
+                            <field name="line_ids" readonly="lines_readonly">
+                                <list editable="bottom" decoration-danger="ecart &lt; 0" decoration-success="ecart &gt; 0" decoration-muted="is_counted == False" create="false" delete="false">
+                                    <field name="article_id" readonly="1"/>
+                                    <field name="product_id" readonly="1" optional="hide"/>
+                                    <field name="quantite_theorique" readonly="1"/>
+                                    <field name="quantite_reelle" readonly="state not in ['draft', 'in_progress']"/>
+                                    <field name="ecart" readonly="1"/>
+                                    <field name="ecart_ratio" readonly="1" widget="percentage" optional="show"/>
+                                    <field name="uom_id" readonly="1"/>
+                                    <field name="is_counted" readonly="1"/>
+                                    <field name="state" invisible="1"/>
+                                    <button name="action_set_counted" string="Confirmer quantité théorique" type="object" icon="fa-check" invisible="is_counted or state != 'in_progress'"/>
+                                    <button name="action_set_zero" string="Mettre à zéro" type="object" icon="fa-power-off" invisible="is_counted or state != 'in_progress'"/>
+                                    <field name="notes" optional="show"/>
+                                </list>
+                            </field>
+                            <field name="lines_readonly" invisible="1"/>
+                        </page>
+                        <page string="Odoo" name="odoo" invisible="adjustment_movement_id == False">
+                            <group>
+                                <field name="adjustment_movement_id" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Ajouter des notes..." readonly="notes_readonly"/>
+                            <field name="notes_readonly" invisible="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des inventaires -->
+    <record id="view_e_gestock_inventory_list" model="ir.ui.view">
+        <field name="name">e_gestock.inventory.list</field>
+        <field name="model">e_gestock.inventory</field>
+        <field name="arch" type="xml">
+            <list string="Inventaires" decoration-info="state=='draft'" decoration-warning="state=='in_progress'" decoration-success="state=='validated'" decoration-muted="state=='cancel'">
+                <field name="reference"/>
+                <field name="date"/>
+                <field name="depot_id"/>
+                <field name="responsable_id"/>
+                <field name="validateur_id"/>
+                <field name="total_lines"/>
+                <field name="total_counted"/>
+                <field name="count_progress" widget="progressbar"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche des inventaires -->
+    <record id="view_e_gestock_inventory_search" model="ir.ui.view">
+        <field name="name">e_gestock.inventory.search</field>
+        <field name="model">e_gestock.inventory</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher un inventaire">
+                <field name="reference"/>
+                <field name="depot_id"/>
+                <field name="responsable_id"/>
+                <field name="validateur_id"/>
+                <separator/>
+                <filter name="draft" string="Brouillon" domain="[('state', '=', 'draft')]"/>
+                <filter name="in_progress" string="En cours" domain="[('state', '=', 'in_progress')]"/>
+                <filter name="validated" string="Validé" domain="[('state', '=', 'validated')]"/>
+                <filter name="cancel" string="Annulé" domain="[('state', '=', 'cancel')]"/>
+                <separator/>
+                <filter name="today" string="Aujourd'hui" domain="[('date', '>=', context_today().strftime('%Y-%m-%d')), ('date', '&lt;=', context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+                <filter name="week" string="Cette semaine" domain="[('date', '>=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today() + datetime.timedelta(days=6-context_today().weekday())).strftime('%Y-%m-%d 23:59:59'))]"/>
+                <filter name="month" string="Ce mois" domain="[('date', '>=', (context_today().replace(day=1)).strftime('%Y-%m-%d')), ('date', '&lt;=', (context_today().replace(day=calendar.monthrange(context_today().year, context_today().month)[1])).strftime('%Y-%m-%d 23:59:59'))]"/>
+                <separator/>
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_by_depot" string="Dépôt" context="{'group_by': 'depot_id'}"/>
+                    <filter name="group_by_state" string="État" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_responsable" string="Responsable" context="{'group_by': 'responsable_id'}"/>
+                    <filter name="group_by_date" string="Date" context="{'group_by': 'date:day'}"/>
+                    <filter name="group_by_month" string="Mois" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les inventaires -->
+    <record id="action_e_gestock_inventory" model="ir.actions.act_window">
+        <field name="name">Inventaires</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.inventory</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_e_gestock_inventory_search"/>
+        <field name="context">{'search_default_draft': 1, 'search_default_in_progress': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun inventaire trouvé
+            </p>
+            <p>
+                Créez votre premier inventaire pour vérifier les niveaux de stock de vos articles.
+            </p>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les lignes d'inventaire -->
+    <record id="view_e_gestock_inventory_line_list" model="ir.ui.view">
+        <field name="name">e_gestock.inventory_line.list</field>
+        <field name="model">e_gestock.inventory_line</field>
+        <field name="arch" type="xml">
+            <list string="Lignes d'inventaire" decoration-danger="ecart &lt; 0" decoration-success="ecart &gt; 0" decoration-muted="is_counted == False">
+                <field name="inventory_id"/>
+                <field name="article_id"/>
+                <field name="quantite_theorique"/>
+                <field name="quantite_reelle"/>
+                <field name="ecart"/>
+                <field name="ecart_ratio" widget="percentage"/>
+                <field name="uom_id"/>
+                <field name="depot_id"/>
+                <field name="is_counted"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les lignes d'inventaire -->
+    <record id="view_e_gestock_inventory_line_search" model="ir.ui.view">
+        <field name="name">e_gestock.inventory_line.search</field>
+        <field name="model">e_gestock.inventory_line</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des lignes d'inventaire">
+                <field name="inventory_id"/>
+                <field name="article_id"/>
+                <field name="depot_id"/>
+                <separator/>
+                <filter name="counted" string="Comptés" domain="[('is_counted', '=', True)]"/>
+                <filter name="not_counted" string="Non comptés" domain="[('is_counted', '=', False)]"/>
+                <filter name="with_gap" string="Avec écart" domain="[('ecart', '!=', 0)]"/>
+                <filter name="negative_gap" string="Écart négatif" domain="[('ecart', '&lt;', 0)]"/>
+                <filter name="positive_gap" string="Écart positif" domain="[('ecart', '&gt;', 0)]"/>
+                <separator/>
+                <group expand="0" string="Regrouper par">
+                    <filter name="group_by_inventory" string="Inventaire" context="{'group_by': 'inventory_id'}"/>
+                    <filter name="group_by_article" string="Article" context="{'group_by': 'article_id'}"/>
+                    <filter name="group_by_depot" string="Dépôt" context="{'group_by': 'depot_id'}"/>
+                    <filter name="group_by_state" string="État" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_counted" string="Compté" context="{'group_by': 'is_counted'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les lignes d'inventaire -->
+    <record id="action_e_gestock_inventory_line" model="ir.actions.act_window">
+        <field name="name">Lignes d'inventaire</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.inventory_line</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="view_e_gestock_inventory_line_search"/>
+        <field name="context">{'search_default_with_gap': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune ligne d'inventaire trouvée
+            </p>
+            <p>
+                Les lignes d'inventaire sont créées lors de la création d'un inventaire.
+            </p>
+        </field>
+    </record>
+</odoo>

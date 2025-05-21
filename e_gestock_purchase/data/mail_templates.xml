@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Email pour notifier un fournisseur d'une nouvelle demande de cotation -->
+        <record id="email_template_new_supplier_quotation_request" model="mail.template">
+                <field name="name">Demande de Cotation - Notification au fournisseur</field>
+                <field name="model_id" ref="model_e_gestock_demande_cotation_fournisseur"/>
+                <field name="subject">{{ object.company_id.name }}: Nouvelle demande de cotation {{ object.reference }}</field>
+                <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+                <field name="email_to">{{ object.supplier_id.email }}</field>
+                <field name="lang">{{ object.supplier_id.lang }}</field>
+                <field name="body_html" type="html">
+                        <div style="margin: 0px; padding: 0px; font-size: 14px;">
+                                <p style="margin: 0px; padding: 0px; font-size: 14px;">
+        Bonjour {{ object.supplier_id.name }},<br/>
+                                <br/>
+
+        Nous vous adressons cette demande de cotation concernant les articles listés ci-dessous.
+
+                                <br/>
+                                <br/>
+
+                                <strong>Référence:</strong> {{ object.reference }}<br/>
+                        <strong>Date d'envoi:</strong> {{ format_date(object.date_envoi) }}<br/>
+                <strong>Date d'échéance:</strong> {{ format_date(object.date_echeance) }}<br/>
+        <strong>Type d'achat:</strong> {{ {'direct': 'Achat direct', 'appel_offre': 'Appel d\'offres', 'consultation': 'Consultation restreinte'}[object.type_achat] }}
+
+        <br/>
+        <br/>
+
+        Veuillez consulter cette demande et soumettre votre offre en cliquant sur le lien ci-dessous:
+        <br/>
+        <div style="margin: 16px 0px 16px 0px; text-align: center;">
+                <a href="{{ object.access_url }}" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                Voir la demande de cotation
+                </a>
+        </div>
+        <br/>
+
+        Nous vous remercions de votre collaboration et restons à votre disposition pour tout complément d'information.
+
+        <br/>
+        <br/>
+
+        Cordialement,
+        <br/>
+        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour notifier le demandeur lorsqu'une cotation est reçue -->
+<record id="email_template_quotation_received" model="mail.template">
+<field name="name">Cotation - Notification de réception</field>
+<field name="model_id" ref="model_e_gestock_cotation"/>
+<field name="subject">{{ object.company_id.name }}: Cotation reçue {{ object.reference }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ object.demande_id.demandeur_id.email }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+        Bonjour {{ object.demande_id.demandeur_id.name }},<br/>
+<br/>
+
+        Nous vous informons qu'une cotation a été reçue pour votre demande {{ object.demande_id.reference }}.
+
+<br/>
+<br/>
+
+<strong>Fournisseur:</strong> {{ object.supplier_id.name }}<br/>
+<strong>Référence:</strong> {{ object.reference }}<br/>
+<strong>Date:</strong> {{ format_date(object.date) }}<br/>
+<strong>Montant total:</strong> {{ format_amount(object.montant_total, object.currency_id) }}<br/>
+<strong>Délai de livraison:</strong> {{ object.delai_livraison }} jours
+
+<br/>
+<br/>
+
+        Vous pouvez consulter cette cotation en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.cotation&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                Voir la cotation
+</a>
+</div>
+
+<br/>
+<br/>
+
+        Cordialement,
+<br/>
+        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour notifier le responsable achat de la validation d'une demande -->
+<record id="email_template_purchase_request_validated" model="mail.template">
+<field name="name">Demande de Cotation - Validée</field>
+<field name="model_id" ref="model_e_gestock_demande_cotation"/>
+<field name="subject">{{ object.company_id.name }}: Demande de cotation validée {{ object.reference }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="partner_to">{{ object.message_follower_ids.partner_id.filtered(lambda p: p.id in user.company_id.partner_id.child_ids.ids).ids }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+        Bonjour,<br/>
+<br/>
+
+        La demande de cotation <strong>{{ object.reference }}</strong> a été validée.
+
+<br/>
+<br/>
+
+<strong>Demandeur:</strong> {{ object.demandeur_id.name }}<br/>
+<strong>Intitulé:</strong> {{ object.intitule }}<br/>
+<strong>Structure:</strong> {{ object.structure_id.name }}<br/>
+<strong>Compte budgétaire:</strong> {{ object.compte_budg_id.name }}<br/>
+<strong>Montant estimé:</strong> {{ format_amount(object.montant_total, object.currency_id) }}
+
+<br/>
+<br/>
+
+        Veuillez consulter cette demande en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.demande_cotation&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                Voir la demande
+</a>
+</div>
+
+<br/>
+
+        Cordialement,
+<br/>
+        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour notifier le contrôle budgétaire -->
+<record id="email_template_budget_check_request" model="mail.template">
+<field name="name">Demande - Contrôle Budgétaire</field>
+<field name="model_id" ref="model_e_gestock_demande_cotation"/>
+<field name="subject">{{ object.company_id.name }}: Demande à contrôler {{ object.reference }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ ctx.get('controller_email', '') }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+        Bonjour,<br/>
+<br/>
+
+        Une demande de cotation nécessite votre contrôle budgétaire.
+
+<br/>
+<br/>
+
+<strong>Référence:</strong> {{ object.reference }}<br/>
+<strong>Demandeur:</strong> {{ object.demandeur_id.name }}<br/>
+<strong>Intitulé:</strong> {{ object.intitule }}<br/>
+<strong>Structure:</strong> {{ object.structure_id.name }}<br/>
+<strong>Compte budgétaire:</strong> {{ object.compte_budg_id.name }}<br/>
+<strong>Montant estimé:</strong> {{ format_amount(object.montant_total, object.currency_id) }}<br/>
+<strong>Solde disponible:</strong> {{ format_amount(object.solde_disponible, object.currency_id) }}
+
+<br/>
+<br/>
+
+        Veuillez vérifier la disponibilité budgétaire en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.demande_cotation&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                Vérifier le budget
+</a>
+</div>
+
+<br/>
+
+        Cordialement,
+<br/>
+        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour notifier le fournisseur de la génération du bon de commande -->
+<record id="email_template_purchase_order_created" model="mail.template">
+<field name="name">Bon de commande - Notification au fournisseur</field>
+<field name="model_id" ref="model_e_gestock_purchase_order"/>
+<field name="subject">{{ object.company_id.name }}: Bon de commande {{ object.name }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ object.partner_id.email }}</field>
+<field name="lang">{{ object.partner_id.lang }}</field>
+<!-- Champs report_template et report_name non disponibles dans Odoo 18 -->
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+        Bonjour {{ object.partner_id.name }},<br/>
+<br/>
+
+        Veuillez trouver ci-joint le bon de commande <strong>{{ object.name }}</strong>.
+
+<br/>
+<br/>
+
+<strong>Référence:</strong> {{ object.name }}<br/>
+<strong>Date:</strong> {{ format_date(object.date_order) }}<br/>
+<strong>Montant total:</strong> {{ format_amount(object.amount_total, object.currency_id) }}<br/>
+<strong>Date de livraison prévue:</strong> {{ format_date(object.date_livraison_prevue) if object.date_livraison_prevue else '' }}
+
+<br/>
+<br/>
+
+        Vous pouvez confirmer cette commande en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.purchase_order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                Confirmer la commande
+</a>
+</div>
+
+<br/>
+
+        N'hésitez pas à nous contacter pour tout complément d'information.
+
+<br/>
+<br/>
+
+        Cordialement,
+<br/>
+        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour notifier le comité de réception pour la livraison prévue -->
+<record id="email_template_delivery_notification" model="mail.template">
+<field name="name">Notification - Livraison prévue</field>
+<field name="model_id" ref="model_e_gestock_purchase_order"/>
+<field name="subject">{{ object.company_id.name }}: Livraison prévue pour la commande {{ object.name }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ object.comite_reception_id.member_ids.mapped('email')|join(', ') }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+        Bonjour,<br/>
+<br/>
+
+        Nous vous informons qu'une livraison est prévue pour la commande suivante:
+
+<br/>
+<br/>
+
+<strong>Référence:</strong> {{ object.name }}<br/>
+<strong>Fournisseur:</strong> {{ object.partner_id.name }}<br/>
+<strong>Date de livraison prévue:</strong> {{ format_date(object.date_livraison_prevue) }}<br/>
+<strong>Lieu de livraison:</strong> {{ object.company_id.name }}
+
+<br/>
+<br/>
+
+        Veuillez vous préparer pour la réception de cette commande en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.purchase_order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                Voir la commande
+</a>
+</div>
+
+<br/>
+
+        Cordialement,
+<br/>
+        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour notifier le demandeur que la commande a été réceptionnée -->
+<record id="email_template_reception_completed" model="mail.template">
+<field name="name">Notification - Commande réceptionnée</field>
+<field name="model_id" ref="model_e_gestock_purchase_order"/>
+<field name="subject">{{ object.company_id.name }}: Commande réceptionnée {{ object.name }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ object.demande_cotation_id.demandeur_id.email }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+        Bonjour {{ object.demande_cotation_id.demandeur_id.name }},<br/>
+<br/>
+
+        Nous vous informons que la commande <strong>{{ object.name }}</strong> a été réceptionnée.
+
+<br/>
+<br/>
+
+<strong>Référence demande:</strong> {{ object.demande_cotation_id.reference }}<br/>
+<strong>Fournisseur:</strong> {{ object.partner_id.name }}<br/>
+<strong>Date de réception:</strong> {{ format_date(object.date_livraison_reelle) }}<br/>
+
+<br/>
+<br/>
+
+        Les articles sont maintenant disponibles. Vous pouvez consulter les détails en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.purchase_order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                Voir la commande
+</a>
+</div>
+
+<br/>
+
+        Cordialement,
+<br/>
+        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+
+<!-- Email pour les étapes de validation du bon de commande -->
+<record id="email_template_purchase_validation_request" model="mail.template">
+<field name="name">Demande de validation - Bon de commande</field>
+<field name="model_id" ref="model_e_gestock_purchase_order"/>
+<field name="subject">{{ object.company_id.name }}: BC à valider {{ object.name }}</field>
+<field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+<field name="email_to">{{ ctx.get('validator_email', '') }}</field>
+<field name="body_html" type="html">
+<div style="margin: 0px; padding: 0px; font-size: 14px;">
+<p style="margin: 0px; padding: 0px; font-size: 14px;">
+        Bonjour,<br/>
+<br/>
+
+        Un bon de commande nécessite votre validation.
+
+<br/>
+<br/>
+
+<strong>Référence:</strong> {{ object.name }}<br/>
+<strong>Fournisseur:</strong> {{ object.partner_id.name }}<br/>
+<strong>Montant:</strong> {{ format_amount(object.amount_total, object.currency_id) }}<br/>
+<strong>Demande d'origine:</strong> {{ object.demande_cotation_id.reference }}<br/>
+<strong>État actuel:</strong> {{ object.state_approbation }}
+
+<br/>
+<br/>
+
+        Veuillez valider ce bon de commande en cliquant sur le lien ci-dessous:
+<br/>
+<div style="margin: 16px 0px 16px 0px; text-align: center;">
+<a href="/web#id={{ object.id }}&amp;model=e_gestock.purchase_order&amp;view_type=form" style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;">
+                Valider
+</a>
+</div>
+
+<br/>
+
+        Cordialement,
+<br/>
+        {{ object.company_id.name }}
+</p>
+</div>
+</field>
+<field name="auto_delete" eval="True"/>
+</record>
+</odoo>

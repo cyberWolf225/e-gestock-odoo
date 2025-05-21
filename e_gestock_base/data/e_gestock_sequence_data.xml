@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Séquence pour les références d'articles -->
+        <record id="sequence_article_ref" model="ir.sequence">
+            <field name="name">Séquence Référence Article</field>
+            <field name="code">e_gestock.article</field>
+            <field name="prefix">%(ref_fam)s</field>
+            <field name="padding">2</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les références de dépôts -->
+        <record id="sequence_depot_ref" model="ir.sequence">
+            <field name="name">Séquence Référence Dépôt</field>
+            <field name="code">e_gestock.depot</field>
+            <field name="prefix"></field>
+            <field name="padding">3</field>
+            <field name="number_next">200</field> <!-- Commencer à 200 pour éviter les conflits -->
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les codes de sections -->
+        <record id="sequence_section_code" model="ir.sequence">
+            <field name="name">Séquence Code Section</field>
+            <field name="code">e_gestock.section</field>
+            <field name="prefix">%(code_structure)s</field>
+            <field name="padding">2</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo> 

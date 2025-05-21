@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_reception_return_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=o.fournisseur_id.lang)"/>
+            <div class="page">
+                <div class="oe_structure"/>
+                <h2>Bon de retour <span t-field="o.reference"/></h2>
+                
+                <div class="row mt32 mb32">
+                    <div class="col-6">
+                        <strong>Fournisseur:</strong>
+                        <div t-field="o.fournisseur_id" t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Date:</strong>
+                                <p t-field="o.date"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Référence:</strong>
+                                <p t-field="o.reference"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Bon de commande:</strong>
+                                <p t-field="o.purchase_order_id.name"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Réception:</strong>
+                                <p t-field="o.reception_id.reference"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Motif du retour: <span t-field="o.motif"/></h4>
+                <p t-field="o.description"/>
+                
+                <table class="table table-sm o_main_table mt-4">
+                    <thead>
+                        <tr>
+                            <th>Article</th>
+                            <th>Désignation</th>
+                            <th class="text-right">Quantité</th>
+                            <th class="text-right">Prix unitaire</th>
+                            <th class="text-right">Montant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="o.line_ids" t-as="line">
+                            <td>
+                                <span t-field="line.article_id.name"/>
+                            </td>
+                            <td>
+                                <span t-field="line.designation"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.quantite"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.prix_unitaire" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.montant" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="text-right">
+                                <strong>Total</strong>
+                            </td>
+                            <td class="text-right">
+                                <strong t-field="o.montant_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+                <div class="row mt32 mb32">
+                    <div class="col-6">
+                        <strong>Informations d'expédition:</strong>
+                        <p t-if="o.transporteur_id">Transporteur: <span t-field="o.transporteur_id.name"/></p>
+                        <p t-if="o.date_expedition">Date d'expédition: <span t-field="o.date_expedition"/></p>
+                        <p t-if="o.numero_tracking">Numéro de tracking: <span t-field="o.numero_tracking"/></p>
+                    </div>
+                    <div class="col-6">
+                        <strong>Responsable:</strong>
+                        <p t-field="o.responsable_id.name"/>
+                    </div>
+                </div>
+                
+                <div class="row mt64">
+                    <div class="col-6">
+                        <strong>Signature responsable:</strong>
+                        <div class="mt16" style="height: 70px; border-bottom: 1px solid black;"></div>
+                    </div>
+                    <div class="col-6">
+                        <strong>Signature transporteur:</strong>
+                        <div class="mt16" style="height: 70px; border-bottom: 1px solid black;"></div>
+                    </div>
+                </div>
+                
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_reception_return">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="e_gestock_reception.report_reception_return_document"/>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_reception_return" model="ir.actions.report">
+        <field name="name">Bon de retour</field>
+        <field name="model">e_gestock.reception.return</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_reception.report_reception_return</field>
+        <field name="report_file">e_gestock_reception.report_reception_return</field>
+        <field name="binding_model_id" ref="model_e_gestock_reception_return"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

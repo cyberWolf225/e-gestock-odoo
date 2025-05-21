@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour le bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_form" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.form</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="arch" type="xml">
+            <form string="Bon de commande">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,to_approve,approved,done"/>
+                    <field name="state_approbation" widget="statusbar" statusbar_visible="draft,cmp_validated,budget_validated,dcg_dept_validated,dcg_validated,dgaaf_validated,dg_validated,approved,withdrawn,delivered,received"/>
+
+                    <!-- Boutons d'action standard -->
+                    <button name="action_send_rfq" string="Envoyer au fournisseur" type="object" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_cancel" string="Annuler" type="object" attrs="{'invisible': [('state', 'in', ['cancel', 'done'])]}"/>
+                    <button name="action_draft" string="Remettre en brouillon" type="object" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+
+                    <!-- Circuit de validation E-GESTOCK avec affichage des validations -->
+                    <!-- CMP Validation -->
+                    <button name="action_validate_cmp" string="Valider (CMP)" type="object" class="oe_highlight" attrs="{'invisible': [('state_approbation', '!=', 'draft')]}" groups="e_gestock_base.group_e_gestock_resp_dmp"/>
+                    <span attrs="{'invisible': ['|', ('state_approbation', '=', 'draft'), ('cmp_validator_id', '=', False)]}" class="badge badge-success">
+                        Validé par CMP: <field name="cmp_validator_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+                    </span>
+
+                    <!-- Budget Validation -->
+                    <button name="action_validate_budget" string="Valider (Budget)" type="object" class="oe_highlight" attrs="{'invisible': [('state_approbation', '!=', 'cmp_validated')]}" groups="e_gestock_base.group_e_gestock_budget_controller"/>
+                    <span attrs="{'invisible': ['|', ('state_approbation', 'in', ['draft', 'cmp_validated']), ('budget_validator_id', '=', False)]}" class="badge badge-success">
+                        Validé par Budget: <field name="budget_validator_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+                    </span>
+
+                    <!-- Chef Dép. DCG Validation -->
+                    <button name="action_validate_dcg_dept" string="Valider (Chef Dép. DCG)" type="object" class="oe_highlight" attrs="{'invisible': [('state_approbation', '!=', 'budget_validated')]}" groups="e_gestock_base.group_e_gestock_resp_dfc"/>
+                    <span attrs="{'invisible': ['|', ('state_approbation', 'in', ['draft', 'cmp_validated', 'budget_validated']), ('dcg_dept_validator_id', '=', False)]}" class="badge badge-success">
+                        Validé par Chef Dép. DCG: <field name="dcg_dept_validator_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+                    </span>
+
+                    <!-- Resp. DCG Validation -->
+                    <button name="action_validate_dcg" string="Valider (Resp. DCG)" type="object" class="oe_highlight" attrs="{'invisible': [('state_approbation', '!=', 'dcg_dept_validated')]}" groups="e_gestock_base.group_dfc_validator"/>
+                    <span attrs="{'invisible': ['|', ('state_approbation', 'in', ['draft', 'cmp_validated', 'budget_validated', 'dcg_dept_validated']), ('dcg_validator_id', '=', False)]}" class="badge badge-success">
+                        Validé par Resp. DCG: <field name="dcg_validator_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+                    </span>
+
+                    <!-- DGAAF Validation -->
+                    <button name="action_validate_dgaaf" string="Valider (DGAAF)" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state_approbation', '!=', 'dcg_validated'), ('needs_dg_validation', '=', True)]}" groups="e_gestock_base.group_dgaa_validator"/>
+                    <span attrs="{'invisible': ['|', '|', ('state_approbation', 'in', ['draft', 'cmp_validated', 'budget_validated', 'dcg_dept_validated', 'dcg_validated']), ('dgaaf_validator_id', '=', False), ('needs_dg_validation', '=', True)]}" class="badge badge-success">
+                        Validé par DGAAF: <field name="dgaaf_validator_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+                    </span>
+
+                    <!-- DG Validation -->
+                    <button name="action_validate_dg" string="Valider (DG)" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state_approbation', '!=', 'dcg_validated'), ('needs_dg_validation', '=', False)]}" groups="e_gestock_base.group_dg_validator"/>
+                    <span attrs="{'invisible': ['|', '|', ('state_approbation', 'in', ['draft', 'cmp_validated', 'budget_validated', 'dcg_dept_validated', 'dcg_validated']), ('dg_validator_id', '=', False), ('needs_dg_validation', '=', False)]}" class="badge badge-success">
+                        Validé par DG: <field name="dg_validator_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+                    </span>
+
+                    <!-- Approbation -->
+                    <button name="action_approve_final" string="Approuver" type="object" class="oe_highlight" attrs="{'invisible': [('state_approbation', 'not in', ['dgaaf_validated', 'dg_validated'])]}" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+                    <!-- Retrait -->
+                    <button name="action_withdraw" string="Marquer comme retiré" type="object" attrs="{'invisible': [('state_approbation', '!=', 'approved')]}" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+                    <!-- Livraison -->
+                    <button name="action_set_delivered" string="Marquer comme livré" type="object" attrs="{'invisible': [('state_approbation', '!=', 'withdrawn')]}" groups="e_gestock_base.group_e_gestock_purchase_manager"/>
+
+                    <!-- Réception -->
+                    <button name="action_reception" string="Réceptionner" type="object" class="oe_highlight" attrs="{'invisible': [('state_approbation', '!=', 'delivered')]}" groups="e_gestock_base.group_e_gestock_reception_manager"/>
+                    <span attrs="{'invisible': ['|', ('state_approbation', '!=', 'received'), ('reception_validator_id', '=', False)]}" class="badge badge-success">
+                        Réceptionné par: <field name="reception_validator_id" readonly="1" nolabel="1" options="{'no_open': True}"/>
+                    </span>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
+                        </group>
+                        <group>
+                            <field name="date_order" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            <field name="date_planned" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            <field name="origin" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                            <field name="needs_dg_validation" invisible="1"/>
+                            <field name="seuil_validation_dg" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lignes de commande" name="order_lines">
+                            <field name="order_line" attrs="{'readonly': [('state', 'not in', ['draft'])]}">
+                                <list string="Lignes de commande" editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="date_planned"/>
+                                    <field name="e_gestock_article_id"/>
+                                    <field name="product_qty"/>
+                                    <field name="product_uom"/>
+                                    <field name="price_unit"/>
+                                    <field name="taxes_id" widget="many2many_tags"/>
+                                    <field name="price_subtotal" sum="Total"/>
+                                </list>
+                                <form string="Ligne de commande">
+                                    <group>
+                                        <group>
+                                            <field name="product_id"/>
+                                            <field name="name"/>
+                                            <field name="date_planned"/>
+                                            <field name="e_gestock_article_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="product_qty"/>
+                                            <field name="product_uom"/>
+                                            <field name="price_unit"/>
+                                            <field name="taxes_id" widget="many2many_tags"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_untaxed" widget="monetary"/>
+                                <field name="amount_tax" widget="monetary"/>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="amount_total"/>
+                                </div>
+                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                            </group>
+                        </page>
+                        <page string="Informations E-GESTOCK" name="e_gestock_info">
+                            <group>
+                                <group string="Origine">
+                                    <field name="demande_cotation_id" readonly="1"/>
+                                    <field name="cotation_id" readonly="1"/>
+                                </group>
+                                <group string="Livraison">
+                                    <field name="date_retrait"/>
+                                    <field name="date_livraison_prevue"/>
+                                    <field name="date_livraison_reelle"/>
+                                    <field name="bl_attachment" widget="binary" filename="bl_filename"/>
+                                    <field name="bl_filename" invisible="1"/>
+                                </group>
+                            </group>
+                            <group string="Comité de réception">
+                                <field name="committee_id" options="{'no_create': True}"/>
+                                <field name="committee_responsible_id" readonly="1"/>
+                                <field name="committee_members" widget="many2many_tags" readonly="1"/>
+                            </group>
+                            <group string="Signataires">
+                                <field name="signataire_ids" widget="many2many_tags"/>
+                            </group>
+                            <group string="Validations">
+                                <group string="Historique des validations">
+                                    <field name="cmp_validator_id" readonly="1" string="Validateur CMP" attrs="{'invisible': [('cmp_validator_id', '=', False)]}"/>
+                                    <field name="cmp_validation_date" readonly="1" string="Date validation CMP" attrs="{'invisible': [('cmp_validator_id', '=', False)]}"/>
+                                    <field name="cmp_comment" readonly="1" string="Commentaire CMP" attrs="{'invisible': [('cmp_validator_id', '=', False)]}"/>
+
+                                    <field name="budget_validator_id" readonly="1" string="Validateur Budget" attrs="{'invisible': [('budget_validator_id', '=', False)]}"/>
+                                    <field name="budget_validation_date" readonly="1" string="Date validation Budget" attrs="{'invisible': [('budget_validator_id', '=', False)]}"/>
+                                    <field name="budget_comment" readonly="1" string="Commentaire Budget" attrs="{'invisible': [('budget_validator_id', '=', False)]}"/>
+
+                                    <field name="dcg_dept_validator_id" readonly="1" string="Validateur Chef Dép. DCG" attrs="{'invisible': [('dcg_dept_validator_id', '=', False)]}"/>
+                                    <field name="dcg_dept_validation_date" readonly="1" string="Date validation Chef Dép. DCG" attrs="{'invisible': [('dcg_dept_validator_id', '=', False)]}"/>
+                                    <field name="dcg_dept_comment" readonly="1" string="Commentaire Chef Dép. DCG" attrs="{'invisible': [('dcg_dept_validator_id', '=', False)]}"/>
+
+                                    <field name="dcg_validator_id" readonly="1" string="Validateur Resp. DCG" attrs="{'invisible': [('dcg_validator_id', '=', False)]}"/>
+                                    <field name="dcg_validation_date" readonly="1" string="Date validation Resp. DCG" attrs="{'invisible': [('dcg_validator_id', '=', False)]}"/>
+                                    <field name="dcg_comment" readonly="1" string="Commentaire Resp. DCG" attrs="{'invisible': [('dcg_validator_id', '=', False)]}"/>
+
+                                    <field name="dgaaf_validator_id" readonly="1" string="Validateur DGAAF" attrs="{'invisible': [('dgaaf_validator_id', '=', False)]}"/>
+                                    <field name="dgaaf_validation_date" readonly="1" string="Date validation DGAAF" attrs="{'invisible': [('dgaaf_validator_id', '=', False)]}"/>
+                                    <field name="dgaaf_comment" readonly="1" string="Commentaire DGAAF" attrs="{'invisible': [('dgaaf_validator_id', '=', False)]}"/>
+
+                                    <field name="dg_validator_id" readonly="1" string="Validateur DG" attrs="{'invisible': [('dg_validator_id', '=', False)]}"/>
+                                    <field name="dg_validation_date" readonly="1" string="Date validation DG" attrs="{'invisible': [('dg_validator_id', '=', False)]}"/>
+                                    <field name="dg_comment" readonly="1" string="Commentaire DG" attrs="{'invisible': [('dg_validator_id', '=', False)]}"/>
+
+                                    <field name="reception_validator_id" readonly="1" string="Validateur Réception" attrs="{'invisible': [('reception_validator_id', '=', False)]}"/>
+                                    <field name="reception_validation_date" readonly="1" string="Date validation Réception" attrs="{'invisible': [('reception_validator_id', '=', False)]}"/>
+                                    <field name="reception_comment" readonly="1" string="Commentaire Réception" attrs="{'invisible': [('reception_validator_id', '=', False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des bons de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_list" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.list</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="arch" type="xml">
+            <list string="Bons de commande" decoration-muted="state=='cancel'" sample="1">
+                <field name="name" string="Référence" readonly="1" decoration-info="state in ('draft','sent')"/>
+                <field name="date_order" readonly="state in ['cancel', 'done', 'approved']"/>
+                <field name="date_planned"/>
+                <field name="partner_id" readonly="1"/>
+                <field name="user_id"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                <field name="origin" optional="show"/>
+                <field name="amount_untaxed" sum="Total HT" widget="monetary" optional="show"/>
+                <field name="amount_total" sum="Total" widget="monetary"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="state"/>
+                <field name="state_approbation"/>
+                <field name="cotation_id" optional="hide"/>
+                <field name="demande_cotation_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche des bons de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_search" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.search</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="arch" type="xml">
+            <search string="Recherche de bons de commande">
+                <field name="name" string="Référence"/>
+                <field name="partner_id" operator="child_of"/>
+                <field name="user_id"/>
+                <field name="origin"/>
+                <field name="cotation_id"/>
+                <field name="demande_cotation_id"/>
+                <separator/>
+                <filter name="draft" string="Brouillons" domain="[('state', '=', 'draft')]"/>
+                <filter name="sent" string="Envoyés" domain="[('state', '=', 'sent')]"/>
+                <filter name="approved" string="Approuvés" domain="[('state', '=', 'approved')]"/>
+                <filter name="done" string="Terminés" domain="[('state', '=', 'done')]"/>
+                <filter name="cancelled" string="Annulés" domain="[('state', '=', 'cancel')]"/>
+                <separator/>
+                <filter name="to_validate_cmp" string="À valider (CMP)" domain="[('state_approbation', '=', 'draft')]"/>
+                <filter name="to_validate_budget" string="À valider (Budget)" domain="[('state_approbation', '=', 'cmp_validated')]"/>
+                <filter name="to_validate_dcg_dept" string="À valider (Chef Dép. DCG)" domain="[('state_approbation', '=', 'budget_validated')]"/>
+                <filter name="to_validate_dcg" string="À valider (Resp. DCG)" domain="[('state_approbation', '=', 'dcg_dept_validated')]"/>
+                <filter name="to_validate_dgaaf" string="À valider (DGAAF)" domain="[('state_approbation', '=', 'dcg_validated'), ('needs_dg_validation', '=', False)]"/>
+                <filter name="to_validate_dg" string="À valider (DG)" domain="[('state_approbation', '=', 'dcg_validated'), ('needs_dg_validation', '=', True)]"/>
+                <filter name="to_approve" string="À approuver" domain="[('state_approbation', 'in', ['dgaaf_validated', 'dg_validated'])]"/>
+                <filter name="withdrawn" string="Retirés" domain="[('state_approbation', '=', 'withdrawn')]"/>
+                <filter name="delivered" string="Livrés" domain="[('state_approbation', '=', 'delivered')]"/>
+                <filter name="received" string="Réceptionnés" domain="[('state_approbation', '=', 'received')]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter name="groupby_supplier" string="Fournisseur" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter name="groupby_user" string="Acheteur" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter name="groupby_date" string="Date de commande" domain="[]" context="{'group_by': 'date_order'}"/>
+                    <filter name="groupby_state" string="État" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter name="groupby_state_approbation" string="État d'approbation" domain="[]" context="{'group_by': 'state_approbation'}"/>
+                    <filter name="groupby_cotation" string="Cotation" domain="[]" context="{'group_by': 'cotation_id'}"/>
+                    <filter name="groupby_demande" string="Demande de cotation" domain="[]" context="{'group_by': 'demande_cotation_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les bons de commande E-GESTOCK -->
+    <record id="action_e_gestock_purchase_order" model="ir.actions.act_window">
+        <field name="name">Bons de commande</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau bon de commande
+            </p>
+            <p>
+                Les bons de commande E-GESTOCK sont créés à partir de cotations sélectionnées.
+            </p>
+        </field>
+    </record>
+
+    <!-- Actions spécifiques pour les différents profils -->
+    <record id="action_e_gestock_purchase_order_cmp" model="ir.actions.act_window">
+        <field name="name">BC à valider (CMP)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'draft')]</field>
+        <field name="context">{'search_default_to_validate_cmp': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande à valider
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_purchase_order_budget" model="ir.actions.act_window">
+        <field name="name">BC à valider (Budget)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'cmp_validated')]</field>
+        <field name="context">{'search_default_to_validate_budget': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande à valider
+            </p>
+        </field>
+    </record>
+</odoo>

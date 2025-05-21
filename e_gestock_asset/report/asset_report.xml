@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Modèle de rapport pour les immobilisations -->
+    <record id="report_e_gestock_asset" model="ir.actions.report">
+        <field name="name">Fiche d'immobilisation</field>
+        <field name="model">e_gestock.asset</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_asset.report_asset_template</field>
+        <field name="report_file">e_gestock_asset.report_asset_template</field>
+        <field name="binding_model_id" ref="model_e_gestock_asset"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <!-- Template QWeb pour le rapport d'immobilisation -->
+    <template id="report_asset_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Fiche d'immobilisation</h2>
+                        
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Référence:</strong> <span t-field="o.reference"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>État:</strong> <span t-field="o.state"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Nom:</strong> <span t-field="o.name"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Type:</strong> <span t-field="o.type_id"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Article:</strong> <span t-field="o.article_id"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Structure:</strong> <span t-field="o.structure_id"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Marque:</strong> <span t-field="o.marque"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Modèle:</strong> <span t-field="o.modele"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Numéro de série:</strong> <span t-field="o.numero_serie"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Code QR:</strong> <span t-field="o.qr_code"/>
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt32">Informations financières</h4>
+                        <div class="row">
+                            <div class="col-4">
+                                <strong>Valeur d'acquisition:</strong> <span t-field="o.valeur_acquisition"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>Valeur résiduelle:</strong> <span t-field="o.valeur_residuelle"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>Durée amortissement:</strong> <span t-field="o.duree_amortissement"/> années
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt32">Dates clés</h4>
+                        <div class="row">
+                            <div class="col-3">
+                                <strong>Date d'acquisition:</strong> <span t-field="o.date_acquisition"/>
+                            </div>
+                            <div class="col-3">
+                                <strong>Date de mise en service:</strong> <span t-field="o.date_mise_service"/>
+                            </div>
+                            <div class="col-3">
+                                <strong>Début de garantie:</strong> <span t-field="o.date_debut_garantie"/>
+                            </div>
+                            <div class="col-3">
+                                <strong>Fin de garantie:</strong> <span t-field="o.date_fin_garantie"/>
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt32">Localisation et responsabilité</h4>
+                        <div class="row">
+                            <div class="col-4">
+                                <strong>Structure:</strong> <span t-field="o.structure_id"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>Section:</strong> <span t-field="o.section_id"/>
+                            </div>
+                            <div class="col-4">
+                                <strong>Localisation:</strong> <span t-field="o.localisation"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Responsable:</strong> <span t-field="o.responsable_id"/>
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt32">Description</h4>
+                        <div class="row">
+                            <div class="col-12">
+                                <span t-field="o.description"/>
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt32">Historique des maintenances</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Référence</th>
+                                    <th>Type</th>
+                                    <th>Date début</th>
+                                    <th>Date fin</th>
+                                    <th>Responsable</th>
+                                    <th>Prestataire</th>
+                                    <th>Coût</th>
+                                    <th>État</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.maintenance_ids" t-as="m">
+                                    <td><span t-field="m.reference"/></td>
+                                    <td><span t-field="m.type"/></td>
+                                    <td><span t-field="m.date_debut"/></td>
+                                    <td><span t-field="m.date_fin"/></td>
+                                    <td><span t-field="m.responsable_id"/></td>
+                                    <td><span t-field="m.prestataire_id"/></td>
+                                    <td><span t-field="m.cout"/></td>
+                                    <td><span t-field="m.state"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    
+    <!-- Rapport d'inventaire des immobilisations -->
+    <record id="report_e_gestock_asset_inventory" model="ir.actions.report">
+        <field name="name">Inventaire des immobilisations</field>
+        <field name="model">e_gestock.asset</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">e_gestock_asset.report_asset_inventory_template</field>
+        <field name="report_file">e_gestock_asset.report_asset_inventory_template</field>
+        <field name="binding_model_id" ref="model_e_gestock_asset"/>
+        <field name="binding_type">report</field>
+    </record>
+    
+    <!-- Template QWeb pour le rapport d'inventaire des immobilisations -->
+    <template id="report_asset_inventory_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">Inventaire des immobilisations</h2>
+                    
+                    <div class="row mt32 mb32">
+                        <div class="col-12">
+                            <p>Date d'impression: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/></p>
+                        </div>
+                    </div>
+                    
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th>Nom</th>
+                                <th>Type</th>
+                                <th>Structure</th>
+                                <th>Localisation</th>
+                                <th>Date acquisition</th>
+                                <th>Valeur acquisition</th>
+                                <th>État</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="o">
+                                <td><span t-field="o.reference"/></td>
+                                <td><span t-field="o.name"/></td>
+                                <td><span t-field="o.type_id"/></td>
+                                <td><span t-field="o.structure_id"/></td>
+                                <td><span t-field="o.localisation"/></td>
+                                <td><span t-field="o.date_acquisition"/></td>
+                                <td><span t-field="o.valeur_acquisition"/></td>
+                                <td><span t-field="o.state"/></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6" class="text-right"><strong>Total</strong></td>
+                                <td><strong t-esc="sum(doc.valeur_acquisition for doc in docs)"/></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

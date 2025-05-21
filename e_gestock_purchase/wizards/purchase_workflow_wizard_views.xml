@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue pour l'assistant de validation -->
+    <record id="view_validation_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.validation_wizard.form</field>
+        <field name="model">e_gestock.validation_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Validation">
+                <field name="workflow_id" invisible="1"/>
+                <field name="validation_type" invisible="1"/>
+                <field name="next_state" invisible="1"/>
+
+                <!-- Lignes pour la validation par le responsable des achats -->
+                <field name="line_ids" attrs="{'invisible': [('validation_type', '!=', 'resp_achat')]}">
+                    <tree editable="bottom">
+                        <field name="article_id"/>
+                        <field name="reference"/>
+                        <field name="description"/>
+                        <field name="quantite"/>
+                        <field name="quantite_accordee"/>
+                        <field name="to_validate"/>
+                    </tree>
+                </field>
+
+                <field name="validate_all" attrs="{'invisible': [('validation_type', '!=', 'resp_achat')]}"/>
+
+                <field name="comment" placeholder="Commentaire..."/>
+
+                <footer>
+                    <button name="action_validate" type="object" string="Valider" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" string="Annuler" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue pour l'assistant de demande de cotation -->
+    <record id="view_quotation_request_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.quotation_request_wizard.form</field>
+        <field name="model">e_gestock.quotation_request_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Demande de cotation">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="workflow_id" invisible="1"/>
+                            <field name="type_achat" widget="radio"/>
+                            <field name="taux_acompte"/>
+                        </group>
+                        <group>
+                            <field name="code_echeance"/>
+                            <field name="delai_echeance"/>
+                        </group>
+                    </group>
+
+                    <separator string="Fournisseurs présélectionnés"/>
+                    <field name="supplier_ids" domain="[('supplier_rank', '>', 0)]">
+                        <tree>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                        </tree>
+                    </field>
+                </sheet>
+
+                <footer>
+                    <button name="action_create_quotation_request" type="object" string="Créer demande de cotation" class="oe_highlight"/>
+                    <button special="cancel" string="Annuler" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue pour l'assistant de sélection du fournisseur -->
+    <record id="view_supplier_selection_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_selection_wizard.form</field>
+        <field name="model">e_gestock.supplier_selection_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sélection du fournisseur mieux disant">
+                <sheet>
+                    <group>
+                        <field name="workflow_id" invisible="1"/>
+                        <field name="demande_cotation_id" readonly="1"/>
+                        <field name="cotation_id" options="{'no_create': True, 'no_open': True}"/>
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button name="action_select_supplier" type="object" string="Sélectionner" class="oe_highlight"/>
+                    <button special="cancel" string="Annuler" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue pour l'assistant d'édition du bon de commande -->
+    <record id="view_po_edit_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.po_edit_wizard.form</field>
+        <field name="model">e_gestock.po_edit_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Édition du bon de commande">
+                <sheet>
+                    <group>
+                        <field name="workflow_id" invisible="1"/>
+                        <field name="cotation_id" readonly="1"/>
+                    </group>
+
+                    <separator string="Signataires"/>
+                    <field name="signataire_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="email"/>
+                        </tree>
+                    </field>
+                </sheet>
+
+                <footer>
+                    <button name="action_edit_po" type="object" string="Éditer bon de commande" class="oe_highlight"/>
+                    <button special="cancel" string="Annuler" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue pour l'assistant de retrait du bon de commande -->
+    <record id="view_po_withdraw_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.po_withdraw_wizard.form</field>
+        <field name="model">e_gestock.po_withdraw_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Retrait du bon de commande">
+                <sheet>
+                    <group>
+                        <field name="workflow_id" invisible="1"/>
+                        <field name="purchase_order_id" readonly="1"/>
+                        <field name="date_retrait"/>
+                        <field name="date_livraison_prevue"/>
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button name="action_withdraw_po" type="object" string="Confirmer retrait" class="oe_highlight"/>
+                    <button special="cancel" string="Annuler" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue pour l'assistant de livraison -->
+    <record id="view_delivery_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.delivery_wizard.form</field>
+        <field name="model">e_gestock.delivery_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Livraison de la commande">
+                <sheet>
+                    <group>
+                        <field name="workflow_id" invisible="1"/>
+                        <field name="purchase_order_id" readonly="1"/>
+                        <field name="date_livraison"/>
+                        <field name="bl_attachment" filename="bl_filename"/>
+                        <field name="bl_filename" invisible="1"/>
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button name="action_deliver" type="object" string="Confirmer livraison" class="oe_highlight"/>
+                    <button special="cancel" string="Annuler" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue pour l'assistant de réception -->
+    <record id="view_reception_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception_wizard.form</field>
+        <field name="model">e_gestock.reception_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Réception de la commande">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="workflow_id" invisible="1"/>
+                            <field name="purchase_order_id" readonly="1"/>
+                            <field name="committee_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="date_reception"/>
+                            <field name="comment" placeholder="Commentaire..."/>
+                        </group>
+                    </group>
+
+                    <separator string="Articles reçus"/>
+                    <field name="line_ids">
+                        <tree editable="bottom">
+                            <field name="article_id" readonly="1"/>
+                            <field name="description" readonly="1"/>
+                            <field name="quantite_commandee" readonly="1"/>
+                            <field name="quantite_recue"/>
+                        </tree>
+                    </field>
+                </sheet>
+
+                <footer>
+                    <button name="action_receive" type="object" string="Confirmer réception" class="oe_highlight"/>
+                    <button special="cancel" string="Annuler" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue pour l'assistant d'annulation -->
+    <record id="view_cancel_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.cancel_wizard.form</field>
+        <field name="model">e_gestock.cancel_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Annulation du processus d'achat">
+                <sheet>
+                    <group>
+                        <field name="workflow_id" invisible="1"/>
+                        <field name="reason" placeholder="Motif d'annulation..." required="1"/>
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button name="action_cancel" type="object" string="Confirmer annulation" class="oe_highlight"/>
+                    <button special="cancel" string="Retour" class="btn btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo> 

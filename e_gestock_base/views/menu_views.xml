@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu racine E-GESTOCK -->
+    <menuitem id="menu_e_gestock_root"
+              name="E-GESTOCK"
+              web_icon="e_gestock_base,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_e_gestock_configuration"
+              name="Configuration"
+              parent="menu_e_gestock_root"
+              sequence="100"/>
+
+    <!-- Structures et organisation -->
+    <menuitem id="menu_e_gestock_organisation"
+              name="Structures et organisation"
+              parent="menu_e_gestock_configuration"
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_structure"
+              name="Structures"
+              parent="menu_e_gestock_organisation"
+              action="action_e_gestock_structure"
+              sequence="10"/>
+
+    <menuitem id="menu_e_gestock_section"
+              name="Sections"
+              parent="menu_e_gestock_organisation"
+              action="action_e_gestock_section"
+              sequence="20"/>
+
+    <!-- Articles et stocks -->
+    <menuitem id="menu_e_gestock_articles"
+              name="Articles et stocks"
+              parent="menu_e_gestock_configuration"
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_depot"
+              name="Dépôts"
+              parent="menu_e_gestock_articles"
+              action="action_e_gestock_depot"
+              sequence="10"/>
+
+    <!-- Ajout des menus article, famille et catégorie -->
+    <menuitem id="menu_e_gestock_categorie"
+              name="Catégories"
+              parent="menu_e_gestock_articles"
+              action="action_e_gestock_categorie"
+              sequence="20"/>
+
+    <menuitem id="menu_e_gestock_famille"
+              name="Familles d'articles"
+              parent="menu_e_gestock_articles"
+              action="action_e_gestock_famille"
+              sequence="30"/>
+
+    <menuitem id="menu_e_gestock_article"
+              name="Articles"
+              parent="menu_e_gestock_articles"
+              action="action_e_gestock_article"
+              sequence="40"/>
+
+    <!-- Administration -->
+    <menuitem id="menu_e_gestock_admin"
+              name="Administration"
+              parent="menu_e_gestock_configuration"
+              sequence="30"/>
+
+    <menuitem id="menu_e_gestock_type_gestion"
+              name="Types de gestion"
+              parent="menu_e_gestock_admin"
+              action="action_e_gestock_type_gestion"
+              sequence="10"/>
+</odoo> 

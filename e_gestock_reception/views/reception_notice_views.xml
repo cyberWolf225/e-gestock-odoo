@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les avis préalables de réception -->
+    <record id="view_reception_notice_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.notice.form</field>
+        <field name="model">e_gestock.reception.notice</field>
+        <field name="arch" type="xml">
+            <form string="Avis préalable de réception">
+                <header>
+                    <button name="action_confirm" string="Confirmer" type="object"
+                            class="oe_highlight" invisible="state != 'draft'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_notify_supplier" string="Notifier le fournisseur" type="object"
+                            class="oe_highlight" invisible="state != 'confirmed'"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_create_reception" string="Créer réception" type="object"
+                            class="oe_highlight" invisible="state not in ['confirmed', 'notified'] or reception_id"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <button name="action_cancel" string="Annuler" type="object"
+                            invisible="state in ['received', 'cancelled']"
+                            groups="stock.group_stock_manager,purchase.group_purchase_user"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,notified,received"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_reception" type="object" class="oe_stat_button" icon="fa-truck"
+                                invisible="not reception_id">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Réception</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date_creation" readonly="1"/>
+                            <field name="date_prevue"/>
+                            <field name="creneau_horaire"/>
+                            <field name="quai_id" domain="[('depot_id', '=', depot_id)]"/>
+                        </group>
+                        <group>
+                            <field name="purchase_order_id" domain="[('state', '=', 'purchase')]" options="{'no_create': True}"/>
+                            <field name="fournisseur_id" readonly="1"/>
+                            <field name="demande_id" readonly="1"/>
+                            <field name="depot_id" options="{'no_create': True}"/>
+                            <field name="responsable_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Articles attendus">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="purchase_line_id" domain="[('order_id', '=', parent.purchase_order_id)]" options="{'no_create': True}"/>
+                                    <field name="article_id" readonly="1"/>
+                                    <field name="designation"/>
+                                    <field name="quantite_attendue"/>
+                                    <field name="quantite_deja_recue" readonly="1"/>
+                                    <field name="emplacement_id" domain="[('depot_id', '=', parent.depot_id)]"/>
+                                    <field name="instructions_specifiques"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Instructions">
+                            <group>
+                                <field name="instructions" placeholder="Instructions spécifiques pour cette réception..."/>
+                                <field name="documents_requis" placeholder="Documents à fournir par le fournisseur..."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les avis préalables de réception -->
+    <record id="view_reception_notice_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.notice.list</field>
+        <field name="model">e_gestock.reception.notice</field>
+        <field name="arch" type="xml">
+            <list decoration-info="state == 'draft'"
+                  decoration-primary="state == 'confirmed'"
+                  decoration-warning="state == 'notified'"
+                  decoration-success="state == 'received'"
+                  decoration-muted="state == 'cancelled'">
+                <field name="reference"/>
+                <field name="date_prevue"/>
+                <field name="creneau_horaire"/>
+                <field name="purchase_order_id"/>
+                <field name="fournisseur_id"/>
+                <field name="depot_id"/>
+                <field name="responsable_id"/>
+                <field name="state"/>
+                <field name="reception_id" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les avis préalables de réception -->
+    <record id="view_reception_notice_search" model="ir.ui.view">
+        <field name="name">e_gestock.reception.notice.search</field>
+        <field name="model">e_gestock.reception.notice</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="reference"/>
+                <field name="purchase_order_id"/>
+                <field name="fournisseur_id"/>
+                <field name="depot_id"/>
+                <field name="responsable_id"/>
+                <separator/>
+                <filter string="Brouillons" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmés" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Fournisseur notifié" name="notified" domain="[('state', '=', 'notified')]"/>
+                <filter string="Réceptionnés" name="received" domain="[('state', '=', 'received')]"/>
+                <filter string="Annulés" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <separator/>
+                <filter string="Aujourd'hui" name="today" domain="[('date_prevue', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Cette semaine" name="this_week" domain="[('date_prevue', '&gt;=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')), ('date_prevue', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Ce mois" name="this_month" domain="[('date_prevue', '&gt;=', (context_today().replace(day=1)).strftime('%Y-%m-%d')), ('date_prevue', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Fournisseur" name="group_by_fournisseur" context="{'group_by': 'fournisseur_id'}"/>
+                    <filter string="Dépôt" name="group_by_depot" context="{'group_by': 'depot_id'}"/>
+                    <filter string="État" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Date prévue" name="group_by_date" context="{'group_by': 'date_prevue'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Vue calendrier pour les avis préalables de réception -->
+    <record id="view_reception_notice_calendar" model="ir.ui.view">
+        <field name="name">e_gestock.reception.notice.calendar</field>
+        <field name="model">e_gestock.reception.notice</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendrier des réceptions" date_start="date_prevue" color="state" mode="month">
+                <field name="reference"/>
+                <field name="fournisseur_id"/>
+                <field name="creneau_horaire"/>
+                <field name="depot_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Action pour les avis préalables de réception -->
+    <record id="action_reception_notice" model="ir.actions.act_window">
+        <field name="name">Avis préalables</field>
+        <field name="res_model">e_gestock.reception.notice</field>
+        <field name="view_mode">list,form,calendar</field>
+        <field name="context">{'search_default_draft': 1, 'search_default_confirmed': 1, 'search_default_notified': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouvel avis préalable de réception
+            </p>
+            <p>
+                Les avis préalables permettent de planifier les réceptions et d'informer les fournisseurs.
+            </p>
+        </field>
+    </record>
+</odoo>

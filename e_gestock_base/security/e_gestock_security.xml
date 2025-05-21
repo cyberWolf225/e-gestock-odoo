@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Catégorie pour les groupes E-GESTOCK -->
+    <record id="module_category_e_gestock" model="ir.module.category">
+        <field name="name">E-GESTOCK</field>
+        <field name="description">Gestion des accès aux modules E-GESTOCK</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Groupe de base -->
+    <record id="group_e_gestock_user" model="res.groups">
+        <field name="name">Utilisateur</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Accès de base aux fonctionnalités E-GESTOCK</field>
+    </record>
+
+    <!-- Groupes administratifs -->
+    <record id="group_e_gestock_admin" model="res.groups">
+        <field name="name">Administrateur</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="comment">Gestion complète du système E-GESTOCK</field>
+    </record>
+
+    <record id="group_e_gestock_direction" model="res.groups">
+        <field name="name">Direction Générale</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Direction générale</field>
+    </record>
+
+    <record id="group_dg_validator" model="res.groups">
+        <field name="name">Validateur DG</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_direction'))]"/>
+        <field name="comment">Validation par le Directeur Général (montants ≥ 5 000 000)</field>
+    </record>
+
+    <record id="group_dgaa_validator" model="res.groups">
+        <field name="name">Validateur DGAA</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_direction'))]"/>
+        <field name="comment">Validation par le Directeur Général Adjoint (montants &lt; 5 000 000)</field>
+    </record>
+
+    <!-- ============ Groupes Achats ============ -->
+    <record id="group_e_gestock_purchase_user" model="res.groups">
+        <field name="name">Utilisateur Achats</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Consultation des données d'achats</field>
+    </record>
+
+    <record id="group_e_gestock_purchase_manager" model="res.groups">
+        <field name="name">Gestionnaire Achats</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_purchase_user'))]"/>
+        <field name="comment">Gestion complète des achats</field>
+    </record>
+
+    <record id="group_e_gestock_quotation_manager" model="res.groups">
+        <field name="name">Gestionnaire Cotations</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_purchase_user'))]"/>
+        <field name="comment">Gestion des demandes de cotation</field>
+    </record>
+
+    <record id="group_section_manager" model="res.groups">
+        <field name="name">Responsable Section</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Gestion au niveau section</field>
+    </record>
+
+    <record id="group_structure_manager" model="res.groups">
+        <field name="name">Responsable Structure</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_section_manager'))]"/>
+        <field name="comment">Gestion au niveau structure</field>
+    </record>
+
+    <record id="group_validation_viewer" model="res.groups">
+        <field name="name">Visualiseur des Validations</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Consultation des validations</field>
+    </record>
+
+    <!-- Groupes de compatibilité pour les anciennes références -->
+    <record id="group_e_gestock_gestionnaire_achats" model="res.groups">
+        <field name="name">Gestionnaire des achats (Ancien)</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_purchase_user'))]"/>
+        <field name="comment">Groupe de compatibilité - Utiliser group_e_gestock_purchase_user à la place</field>
+    </record>
+
+    <record id="group_e_gestock_resp_achats" model="res.groups">
+        <field name="name">Responsable des achats (Ancien)</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_purchase_manager'))]"/>
+        <field name="comment">Groupe de compatibilité - Utiliser group_e_gestock_purchase_manager à la place</field>
+    </record>
+
+    <record id="group_quotation_manager" model="res.groups">
+        <field name="name">Gestionnaire des Cotations (Ancien)</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_quotation_manager'))]"/>
+        <field name="comment">Groupe de compatibilité - Utiliser group_e_gestock_quotation_manager à la place</field>
+    </record>
+
+    <!-- ============ Groupes Inventaire ============ -->
+    <record id="group_e_gestock_inventory_user" model="res.groups">
+        <field name="name">Utilisateur Inventaire</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Consultation des données d'inventaire</field>
+    </record>
+
+    <record id="group_e_gestock_inventory_manager" model="res.groups">
+        <field name="name">Gestionnaire Inventaire</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_inventory_user'))]"/>
+        <field name="comment">Gestion complète des inventaires</field>
+    </record>
+
+    <record id="group_e_gestock_resp_depot" model="res.groups">
+        <field name="name">Responsable Dépôt</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_inventory_user'))]"/>
+        <field name="comment">Gestion des dépôts</field>
+    </record>
+
+    <!-- ============ Groupes Réception ============ -->
+    <record id="group_e_gestock_reception_user" model="res.groups">
+        <field name="name">Utilisateur Réception</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Consultation des réceptions</field>
+    </record>
+
+    <record id="group_e_gestock_reception_manager" model="res.groups">
+        <field name="name">Gestionnaire Réception</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_reception_user'))]"/>
+        <field name="comment">Gestion complète des réceptions</field>
+    </record>
+
+    <!-- Groupe de compatibilité pour les anciennes références -->
+    <record id="group_reception_manager" model="res.groups">
+        <field name="name">Responsable Réception (Ancien)</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_reception_manager'))]"/>
+        <field name="comment">Groupe de compatibilité - Utiliser group_e_gestock_reception_manager à la place</field>
+    </record>
+
+    <!-- ============ Groupes Budget ============ -->
+    <record id="group_e_gestock_budget_user" model="res.groups">
+        <field name="name">Utilisateur Budget</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Consultation des données budgétaires</field>
+    </record>
+
+    <record id="group_e_gestock_budget_manager" model="res.groups">
+        <field name="name">Gestionnaire Budget</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_budget_user'))]"/>
+        <field name="comment">Gestion complète des budgets</field>
+    </record>
+
+    <record id="group_e_gestock_budget_controller" model="res.groups">
+        <field name="name">Contrôleur Budgétaire</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_budget_user'))]"/>
+        <field name="comment">Contrôle des budgets</field>
+    </record>
+
+    <record id="group_e_gestock_budget_engager" model="res.groups">
+        <field name="name">Engageur Budgétaire</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_budget_user'))]"/>
+        <field name="comment">Engagement des budgets</field>
+    </record>
+
+    <record id="group_e_gestock_resp_dmp" model="res.groups">
+        <field name="name">Responsable DMP</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Direction des Marchés Publics</field>
+    </record>
+
+    <record id="group_e_gestock_resp_dfc" model="res.groups">
+        <field name="name">Responsable DFC</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Direction Financière et Comptable</field>
+    </record>
+
+    <record id="group_dfc_validator" model="res.groups">
+        <field name="name">Validateur DFC</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_resp_dfc'))]"/>
+        <field name="comment">Validation financière</field>
+    </record>
+
+    <!-- Groupes de compatibilité pour les anciennes références -->
+    <record id="group_e_gestock_resp_budget" model="res.groups">
+        <field name="name">Responsable contrôle budgétaire (Ancien)</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_budget_manager'))]"/>
+        <field name="comment">Groupe de compatibilité - Utiliser group_e_gestock_budget_manager à la place</field>
+    </record>
+
+    <record id="group_budget_controller" model="res.groups">
+        <field name="name">Contrôleur Budgétaire (Ancien)</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_budget_controller'))]"/>
+        <field name="comment">Groupe de compatibilité - Utiliser group_e_gestock_budget_controller à la place</field>
+    </record>
+
+    <record id="group_budget_engager" model="res.groups">
+        <field name="name">Engageur Budgétaire (Ancien)</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_budget_engager'))]"/>
+        <field name="comment">Groupe de compatibilité - Utiliser group_e_gestock_budget_engager à la place</field>
+    </record>
+
+    <!-- Groupes spécifiques modules -->
+
+    <!-- Groupes Fournisseurs -->
+    <record id="group_e_gestock_supplier_user" model="res.groups">
+        <field name="name">Utilisateur Fournisseurs</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Consultation des données fournisseurs</field>
+    </record>
+
+    <record id="group_e_gestock_supplier_manager" model="res.groups">
+        <field name="name">Responsable Fournisseurs</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_supplier_user'))]"/>
+        <field name="comment">Gestion complète des fournisseurs</field>
+    </record>
+
+    <!-- Groupes Immobilisations -->
+    <record id="group_e_gestock_asset_user" model="res.groups">
+        <field name="name">Utilisateur Immobilisations</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Consultation des immobilisations</field>
+    </record>
+
+    <record id="group_e_gestock_asset_manager" model="res.groups">
+        <field name="name">Responsable Immobilisations</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_asset_user'))]"/>
+        <field name="comment">Gestion complète des immobilisations</field>
+    </record>
+
+    <record id="group_e_gestock_asset_maintenance" model="res.groups">
+        <field name="name">Maintenance Immobilisations</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_asset_user'))]"/>
+        <field name="comment">Gestion des maintenances des immobilisations</field>
+    </record>
+
+    <record id="group_e_gestock_asset_accountant" model="res.groups">
+        <field name="name">Comptable Immobilisations</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_asset_user'))]"/>
+        <field name="comment">Gestion des aspects comptables des immobilisations</field>
+    </record>
+
+    <!-- Groupes Perdiems -->
+    <record id="group_e_gestock_perdiem_user" model="res.groups">
+        <field name="name">Utilisateur Perdiems</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Consultation des perdiems</field>
+    </record>
+
+    <record id="group_e_gestock_perdiem_requester" model="res.groups">
+        <field name="name">Demandeur Perdiems</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_perdiem_user'))]"/>
+        <field name="comment">Création et soumission des demandes de perdiem</field>
+    </record>
+
+    <record id="group_e_gestock_perdiem_validator" model="res.groups">
+        <field name="name">Validateur Perdiems</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_perdiem_user'))]"/>
+        <field name="comment">Validation des demandes de perdiem</field>
+    </record>
+
+    <record id="group_e_gestock_perdiem_manager" model="res.groups">
+        <field name="name">Responsable Perdiems</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_perdiem_validator'))]"/>
+        <field name="comment">Gestion complète des perdiems</field>
+    </record>
+
+    <!-- Groupes Travaux -->
+    <record id="group_e_gestock_works_manager" model="res.groups">
+        <field name="name">Gestionnaire Travaux</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Gestion des travaux</field>
+    </record>
+
+    <record id="group_e_gestock_works_supervisor" model="res.groups">
+        <field name="name">Superviseur Travaux</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_works_manager'))]"/>
+        <field name="comment">Supervision des travaux</field>
+    </record>
+
+    <!-- Groupes Demandes de Fonds -->
+    <record id="group_e_gestock_fund_request_manager" model="res.groups">
+        <field name="name">Gestionnaire Demandes de Fonds</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="comment">Gestion des demandes de fonds</field>
+    </record>
+
+    <record id="group_e_gestock_fund_request_validator" model="res.groups">
+        <field name="name">Validateur Demandes de Fonds</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="implied_ids" eval="[(4, ref('group_e_gestock_fund_request_manager'))]"/>
+        <field name="comment">Validation des demandes de fonds</field>
+    </record>
+
+    <!-- Groupes externes -->
+    <record id="group_e_gestock_fournisseur" model="res.groups">
+        <field name="name">Fournisseur</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="comment">Accès limité pour les fournisseurs via le portail</field>
+    </record>
+
+    <record id="group_e_gestock_api_mobile" model="res.groups">
+        <field name="name">API Mobile</field>
+        <field name="category_id" ref="module_category_e_gestock"/>
+        <field name="comment">Accès limité pour l'application mobile</field>
+    </record>
+
+    <!-- Règles d'accès par modèle -->
+    <record id="e_gestock_structure_rule" model="ir.rule">
+        <field name="name">Structures: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_structure"/>
+        <field name="groups" eval="[(4, ref('group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_structure_user_rule" model="ir.rule">
+        <field name="name">Structures: lecture pour tous les utilisateurs</field>
+        <field name="model_id" ref="model_e_gestock_structure"/>
+        <field name="groups" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="e_gestock_section_rule" model="ir.rule">
+        <field name="name">Sections: accès complet pour admin</field>
+        <field name="model_id" ref="model_e_gestock_section"/>
+        <field name="groups" eval="[(4, ref('group_e_gestock_admin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="e_gestock_section_user_rule" model="ir.rule">
+        <field name="name">Sections: lecture pour tous les utilisateurs</field>
+        <field name="model_id" ref="model_e_gestock_section"/>
+        <field name="groups" eval="[(4, ref('group_e_gestock_user'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>

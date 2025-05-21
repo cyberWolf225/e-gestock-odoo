@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Les groupes sont maintenant définis dans le module de base e_gestock_base -->
+
+        <!-- Règle d'accès complet pour l'administrateur -->
+        <record id="rule_admin_full_access" model="ir.rule">
+            <field name="name">Accès complet pour l'administrateur</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation_line"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_admin'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+    </data>
+
+    <!-- Règles de sécurité pour les demandes de cotation -->
+    <data noupdate="1">
+        <!-- Règle pour les Gestionnaires des achats -->
+        <record id="rule_demande_cotation_gest_achats" model="ir.rule">
+            <field name="name">Demandes de cotation pour les Gestionnaires des achats</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation"/>
+            <field name="domain_force">[('demandeur_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_user'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <!-- Règle pour les Responsables des achats -->
+        <record id="rule_demande_cotation_resp_achats" model="ir.rule">
+            <field name="name">Demandes de cotation pour les Responsables des achats</field>
+            <field name="model_id" ref="model_e_gestock_demande_cotation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règle pour les cotations -->
+        <record id="rule_cotation_resp_achats" model="ir.rule">
+            <field name="name">Cotations pour les Responsables des achats</field>
+            <field name="model_id" ref="model_e_gestock_cotation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('e_gestock_base.group_e_gestock_purchase_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Règle d'accès aux réceptions - commentée car le modèle est défini dans e_gestock_reception -->
+        <!--
+        <record id="e_gestock_purchase_reception_rule" model="ir.rule">
+            <field name="name">Accès aux réceptions selon structure</field>
+            <field name="model_id" ref="model_e_gestock_reception"/>
+            <field name="domain_force">['|', ('demande_id.user_id', '=', user.id), ('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('purchase.group_purchase_manager'))]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+        -->
+    </data>
+</odoo>

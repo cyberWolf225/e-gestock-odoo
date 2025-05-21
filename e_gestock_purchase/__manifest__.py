@@ -1,0 +1,17 @@
+{    'name': 'E-GESTOCK Purchase',    'version': '1.0',    'category': 'Inventory/Purchase',    'sequence': 20,    'summary': 'Gestion des achats et cotations pour E-GESTOCK',    'description': """Module de gestion des achats et cotations=========================================Ce module permet de gérer tout le processus d'achat dans la solution E-GESTOCK,depuis les demandes de cotation jusqu'à la validation des achats, en passantpar le circuit de validation et l'émission des bons de commande.Le workflow linéaire permet de suivre chaque étape du processus d'achat de manière séquentielle.    """,    'author': 'E-GESTOCK Team',    'website': 'https://www.e-gestock.com',    'depends': [        'base',        'mail',        'product',        'e_gestock_base',        'e_gestock_inventory',        'portal',        'website',    ],    'data': [        'security/e_gestock_purchase_security.xml',        'security/ir.model.access.csv',        'security/e_gestock_purchase_restrictive_rules_modified.xml',  # Version modifiée sans références au module purchase        'data/sequence_data.xml',        'data/e_gestock_purchase_sequence.xml',        'data/mail_templates.xml',  # Modèles d'email pour les demandes de cotation        'data/mail_templates_modified.xml',  # Version modifiée sans références au module purchase        'views/demande_cotation_views.xml',        'views/cotation_views.xml',        'views/e_gestock_purchase_order_views_modified.xml',  # Version modifiée sans attributs attrs et states        'views/e_gestock_purchase_order_actions.xml',  # Actions pour les bons de commande        'views/menu_views_new.xml',  # Chargé avant reception_committee_views.xml pour que le menu parent existe        'views/reception_committee_views.xml',        'views/purchase_workflow_views.xml',  # Vues pour le workflow linéaire        'views/portal_templates.xml',        'views/portal_templates_purchase_order_modified.xml',  # Version modifiée sans références au module purchase        'wizards/validation_wizard_views.xml',  # Vues pour l'assistant de validation        'wizards/quotation_request_wizard_views.xml',  # Vues pour l'assistant de demande de cotation        'wizards/supplier_selection_wizard_views.xml',  # Vues pour l'assistant de sélection de fournisseur        'wizards/po_edit_wizard_views.xml',  # Vues pour l'assistant d'édition du bon de commande        'wizards/po_withdraw_wizard_views.xml',  # Vues pour l'assistant de retrait du bon de commande        'wizards/delivery_wizard_views.xml',  # Vues pour l'assistant de livraison        'wizards/reception_wizard_views.xml',  # Vues pour l'assistant de réception        'wizards/cancel_wizard_views.xml',  # Vues pour l'assistant d'annulation        'wizards/generate_purchase_order_wizard_views.xml',        'wizards/select_suppliers_wizard_views.xml',        'wizards/validate_reception_wizard_views.xml',        'wizards/validation_comment_wizard_views.xml',
+        'report/demande_cotation_report.xml',
+        'report/cotation_report.xml',
+        'report/purchase_order_report_modified.xml',  # Version modifiée sans références au module purchase
+    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    'license': 'LGPL-3',
+    'assets': {
+        'web.assets_frontend': [
+            '/e_gestock_purchase/static/src/css/portal.css',
+            '/e_gestock_purchase/static/src/js/portal.js',
+        ],
+    },
+}

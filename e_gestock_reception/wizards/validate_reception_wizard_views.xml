@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour l'assistant de validation de réception -->
+    <record id="view_validate_reception_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.validate_reception_wizard.form</field>
+        <field name="model">e_gestock.reception.validate_reception_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Valider la réception">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="purchase_order_id" options="{'no_create': True}"/>
+                            <field name="date_reception"/>
+                            <field name="committee_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="notes" placeholder="Notes de réception..."/>
+                        </group>
+                    </group>
+                    <separator string="Articles à réceptionner"/>
+                    <p class="text-muted">
+                        Vérifiez et ajustez les quantités à réceptionner si nécessaire.
+                    </p>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="purchase_line_id" invisible="1"/>
+                            <field name="product_id" readonly="1"/>
+                            <field name="description" readonly="1"/>
+                            <field name="product_qty" readonly="1"/>
+                            <field name="qty_received" readonly="1"/>
+                            <field name="qty_to_receive" required="1"/>
+                            <field name="uom_id" readonly="1"/>
+                            <field name="notes" placeholder="Notes sur cette ligne..."/>
+                        </list>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="action_validate" string="Valider" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Action pour ouvrir l'assistant -->
+    <record id="action_validate_reception_wizard" model="ir.actions.act_window">
+        <field name="name">Valider la réception</field>
+        <field name="res_model">e_gestock.reception.validate_reception_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

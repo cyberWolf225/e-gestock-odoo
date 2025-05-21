@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ajout des champs structure_id et section_id dans le formulaire utilisateur -->
+    <record id="view_users_form_e_gestock" model="ir.ui.view">
+        <field name="name">res.users.form.e_gestock</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="E-GESTOCK" name="e_gestock">
+                    <group>
+                        <group string="Affectation principale">
+                            <field name="structure_id" options="{'no_create': True}"/>
+                            <field name="section_id" options="{'no_create': True}" domain="[('code_structure', '=', structure_id)]"/>
+                        </group>
+                        <group string="Accès multiples">
+                            <field name="structure_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+
+            <!-- Ajout d'un onglet spécifique pour les groupes E-GESTOCK dans l'onglet "Droits d'accès" -->
+            <xpath expr="//page[@name='access_rights']//group" position="after">
+                <separator string="Rôles E-GESTOCK"/>
+                <group name="e_gestock_access_rights" col="1">
+                    <group>
+                        <field name="e_gestock_groups_id" widget="many2many_checkboxes" options="{'no_create': True}"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Ajout d'une action de menu spécifique pour la gestion des utilisateurs E-GESTOCK -->
+    <record id="action_users_e_gestock" model="ir.actions.act_window">
+        <field name="name">Utilisateurs E-GESTOCK</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_e_gestock_users': 1}</field>
+        <field name="help">Gérez les utilisateurs et leurs droits d'accès dans E-GESTOCK.</field>
+    </record>
+
+    <!-- Ajout d'un filtre de recherche pour les utilisateurs E-GESTOCK -->
+    <record id="view_users_search_e_gestock" model="ir.ui.view">
+        <field name="name">res.users.search.e_gestock</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <filter string="Utilisateurs E-GESTOCK" name="e_gestock_users" domain="[('groups_id.category_id.name', 'ilike', 'E-GESTOCK')]"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Menu pour accéder aux utilisateurs E-GESTOCK -->
+    <menuitem id="menu_e_gestock_users" name="Utilisateurs" parent="menu_e_gestock_configuration" action="action_users_e_gestock" sequence="10"/>
+</odoo>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les quais de réception -->
+    <record id="view_reception_quai_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quai.form</field>
+        <field name="model">e_gestock.reception.quai</field>
+        <field name="arch" type="xml">
+            <form string="Quai de réception">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom du quai..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="depot_id" options="{'no_create': True}"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="capacite"/>
+                            <field name="type_vehicule"/>
+                            <field name="responsable_id"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Équipements">
+                            <field name="equipement_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="type"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Planning">
+                            <field name="planning_ids">
+                                <list editable="bottom">
+                                    <field name="date"/>
+                                    <field name="creneau"/>
+                                    <field name="notice_id" options="{'no_create': True}"/>
+                                    <field name="fournisseur_id" readonly="1"/>
+                                    <field name="reception_id" readonly="1"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Notes sur ce quai de réception..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les quais de réception -->
+    <record id="view_reception_quai_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quai.list</field>
+        <field name="model">e_gestock.reception.quai</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="depot_id"/>
+                <field name="capacite"/>
+                <field name="type_vehicule"/>
+                <field name="responsable_id"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour les équipements de réception -->
+    <record id="view_reception_equipement_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.equipement.form</field>
+        <field name="model">e_gestock.reception.equipement</field>
+        <field name="arch" type="xml">
+            <form string="Équipement de réception">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom de l'équipement..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Description de l'équipement..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les équipements de réception -->
+    <record id="view_reception_equipement_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.equipement.list</field>
+        <field name="model">e_gestock.reception.equipement</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="type"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue formulaire pour le planning des quais -->
+    <record id="view_reception_quai_planning_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quai.planning.form</field>
+        <field name="model">e_gestock.reception.quai.planning</field>
+        <field name="arch" type="xml">
+            <form string="Planning de quai">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="quai_id" options="{'no_create': True}"/>
+                            <field name="date"/>
+                            <field name="creneau"/>
+                        </group>
+                        <group>
+                            <field name="notice_id" options="{'no_create': True}"/>
+                            <field name="fournisseur_id" readonly="1"/>
+                            <field name="reception_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="notes" placeholder="Notes sur cette réservation..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour le planning des quais -->
+    <record id="view_reception_quai_planning_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quai.planning.list</field>
+        <field name="model">e_gestock.reception.quai.planning</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="quai_id"/>
+                <field name="date"/>
+                <field name="creneau"/>
+                <field name="notice_id"/>
+                <field name="fournisseur_id"/>
+                <field name="reception_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue calendrier pour le planning des quais -->
+    <record id="view_reception_quai_planning_calendar" model="ir.ui.view">
+        <field name="name">e_gestock.reception.quai.planning.calendar</field>
+        <field name="model">e_gestock.reception.quai.planning</field>
+        <field name="arch" type="xml">
+            <calendar string="Planning des quais" date_start="date" color="quai_id" mode="month">
+                <field name="quai_id"/>
+                <field name="creneau"/>
+                <field name="fournisseur_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Action pour les quais de réception -->
+    <record id="action_reception_quai" model="ir.actions.act_window">
+        <field name="name">Quais de réception</field>
+        <field name="res_model">e_gestock.reception.quai</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau quai de réception
+            </p>
+            <p>
+                Les quais de réception définissent les points d'entrée des marchandises dans vos dépôts.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action pour les équipements de réception -->
+    <record id="action_reception_equipement" model="ir.actions.act_window">
+        <field name="name">Équipements de réception</field>
+        <field name="res_model">e_gestock.reception.equipement</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouvel équipement de réception
+            </p>
+            <p>
+                Les équipements de réception sont utilisés pour faciliter la réception des marchandises.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action pour le planning des quais -->
+    <record id="action_reception_quai_planning" model="ir.actions.act_window">
+        <field name="name">Planning des quais</field>
+        <field name="res_model">e_gestock.reception.quai.planning</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle réservation de quai
+            </p>
+            <p>
+                Le planning des quais permet de gérer les réservations des quais de réception.
+            </p>
+        </field>
+    </record>
+</odoo>

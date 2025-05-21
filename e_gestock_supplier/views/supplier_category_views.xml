@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les catégories de fournisseur -->
+    <record id="e_gestock_supplier_category_form_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_category.form</field>
+        <field name="model">e_gestock.supplier_category</field>
+        <field name="arch" type="xml">
+            <form string="Catégorie de fournisseur">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name" placeholder="Nom de la catégorie"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="parent_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="note" placeholder="Ajouter une description de cette catégorie de fournisseur..."/>
+                        </page>
+                        <page string="Fournisseurs">
+                            <field name="partner_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                    <field name="e_gestock_note_globale"/>
+                                    <field name="e_gestock_is_approved"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue arborescente pour les catégories de fournisseur -->
+    <record id="e_gestock_supplier_category_tree_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_category.tree</field>
+        <field name="model">e_gestock.supplier_category</field>
+        <field name="arch" type="xml">
+            <list string="Catégories de fournisseur">
+                <field name="complete_name"/>
+                <field name="code"/>
+                <field name="partner_count"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue liste des catégories de fournisseur -->
+    <record id="e_gestock_supplier_category_list_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_category.list</field>
+        <field name="model">e_gestock.supplier_category</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Catégories de fournisseur" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="parent_id"/>
+                <field name="partner_count"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche des catégories de fournisseur -->
+    <record id="e_gestock_supplier_category_search_view" model="ir.ui.view">
+        <field name="name">e_gestock.supplier_category.search</field>
+        <field name="model">e_gestock.supplier_category</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher des catégories">
+                <field name="name" string="Catégorie"/>
+                <field name="code"/>
+                <filter string="Archivées" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Catégorie parente" name="parent" domain="[]" context="{'group_by':'parent_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour afficher les catégories de fournisseur -->
+    <record id="action_e_gestock_supplier_category" model="ir.actions.act_window">
+        <field name="name">Catégories de fournisseur</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.supplier_category</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="e_gestock_supplier_category_tree_view"/>
+        <field name="search_view_id" ref="e_gestock_supplier_category_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer une nouvelle catégorie de fournisseur
+            </p>
+            <p>
+                Organisez vos fournisseurs en catégories pour une meilleure gestion et supervision.
+            </p>
+        </field>
+    </record>
+</odoo>

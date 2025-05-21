@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Mise à jour de la vue existante pour les paramètres E-GESTOCK -->
+    <record id="res_config_settings_view_form_hide_sale_template" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.e_gestock</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Ajouter une section pour les paramètres E-GESTOCK -->
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="E-GESTOCK" string="E-GESTOCK" data-key="e_gestock_base">
+                    <h2>Paramètres généraux</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <!-- Ici, vous pouvez ajouter des champs de configuration -->
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Configuration E-GESTOCK</span>
+                                <div class="text-muted">
+                                    Paramètres généraux pour E-GESTOCK
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

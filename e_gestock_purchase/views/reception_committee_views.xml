@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les comités de réception -->
+    <record id="view_e_gestock_reception_committee_form" model="ir.ui.view">
+        <field name="name">e_gestock.reception_committee.form</field>
+        <field name="model">e_gestock.reception_committee</field>
+        <field name="arch" type="xml">
+            <form string="Comité de réception">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_purchase_orders" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field name="purchase_order_count" widget="statinfo" string="Bons de commande"/>
+                        </button>
+                        <button name="action_view_receptions" type="object" class="oe_stat_button" icon="fa-check-square-o">
+                            <field name="reception_count" widget="statinfo" string="Réceptions"/>
+                        </button>
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom du comité"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="Code unique"/>
+                            <field name="structure_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="responsible_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Membres du comité" name="members">
+                            <field name="member_ids" options="{'no_create': True}">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Bons de commande assignés" name="purchase_orders">
+                            <field name="purchase_order_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="date_order"/>
+                                    <field name="amount_total"/>
+                                    <field name="state_approbation"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les comités de réception -->
+    <record id="view_e_gestock_reception_committee_list" model="ir.ui.view">
+        <field name="name">e_gestock.reception_committee.list</field>
+        <field name="model">e_gestock.reception_committee</field>
+        <field name="arch" type="xml">
+            <list string="Comités de réception" decoration-muted="active == False">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="structure_id"/>
+                <field name="responsible_id"/>
+                <field name="purchase_order_count"/>
+                <field name="reception_count"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les comités de réception -->
+    <record id="view_e_gestock_reception_committee_search" model="ir.ui.view">
+        <field name="name">e_gestock.reception_committee.search</field>
+        <field name="model">e_gestock.reception_committee</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher un comité de réception">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="structure_id"/>
+                <field name="responsible_id"/>
+                <filter string="Archivés" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Structure" name="structure" domain="[]" context="{'group_by': 'structure_id'}"/>
+                    <filter string="Responsable" name="responsible" domain="[]" context="{'group_by': 'responsible_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les comités de réception -->
+    <record id="action_e_gestock_reception_committee" model="ir.actions.act_window">
+        <field name="name">Comités de réception</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.reception_committee</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau comité de réception
+            </p>
+            <p>
+                Les comités de réception sont responsables de la validation des livraisons.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu pour les comités de réception -->
+    <menuitem id="menu_e_gestock_reception_committee" name="Comités de réception" parent="menu_e_gestock_purchase_config" action="action_e_gestock_reception_committee" sequence="20" groups="e_gestock_base.group_e_gestock_admin,e_gestock_base.group_dfc_validator"/>
+</odoo>

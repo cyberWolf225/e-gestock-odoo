@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour les dépôts -->
+    <record id="view_e_gestock_depot_form" model="ir.ui.view">
+        <field name="name">e_gestock.depot.form</field>
+        <field name="model">e_gestock.depot</field>
+        <field name="arch" type="xml">
+            <form string="Dépôt">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-building-o" type="object" name="action_view_warehouse"
+                                invisible="warehouse_id == False">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Entrepôt</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="ref_depot" class="oe_edit_only"/>
+                        <h1><field name="ref_depot" placeholder="Référence (ex: 83)"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="design_dep" placeholder="Désignation du dépôt"/>
+                            <field name="principal"/>
+                            <field name="code_ville"/>
+                        </group>
+                        <group>
+                            <field name="tel_dep" placeholder="Téléphone"/>
+                            <field name="adr_dep" placeholder="Adresse"/>
+                            <field name="responsable_id" options="{'no_create': True}"/>
+                            <field name="structure_count" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="warehouse_id" readonly="1"/>
+                            <field name="location_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Structures associées">
+                            <field name="structure_ids" readonly="1">
+                                <list>
+                                    <field name="code_structure"/>
+                                    <field name="nom_structure"/>
+                                    <field name="section_count"/>
+                                    <field name="active"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste pour les dépôts -->
+    <record id="view_e_gestock_depot_list" model="ir.ui.view">
+        <field name="name">e_gestock.depot.list</field>
+        <field name="model">e_gestock.depot</field>
+        <field name="arch" type="xml">
+            <list string="Dépôts">
+                <field name="ref_depot"/>
+                <field name="design_dep"/>
+                <field name="responsable_id"/>
+                <field name="tel_dep"/>
+                <field name="adr_dep"/>
+                <field name="principal"/>
+                <field name="structure_count"/>
+                <field name="warehouse_id"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche pour les dépôts -->
+    <record id="view_e_gestock_depot_search" model="ir.ui.view">
+        <field name="name">e_gestock.depot.search</field>
+        <field name="model">e_gestock.depot</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher un dépôt">
+                <field name="ref_depot"/>
+                <field name="design_dep"/>
+                <field name="responsable_id"/>
+                <filter string="Dépôt principal" name="principal" domain="[('principal', '=', True)]"/>
+                <filter string="Archivé" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Responsable" name="group_by_responsable" context="{'group_by': 'responsable_id'}"/>
+                    <filter string="Code ville" name="group_by_ville" context="{'group_by': 'code_ville'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les dépôts -->
+    <record id="action_e_gestock_depot" model="ir.actions.act_window">
+        <field name="name">Dépôts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.depot</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_e_gestock_depot_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau dépôt
+            </p>
+            <p>
+                Les dépôts sont les points de stockage physique des articles.
+            </p>
+        </field>
+    </record>
+</odoo>

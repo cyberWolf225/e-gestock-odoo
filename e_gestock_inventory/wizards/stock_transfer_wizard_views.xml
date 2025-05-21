@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire pour l'assistant de transfert -->
+    <record id="view_e_gestock_stock_transfer_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.stock_transfer_wizard.form</field>
+        <field name="model">e_gestock.stock_transfer_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Assistant de transfert de stock">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="depot_source_id" options="{'no_create': True}" required="1"/>
+                            <field name="depot_destination_id" options="{'no_create': True}" required="1"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Articles à transférer" name="lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="article_id" required="1"/>
+                                    <field name="quantite" required="1"/>
+                                    <field name="quantite_disponible"/>
+                                    <field name="uom_id" readonly="1"/>
+                                    <field name="prix_unitaire"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Ajouter des notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="action_transfer" string="Transférer" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action pour l'assistant de transfert -->
+    <record id="action_e_gestock_stock_transfer_wizard" model="ir.actions.act_window">
+        <field name="name">Transfert de stock</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.stock_transfer_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_e_gestock_stock_transfer_wizard_form"/>
+    </record>
+
+    <!-- Menu action pour l'assistant de transfert déplacé vers menu_views.xml -->
+</odoo> 

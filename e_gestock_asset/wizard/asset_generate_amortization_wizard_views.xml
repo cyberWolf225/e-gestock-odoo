@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire de l'assistant de génération des amortissements -->
+    <record id="view_e_gestock_asset_generate_amortization_wizard_form" model="ir.ui.view">
+        <field name="name">e_gestock.asset.generate.amortization.wizard.form</field>
+        <field name="model">e_gestock.asset.generate.amortization.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Générer les amortissements">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id" readonly="1"/>
+                            <field name="date_debut"/>
+                            <field name="duree_amortissement"/>
+                            <field name="methode_amortissement"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="valeur_acquisition" widget="monetary"/>
+                            <field name="valeur_residuelle" widget="monetary"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_generate_amortization" string="Générer" type="object" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

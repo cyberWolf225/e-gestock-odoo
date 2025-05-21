@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Actions spécifiques pour les différents profils -->
+    <record id="action_e_gestock_purchase_order_dcg_dept" model="ir.actions.act_window">
+        <field name="name">BC à valider (Chef Dép. DCG)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'budget_validated')]</field>
+        <field name="context">{'search_default_to_validate_dcg_dept': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande à valider
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_purchase_order_dcg" model="ir.actions.act_window">
+        <field name="name">BC à valider (Resp. DCG)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'dcg_dept_validated')]</field>
+        <field name="context">{'search_default_to_validate_dcg': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande à valider
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_purchase_order_dgaaf" model="ir.actions.act_window">
+        <field name="name">BC à valider (DGAAF)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'dcg_validated'), ('needs_dg_validation', '=', False)]</field>
+        <field name="context">{'search_default_to_validate_dgaaf': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande à valider
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_purchase_order_dg" model="ir.actions.act_window">
+        <field name="name">BC à valider (DG)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'dcg_validated'), ('needs_dg_validation', '=', True)]</field>
+        <field name="context">{'search_default_to_validate_dg': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande à valider
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_purchase_order_approved" model="ir.actions.act_window">
+        <field name="name">BC approuvés</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'approved')]</field>
+        <field name="context">{'search_default_approved': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande approuvé
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_purchase_order_delivered" model="ir.actions.act_window">
+        <field name="name">BC livrés</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'delivered')]</field>
+        <field name="context">{'search_default_delivered': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande livré
+            </p>
+        </field>
+    </record>
+
+    <record id="action_e_gestock_purchase_order_received" model="ir.actions.act_window">
+        <field name="name">BC réceptionnés</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">e_gestock.purchase_order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('state_approbation', '=', 'received')]</field>
+        <field name="context">{'search_default_received': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun bon de commande réceptionné
+            </p>
+        </field>
+    </record>
+</odoo>

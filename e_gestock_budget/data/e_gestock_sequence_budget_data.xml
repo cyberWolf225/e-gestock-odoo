@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Séquence pour les références de crédits budgétaires -->
+        <record id="sequence_credit_budget_ref" model="ir.sequence">
+            <field name="name">Séquence Crédit Budgétaire</field>
+            <field name="code">e_gestock.credit_budget</field>
+            <field name="prefix">CRED/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les références de dotations budgétaires -->
+        <record id="sequence_dotation_budget_ref" model="ir.sequence">
+            <field name="name">Séquence Dotation Budgétaire</field>
+            <field name="code">e_gestock.dotation_budget</field>
+            <field name="prefix">DOT/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Séquence pour les références de contrôles budgétaires -->
+        <record id="sequence_budget_control_ref" model="ir.sequence">
+            <field name="name">Séquence Contrôle Budgétaire</field>
+            <field name="code">e_gestock.budget_control</field>
+            <field name="prefix">CTRL/%(year)s/</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo> 

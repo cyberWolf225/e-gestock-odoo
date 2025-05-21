@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vue formulaire des types d'immobilisations -->
+    <record id="view_e_gestock_asset_type_form" model="ir.ui.view">
+        <field name="name">e_gestock.asset_type.form</field>
+        <field name="model">e_gestock.asset_type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                        <button name="action_view_assets" type="object" class="oe_stat_button" icon="fa-cubes">
+                            <field name="asset_count" widget="statinfo" string="Immobilisations"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom du type"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="duree_amortissement"/>
+                            <field name="methode_amortissement"/>
+                        </group>
+                        <group>
+                            <field name="account_asset_id"/>
+                            <field name="account_depreciation_id"/>
+                            <field name="account_expense_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="note" placeholder="Description détaillée du type d'immobilisation..."/>
+                        </page>
+                        <page string="Immobilisations" name="assets">
+                            <field name="asset_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue liste des types d'immobilisations -->
+    <record id="view_e_gestock_asset_type_list" model="ir.ui.view">
+        <field name="name">e_gestock.asset_type.list</field>
+        <field name="model">e_gestock.asset_type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="duree_amortissement"/>
+                <field name="methode_amortissement"/>
+                <field name="asset_count"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue recherche des types d'immobilisations -->
+    <record id="view_e_gestock_asset_type_search" model="ir.ui.view">
+        <field name="name">e_gestock.asset_type.search</field>
+        <field name="model">e_gestock.asset_type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="code"/>
+                <field name="name"/>
+                <separator/>
+                <filter string="Actif" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Archivé" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Regrouper par">
+                    <filter string="Méthode d'amortissement" name="groupby_methode" context="{'group_by': 'methode_amortissement'}"/>
+                    <filter string="Durée d'amortissement" name="groupby_duree" context="{'group_by': 'duree_amortissement'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action pour les types d'immobilisations -->
+    <record id="action_e_gestock_asset_type" model="ir.actions.act_window">
+        <field name="name">Types d'immobilisations</field>
+        <field name="res_model">e_gestock.asset_type</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Créer un nouveau type d'immobilisation
+            </p>
+            <p>
+                Configurez les différents types d'immobilisations avec leurs comptes comptables et paramètres d'amortissement par défaut.
+            </p>
+        </field>
+    </record>
+</odoo>

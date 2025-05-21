@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Modèle d'email pour notifier les membres du comité lorsqu'une réception est soumise pour validation -->
+        <record id="email_template_reception_submitted_to_comite" model="mail.template">
+            <field name="name">Réception - Soumise au comité</field>
+            <field name="model_id" ref="model_e_gestock_reception"/>
+            <field name="subject">Nouvelle réception à valider: {{ object.reference }}</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="lang">{{ object.responsable_id.lang }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour,
+                    </p>
+                    <p>
+                        Une nouvelle réception a été soumise au comité pour validation:
+                    </p>
+
+                    <ul>
+                        <li>Référence: <strong>{{ object.reference }}</strong></li>
+                        <li>Date: {{ object.date }}</li>
+                        <li>Bon de commande: {{ object.purchase_order_id.name }}</li>
+                        <li>Fournisseur: {{ object.fournisseur_id.name }}</li>
+                        <li>Soumis par: {{ object.responsable_id.name }}</li>
+                    </ul>
+
+                    <p>
+                        Veuillez vous connecter au système pour examiner cette réception et procéder à la validation.
+                    </p>
+                    <p>
+                        Cordialement,<br/>
+                        L'équipe E-GESTOCK
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <!-- Modèle d'email pour notifier le demandeur que le PV a été validé -->
+        <record id="email_template_pv_reception_validated" model="mail.template">
+            <field name="name">PV Réception - Validé</field>
+            <field name="model_id" ref="model_e_gestock_pv_reception"/>
+            <field name="subject">PV de réception validé: {{ object.reference }}</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="lang">{{ object.created_by_id.lang }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour,
+                    </p>
+                    <p>
+                        Le procès-verbal de réception référence <strong>{{ object.reference }}</strong> a été validé.
+                    </p>
+
+                    <ul>
+                        <li>Réception: {{ object.reception_id.reference }}</li>
+                        <li>Bon de commande: {{ object.reception_id.purchase_order_id.name }}</li>
+                        <li>Fournisseur: {{ object.reception_id.fournisseur_id.name }}</li>
+                        <li>Date de validation: {{ object.date_validation }}</li>
+                    </ul>
+
+                    <p>
+                        Cordialement,<br/>
+                        L'équipe E-GESTOCK
+                    </p>
+                </div>
+            </field>
+        </record>
+        <!-- Modèle d'email pour notifier le fournisseur d'un avis préalable de réception -->
+        <record id="email_template_reception_notice" model="mail.template">
+            <field name="name">Avis préalable de réception</field>
+            <field name="model_id" ref="model_e_gestock_reception_notice"/>
+            <field name="subject">Avis préalable de réception: {{ object.reference }}</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="email_to">{{ object.fournisseur_id.email }}</field>
+            <field name="lang">{{ object.fournisseur_id.lang }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour {{ object.fournisseur_id.name }},
+                    </p>
+                    <p>
+                        Nous vous informons qu'une livraison est attendue dans nos locaux selon les détails suivants:
+                    </p>
+
+                    <ul>
+                        <li>Référence: <strong>{{ object.reference }}</strong></li>
+                        <li>Bon de commande: {{ object.purchase_order_id.name }}</li>
+                        <li>Date prévue: {{ object.date_prevue }}</li>
+                        <li>Créneau horaire: {{ dict(object._fields['creneau_horaire'].selection).get(object.creneau_horaire) }}</li>
+                        <li>Dépôt: {{ object.depot_id.name }}</li>
+                        {% if object.quai_id %}
+                        <li>Quai de réception: {{ object.quai_id.name }}</li>
+                        {% endif %}
+                    </ul>
+
+                    <p><strong>Articles attendus:</strong></p>
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr style="background-color:#f2f2f2;">
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Article</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Désignation</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Quantité attendue</th>
+                        </tr>
+                        {% for line in object.line_ids %}
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ line.article_id.name }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ line.designation }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">{{ line.quantite_attendue }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                    {% if object.instructions %}
+                    <p><strong>Instructions spécifiques:</strong></p>
+                    <p>{{ object.instructions }}</p>
+                    {% endif %}
+
+                    {% if object.documents_requis %}
+                    <p><strong>Documents requis:</strong></p>
+                    <p>{{ object.documents_requis }}</p>
+                    {% endif %}
+
+                    <p>
+                        Merci de respecter la date et l'horaire indiqués pour faciliter la réception de votre livraison.
+                    </p>
+                    <p>
+                        Cordialement,<br/>
+                        {{ object.responsable_id.name }}<br/>
+                        {{ object.company_id.name }}
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <!-- Modèle d'email pour notifier le fournisseur d'une non-conformité critique -->
+        <record id="email_template_nonconformity_critical" model="mail.template">
+            <field name="name">Non-conformité critique</field>
+            <field name="model_id" ref="model_e_gestock_reception_nonconformity"/>
+            <field name="subject">URGENT: Non-conformité critique détectée - {{ object.reference }}</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="email_to">{{ object.fournisseur_id.email }}</field>
+            <field name="lang">{{ object.fournisseur_id.lang }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour {{ object.fournisseur_id.name }},
+                    </p>
+                    <p>
+                        Nous vous informons qu'une <strong>non-conformité critique</strong> a été détectée lors de la réception de votre livraison:
+                    </p>
+
+                    <ul>
+                        <li>Référence: <strong>{{ object.reference }}</strong></li>
+                        <li>Bon de commande: {{ object.purchase_order_id.name }}</li>
+                        <li>Réception: {{ object.reception_id.reference }}</li>
+                        <li>Date: {{ object.date }}</li>
+                        <li>Article: {{ object.article_id.name }}</li>
+                        <li>Type de non-conformité: {{ dict(object._fields['type'].selection).get(object.type) }}</li>
+                    </ul>
+
+                    <p><strong>Description du problème:</strong></p>
+                    <p>{{ object.description }}</p>
+
+                    <p><strong>Action requise:</strong> {{ dict(object._fields['action_requise'].selection).get(object.action_requise) }}</p>
+
+                    <p>
+                        Cette non-conformité nécessite une action immédiate de votre part. Veuillez nous contacter dans les plus brefs délais pour discuter des mesures correctives à mettre en place.
+                    </p>
+                    <p>
+                        Cordialement,<br/>
+                        {{ object.responsable_id.name }}<br/>
+                        {{ object.company_id.name }}
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <!-- Modèle d'email pour notifier le fournisseur d'un retour -->
+        <record id="email_template_reception_return" model="mail.template">
+            <field name="name">Retour fournisseur</field>
+            <field name="model_id" ref="model_e_gestock_reception_return"/>
+            <field name="subject">Retour de marchandises: {{ object.reference }}</field>
+            <field name="email_from">{{ (object.company_id.email or user.email) }}</field>
+            <field name="email_to">{{ object.fournisseur_id.email }}</field>
+            <field name="lang">{{ object.fournisseur_id.lang }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Bonjour {{ object.fournisseur_id.name }},
+                    </p>
+                    <p>
+                        Nous vous informons que nous procédons au retour de marchandises selon les détails suivants:
+                    </p>
+
+                    <ul>
+                        <li>Référence du retour: <strong>{{ object.reference }}</strong></li>
+                        <li>Bon de commande: {{ object.purchase_order_id.name }}</li>
+                        <li>Réception: {{ object.reception_id.reference }}</li>
+                        <li>Date: {{ object.date }}</li>
+                        <li>Motif principal: {{ dict(object._fields['motif'].selection).get(object.motif) }}</li>
+                    </ul>
+
+                    <p><strong>Description:</strong></p>
+                    <p>{{ object.description }}</p>
+
+                    <p><strong>Articles retournés:</strong></p>
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr style="background-color:#f2f2f2;">
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Article</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Désignation</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Quantité</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Montant</th>
+                        </tr>
+                        {% for line in object.line_ids %}
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ line.article_id.name }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ line.designation }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">{{ line.quantite }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">{{ line.montant }} {{ object.currency_id.symbol }}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr style="background-color:#f2f2f2;">
+                            <td colspan="3" style="border: 1px solid #ddd; padding: 8px; text-align: right;"><strong>Total:</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: right;"><strong>{{ object.montant_total }} {{ object.currency_id.symbol }}</strong></td>
+                        </tr>
+                    </table>
+
+                    {% if object.transporteur_id %}
+                    <p><strong>Informations d'expédition:</strong></p>
+                    <ul>
+                        <li>Transporteur: {{ object.transporteur_id.name }}</li>
+                        {% if object.date_expedition %}
+                        <li>Date d'expédition: {{ object.date_expedition }}</li>
+                        {% endif %}
+                        {% if object.numero_tracking %}
+                        <li>Numéro de tracking: {{ object.numero_tracking }}</li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+
+                    <p>
+                        Nous vous demandons de bien vouloir accuser réception de ce retour et de nous faire parvenir un avoir correspondant dans les meilleurs délais.
+                    </p>
+                    <p>
+                        Cordialement,<br/>
+                        {{ object.responsable_id.name }}<br/>
+                        {{ object.company_id.name }}
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

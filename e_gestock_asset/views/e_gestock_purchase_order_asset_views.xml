@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extension de la vue formulaire du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_form_asset_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.form.asset.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Ajouter un bouton pour voir les immobilisations -->
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_assets" type="object" class="oe_stat_button" icon="fa-cubes"
+                        groups="e_gestock_base.group_e_gestock_asset_user,e_gestock_base.group_e_gestock_asset_manager">
+                    <field name="asset_count" widget="statinfo" string="Immobilisations"/>
+                </button>
+            </xpath>
+            
+            <!-- Ajouter un champ pour indiquer s'il s'agit d'un achat d'immobilisations -->
+            <xpath expr="//group[@name='purchase_info']" position="after">
+                <group string="Immobilisations" name="asset_info" groups="e_gestock_base.group_e_gestock_asset_user,e_gestock_base.group_e_gestock_asset_manager">
+                    <field name="is_asset_purchase" widget="boolean_toggle"/>
+                </group>
+            </xpath>
+            
+            <!-- Ajouter un bouton pour créer des immobilisations -->
+            <xpath expr="//header" position="inside">
+                <button name="action_create_assets" string="Créer immobilisations" type="object"
+                        class="btn-primary" 
+                        attrs="{'invisible': ['|', ('state_approbation', '!=', 'received'), ('is_asset_purchase', '=', False)]}"
+                        groups="e_gestock_base.group_e_gestock_asset_manager"/>
+            </xpath>
+            
+            <!-- Ajouter un onglet pour les immobilisations -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Immobilisations" name="assets" 
+                      attrs="{'invisible': [('asset_count', '=', 0)]}"
+                      groups="e_gestock_base.group_e_gestock_asset_user,e_gestock_base.group_e_gestock_asset_manager">
+                    <field name="asset_ids" readonly="1">
+                        <list>
+                            <field name="reference"/>
+                            <field name="name"/>
+                            <field name="type_id"/>
+                            <field name="date_acquisition"/>
+                            <field name="valeur_acquisition" widget="monetary"/>
+                            <field name="state" widget="badge" 
+                                decoration-info="state == 'in_stock'" 
+                                decoration-success="state == 'in_service'" 
+                                decoration-warning="state == 'in_maintenance'" 
+                                decoration-danger="state in ('out_of_service', 'disposed', 'scrapped')"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            
+            <!-- Ajouter un indicateur pour les lignes qui sont des immobilisations -->
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_subtotal']" position="after">
+                <field name="is_asset" widget="boolean_toggle"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Extension de la vue liste du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_list_asset_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.list.asset.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state_approbation']" position="after">
+                <field name="is_asset_purchase" optional="hide" widget="boolean_toggle"/>
+                <field name="asset_count" optional="hide"/>
+            </xpath>
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-primary">is_asset_purchase</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Extension de la vue recherche du bon de commande E-GESTOCK -->
+    <record id="view_e_gestock_purchase_order_search_asset_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.purchase_order.search.asset.inherit</field>
+        <field name="model">e_gestock.purchase_order</field>
+        <field name="inherit_id" ref="e_gestock_purchase.view_e_gestock_purchase_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='state_approbation']" position="after">
+                <separator/>
+                <filter string="Achats d'immobilisations" name="asset_purchase" domain="[('is_asset_purchase', '=', True)]"/>
+                <filter string="Avec immobilisations" name="with_assets" domain="[('asset_count', '>', 0)]"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Extension de la vue formulaire de l'immobilisation pour ajouter le lien vers le bon de commande -->
+    <record id="view_e_gestock_asset_form_purchase_inherit" model="ir.ui.view">
+        <field name="name">e_gestock.asset.form.purchase.inherit</field>
+        <field name="model">e_gestock.asset</field>
+        <field name="inherit_id" ref="e_gestock_asset.view_e_gestock_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='acquisition_info']" position="inside">
+                <field name="purchase_order_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
